@@ -23,15 +23,26 @@ CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://127.0.0.1 http:
 
 CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://127.0.0.1 http://localhost").split()
 
-CSRF_COOKIE_SECURE = os.getenv("CSRF_COOKIE_SECURE", default=False) == "True"
-
-SESSION_COOKIE_SECURE = os.getenv("SESSION_COOKIE_SECURE", default=False) == "True"
-
 DEFAULT_SITE_URL = os.getenv("DEFAULT_SITE_URL", default="localhost:8000")
 
 OPERATING_SYSTEM = system()  # можно привязать запуск redis и celery
 
 TESTING = "test" in sys.argv
+
+########################
+#  EMAIL
+########################
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.yandex.ru"
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+
+EMAIL_SERVER = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
 
 
 ########################
@@ -191,12 +202,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 DJOSER = {
-    "LOGIN_FIELD": "username",
+    "LOGIN_FIELD": "email",
     "USERNAME_FIELD": "username",
     "USER_CREATE_PASSWORD_RETYPE": True,
     "SEND_ACTIVATION_EMAIL": False,
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": False,
-    "PASSWORD_RESET_CONFIRM_RETYPE": False,
+    "PASSWORD_RESET_CONFIRM_RETYPE": True,
     "HIDE_USERS": True,
     "SERIALIZERS": {
         "user": "users.serializers.UserSerializer",
