@@ -1,8 +1,29 @@
+from django.db import transaction
 from djoser.views import UserViewSet as DjoserUserViewSet
-from rest_framework import permissions, status
+from drf_spectacular.utils import extend_schema, extend_schema_view, inline_serializer
+from rest_framework import permissions, serializers, status
 from rest_framework.response import Response
 
+from users.serializers import ChildSerializer
 
+
+@extend_schema_view(
+    create=extend_schema(
+        request=inline_serializer(
+            name="InlineFormSerializer",
+            fields={
+                "email": serializers.EmailField(),
+                "password": serializers.CharField(),
+                "re_password": serializers.CharField(),
+                "first_name": serializers.CharField(),
+                "last_name": serializers.CharField(),
+                "patronymic_name": serializers.CharField(),
+                "date_of_birth": serializers.DateField(),
+                "child": ChildSerializer(),
+            },
+        ),
+    ),
+)
 class UserViewSet(DjoserUserViewSet):
     def get_permissions(self):
         if self.action == "me":
@@ -13,7 +34,7 @@ class UserViewSet(DjoserUserViewSet):
         """
         Доступ только для авторизованных пользователей.
 
-        Пользователь может получить только cвой профиль.
+        Пользователь может получить только свой профиль.
         Любой профиль может посмотреть только админ.
         """
         return super().retrieve(request, *args, **kwargs)
@@ -29,7 +50,22 @@ class UserViewSet(DjoserUserViewSet):
 
     def create(self, request, *args, **kwargs):
         """Доступ только для неавторизованных пользователей."""
-        return super().create(request, *args, **kwargs)
+        child_data = request.data.pop("child", None)
+        child_serializer = ChildSerializer(data=child_data)
+        child_serializer.is_valid(raise_exception=True)
+        child_instance = child_serializer.save()
+        request.data["child"] = child_instance.id
+        serializer = self.get_serializer(data=request.data)
+        with transaction.atomic():
+            if serializer.is_valid():
+                self.perform_create(serializer)
+                headers = self.get_success_headers(serializer.data)
+                child_instance.parent = serializer.instance
+                child_instance.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+            else:
+                child_instance.delete()
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, *args, **kwargs):
         """

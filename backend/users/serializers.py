@@ -1,10 +1,37 @@
 from django.contrib.auth import get_user_model
-from django.db.models import Q
 from djoser.serializers import UserCreatePasswordRetypeSerializer as DjoserUserCreateSerializer
 from djoser.serializers import UserSerializer as DjoserUserSerializer
 from rest_framework import serializers
 
+from users.models import Child
+
 User = get_user_model()
+
+
+class ChildSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Child
+        fields = ["pk", "first_name", "last_name", "patronymic_name", "date_of_birth", "school", "classroom"]
+
+    def validate_first_name(self, value):
+        if not self.is_russian(value):
+            raise serializers.ValidationError("Имя должно состоять только из русских букв")
+        return value
+
+    def validate_last_name(self, value):
+        if not self.is_russian(value):
+            raise serializers.ValidationError("Фамилия должна состоять только из русских букв")
+        return value
+
+    def validate_patronymic_name(self, value):
+        if not self.is_russian(value):
+            raise serializers.ValidationError("Отчество должно состоять только из русских букв")
+        return value
+
+    def is_russian(self, s):
+        russian_alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+        allowed_chars = russian_alphabet + "-' "
+        return all(c.lower() in allowed_chars or c.isspace() for c in s)
 
 
 class UserSerializer(DjoserUserSerializer):
@@ -16,42 +43,11 @@ class UserSerializer(DjoserUserSerializer):
     username, если эти поля будут изменены.
     """
 
+    child = ChildSerializer(read_only=True)
+
     class Meta:
         model = User
-        fields = (
-            "id",
-            "email",
-            "username",
-            "first_name",
-            "last_name",
-            "created_at",
-            "updated_at",
-        )
-
-    def get_validate_duplicate(self, field):
-        request = self.context.get("request")
-        value = request.data.get(field)
-        if value and request.method in ("PUT", "PATCH"):
-            modified_user_id = int(request.parser_context["kwargs"].get("id"))
-            users = User.objects.filter(Q(email=value) | Q(username=value)).all()  # при добавлении полей, расширить
-            if users:
-                if users.count() > 1:
-                    pass
-                elif modified_user_id == users[0].id:
-                    return
-                return f"Пользователь с таким {field} уже существует"
-
-    def validate_email(self, value):
-        error = self.get_validate_duplicate("email")
-        if error:
-            raise serializers.ValidationError(error)
-        return value
-
-    def validate_username(self, value):
-        error = self.get_validate_duplicate("username")
-        if error:
-            raise serializers.ValidationError(error)
-        return value
+        fields = ["pk", "email", "first_name", "last_name", "patronymic_name", "date_of_birth", "child"]
 
 
 class UserCreateSerializer(DjoserUserCreateSerializer):
@@ -61,46 +57,49 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
 
     password = serializers.CharField(write_only=True)
     re_password = serializers.CharField(write_only=True)
+    child = serializers.PrimaryKeyRelatedField(queryset=Child.objects.all())
 
     class Meta:
         model = User
         fields = (
             "id",
-            "username",
             "email",
             "password",
             "re_password",
+            "first_name",
+            "last_name",
+            "patronymic_name",
+            "date_of_birth",
+            "child",
         )
 
-    def validate_email(self, value):
-        if User.objects.filter(email=value).exists():
-            raise serializers.ValidationError("Пользователь с таким email уже существует")
+    def validate_first_name(self, value):
+        if not self.is_russian(value):
+            raise serializers.ValidationError("Имя должно состоять только из русских букв")
         return value
 
-    def validate_username(self, value):
-        if value and User.objects.filter(username=value).exists():
-            raise serializers.ValidationError("Пользователь с таким username уже существует")
+    def validate_last_name(self, value):
+        if not self.is_russian(value):
+            raise serializers.ValidationError("Фамилия должна состоять только из русских букв")
         return value
 
-    def validate_password(self, value):
-        from django.contrib.auth.password_validation import validate_password
-
-        validate_password(value)
+    def validate_patronymic_name(self, value):
+        if not self.is_russian(value):
+            raise serializers.ValidationError("Отчество должно состоять только из русских букв")
         return value
 
-    def validate_re_password(self, value):
-        if self.initial_data["password"] != value:
-            raise serializers.ValidationError("Пароли не совпадают")
-        return value
+    def is_russian(self, s):
+        russian_alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+        allowed_chars = russian_alphabet + "-' "
+        return all(c.lower() in allowed_chars or c.isspace() for c in s)
 
 
 class ShortReadUserSerializer(serializers.ModelSerializer):
+    child = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model = User
-        fields = (
-            "id",
-            "username",
-        )
+        fields = ("id", "email", "child")
 
 
 class UserDeleteSerializer(serializers.Serializer):
