@@ -4,6 +4,8 @@ from drf_spectacular.utils import extend_schema, extend_schema_view, inline_seri
 from rest_framework import permissions, serializers, status
 from rest_framework.response import Response
 
+from api.mixins import RetrieveUpdateViewSet
+from users.models import Child
 from users.serializers import ChildSerializer
 
 
@@ -92,8 +94,28 @@ class UserViewSet(DjoserUserViewSet):
         Пользователь может удалить свой профиль.
         Любой профиль может удалить только админ.
         """
-        # переопределено, т.к. требовался текущий пароль в теле запроса
+        # частично переопределено, т.к. требовался текущий пароль в теле запроса
         # тело при delete методе не одобряется OpenAPI
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if request.user.is_superuser or int(self.kwargs["id"]) == request.user.id:
+            instance = self.get_object()
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+class ChildViewSet(RetrieveUpdateViewSet):
+    """
+    Эндпоинты для работы с профилем ребенка.
+
+    Доступ только для авторизованных пользователей.
+    Пользователь может получить и изменить только профиль ребенка,
+    родителем которого он является.
+    """
+
+    queryset = Child.objects.all()
+    serializer_class = ChildSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        return super().get_queryset().filter(parent=self.request.user)
