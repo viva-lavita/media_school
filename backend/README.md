@@ -1,4 +1,4 @@
-![example workflow](https://github.com/TeamCode01/media_school/actions/workflows/deploy.yml/badge.svg)
+![example workflow](https://github.com/viva-lavita/media_school/actions/workflows/deploy.yml/badge.svg)
 
 [![GitHub%20Actions](https://img.shields.io/badge/-GitHub%20Actions-464646?style=flat-square&logo=GitHub%20actions)](https://github.com/features/actions)
 [![docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com)
