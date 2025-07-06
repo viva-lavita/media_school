@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from api.views import health_check, get_contact
+from api.views import get_contact, health_check
 
 app_name = "api"
 
