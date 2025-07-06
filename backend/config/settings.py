@@ -23,26 +23,14 @@ CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://127.0.0.1 http:
 
 CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://127.0.0.1 http://localhost").split()
 
-DEFAULT_SITE_URL = os.getenv("DEFAULT_SITE_URL", default="localhost:8000")
+DOMAIN = os.getenv("DOMAIN", default="localhost:8000")
+SITE_NAME = os.getenv("SITE_NAME", default="Django5 Template")
+# DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", default="Django5 Template <admin@localhost>")
+# DEFAULT_FROM_PHONE = os.getenv("DEFAULT_FROM_PHONE", default="+7 (000) 000-00-00")
 
 OPERATING_SYSTEM = system()  # можно привязать запуск redis и celery
 
 TESTING = "test" in sys.argv
-
-########################
-#  EMAIL
-########################
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.yandex.ru"
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-
-EMAIL_SERVER = EMAIL_HOST_USER
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_ADMIN = EMAIL_HOST_USER
 
 
 ########################
@@ -92,7 +80,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -208,6 +196,10 @@ DJOSER = {
     "SEND_ACTIVATION_EMAIL": False,
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": False,
     "PASSWORD_RESET_CONFIRM_RETYPE": True,
+    "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",  # pragma: allowlist secret
+    "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": True if DEBUG else False,
+    "USERNAME_RESET_CONFIRM_URL": "email/reset/confirm/{uid}/{token}",  # конечная точка, которую должны реализовать фронты
+    "USERNAME_RESET_SHOW_EMAIL_NOT_FOUND": True if DEBUG else False,  # теперь 404 если эмейла нет в бд
     "HIDE_USERS": True,
     "SERIALIZERS": {
         "user": "users.serializers.UserSerializer",
@@ -217,6 +209,18 @@ DJOSER = {
     },
     "PERMISSIONS": {
         "user_create": ("api.permissions.NotIsAuthenticated",),
+    },
+    "EMAIL_FRONTEND_SITE_NAME": SITE_NAME,
+    "EMAIL_FRONTEND_DOMAIN": DOMAIN,
+    # ниже перопределив классы почтовых сообщений, можно дополнить/заменить шаблоны писем
+    # см users/email.py
+    "EMAIL": {
+        "activation": "djoser.email.ActivationEmail",
+        "confirmation": "djoser.email.ConfirmationEmail",  # pragma: allowlist secret
+        "password_reset": "users.email.CustomPasswordResetEmail",  # pragma: allowlist secret
+        "password_changed_confirmation": "djoser.email.PasswordChangedConfirmationEmail",  # pragma: allowlist secret
+        "username_changed_confirmation": "djoser.email.UsernameChangedConfirmationEmail",
+        "username_reset": "djoser.email.UsernameResetEmail",
     },
 }
 
@@ -273,3 +277,19 @@ SPECTACULAR_SETTINGS = {
     "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
     "REDOC_DIST": "SIDECAR",
 }
+
+
+########################
+#  EMAIL
+########################
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.yandex.ru"
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+
+EMAIL_SERVER = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
