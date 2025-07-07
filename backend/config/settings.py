@@ -25,7 +25,8 @@ CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://127.0.0.1 http:
 
 DOMAIN = os.getenv("DOMAIN", default="localhost:8000")
 SITE_NAME = os.getenv("SITE_NAME", default="Django5 Template")
-# DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", default="Django5 Template <admin@localhost>")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", default="Django5 Template <admin@localhost>")
+# при необходимости можно добавить в шаблон писем
 # DEFAULT_FROM_PHONE = os.getenv("DEFAULT_FROM_PHONE", default="+7 (000) 000-00-00")
 
 OPERATING_SYSTEM = system()  # можно привязать запуск redis и celery
