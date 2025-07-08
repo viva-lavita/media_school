@@ -12,8 +12,17 @@ from api.serializers import ContactSerializer
 def health_check(request):
     return Response(status=status.HTTP_200_OK)
 
-@api_view(['GET'])
+
+@extend_schema(responses={status.HTTP_200_OK: ContactSerializer})
+@api_view(["GET"])
 def get_contact(request):
+    """
+    Возвращает последний экземпляр контактной информации школы
+    Используется для раздела 'Контакты' и для футера сайта
+    JSON содержит поля: 'address', 'phone_number', 'contact_email', 'school_website',
+    'school_website', 'social_vk', 'social_ok', 'latitude', 'longitude'
+    Доступ публичный, без аутентификации
+    """
     instance = Contact.objects.last()
 
     if not instance:

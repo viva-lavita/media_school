@@ -2,74 +2,34 @@ from django.db import models
 
 
 class Contact(models.Model):
+    """
+    Модель для хранения контактной информации школы
+    Используется для раздела 'Контакты' и для футера сайта
+    Содержит: адрес, телефон, email, сайт, ссылку на фото, ссылки на ОК и ВК, координаты для карт
+    Хранится 1 актуальная запись, возвращает через GET /api/v1/contacts/
+    """
 
-    address = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="Адрес"
-    )
+    address = models.CharField(verbose_name="Адрес", max_length=255, blank=True, null=True)
 
-    phone_number = models.CharField(
-        max_length=20,
-        blank=True,
-        null=True,
-        verbose_name="Телефон"
-    )
+    phone_number = models.CharField(verbose_name="Телефон", max_length=20, blank=True, null=True)
 
-    contact_email = models.EmailField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="Электронная почта"
-    )
+    contact_email = models.CharField(verbose_name="Электронная почта", max_length=255, blank=True, null=True)
 
-    school_website = models.URLField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="Сайт школы"
-    )
+    school_website = models.CharField(verbose_name="Сайт школы", max_length=255, blank=True, null=True)
 
-    school_photo = models.CharField(
-        blank=True,
-        null=True,
-        verbose_name="Ссылка на фото школы"
-    )
+    school_photo = models.CharField(verbose_name="Ссылка на фото школы", blank=True, null=True)
 
-    social_vk = models.URLField(
-        blank=True,
-        null=True,
-        verbose_name="Ссылка на ВК"
-    )
+    social_vk = models.CharField(verbose_name="Ссылка на ВК", max_length=255, blank=True, null=True)
 
-    social_ok = models.URLField(
-        blank=True,
-        null=True,
-        verbose_name="Ссылка на ОК"
-    )
+    social_ok = models.CharField(verbose_name="Ссылка на ОК", max_length=255, blank=True, null=True)
 
-    latitude = models.FloatField(
-        blank=True,
-        null=True,
-        verbose_name="Широта"
-    )
+    latitude = models.FloatField(verbose_name="Широта", blank=True, null=True)
 
-    longitude = models.FloatField(
-        blank=True,
-        null=True,
-        verbose_name="Долгота"
-    )
+    longitude = models.FloatField(verbose_name="Долгота", blank=True, null=True)
 
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Дата создания"
-    )
+    created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
 
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        verbose_name="Дата изменения"
-    )
+    updated_at = models.DateTimeField(verbose_name="Дата изменения", auto_now=True)
 
     def __str__(self):
         return f"Contacts: {self.address}"
