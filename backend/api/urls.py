@@ -13,4 +13,5 @@ urlpatterns = [
     path("", include("users.urls")),
     path("utils/health-check/", health_check, name="health-check"),
     path("contacts/", get_contact, name="contacts"),
+    path("content/", include("content.urls")),
 ]
