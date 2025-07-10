@@ -9,6 +9,7 @@ from content.serializers import (
 
 
 # TODO: Расширить после новостей, анонсов и конкурсов.
+# TODO: Добавить пагинацию
 class CatalogViewSet(RetrieveListViewSet):
     """
     Эндпоинты для работы с категориями.
