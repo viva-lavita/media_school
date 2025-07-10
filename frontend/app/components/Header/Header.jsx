@@ -20,10 +20,10 @@ export default function Header() {
           </ul>
         </nav>
         <div className="flex items-center gap-10">
-          <img src="/header-images/search.svg" alt="" className="size-9"/>
+          <img src="/header-images/search.svg" alt="search" className="size-9"/>
           <div className="flex gap-5">
-              <img src="/header-images/vk-button.png" alt=""  className="size-11.5"/>
-              <img src="/header-images/ok-button.png" alt=""  className="size-11.5"/>
+              <img src="/header-images/vk-button.png" alt="Вконтакте"  className="size-11.5"/>
+              <img src="/header-images/ok-button.png" alt="Одноклассники"  className="size-11.5"/>
           </div>
             <button className="py-3 px-6" style={{ background: "#DEEDAB" }}>
                 Личный кабинет
