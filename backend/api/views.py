@@ -17,11 +17,11 @@ def health_check(request):
 @api_view(["GET"])
 def get_contact(request):
     """
-    Возвращает последний экземпляр контактной информации школы
-    Используется для раздела 'Контакты' и для футера сайта
+    Возвращает последний экземпляр контактной информации школы.
+    Используется для раздела 'Контакты' и для футера сайта.
     JSON содержит поля: 'address', 'phone_number', 'contact_email', 'school_website',
-    'school_website', 'social_vk', 'social_ok', 'latitude', 'longitude'
-    Доступ публичный, без аутентификации
+    'school_website', 'social_vk', 'social_ok', 'latitude', 'longitude'.
+    Доступ публичный, без аутентификации.
     """
     instance = Contact.objects.last()
 
