@@ -6,3 +6,9 @@ class RetrieveUpdateViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, 
     """Миксин только для чтения и обновления экземпляра."""
 
     pass
+
+
+class RetrieveListViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, GenericViewSet):
+    """Миксин только для чтения и получения списка экземпляров."""
+
+    pass

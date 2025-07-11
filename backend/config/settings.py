@@ -64,6 +64,7 @@ INSTALLED_APPS += [
     "api.apps.ApiConfig",
     "users.apps.UsersConfig",
     "news.apps.NewsConfig",
+    "content.apps.ContentConfig",
 ]
 
 MIDDLEWARE = [
