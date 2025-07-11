@@ -1,4 +1,5 @@
 import { Montserrat } from 'next/font/google'
+import Link from "next/link";
 
 const montserrat = Montserrat({
     subsets: ['latin', 'cyrillic'],
@@ -12,11 +13,11 @@ export default function Header() {
         <img src="/images/logo.svg" alt=""/>
         <nav className="flex items-center">
           <ul className="flex gap-7 h-5">
-            <li>О проекте</li>
-            <li>Новости</li>
-            <li>Каталог материалов</li>
-            <li>Вопрос-ответ</li>
-            <li>Контакты</li>
+            <li><Link href="/about">О проекте</Link></li>
+            <li><Link href="/news">Новости</Link></li>
+            <li><Link href="/catalog">Каталог материалов</Link></li>
+            <li><Link href="/qa">Вопрос-ответ</Link></li>
+            <li><Link href="/contacts">Контакты</Link></li>
           </ul>
         </nav>
         <div className="flex items-center gap-10">
