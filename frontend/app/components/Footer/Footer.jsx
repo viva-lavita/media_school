@@ -1,3 +1,5 @@
+import { montserrat } from '@/lib/fonts'
+
 export default function Footer() {
   return (
       <div className="w-screen h-53.5" style={{ backgroundColor: "#F6FFDE" }}>
