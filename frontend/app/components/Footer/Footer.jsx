@@ -1,6 +1,7 @@
 import { montserrat } from '@/lib/fonts'
 import { inter } from '@/lib/fonts'
 import Link from 'next/link'
+import styles from './Footer.module.css'
 
 export default function Footer() {
   return (
@@ -16,15 +17,13 @@ export default function Footer() {
               <div className={`font-medium text-base flex flex-col gap-2 mr-[13%]`}>
                   <nav>
                       <ul>
-                          <li>
-                              <Link href="/about">О проекте</Link>
-                          </li>
-                          <li>
-                              <Link href="/news">Новости</Link>
-                          </li>
-                          <li>
-                              <Link href="/catalog">Каталог материалов</Link>
-                          </li>
+                          <li><Link href="/about">О проекте</Link></li>
+                          <li><Link href="/news">Новости</Link></li>
+                          <li><Link href="/catalog">Каталог материалов</Link></li>
+                          <div className={`hidden`}>
+                              <li><Link href="/news">Вопрос-ответ</Link></li>
+                              <li><Link href="/catalog">Контакты</Link></li>
+                          </div>
                       </ul>
                   </nav>
               </div>
