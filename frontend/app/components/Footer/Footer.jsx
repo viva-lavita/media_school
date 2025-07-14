@@ -1,9 +1,20 @@
+'use client';
+import { useState, useEffect } from 'react';
 import { montserrat } from '@/lib/fonts'
 import { inter } from '@/lib/fonts'
 import Link from 'next/link'
 import styles from './Footer.module.css'
 
 export default function Footer() {
+  const [pageWidth, setPageWidth] = useState(360);
+
+  useEffect(() => {
+    const handleResize = () => setPageWidth(window.innerWidth);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
       <div className="w-screen h-53.5" style={{ backgroundColor: "#F6FFDE" }}>
           <footer className={`${montserrat.className} flex w-[1400px] pt-10 pb-4 mx-auto h-full justify-between`} style={{color: '#040404'}}>
@@ -20,7 +31,7 @@ export default function Footer() {
                           <li><Link href="/about">О проекте</Link></li>
                           <li><Link href="/news">Новости</Link></li>
                           <li><Link href="/catalog">Каталог материалов</Link></li>
-                          <div className={`hidden`}>
+                          <div className={`${pageWidth > 1024 ? 'hidden' : ''}`}>
                               <li><Link href="/news">Вопрос-ответ</Link></li>
                               <li><Link href="/catalog">Контакты</Link></li>
                           </div>
