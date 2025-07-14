@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-      <div className="w-screen h-53.5" style={{ backgroundColor: "#F6FFDE" }}>
+      <div className="w-screen h-53.5">
           <footer className={`${montserrat.className} flex w-[1400px] pt-10 pb-4 mx-auto h-full justify-between`} style={{color: '#040404'}}>
               <div className="flex flex-col justify-between mr-[5%]">
                   <div className={`font-semibold text-lg flex flex-col gap-2`}>
