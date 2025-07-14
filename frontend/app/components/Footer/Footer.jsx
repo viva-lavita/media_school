@@ -16,14 +16,14 @@ export default function Footer() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   return (
-      <div className="w-screen h-53.5" style={{ backgroundColor: "#F6FFDE" }}>
-          <footer className={`${montserrat.className} flex w-[1400px] pt-10 pb-4 mx-auto h-full justify-between`} style={{color: '#040404'}}>
-              <div className="flex flex-col justify-between mr-[5%]">
+      <div className={`${styles.bg} gap-10 flex flex-col w-screen`}>
+          <footer className={`${montserrat.className} ${styles.fontColor} ${styles.footer} ${pageWidth >= 768 && 
+          pageWidth < 1024 ? 'flex-wrap' : '' } flex mx-auto h-full`}>
+              <div className="flex flex-col justify-between mr-[7.75%]">
                   <div className={`font-semibold text-lg flex flex-col gap-2`}>
                       <p>+7 3822 71-67-69</p>
                       <p>perspectiva@education70.ru</p>
                   </div>
-                  <p className={`font-normal text-sm`}>© 2025 МАОУ Школа «Перспектива» г. Томск</p>
               </div>
               <div className={`font-medium text-base flex flex-col gap-2 mr-[13%]`}>
                   <nav>
@@ -31,25 +31,28 @@ export default function Footer() {
                           <li><Link href="/about">О проекте</Link></li>
                           <li><Link href="/news">Новости</Link></li>
                           <li><Link href="/catalog">Каталог материалов</Link></li>
+                          {pageWidth !== null && (
                           <div className={`${pageWidth > 1024 ? 'hidden' : ''}`}>
                               <li><Link href="/news">Вопрос-ответ</Link></li>
                               <li><Link href="/catalog">Контакты</Link></li>
                           </div>
+                          )}
                       </ul>
                   </nav>
               </div>
-              <div className="flex flex-col justify-between mr-[15%]">
-                  <div className="text-base font-medium flex flex-col gap-2">
+              {pageWidth !== null && pageWidth > 1024 && (
+                  <div className="flex flex-col justify-between mr-[15%]">
+                    <div className="text-base font-medium flex flex-col gap-2">
                       <nav>
-                          <ul>
-                              <li><Link href="/qa">Вопрос-ответ</Link></li>
-                              <li><Link href="/contacts">Контакты</Link></li>
-                          </ul>
+                        <ul>
+                          <li><Link href="/news">Вопрос-ответ</Link></li>
+                          <li><Link href="/catalog">Контакты</Link></li>
+                        </ul>
                       </nav>
+                    </div>
                   </div>
-                  <p className={`text-sm font-normal`}>Designed by Freepik</p>
-              </div>
-              <div className="flex flex-col justify-between">
+              )}
+            <div className={`flex flex-col justify-between ${pageWidth >= 768 && pageWidth < 1024 ? 'ml-[50%]' : '' }`}>
                   <div className="text-base font-medium flex flex-col gap-2">
                       <nav>
                           <ul>
@@ -58,14 +61,23 @@ export default function Footer() {
                           </ul>
                       </nav>
                   </div>
-                  <p className={`${inter.className} text-xs font-medium flex items-center gap-2`}>
-                      Сделано в
-                      <img src="/footer-images/logo.svg" alt="1t" className="w-[28.8px] h-6 inline-block" />
-                      <img src="/footer-images/union.svg" alt="Союз рф" className="w-[70px] h-[10.5px] inline-block" />
-                      | TEAMCODE
-                  </p>
               </div>
           </footer>
+          <div className={`${pageWidth <= 360 ? 'flex-col gap-2 w-80 mx-auto' : ''} mx-auto flex ${montserrat.className}
+          ${styles.footer}`}>
+            <div className={`${pageWidth >= 768 && pageWidth < 1024 ? 'flex flex-col gap-2' : ''}`}>
+              <p className={`font-normal text-sm`}>
+                © 2025 МАОУ Школа {pageWidth <= 360 ? <br/> : ''} «Перспектива» г. Томск
+              </p>
+              <p className={`text-sm font-normal`}>Designed by Freepik</p>
+            </div>
+            <p className={`${inter.className} ${pageWidth >= 768 && pageWidth < 1024 ? '' : '' } text-xs font-medium flex items-center gap-2`}>
+              Сделано в
+              <img src="/footer-images/logo.svg" alt="1t" className="w-[28.8px] h-6 inline-block" />
+              <img src="/footer-images/union.svg" alt="Союз рф" className="w-[70px] h-[10.5px] inline-block" />
+              | TEAMCODE
+            </p>
+          </div>
       </div>
   );
 }
