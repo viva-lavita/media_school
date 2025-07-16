@@ -1,3 +1,51 @@
-.main {
-  height: 105px;
+.hidden {
+    display: none;
+}
+.notHidden {
+    display: flex;
+}
+.btn {
+    background: #DEEDAB
+}
+
+@media (max-width: 360px) {
+    .header{
+        width: 320px;
+        padding: 5px 0;
+    }
+    .logo {
+        width: 42px;
+        height: 36px;
+    }
+}
+@media (min-width: 361px) and (max-width: 768px) {
+    .header{
+        max-width: 728px;
+        min-width: 580px;
+        padding: 3px 0;
+    }
+    .logo {
+        width: 74px;
+        height: 64px;
+    }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+    .header{
+        max-width: 944px;
+        padding: 8px 0;
+    }
+    .logo {
+        width: 74px;
+        height: 64px;
+    }
+}
+@media (min-width: 1025px) {
+    .header{
+        max-width: 1400px;
+        padding: 8px 0;
+    }
+    .logo {
+        width: 74px;
+        height: 64px;
+    }
 }
