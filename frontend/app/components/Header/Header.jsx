@@ -3,12 +3,7 @@ import { Montserrat } from 'next/font/google'
 import Link from "next/link";
 import styles from "./Header.module.css"
 import { useState, useEffect } from 'react';
-
-const montserrat = Montserrat({
-    subsets: ['latin', 'cyrillic'],
-    weight: ['500'],
-    style: ['normal'],
-})
+import { montserrat } from '@/lib/fonts'
 
 export default function Header() {
   const [pageWidth, setPageWidth] = useState(360);
