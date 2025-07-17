@@ -4,6 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="8111c716-4b9f-4d90-a3ef-d9cb6bff4974" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/components/Footer/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/components/Footer/Footer.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/components/Footer/Footer.module.css" afterDir="false" />
+    </list>
     <list default="true" id="8111c716-4b9f-4d90-a3ef-d9cb6bff4974" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +18,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Zondkun&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/viva-lavita/media_school.git&quot;,
+    &quot;accountId&quot;: &quot;8f8a0841-46b7-4c0e-a2c8-ba9aa9f2b031&quot;
+  }
+}</component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
   "lastFilter": {
     "state": "OPEN",
@@ -43,6 +60,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "footer",
     "git-widget-placeholder": "#6 on Header",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
@@ -74,6 +92,11 @@
       <workItem from="1752240031608" duration="313000" />
       <workItem from="1752240564336" duration="209000" />
       <workItem from="1752240817691" duration="4626000" />
+      <workItem from="1752249530074" duration="1298000" />
+      <workItem from="1752406598879" duration="928000" />
+      <workItem from="1752508103625" duration="367000" />
+      <workItem from="1752520024441" duration="1154000" />
+      <workItem from="1752663266542" duration="11442000" />
     </task>
     <servers />
   </component>

@@ -178,3 +178,4 @@ cython_debug/
 static/
 /media
 media/
+.idea/workspace.xml
