@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import "./globals.css";
+import Navigation from "./components/Navigation/Navigation";
 
 export const metadata = {
   title: "Create Next App",
@@ -9,12 +10,13 @@ export const metadata = {
 };
 
 
-export default function RootLayout({ children }) {
+export default function RootLayout({children}) {
   return (
     <html lang="ru">
       <body>
         <Suspense fallback={<div>Loading...</div>}>
           <Header />
+          <Navigation />
           {children}
           <Footer />
         </Suspense>

@@ -1,0 +1,15 @@
+.breadcrumb {
+ display: flex;
+ align-items: center;
+ margin: 40px 0;
+}
+
+.breadcrumbItem {
+ color: #535353;
+ text-decoration: none;
+ font-size: 14px;
+}
+
+.active {
+ color: #040404 !important;
+}
