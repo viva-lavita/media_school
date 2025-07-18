@@ -45,7 +45,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev-frontend&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;footer&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -81,7 +81,7 @@
       <workItem from="1752508103625" duration="367000" />
       <workItem from="1752520024441" duration="1154000" />
       <workItem from="1752663266542" duration="11442000" />
-      <workItem from="1752773196637" duration="14000" />
+      <workItem from="1752773255906" duration="360000" />
     </task>
     <servers />
   </component>
