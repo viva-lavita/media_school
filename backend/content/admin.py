@@ -1,7 +1,14 @@
 from django.contrib import admin
+from django.contrib.admin.sites import AdminSite
 
-from content.models import Catalog, DocumentContent, PhotoContent, VideoContent
+from content.models import (
+    Catalog,
+    DocumentContent,
+    PhotoContent,
+    VideoContent,
+)
 
+AdminSite.empty_value_display = "-"
 admin.site.register(Catalog)
 
 
@@ -11,6 +18,7 @@ class DocumentContentAdmin(admin.ModelAdmin):
     search_fields = ("catalog__name", "description")
     list_filter = ("catalog__name",)
     show_facets = admin.ShowFacets.ALWAYS
+    date_hierarchy = "created_at"
 
 
 @admin.register(PhotoContent)
@@ -19,6 +27,7 @@ class PhotoContentAdmin(admin.ModelAdmin):
     search_fields = ("catalog__name", "description")
     list_filter = ("catalog__name",)
     show_facets = admin.ShowFacets.ALWAYS
+    date_hierarchy = "created_at"
 
 
 @admin.register(VideoContent)
@@ -27,10 +36,4 @@ class VideoContentAdmin(admin.ModelAdmin):
     search_fields = ("catalog__name", "description")
     list_filter = ("catalog__name",)
     show_facets = admin.ShowFacets.ALWAYS
-
-    # Заготовка для новостей и анонсов
-    # def save_model(self, request, obj, form, change):
-    #     if not change:
-    #         obj.created_by = request.user
-    #     obj.updated_by = request.user
-    #     return super().save_model(request, obj, form, change)
+    date_hierarchy = "created_at"
