@@ -1,3 +1,86 @@
 .main {
+  display: flex;
+  flex-direction: column;
   min-height: calc(100vh - 105px - 214px);
+  gap: 80px;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 120px;
+  margin: 0 auto;
+}
+
+.mainImage {
+  background-image: url('/images/main-page-library.png');
+  background-size: cover;
+  background-position: top;
+}
+
+.mainImageTextBottom {
+  width: 841px;
+  font-size: 18px
+}
+
+@media screen and (min-width: 1024px) {
+  .mainImage {
+    height: 850px;
+  }
+  .mainImageTextTop {
+    line-height: 1.12;
+    font-size: 52px;
+  }
+  .mainImageContent{
+    width: 1129px;
+    top: 66%;
+  }
+  .mainContent {
+    width: 1400px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .mainImage {
+    height: 600px;
+  }
+  .mainImageTextTop {
+    font-size: 40px;
+  }
+  .mainImageContent {
+    width: 936px;
+    top: 60%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .mainImage {
+    height: 550px;
+  }
+  .mainImageTextTop {
+    font-size: 32px;
+  }
+  .mainImageTextBottom {
+    width: 728px;
+  }
+  .mainImageContent {
+    width: 728px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .mainImage {
+    height: 750px;
+    background-size: 300% 100%;
+  }
+  .mainImageContent {
+    width: 320px;
+    top: 50%;
+  }
+  .mainImageTextTop {
+    font-size: 28px;
+  }
+  .mainImageTextBottom {
+    width: 320px;
+    font-size: 16px;
+  }
 }

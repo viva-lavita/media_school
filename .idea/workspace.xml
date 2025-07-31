@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8111c716-4b9f-4d90-a3ef-d9cb6bff4974" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/blogging.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/interviewing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/longread.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/main-page-library.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/photo-processing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/photographing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/storytelling.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/video-editing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/videotaping-uas.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/videotaping.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/Home.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/Home.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lib/fonts.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lib/fonts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +58,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;footer&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/main-page&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -58,6 +71,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Админус\Documents\GitHub\media_school\frontend\public\images" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -82,6 +100,11 @@
       <workItem from="1752520024441" duration="1154000" />
       <workItem from="1752663266542" duration="11442000" />
       <workItem from="1752773255906" duration="360000" />
+      <workItem from="1753285247612" duration="1873000" />
+      <workItem from="1753288016131" duration="5941000" />
+      <workItem from="1753585886641" duration="77000" />
+      <workItem from="1753808553379" duration="10704000" />
+      <workItem from="1753962606097" duration="12346000" />
     </task>
     <servers />
   </component>
