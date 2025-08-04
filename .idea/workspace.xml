@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8111c716-4b9f-4d90-a3ef-d9cb6bff4974" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/blogging.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/interviewing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/longread.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/main-page-library.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/photo-processing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/photographing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/storytelling.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/video-editing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/videotaping-uas.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/videotaping.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/Home.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/Home.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/lib/fonts.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lib/fonts.js" afterDir="false" />
-    </list>
+    <list default="true" id="8111c716-4b9f-4d90-a3ef-d9cb6bff4974" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,7 +89,7 @@
       <workItem from="1753288016131" duration="5941000" />
       <workItem from="1753585886641" duration="77000" />
       <workItem from="1753808553379" duration="10704000" />
-      <workItem from="1753962606097" duration="12346000" />
+      <workItem from="1753962606097" duration="12571000" />
     </task>
     <servers />
   </component>
