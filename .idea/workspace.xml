@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8111c716-4b9f-4d90-a3ef-d9cb6bff4974" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/materialCatalogArrow.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/Home.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/Home.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lib/fonts.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lib/fonts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +98,9 @@
       <workItem from="1753808553379" duration="10704000" />
       <workItem from="1753962606097" duration="12571000" />
       <workItem from="1754302595348" duration="13000" />
-      <workItem from="1754316000567" duration="7808000" />
+      <workItem from="1754316000567" duration="9303000" />
+      <workItem from="1754471715042" duration="1791000" />
+      <workItem from="1754577251337" duration="9573000" />
     </task>
     <servers />
   </component>

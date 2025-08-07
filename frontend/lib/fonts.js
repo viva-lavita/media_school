@@ -21,7 +21,7 @@ export const inter = Inter({
 
 export const comfortaa = Comfortaa ({
     subsets: ['latin', 'cyrillic'],
-    weight: ['400', '500', '600'],
+    weight: ['400', '500', '600', '700'],
     style: ['normal'],
     variable: '--font-inter',
     display: 'swap',
