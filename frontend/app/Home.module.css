@@ -1,3 +1,13 @@
+.skillsTrainingList {
+  padding-left: 8px;
+}
+
+.skillsTrainingList li::before  {
+  content: "•";
+  font-size: 1em;
+  margin-right: 8px;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -46,7 +56,9 @@
   font-size: 42px;
 }
 
-.skillsTraining {
+.skillsTraining,
+.mediaSchoolSpecial,
+.mediaSchoolExperience {
   width: 1400px;
 }
 
@@ -100,9 +112,52 @@
   top: 1px;
 }
 
+.skillsTrainingTitle {
+  font-size: 22px;
+}
+
+.skillsTrainingProspects {
+  gap: 40px;
+}
+
+.mediaSchoolSpecial {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.mediaSchoolSpecialTitle,
+.mediaSchoolExperienceTeacher {
+  font-size: 22px;
+}
+
+.mediaSchoolSpecialContent {
+  display: flex;
+}
+
+.mediaSchoolSpecialItem {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 0;
+  flex-grow: 1;
+  gap: 16px;
+  padding: 30px;
+}
+
+.mediaSchoolExperience {
+  gap: 28px;
+}
+
+.mediaSchoolExperienceTeachers {
+  display: flex;
+  gap: 30px;
+}
+
 @media screen and (max-width: 1024px) {
   .mainContent,
-  .skillsTraining {
+  .skillsTraining,
+  .mediaSchoolSpecial,
+  .mediaSchoolExperience {
     width: 944px;
   }
   .mainImage {
@@ -110,7 +165,8 @@
     background-position: center;
     background-size: cover;
   }
-  .aboutLearningContainer {
+  .aboutLearningContainer,
+  .mediaSchoolExperienceTeachers {
     gap: 20px;
   }
   .mainImageTextTop {
@@ -138,10 +194,25 @@
   .aboutLearningTitleContainer {
     width: 734px;
   }
+  .skillsTrainingTitle,
+  .mediaSchoolExperienceTeacher {
+    font-size: 18px;
+  }
+  .skillsTrainingProspects {
+    gap: 28px;
+  }
+  .mediaSchoolSpecialContent {
+    flex-direction: column;
+  }
+  .mediaSchoolSpecialItem {
+    padding: 30px 33px;
+  }
 }
 @media screen and (max-width: 768px) {
   .mainContent,
-  .skillsTraining {
+  .skillsTraining,
+  .mediaSchoolSpecial,
+  .mediaSchoolExperience {
     width: 728px;
   }
   .mainImage {
@@ -178,10 +249,28 @@
   .aboutLearningTitleContainer {
     width: 684px;
   }
+  .skillsTrainingTitle,
+  .mediaSchoolExperienceTeacher {
+    font-size: 18px;
+  }
+  .skillsTrainingProspects {
+    gap: 28px;
+  }
+  .mediaSchoolSpecialContent {
+    flex-direction: column;
+  }
+  .mediaSchoolSpecialItem {
+    padding: 25px 28px;
+  }
+  .mediaSchoolExperienceTeachers {
+    gap: 20px;
+  }
 }
 @media screen and (max-width: 360px) {
   .mainContent,
-  .skillsTraining {
+  .skillsTraining,
+  .mediaSchoolSpecial,
+  .mediaSchoolExperience {
     width: 320px;
   }
   .mainImage {
@@ -225,5 +314,26 @@
   }
   .aboutLearningTitleContainer {
     width: 320px;
+  }
+  .skillsTrainingTitle,
+  .mediaSchoolSpecialTitle,
+  .mediaSchoolExperienceTeacher {
+    font-size: 18px;
+  }
+  .skillsTrainingProspects,
+  .mediaSchoolSpecial {
+    gap: 28px;
+  }
+  .mediaSchoolSpecialContent {
+    flex-direction: column;
+  }
+  .mediaSchoolSpecialItem {
+    padding: 20px;
+  }
+  .mediaSchoolExperience {
+    gap: 20px;
+  }
+  .mediaSchoolExperienceTeachers {
+    gap: 0;
   }
 }
