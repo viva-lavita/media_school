@@ -71,7 +71,7 @@ export default function Home() {
               <p className={`${styles.topicsStudyText}`}>Лонгрид</p>
             </div>
           </div>
-          <p className={`${montserrat.className} ${styles.materialCatalog}`}>КАТАЛОГ МАТЕРИАЛОВ</p>
+          <p className={`${montserrat.className} ${styles.materialCatalog} text-lg font-semibold text-dark-green`}>КАТАЛОГ МАТЕРИАЛОВ</p>
         </div>
         <div className={`${styles.skillsTraining} flex flex-col gap-10`}>
           <h1 className={`${comfortaa.className} ${styles.aboutLearning} ${styles.aboutLearningTitleContainer}`}>
@@ -109,7 +109,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <p className={`${montserrat.className} ${styles.materialCatalog}`}>ПОДРОБНЕЕ О&nbsp;ПРОЕКТЕ</p>
+          <p className={`${montserrat.className} ${styles.materialCatalog} text-lg font-semibold text-dark-green`}>ПОДРОБНЕЕ О&nbsp;ПРОЕКТЕ</p>
         </div>
         <div className={`${styles.mediaSchoolSpecial}`}>
           <h1 className={`${comfortaa.className} ${styles.aboutLearning}`}>Что&nbsp;делает Медиашколу особенной</h1>
@@ -197,9 +197,235 @@ export default function Home() {
             <img src="/images/ArrowRight.svg" alt="ArrowRight"/>
           </div>
         </div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div className={`${styles.announcements} flex flex-col gap-10`}>
+          <h1 className={`${comfortaa.className} ${styles.aboutLearning}`}>Новости, анонсы и конкурсы</h1>
+          <div className={`${styles.announcementsContainer}`}>
+            <div className={`flex flex-col basis-0 grow gap-2`}>
+              <figure className={`flex flex-col gap-3`}>
+                <img
+                  src="/images/news.png"
+                  alt="новости"/>
+                <figcapture className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}>
+                  НОВОСТИ
+                </figcapture>
+              </figure>
+              <div className={`flex flex-col gap-2`}>
+                <p className={`${montserrat.className} font-normal text-lg leading-[140%]`}>
+                  В&nbsp;школу приехали студенты-журналисты: как&nbsp;прошёл день МК
+                </p>
+                <p className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}>
+                  В минувший четверг в&nbsp;нашей школе прошёл необычный и&nbsp;насыщенный день&nbsp;— к&nbsp;нам приехали
+                  студенты факультета журналистики, чтобы провести серию мастер-классов и&nbsp;творческих встреч
+                  для школьников.
+                </p>
+              </div>
+              <p className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}>
+                10&nbsp;апреля 2025
+              </p>
+            </div>
+            <div className={`${pageWidth < 768 ? 'hidden' : ''} flex flex-col basis-0 grow gap-2`}>
+              <figure className={`flex flex-col gap-3`}>
+                <img
+                  src="/images/announcements.png"
+                  alt="анонсы"/>
+                <figcapture className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}>
+                  АНОНСЫ
+                </figcapture>
+              </figure>
+              <div className={`flex flex-col gap-2`}>
+                <p className={`${montserrat.className} font-normal text-lg leading-[140%]`}>
+                  Стартует курс по&nbsp;фотографии&nbsp;— запишись в&nbsp;медиагруппу!
+                </p>
+                <p className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}>
+                  В минувший четверг в&nbsp;нашей школе прошёл необычный и&nbsp;насыщенный день&nbsp;— к&nbsp;нам приехали
+                  студенты факультета журналистики, чтобы провести серию мастер-классов и&nbsp;творческих встреч
+                  для школьников.
+                </p>
+              </div>
+              <p className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}>
+                6&nbsp;апреля 2025
+              </p>
+            </div>
+            <div className={`${pageWidth < 1920 ? 'hidden' : ''} flex flex-col basis-0 grow gap-2`}>
+              <figure className={`flex flex-col gap-3`}>
+                <img
+                  src="/images/news-together.png"
+                  alt="новости"/>
+                <figcapture className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}>
+                  НОВОСТИ
+                </figcapture>
+              </figure>
+              <div className={`flex flex-col gap-2`}>
+                <p className={`${montserrat.className} font-normal text-lg leading-[140%]`}>
+                  Медиашкола приняла участников из&nbsp;соседней школы&nbsp;— вместе учиться интереснее
+                </p>
+                <p className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}>
+                  В минувший четверг в&nbsp;нашей школе прошёл необычный и&nbsp;насыщенный день&nbsp;— к&nbsp;нам приехали
+                  студенты факультета журналистики, чтобы провести серию мастер-классов и&nbsp;творческих встреч
+                  для школьников.
+                </p>
+              </div>
+              <p className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}>
+                2&nbsp;апреля 2025
+              </p>
+            </div>
+          </div>
+          <p className={`${montserrat.className} ${styles.materialCatalog} text-lg font-semibold text-dark-green`}>ВСЕ&nbsp;НОВОСТИ</p>
+        </div>
+        <div className={`${styles.feedback} relative flex flex-col gap-7`}>
+          <div className={`flex flex-col gap-10`}>
+            <h1 className={`${comfortaa.className} ${styles.aboutLearning}`}>Отзывы о&nbsp;проекте</h1>
+            <div className={`${styles.feedbackContent}`}>
+              <div className={`flex flex-col basis-0 grow gap-2 p-4 border-green border bg-light-green`}>
+                <figure className={`flex items-center gap-2`}>
+                  <img
+                    src="/images/avatar.png"
+                    alt="аватар"
+                    className={`h-[100px] w-[100px] rounded-full`}/>
+                  <figcaption className={`${montserrat.className} font-medium text-base leading-[100%]`}>
+                    Анна, 15&nbsp;лет
+                  </figcaption>
+                </figure>
+                <div className={`flex flex-col gap-3`}>
+                  <p className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}>
+                    «Я&nbsp;всегда любила снимать видео на&nbsp;телефон, но&nbsp;делала это&nbsp;скорее интуитивно.
+                    На&nbsp;мастер-классе по&nbsp;видеосъёмке нам&nbsp;объяснили, как&nbsp;строить кадр, зачем нужен
+                    сценарий и&nbsp;как&nbsp;пользоваться светом. Всё&nbsp;было интересно и&nbsp;понятно&nbsp;—
+                    не&nbsp;просто лекция, а&nbsp;живая работа с&nbsp;камерой. Мы&nbsp;сразу пробовали снимать сами.
+                    Я&nbsp;даже&nbsp;попробовала себя в&nbsp;роли режиссёра и&nbsp;поняла, что&nbsp;хочу продолжать
+                    этим заниматься. Теперь мечтаю поступить в&nbsp;вуз, связанный с&nbsp;медиа»
+                  </p>
+                  <p className={`${montserrat.className} ${styles.materialCatalog} font-medium text-base leading-[100%] 
+                  text-grey-2`}>
+                    ЧИТАТЬ ПОЛНОСТЬЮ
+                  </p>
+                </div>
+              </div>
+              <div className={`${pageWidth >= 768 
+                ? 'flex flex-col basis-0 grow gap-2 p-4 border-green border bg-light-green' 
+                : 'hidden'}`}>
+                <figure className={`flex items-center gap-2`}>
+                  <img
+                    src="/images/feedback-kirill.png"
+                    alt="отзывы Кирилл"
+                    className={`h-[100px] w-[100px] rounded-full`}/>
+                  <figcaption className={`${montserrat.className} font-medium text-base leading-[100%]`}>
+                    Кирилл, 17&nbsp;лет
+                  </figcaption>
+                </figure>
+                <div className={`flex flex-col gap-3`}>
+                  <p className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}>
+                    «На&nbsp;одном из&nbsp;занятий у&nbsp;нас&nbsp;был гость&nbsp;— настоящий журналист с&nbsp;телевидения.
+                    Он&nbsp;рассказал, как&nbsp;проводить интервью, что&nbsp;такое открытые и&nbsp;закрытые вопросы,
+                    и&nbsp;как&nbsp;не&nbsp;бояться камеры. А&nbsp;потом мы&nbsp;сами брали интервью у&nbsp;учителей
+                    и&nbsp;учеников. Это&nbsp;был&nbsp;новый опыт, и&nbsp;я&nbsp;понял, что&nbsp;мне&nbsp;нравится быть
+                    в&nbsp;центре событий. До&nbsp;этого&nbsp;я&nbsp;вообще не&nbsp;знал, что&nbsp;журналистика
+                    может быть такой живой и&nbsp;интересной».
+                  </p>
+                  <p className={`${montserrat.className} ${styles.materialCatalog} font-medium text-base leading-[100%] text-grey-2`}>
+                    ЧИТАТЬ ПОЛНОСТЬЮ
+                  </p>
+                </div>
+              </div>
+              <div className={`${pageWidth >= 1024 
+                ? 'flex flex-col basis-0 grow gap-2 p-4 border-green border bg-light-green' 
+                : 'hidden'}`}>
+                <figure className={`flex items-center gap-2`}>
+                  <img
+                    src="/images/feedback-liza.png"
+                    alt="аватар"
+                    className={`h-[100px] w-[100px] rounded-full`}/>
+                  <figcaption className={`${montserrat.className} font-medium text-base leading-[100%]`}>
+                    Лиза, 14&nbsp;лет
+                  </figcaption>
+                </figure>
+                <div className={`flex flex-col gap-3`}>
+                  <p className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}>
+                    «Я&nbsp;попала на&nbsp;мастер-класс по&nbsp;блогингу&nbsp;— и&nbsp;это&nbsp;было лучше,
+                    чем&nbsp;любой урок! Нас&nbsp;научили, как&nbsp;вести себя в&nbsp;кадре, о&nbsp;чём&nbsp;говорить,
+                    чтобы&nbsp;было интересно, и&nbsp;как&nbsp;монтировать видео. Мы&nbsp;сразу начали снимать свой
+                    блог, и&nbsp;я&nbsp;даже&nbsp;записала первое видео про&nbsp;школьный праздник. Поняла,
+                    что&nbsp;это&nbsp;не&nbsp;просто развлечение, а&nbsp;настоящая работа, которая требует подготовки.
+                    Теперь я&nbsp;веду свой видеодневник для&nbsp;школьного канала».
+                  </p>
+                  <p className={`${montserrat.className} ${styles.materialCatalog} font-medium text-base leading-[100%] text-grey-2`}>
+                    ЧИТАТЬ ПОЛНОСТЬЮ
+                  </p>
+                </div>
+              </div>
+              <div className={`${pageWidth >= 1920 
+                ? 'flex flex-col basis-0 grow gap-2 p-4 border-green border bg-light-green' 
+                : 'hidden'}`}>
+                <figure className={`flex items-center gap-2`}>
+                  <img
+                    src="/images/avatar.png"
+                    alt="аватар"
+                    className={`h-[100px] w-[100px] rounded-full`}/>
+                  <figcaption className={`${montserrat.className} font-medium text-base leading-[100%]`}>
+                    Даниил, 16&nbsp;лет
+                  </figcaption>
+                </figure>
+                <div className={`flex flex-col gap-3`}>
+                  <p className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}>
+                    «Я&nbsp;в&nbsp;медиагруппе почти с&nbsp;самого начала. За&nbsp;это&nbsp;время мы&nbsp;научились
+                    снимать, писать тексты, брать интервью и&nbsp;даже&nbsp;делать простые новостные сюжеты.
+                    У&nbsp;нас&nbsp;уже есть&nbsp;несколько видео на&nbsp;сайте&nbsp;— приятно видеть результат своей
+                    работы. Мне&nbsp;нравится, что&nbsp;всё&nbsp;по‑настоящему: у&nbsp;нас&nbsp;есть&nbsp;задачи,
+                    дедлайны, съёмки. Это&nbsp;развивает и&nbsp;ответственность, и&nbsp;креативность. После&nbsp;школы
+                    хочу поступать на&nbsp;журналиста, и&nbsp;опыт в&nbsp;Медиашколе точно поможет».
+                  </p>
+                  <p className={`${montserrat.className} ${styles.materialCatalog} 
+                  font-medium text-base leading-[100%] text-grey-2`}>
+                    ЧИТАТЬ ПОЛНОСТЬЮ
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={`${pageWidth >= 1920 ? 'absolute top-[7px] right-0' : 'justify-center'} flex gap-3`}>
+            <img src="/images/ArrowLeft.svg" alt="ArrowLeft"/>
+            <img src="/images/ArrowRight.svg" alt="ArrowRight"/>
+          </div>
+        </div>
+        <div className={`${styles.contactUs} border-green border py-10 mb-20`}>
+          <h1 className={`${comfortaa.className} ${styles.contactUsTitle} font-bold`}>Остались вопросы? Свяжитесь с&nbsp;нами</h1>
+          <div className={`${styles.contactUsContent} flex flex-col items-center`}>
+            <div className={`${styles.contactUsInfo} flex`}>
+              <div className={`${styles.contactUsInfoItem} flex items-center`}>
+                <span className={`${montserrat.className} ${styles.contactInfo} text-grey-2 font-normal`}>
+                  График работы:
+                </span>
+                <span className={`${montserrat.className} ${styles.contactInfoValue} font-normal text-lg leading-[140%]`}>09:00–18:00</span>
+              </div>
+              <div className={`${styles.contactUsInfoItem} flex items-center`}>
+                <span className={`${montserrat.className} ${styles.contactInfo} text-grey-2 font-normal text-base leading-[130%]`}>
+                  Телефон:
+                </span>
+                <span className={`${montserrat.className} ${styles.contactInfoValue} font-normal text-lg leading-[140%]`}>
+                  +7&nbsp;(3822)&nbsp;71-67-69
+                </span>
+              </div>
+              <div className={`${styles.contactUsInfoItem} flex items-center`}>
+                <span className={`${montserrat.className} ${styles.contactInfo} text-grey-2 font-normal text-base leading-[130%]`}>
+                  Почта:
+                </span>
+                <span className={`${montserrat.className} ${styles.contactInfoValue} font-normal text-lg leading-[140%]`}>
+                  perspectiva@education70.ru
+                </span>
+              </div>
+            </div>
+            <div className={`flex gap-3`}>
+              <img
+                src="/header-images/ok-button.png"
+                alt="Одноклассники"
+                className={`h-8 w-8`}/>
+              <img
+                src="/header-images/vk-button.png"
+                alt="Вконтакте"
+                className={`h-8 w-8`}/>
+            </div>
+          </div>
+        </div>
       </div>
   </div>
   )

@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8111c716-4b9f-4d90-a3ef-d9cb6bff4974" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/ArrowRight.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/Evgeny-Pavlovich-Zaitsev.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/Maria-Sergeyevna-Gauer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/Nadezhda-Leonidovna-Mikhalchuk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/images/Olga-Sergeevna-Dumcheva.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/announcements.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/avatar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/feedback-kirill.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/feedback-liza.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/news-together.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/images/news.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/Home.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/Home.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +106,10 @@
       <workItem from="1754471715042" duration="1791000" />
       <workItem from="1754577251337" duration="11372000" />
       <workItem from="1755008089221" duration="5311000" />
-      <workItem from="1755094952246" duration="10868000" />
+      <workItem from="1755094952246" duration="11243000" />
+      <workItem from="1755539321418" duration="1859000" />
+      <workItem from="1755602819065" duration="7076000" />
+      <workItem from="1755622501044" duration="10167000" />
     </task>
     <servers />
   </component>
