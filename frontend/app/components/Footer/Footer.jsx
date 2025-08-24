@@ -24,7 +24,6 @@ export default function Footer() {
                       <p>+7 3822 71-67-69</p>
                       <p>perspectiva@education70.ru</p>
                   </div>
-                  <p className={`font-normal text-sm`}>© 2025 МАОУ Школа «Перспектива» г. Томск</p>
               </div>
               <div className={`${pageWidth >= 1400 ? 'mr-[13%]':''} ${pageWidth >= 768 && pageWidth < 1024 ? 'ml-[7.75%]':''} 
                ${pageWidth >= 1024 && pageWidth < 1400 ? 'mr-[14%]':''} font-medium text-base flex flex-col gap-2 `}>
