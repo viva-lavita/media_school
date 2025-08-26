@@ -88,7 +88,7 @@ class Competition(BaseContent):
 
 
 class Paragraph(models.Model):
-    """Параграфы новости, анонса, конкурса."""
+    """Параграф новости, анонса, конкурса."""
 
     news = models.ForeignKey(
         News, on_delete=models.CASCADE, related_name="paragraphs", null=True, blank=True, verbose_name="Новость"

@@ -16,6 +16,7 @@ class ParagraphSerializer(serializers.ModelSerializer):
         )
 
     def to_representation(self, instance):
+        """Только не пустые поля."""
         representation = super().to_representation(instance)
         representation = {k: v for k, v in representation.items() if v}
         return representation
