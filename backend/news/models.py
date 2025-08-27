@@ -47,6 +47,7 @@ class News(BaseContent):
     class Meta:
         verbose_name = "Новость"
         verbose_name_plural = "Новости"
+        ordering = ("-created_at",)
 
 
 class Announcement(BaseContent):
@@ -55,6 +56,7 @@ class Announcement(BaseContent):
     class Meta:
         verbose_name = "Анонс"
         verbose_name_plural = "Анонсы"
+        ordering = ("-created_at",)
 
 
 class Competition(BaseContent):
@@ -66,9 +68,10 @@ class Competition(BaseContent):
     class Meta:
         verbose_name = "Конкурс"
         verbose_name_plural = "Конкурсы"
+        ordering = ("-created_at", "start_date", "end_date")
 
     def __str__(self):
-        return self.title
+        return self.date
 
     @property
     def date(self):
