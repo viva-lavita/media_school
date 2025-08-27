@@ -266,8 +266,8 @@ SIMPLE_JWT = {
 #  SWAGGER
 ########################
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Django5 Template",
-    "DESCRIPTION": "Django5 Test Swagger API description",
+    "TITLE": "API Media school",
+    "DESCRIPTION": "v1",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     "SCHEMA_PATH_PREFIX": "/api/v1/",

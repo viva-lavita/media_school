@@ -70,3 +70,20 @@ class DocumentContent(models.Model):
     class Meta:
         verbose_name = "Файловый контент"
         verbose_name_plural = "Файловый контент"
+
+
+class Expert(models.Model):
+    """Эксперты и наставники."""
+
+    full_name = models.CharField(max_length=255, verbose_name="ФИО")
+    image = models.URLField(verbose_name="Ссылка на картинку")
+    position = models.CharField(max_length=255, verbose_name="Должность")
+    catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Категория")
+    created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
+
+    def __str__(self):
+        return f"Наставник: {self.full_name}"
+
+    class Meta:
+        verbose_name = "Наставник"
+        verbose_name_plural = "Наставники"

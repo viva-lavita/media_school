@@ -1,8 +1,11 @@
+from django_filters.rest_framework import DjangoFilterBackend
+
 from api.mixins import RetrieveListViewSet
-from content.models import Catalog, DocumentContent, PhotoContent, VideoContent
+from content.models import Catalog, DocumentContent, Expert, PhotoContent, VideoContent
 from content.serializers import (
     CatalogSerializer,
     DocumentContentSerializer,
+    ExpertSerializer,
     PhotoContentSerializer,
     VideoContentSerializer,
 )
@@ -52,3 +55,22 @@ class DocumentContentViewSet(RetrieveListViewSet):
 
     queryset = DocumentContent.objects.all()
     serializer_class = DocumentContentSerializer
+
+
+class ExpertViewSet(RetrieveListViewSet):
+    """
+    Эксперты и наставники.
+
+    Доступно всем.
+    Фильтрация по id категории.
+
+    Для страниц:
+     - главной (раздел 'Журналисты и эксперты, которые делятся опытом');
+     - о проекте (раздел 'Журналисты и эксперты, которые делятся опытом').
+     - каталога материалов (раздел 'Наставники', фильтр по id категории).
+    """
+
+    queryset = Expert.objects.all().order_by("id")
+    serializer_class = ExpertSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ("catalog",)

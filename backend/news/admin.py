@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 
 from news.models import (
@@ -58,8 +59,10 @@ class NewsAdmin(admin.ModelAdmin):
         return obj.updated_by.get_full_name()
 
 
-@admin.register(Paragraph)
-class ParagraphAdmin(admin.ModelAdmin):
-    list_display = ("id", "news", "announcement", "competition", "created_at")
-    show_facets = admin.ShowFacets.ALWAYS
-    date_hierarchy = "created_at"
+if settings.DEBUG:
+
+    @admin.register(Paragraph)
+    class ParagraphAdmin(admin.ModelAdmin):
+        list_display = ("id", "news", "announcement", "competition", "created_at")
+        show_facets = admin.ShowFacets.ALWAYS
+        date_hierarchy = "created_at"

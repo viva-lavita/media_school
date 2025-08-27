@@ -37,7 +37,7 @@ class BaseContent(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.author_for_display:
-            self.author_for_display = f"{self.created_by.get_full_name()}"
+            self.author_for_display = f"{self.author.get_full_name()}"
         super().save(*args, **kwargs)
 
 

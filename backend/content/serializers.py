@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from content.models import Catalog, DocumentContent, PhotoContent, VideoContent
+from content.models import Catalog, DocumentContent, Expert, PhotoContent, VideoContent
 
 
 class CatalogSerializer(serializers.ModelSerializer):
@@ -36,4 +36,16 @@ class DocumentContentSerializer(serializers.ModelSerializer):
             "id",
             "catalog_id",
             "document_path",
+        )
+
+
+class ExpertSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Expert
+        fields = (
+            "id",
+            "full_name",
+            "image",
+            "position",
+            "catalog_id",
         )

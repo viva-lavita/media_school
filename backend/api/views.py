@@ -17,17 +17,14 @@ def health_check(request):
 @api_view(["GET"])
 def get_contact(request):
     """
-    Возвращает последний экземпляр контактной информации школы.
+    Контактная информация школы.
     Используется для раздела 'Контакты' и для футера сайта.
-    JSON содержит поля: 'address', 'phone_number', 'contact_email', 'school_website',
-    'school_website', 'social_vk', 'social_ok', 'latitude', 'longitude'.
-    Доступ публичный, без аутентификации.
+
+    Доступно всем.
     """
     instance = Contact.objects.last()
 
     if not instance:
         return Response({"error": "Контакты не найдены"}, status=status.HTTP_404_NOT_FOUND)
-
     serializer = ContactSerializer(instance)
-
     return Response(serializer.data, status=status.HTTP_200_OK)

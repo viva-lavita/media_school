@@ -32,6 +32,19 @@ class NewsSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "image_path",
+            "author_for_display",
             "created_at",
             "paragraphs",
+        )
+
+
+class ShortNewsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = News
+        fields = (
+            "id",
+            "title",
+            "description",
+            "image_path",
+            "created_at",
         )
