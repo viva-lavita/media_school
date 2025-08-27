@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.models import Contact
+from api.models import Contact, Review
 
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -16,4 +16,16 @@ class ContactSerializer(serializers.ModelSerializer):
             "social_ok",
             "latitude",
             "longitude",
+        ]
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+            "full_name",
+            "age",
+            "image",
+            "review",
+            "created_at",
         ]

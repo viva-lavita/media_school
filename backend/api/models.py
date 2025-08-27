@@ -25,3 +25,24 @@ class Contact(models.Model):
     class Meta:
         verbose_name = "Контакт"
         verbose_name_plural = "Контакты"
+
+
+class Review(models.Model):
+    """
+    Отзывы о проекте.
+    """
+
+    full_name = models.CharField(verbose_name="ФИО", max_length=255)
+    age = models.PositiveIntegerField(verbose_name="Возраст", blank=True, null=True)
+    image = models.URLField(verbose_name="Ссылка на картинку", blank=True, null=True)
+    review = models.TextField(verbose_name="Отзыв")
+    created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name="Дата изменения", auto_now=True)
+
+    def __str__(self):
+        return f"Отзыв: {self.full_name}"
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+        ordering = ["-created_at", "-updated_at"]

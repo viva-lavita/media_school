@@ -1,12 +1,14 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from api.views import get_contact, health_check
+from api.views import ReviewViewSet, get_contact, health_check
 
 app_name = "api"
 
 
 router = DefaultRouter()
+
+router.register("reviews", ReviewViewSet, basename="reviews")
 
 urlpatterns = [
     path("", include(router.urls)),
