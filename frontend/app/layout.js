@@ -3,6 +3,7 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import "./globals.css";
 import Navigation from "./components/Navigation/Navigation";
+import About from "./about/About";
 
 export const metadata = {
   title: "Create Next App",
@@ -18,6 +19,7 @@ export default function RootLayout({children}) {
           <Header />
           <Navigation />
           {children}
+          <About />
           <Footer />
         </Suspense>
       </body>
