@@ -1,0 +1,172 @@
+.newsContainer {
+    max-width: 1400px;
+    width: calc(100vw - 80px);
+    margin: 0 auto 80px;
+    display: flex; 
+    flex-direction: column;
+    gap: 60px;
+}
+
+.newsInfo {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+}
+
+.newsAll {
+    display: flex; 
+    flex-direction: column;
+    gap: 60px;
+}
+
+.newsCard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px; 
+}
+
+.newsContent {
+    display: flex; 
+    flex-direction: column;
+    gap: 40px;
+}
+
+.newsTitle {
+    font-size: 42px;
+}
+
+.newsContainerAbout {
+    gap: 40px;
+}
+
+.contactUs {
+    gap: 20px;
+}
+
+.contactInfo {
+    gap: 12px;
+}
+
+.contactInfoTelEmail {
+    gap: 75px;
+}
+
+.newsMap {
+    background-image: url('/images/Map.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 450px;
+    width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+    .newsContainer {
+        max-width: 944px;
+        width: calc(100vw - 40px);
+    }
+    .newsCard {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .newsTitle {
+        font-size: 40px;
+    }
+    .contactUs,
+    .contactInfoTelEmail {
+        gap: 12px;
+    }
+    .contactInfo {
+        gap: 4px;
+    }
+    .contactInfoTelEmail {
+        flex-direction: column;
+    }
+    .newsContainer {
+        gap: 20px;
+    }
+    .newsImage {
+        height: 267px;
+    }
+    .newsMap {
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .newsContainer {
+        max-width: 728px;
+        width: calc(100vw - 40px);
+    }
+    .newsTitle {
+        font-size: 32px;
+    }
+    .contactUs,
+    .contactInfoTelEmail {
+        gap: 12px;
+    }
+    .contactInfo {
+        gap: 4px;
+    }
+    .contactInfoTelEmail,
+    .newsContainer {
+        flex-direction: column;
+    }
+    .newsContainer {
+        gap: 40px;
+    }
+    .newsImage {
+        width: 728px;
+        height: 420px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .newsContainer {
+        width: 320px;
+    }
+    .newsCard {
+        grid-template-columns: 1fr;
+    }
+    .newsTitle {
+        font-size: 28px;
+    }
+    .newsContainerAbout {
+        gap: 28px;
+    }
+    .contactUs,
+    .contactInfoTelEmail {
+        gap: 12px;
+    }
+    .contactInfo {
+        gap: 4px;
+    }
+    .contactInfoTelEmail,
+    .newsContainer {
+        flex-direction: column;
+    }
+    .newsContainer {
+        gap: 40px;
+        margin: 0 auto 60px;
+    }
+    .newsImage {
+        width: 320px;
+        height: auto;
+    }
+    .newsMap {
+        height: 240px;
+    }
+}
+
+
+.aboutLearning {
+  font-family: Comfortaa;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 52px;
+  leading-trim: NONE;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+}
