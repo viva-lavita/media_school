@@ -85,13 +85,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: .env
-          path: .env
+          path: .
 
       - name: Copy .env
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
+          host: ${{ secrets.HOST_SERVER }}
+          username: ${{ secrets.USER_SERVER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: .env
@@ -100,8 +100,8 @@ jobs:
       - name: Copy docker-compose.yml
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
+          host: ${{ secrets.HOST_SERVER }}
+          username: ${{ secrets.USER_SERVER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "docker-compose.yml"
@@ -110,8 +110,8 @@ jobs:
       - name: Copy nginx.conf
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
+          host: ${{ secrets.HOST_SERVER }}
+          username: ${{ secrets.USER_SERVER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "infra/nginx.conf"
@@ -122,7 +122,8 @@ jobs:
         with:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
-          password: ${{ secrets.PASSWORD_SERVER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             cd app
             sudo docker compose down
