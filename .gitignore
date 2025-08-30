@@ -178,3 +178,5 @@ cython_debug/
 static/
 /media
 media/
+.vscode/
+/.vscode

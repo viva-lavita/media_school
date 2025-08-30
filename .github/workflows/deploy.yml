@@ -46,7 +46,7 @@ jobs:
       - name: Push to DockerHub
         uses: docker/build-push-action@v4
         with:
-          context: ./backend
+          context: ./backend/
           file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_IMAGE_BACKEND }}:latest
