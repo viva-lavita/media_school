@@ -93,7 +93,7 @@ jobs:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          # passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: .env
           target: /root/app/.env
 
@@ -103,7 +103,7 @@ jobs:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          # passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "docker-compose.yml"
           target: /root/app
 
@@ -113,7 +113,7 @@ jobs:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          # passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "infra/nginx.conf"
           target: /root/app/infra
 
@@ -123,7 +123,7 @@ jobs:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          # passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             cd app
             sudo docker compose down
