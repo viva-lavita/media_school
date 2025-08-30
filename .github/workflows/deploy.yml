@@ -87,7 +87,7 @@ jobs:
           name: .env
           path: .
 
-      - name: Copy .env to server
+      - name: Copy .env
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST_SERVER }}
