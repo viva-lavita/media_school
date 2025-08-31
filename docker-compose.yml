@@ -34,6 +34,9 @@ services:
         interval: 10s
         timeout: 5s
         retries: 5
+    volumes:
+      - static:/backend/static/
+      - media:/backend/media/
     command: bash /scripts/start-prod.sh
 
 
