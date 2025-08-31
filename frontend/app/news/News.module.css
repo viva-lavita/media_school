@@ -61,10 +61,18 @@
     width: 100%;
 }
 
+.tab-style {
+    font-weight: 500 !important;
+    font-size: 16px;
+    line-height: 1; 
+    letter-spacing: 0; 
+    text-align: center; 
+}
+
 @media screen and (max-width: 1024px) {
     .newsContainer {
         max-width: 944px;
-        width: calc(100vw - 40px);
+        width: calc(100vw - 80px);
     }
     .newsCard {
         grid-template-columns: repeat(2, 1fr);
@@ -124,7 +132,8 @@
 
 @media screen and (max-width: 360px) {
     .newsContainer {
-        width: 320px;
+        max-width: 320px;
+        width: calc(100vw - 40px);
     }
     .newsCard {
         grid-template-columns: 1fr;
