@@ -4,7 +4,7 @@ import {montserrat} from "@/lib/fonts";
 
 export default function LoginPage() {
   return (
-    <div className={`${styles.loginContainer} flex m-auto`}>
+    <div className={`${styles.loginContainer} flex justify-center m-auto`}>
       <div className={`${styles.loginImage} flex basis-0 grow`}></div>
       <div className={`${styles.loginContent} flex flex-col bg-light-green border-green border`}>
         <div className={`${styles.loginTitleContainer} flex flex-col items-center`}>
@@ -22,6 +22,7 @@ export default function LoginPage() {
                 className="w-full border border-green bg-white py-3 px-4 focus:outline-none"
                 name="login"
                 placeholder="Логин"
+                required
               />
               <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-15.5 top-3 text-red-500`}>
               *
@@ -38,6 +39,7 @@ export default function LoginPage() {
                 className="h-[43px] w-full border border-green bg-white py-3 px-4 focus:outline-none"
                 name="password"
                 placeholder="Пароль"
+                required
               />
               <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-18.5 top-2 text-red-500`}>
               *
