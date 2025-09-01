@@ -326,17 +326,17 @@ const filteredContests = contestsData.filter((item) => {
         <div className={`${styles.newsAll}`}>
           <div className={`${styles.announcements} flex flex-col gap-7`}>
             <h1
-              className={`${comfortaa.className} ${styles.aboutLearning}`}
+              className={`${comfortaa.className} ${styles.aboutLearning}  text-textblack`}
               style={{ paddingBottom: "9px" }}
             >
               Новости, анонсы и конкурсы
             </h1>
 
-            <div className="flex justify-center space-x-[30px]">
+            <div className="flex justify-center space-x-[30px] text-grey-2">
               <button
                 onClick={() => handleTabChange("news")}
                 className={`${
-                  currentTab === "news" ? "border-b-2 border-[#3C4226]" : ""
+                  currentTab === "news" ? "border-b-2 border-dark-green" : ""
                 } ${montserrat.className} w-[208px]`}
                 style={{ paddingBottom: "9px" }}
               >
@@ -346,7 +346,7 @@ const filteredContests = contestsData.filter((item) => {
                 onClick={() => handleTabChange("announcements")}
                 className={`${
                   currentTab === "announcements"
-                    ? "border-b-2 border-[#3C4226]"
+                    ? "border-b-2 border-dark-green"
                     : ""
                 } ${montserrat.className} tab-style w-[208px]`}
                 style={{ paddingBottom: "9px" }}
@@ -356,7 +356,7 @@ const filteredContests = contestsData.filter((item) => {
               <button
                 onClick={() => handleTabChange("contests")}
                 className={`${
-                  currentTab === "contests" ? "border-b-2 border-[#3C4226]" : ""
+                  currentTab === "contests" ? "border-b-2 border-dark-green" : ""
                 } ${montserrat.className} w-[208px]`}
                 style={{ paddingBottom: "9px" }}
               >
@@ -367,7 +367,7 @@ const filteredContests = contestsData.filter((item) => {
             {/* Радиокнопки для фильтрации */}
             
             {currentTab === "contests" && (
-              <div className="flex space-x-7 mt-4">
+              <div className="flex space-x-7">
                 <label className={`${styles.customRadio}`}>
                   <input
                     type="radio"
@@ -376,7 +376,7 @@ const filteredContests = contestsData.filter((item) => {
                     onChange={() => setShowCompleted(false)}
                   />
                   <span className={`${styles.radioBtn}`}></span>
-                  <span className={`${styles.textStyle} ${!showCompleted ? 'text-black' : 'text-gray-400'}`}>
+                  <span className={`${styles.textStyle} ${!showCompleted ? 'text-textblack' : 'text-grey-2'}`}>
                     Текущие
                   </span>
                 </label>
@@ -389,7 +389,7 @@ const filteredContests = contestsData.filter((item) => {
                     onChange={() => setShowCompleted(true)}
                   />
                   <span className={`${styles.radioBtn}`}></span>
-                  <span className={`${styles.textStyle} ${showCompleted ? 'text-black' : 'text-gray-400'}`}>
+                  <span className={`${styles.textStyle} ${showCompleted ? 'text-textblack' : 'text-grey-2'}`}>
                     Завершенные
                   </span>
                 </label>
@@ -408,7 +408,7 @@ const filteredContests = contestsData.filter((item) => {
                   const isCompleted = currentDate > dateEnd;
 
                   return (
-                    <div key={index} className={`flex flex-col gap-2 relative`}>
+                    <div key={index} className={`flex flex-col gap-2 text-anonsblack relative`}>
                       <div
                         style={{
                           position: "absolute",
@@ -453,12 +453,12 @@ const filteredContests = contestsData.filter((item) => {
                       </figure>
                       <div className={`flex flex-col gap-2`}>
                         <p
-                          className={`${montserrat.className} font-normal text-lg leading-[140%]`}
+                          className={`${montserrat.className} font-normal text-lg text-textblack leading-[140%]`}
                         >
                           {item.title}
                         </p>
                         <p
-                          className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}
+                          className={`${montserrat.className} line-clamp-3 font-normal text-textblack leading-[130%]`}
                         >
                           {item.preview}
                         </p>
@@ -483,12 +483,12 @@ const filteredContests = contestsData.filter((item) => {
                     </figure>
                     <div className={`flex flex-col gap-2`}>
                       <p
-                        className={`${montserrat.className} font-normal text-lg leading-[140%]`}
+                        className={`${montserrat.className} font-normal text-lg text-textblack leading-[140%]`}
                       >
                         {item.title}
                       </p>
                       <p
-                        className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}
+                        className={`${montserrat.className} line-clamp-3 font-normal text-base text-textblack leading-[130%]`}
                       >
                         {item.preview}
                       </p>
