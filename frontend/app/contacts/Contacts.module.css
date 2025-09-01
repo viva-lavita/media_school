@@ -1,0 +1,123 @@
+.contactsContainer {
+    display: flex;
+    gap: 30px;
+    width: 1400px;
+    margin: 0 auto 80px;
+}
+
+.contactsTitle {
+    font-size: 52px;
+}
+
+.contactsContainerAbout {
+    gap: 40px;
+}
+
+.contactUs {
+    gap: 20px;
+}
+
+.contactInfo {
+    gap: 12px;
+}
+
+.contactInfoTelEmail {
+    gap: 75px;
+}
+
+.contactsMap {
+    background-image: url('/images/Map.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 450px;
+    width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+    .contactsContainer {
+        width: 944px;
+    }
+    .contactsTitle {
+        font-size: 40px;
+    }
+    .contactUs,
+    .contactInfoTelEmail {
+        gap: 12px;
+    }
+    .contactInfo {
+        gap: 4px;
+    }
+    .contactInfoTelEmail {
+        flex-direction: column;
+    }
+    .contactsContainer {
+        gap: 20px;
+    }
+    .contactsImage {
+        height: 267px;
+    }
+    .contactsMap {
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .contactsContainer {
+        width: 728px;
+    }
+    .contactsTitle {
+        font-size: 32px;
+    }
+    .contactUs,
+    .contactInfoTelEmail {
+        gap: 12px;
+    }
+    .contactInfo {
+        gap: 4px;
+    }
+    .contactInfoTelEmail,
+    .contactsContainer {
+        flex-direction: column;
+    }
+    .contactsContainer {
+        gap: 40px;
+    }
+    .contactsImage {
+        width: 728px;
+        height: 420px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .contactsContainer {
+        width: 320px;
+    }
+    .contactsTitle {
+        font-size: 28px;
+    }
+    .contactsContainerAbout {
+        gap: 28px;
+    }
+    .contactUs,
+    .contactInfoTelEmail {
+        gap: 12px;
+    }
+    .contactInfo {
+        gap: 4px;
+    }
+    .contactInfoTelEmail,
+    .contactsContainer {
+        flex-direction: column;
+    }
+    .contactsContainer {
+        gap: 40px;
+        margin: 0 auto 60px;
+    }
+    .contactsImage {
+        height: 185px;
+    }
+    .contactsMap {
+        height: 240px;
+    }
+}
