@@ -1,0 +1,32 @@
+.wrap {
+ display: flex;
+ flex-direction: column;
+ gap: 40px;
+ width: 1400px;
+ margin: 0 auto 40px;
+}
+.titleQA {
+ font-size: 52px;
+ font-weight: 700;
+ text-align: center;
+}
+
+.tabs {
+ display: flex;
+ justify-content: left;
+ gap: 18px;
+}
+.tabButton {
+ font-size: 16px;
+ font-weight: 500;
+ border: none;
+ cursor: pointer;
+ padding-bottom: 12px;
+ color: #535353;
+}
+
+.active,
+.tabButton:hover {
+ color: #3c4226;
+ border-bottom: 2px solid #3c4226;
+}
