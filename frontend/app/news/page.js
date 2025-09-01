@@ -396,7 +396,7 @@ const filteredContests = contestsData.filter((item) => {
               </div>
             )}
 
-            <Link href="/onenews" className={`${styles.newsCard}`}>
+            <div className={`${styles.newsCard}`}>
               {currentItems.map((item, index) => {
                 if (currentTab === "contests") {
                   // Преобразуем дату завершения в формат ГГГГ-ММ-ДД
@@ -408,7 +408,7 @@ const filteredContests = contestsData.filter((item) => {
                   const isCompleted = currentDate > dateEnd;
 
                   return (
-                    <div key={index} className={`flex flex-col gap-2 text-anonsblack relative`}>
+                    <Link key={index} href={`/news/${encodeURIComponent(item.title)}`} className={`flex flex-col gap-2 relative`}>
                       <div
                         style={{
                           position: "absolute",
@@ -468,11 +468,11 @@ const filteredContests = contestsData.filter((item) => {
                       >
                         {item.date}
                       </p>
-                    </div>
+                    </Link>
                   );
                 }
                 return (
-                  <div key={index} className={`flex flex-col gap-2 relative`}>
+                  <Link key={index} href={`/news/${encodeURIComponent(item.title)}`} className={`flex flex-col gap-2 relative`}>
                     <figure className={`flex flex-col gap-3`}>
                       <img src={item.image} alt="новости" />
                       <figcaption
@@ -498,10 +498,10 @@ const filteredContests = contestsData.filter((item) => {
                     >
                       {item.date}
                     </p>
-                  </div>
+                  </Link>
                 );
               })}
-            </Link>
+            </div>
           </div>
           <div className="flex justify-center">
             {totalPages > 1 && (
