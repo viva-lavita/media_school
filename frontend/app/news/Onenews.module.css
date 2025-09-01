@@ -1,0 +1,142 @@
+.newsContainer {
+    width: 1400px;
+    margin: 0 auto 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.newsInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.newsAll {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.newsContent {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.newsTitle {
+    font-size: 42px;
+}
+
+.newsPreview {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.newsImage {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+}
+
+.newsParagraph {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.subImage {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+}
+
+.commentSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.commentInput {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.commentButton {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.commentButton:hover {
+    background-color: #0056b3;
+}
+
+.commentsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.comment {
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+@media screen and (max-width: 1024px) {
+    .newsContainer {
+        width: 944px;
+        gap: 20px;
+    }
+    .newsTitle {
+        font-size: 40px;
+    }
+    .newsImage {
+        height: 267px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .newsContainer {
+        width: 728px;
+        gap: 40px;
+    }
+    .newsTitle {
+        font-size: 32px;
+    }
+    .newsImage {
+        width: 728px;
+        height: 420px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .newsContainer {
+        width: 320px;
+        gap: 40px;
+        margin: 0 auto 60px;
+    }
+    .newsTitle {
+        font-size: 28px;
+    }
+    .newsImage {
+        width: 320px;
+        height: auto;
+    }
+}

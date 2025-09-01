@@ -35,7 +35,7 @@ export default function Navigation() {
      if (index === crumbs.length - 1) {
       return (
        <li key={currentPath} className={`${styles.breadcrumbItem} ${styles.active}`}>
-        {path[currentPath]}
+        {path[currentPath] || ' / ' + decodeURIComponent(crumb)}
        </li>
       );
      }
