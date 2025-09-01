@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./News.module.css";
 import { comfortaa } from "@/lib/fonts";
 import { montserrat } from "@/lib/fonts";
+import Image from 'next/image';
 
 const newsData = [
   {
@@ -332,7 +333,13 @@ const filteredContests = contestsData.filter((item) => {
             </h1>
 
             <div className="flex justify-center space-x-[30px]">
-              <button onClick={() => handleTabChange("news")} className={`${currentTab === "news" ? "border-b-2 border-[#3C4226]" : ""} ${montserrat.className} w-[208px]`} style={{ paddingBottom: "9px" }}>
+              <button
+                onClick={() => handleTabChange("news")}
+                className={`${
+                  currentTab === "news" ? "border-b-2 border-[#3C4226]" : ""
+                } ${montserrat.className} w-[208px]`}
+                style={{ paddingBottom: "9px" }}
+              >
                 Новости
               </button>
               <button
@@ -358,33 +365,36 @@ const filteredContests = contestsData.filter((item) => {
             </div>
 
             {/* Радиокнопки для фильтрации */}
-            <div className="flex space-x-7 mt-4">
-              <label className={`${styles.customRadio}`}>
-                <input
-                  type="radio"
-                  name="contestStatus"
-                  checked={!showCompleted}
-                  onChange={() => setShowCompleted(false)}
-                />
-                <span className={`${styles.radioBtn}`}></span>
-                <span className={`${styles.textStyle}`} style={{ color: 'blue' }}> 
-                  Текущие
-                </span>
-              </label>
-              <div className={`${styles.verticalLine}`}></div>
-              <label className={`${styles.customRadio}`}>
-                <input
-                  type="radio"
-                  name="contestStatus"
-                  checked={showCompleted}
-                  onChange={() => setShowCompleted(true)}
-                />
-                <span className={`${styles.radioBtn}`}></span>
-                <span className={`${styles.textStyle}`} style={{ color: 'red' }}> 
-                  Завершенные
-                </span>
-              </label>
-            </div>
+            
+            {currentTab === "contests" && (
+              <div className="flex space-x-7 mt-4">
+                <label className={`${styles.customRadio}`}>
+                  <input
+                    type="radio"
+                    name="contestStatus"
+                    checked={!showCompleted}
+                    onChange={() => setShowCompleted(false)}
+                  />
+                  <span className={`${styles.radioBtn}`}></span>
+                  <span className={`${styles.textStyle} ${!showCompleted ? 'text-black' : 'text-gray-400'}`}>
+                    Текущие
+                  </span>
+                </label>
+                <div className={`${styles.verticalLine}`}></div>
+                <label className={`${styles.customRadio}`}>
+                  <input
+                    type="radio"
+                    name="contestStatus"
+                    checked={showCompleted}
+                    onChange={() => setShowCompleted(true)}
+                  />
+                  <span className={`${styles.radioBtn}`}></span>
+                  <span className={`${styles.textStyle} ${showCompleted ? 'text-black' : 'text-gray-400'}`}>
+                    Завершенные
+                  </span>
+                </label>
+              </div>
+            )}
 
             <Link href="/onenews" className={`${styles.newsCard}`}>
               {currentItems.map((item, index) => {
@@ -423,7 +433,14 @@ const filteredContests = contestsData.filter((item) => {
                           boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                         }}
                       >
-                        <img src={isCompleted ? "/images/checkmark.svg" : "/images/Star_news.svg"} alt={isCompleted ? "check" : "star"} style={{ marginRight: "5px" }} />
+
+                        <Image
+                          src={isCompleted ? "/images/checkmark.svg" : "/images/Anons_news.svg"}
+                          alt={isCompleted ? "check" : "anons"}
+                          width={16} 
+                          height={16} 
+                          style={{ marginRight: "5px" }}
+                        />
                         {isCompleted ? "завершен" : `c ${item.date_start}`}
                       </div>
                       <figure className={`flex flex-col gap-3`}>
