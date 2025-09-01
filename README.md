@@ -13,6 +13,8 @@
 
 [Фигма](https://www.figma.com/design/cgUGIUQFn782UyudkmnjHX/Проект-Медиашкола?node-id=5564-7679&t=QTzeWHPmXbpN2Wyd-0)
 [Пользовательские сценарии](https://docs.google.com/document/d/14oRt8ksrGBqYW9jXylPTeX087ZLOKZ_G/edit?usp=sharing&ouid=113258523271573882026&rtpof=true&sd=true)
+[SWAGGER](http://217.114.11.243/swagger/)
+[Админка](http://217.114.11.243/admin/)
 
 ---
 

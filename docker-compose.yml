@@ -39,6 +39,19 @@ services:
       - media:/backend/media/
     command: bash /scripts/start-prod.sh
 
+  # frontend:
+  #   image: '${DOCKER_IMAGE_FRONTEND?Variable not set}:${TAG-latest}'
+  #   depends_on:
+  #     backend:
+  #       condition: service_healthy
+  #       restart: true
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - frontend_dist:/app/dist/  # уточнить путь у фронтов
+  #   networks:
+  #     - default
+
 
   nginx:
     image: nginx:alpine
@@ -53,6 +66,8 @@ services:
       - static:/static/
       - media:/media/
       - ./infra/nginx.conf:/etc/nginx/conf.d/default.conf
+      - frontend_dist:/usr/src/app/dist
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - default
 
