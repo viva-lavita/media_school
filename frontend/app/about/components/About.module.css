@@ -98,46 +98,7 @@
  font-weight: 400;
  color: #040404;
 }
-.detailesMediashcool h3 {
- font-size: 42px;
- color: #040404;
- font-weight: 700;
- text-align: center;
-}
 
-.detailsContext {
- display: flex;
- margin-top: 40px;
-}
-.detailCard {
- width: 466px;
- display: flex;
- flex-direction: column;
- gap: 16px;
- padding: 28px;
-}
-
-.titleCard {
- font-weight: 700;
- font-size: 22px;
- color: #040404;
-}
-.textCard {
- font-weight: 400;
- font-size: 16px;
- color: #040404;
-}
-.detailCardFirst {
- background-color: #edf6cd;
-}
-
-.detailCardSecond {
- background-color: #f6ffde;
-}
-
-.detailCardThird {
- background-color: #fbfff0;
-}
 @media screen and (max-width: 1024px) {
  .wrap {
   gap: 40px;
@@ -162,19 +123,6 @@
  .founders {
   width: 462px;
  }
- .detailesMediashcool h3 {
-  font-size: 36px;
- }
-
- .detailsContext {
-  display: flex;
-  flex-direction: column;
-  margin-top: 40px;
- }
- .detailCard {
-  width: 100%;
-  padding: 30px;
- }
 }
 
 @media screen and (max-width: 768px) {
@@ -193,14 +141,21 @@
   gap: 40px;
  }
 
- .detailesMediashcool h3 {
-  font-size: 28px;
- }
 }
 
 @media screen and (max-width: 360px) {
- .textBlock {
-  gap: 24px;
+  .wrap {
   width: 320px;
+ }
+ .titleAbout {
+  font-size: 28px;
+ }
+ .projectInfo {
+  gap: 28px;
+ }
+ .textBlock {
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
  }
 }
