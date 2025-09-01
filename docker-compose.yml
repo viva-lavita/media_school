@@ -39,19 +39,21 @@ services:
       - media:/backend/media/
     command: bash /scripts/start-prod.sh
 
-  # frontend:
-  #   image: '${DOCKER_IMAGE_FRONTEND?Variable not set}:${TAG-latest}'
-  #   depends_on:
-  #     backend:
-  #       condition: service_healthy
-  #       restart: true
-  #   env_file:
-  #     - .env
-  #   volumes:
-  #     - frontend_dist:/app/dist/  # уточнить путь у фронтов
-  #   networks:
-  #     - default
-
+  frontend:
+    image: '${DOCKER_IMAGE_FRONTEND?Variable not set}:${TAG-latest}'
+    depends_on:
+      backend:
+        condition: service_healthy
+        restart: true
+    env_file:
+      - .env
+    environment:
+      - PORT=3000
+    volumes:
+      - frontend_dist:/app/dist/
+    networks:
+      - default
+    command: sh -c 'rm -rf /app/dist/* && cp -r ./.next/* /app/dist/ && npm run start'
 
   nginx:
     image: nginx:alpine
