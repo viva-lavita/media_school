@@ -1,5 +1,6 @@
 .newsContainer {
-    width: 1400px;
+    max-width: 1400px;
+    width: calc(100vw - 80px);
     margin: 0 auto 80px;
     display: flex;
     flex-direction: column;
@@ -23,6 +24,9 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    padding-right: 30px;
+    max-width: 1043px;
+    width: calc(76vw);
 }
 
 .newsTitle {
@@ -36,21 +40,24 @@
 }
 
 .newsImage {
-    width: 100%;
+    width: calc(50vw - 55px);
     height: auto;
-    max-width: 600px;
+    max-width: 685px;
+    max-height: 460px;
+    object-fit: cover; 
+}
+.Onenews-module__n4XGSG__subImage,
+.subImage {
+    height: auto;
+    max-width: 1043px;
+    width: calc( 75vw ); 
+    object-fit: cover;
 }
 
 .newsParagraph {
     display: flex;
     flex-direction: column;
     gap: 16px;
-}
-
-.subImage {
-    width: 100%;
-    height: auto;
-    max-width: 400px;
 }
 
 .commentSection {
@@ -70,6 +77,8 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    max-width: 1043px;
+    width: calc(76vw);
 }
 
 .commentButton {
@@ -80,6 +89,8 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    width:129px;
+
 }
 
 .commentButton:hover {
@@ -98,6 +109,9 @@
     border-radius: 4px;
     background-color: #f9f9f9;
 }
+.underline {
+  text-decoration: underline;
+}
 
 @media screen and (max-width: 1024px) {
     .newsContainer {
@@ -108,7 +122,11 @@
         font-size: 40px;
     }
     .newsImage {
-        height: 267px;
+        width: calc(50vw - 50px);
+        height: auto;
+        max-width: 462px;
+        max-height: 310px;
+        object-fit: cover; 
     }
 }
 
@@ -121,8 +139,11 @@
         font-size: 32px;
     }
     .newsImage {
-        width: 728px;
-        height: 420px;
+        width: calc(50vw - 30px);
+        height: auto;
+        max-width: 354px;
+        max-height: 236px;
+        object-fit: cover; 
     }
 }
 
@@ -136,7 +157,14 @@
         font-size: 28px;
     }
     .newsImage {
-        width: 320px;
+        max-width: 320px;
+        width: calc(100vw - 40px);
         height: auto;
+    }
+    .newsInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: flex-end;
     }
 }
