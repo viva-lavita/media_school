@@ -39,7 +39,7 @@
 .newsContainerAbout {
     gap: 40px;
 }
-
+/* 
 .contactUs {
     gap: 20px;
 }
@@ -50,16 +50,16 @@
 
 .contactInfoTelEmail {
     gap: 75px;
-}
+} */
 
-.newsMap {
+/* .newsMap {
     background-image: url('/images/Map.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: 450px;
     width: 100%;
-}
+} */
 
 .tab-style {
     font-weight: 500 !important;
@@ -67,6 +67,59 @@
     line-height: 1; 
     letter-spacing: 0; 
     text-align: center; 
+}
+
+.textStyle {
+  font-family: "Montserrat";
+  font-weight: 400;
+  font-style: normal; 
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: 0%;
+}
+
+.verticalLine {
+    width: 1.5px; /* Толщина линии */
+    height: 25px; /* Высота линии */
+    background-color: #BAC720; /* Цвет линии */
+}
+
+.customRadio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.customRadio input[type="radio"] {
+  display: none; /* Скрываем стандартные радиокнопки */
+}
+
+.radioBtn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #BAC720; /* Цвет рамки */
+  background-color: white; /* Цвет фона */
+  position: relative;
+  margin-right: 10px; /* Отступ между кнопкой и текстом */
+}
+
+.radioBtn::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #BAC720; /* Цвет заполнения при выборе */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; /* По умолчанию скрыто */
+  transition: opacity 0.2s; /* Плавный переход */
+}
+
+.customRadio input[type="radio"]:checked + .radioBtn::after {
+  opacity: 1; /* Показать при выборе */
 }
 
 @media screen and (max-width: 1024px) {
