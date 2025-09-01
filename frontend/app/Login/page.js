@@ -20,20 +20,23 @@ export default function LoginPage() {
                 type="text"
                 id="login"
                 className="w-full border border-green bg-white py-3 px-4 focus:outline-none"
+                name="login"
                 placeholder="Логин"
               />
               <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-15.5 top-3 text-red-500`}>
               *
-            </span>
+              </span>
               <img className={`absolute top-4.5 right-4`}
                    src="/images/cross.svg"
-                   alt="крестик"/>
+                   alt="крестик"
+              />
             </div>
             <div className="relative">
               <input
                 type="text"
-                id="login"
+                id="password"
                 className="h-[43px] w-full border border-green bg-white py-3 px-4 focus:outline-none"
+                name="password"
                 placeholder="Пароль"
               />
               <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-18.5 top-2 text-red-500`}>
