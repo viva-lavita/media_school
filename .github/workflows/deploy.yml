@@ -76,6 +76,7 @@ jobs:
           echo "DOMAIN=${{ secrets.DOMAIN }}" >> .env
           echo "SITE_NAME=${{ secrets.SITE_NAME }}" >> .env
           echo "DOCKER_IMAGE_BACKEND=${{ secrets.DOCKER_IMAGE_BACKEND }}" >> .env
+          echo "DOCKER_IMAGE_FRONTEND=${{ secrets.DOCKER_IMAGE_FRONTEND }}" >> .env
           echo "GUNICORN_WORKERS=${{ secrets.GUNICORN_WORKERS }}" >> .env
           echo "GUNICORN_THREADS=${{ secrets.GUNICORN_THREADS }}" >> .env
           echo "GUNICORN_TIMEOUT=${{ secrets.GUNICORN_TIMEOUT }}" >> .env
