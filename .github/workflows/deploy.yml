@@ -127,7 +127,7 @@ jobs:
           script: |
             cd app
             sudo docker compose down
-            sudo docker volume rm frontend_dist
+            sudo docker volume rm app_frontend_dist
             sudo docker container prune -f
             sudo docker image prune -f
             sudo docker compose pull
