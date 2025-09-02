@@ -4,7 +4,7 @@ import { newsData, announcementsData, contestsData } from "../data.js";
 import styles from "../Onenews.module.css";
 import { comfortaa } from "@/lib/fonts";
 import { montserrat } from "@/lib/fonts";
-import { usePathname } from 'next/navigation';
+// import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -12,6 +12,15 @@ export default function NewsDetail() {
   const { title } = useParams();
   const decodedTitle = decodeURIComponent(title);
   const [charCount, setCharCount] = useState(0);
+
+  const formatAnswer = (num) => {
+    const getAnswerWord = (n) => {
+      if (n % 10 === 1 && n % 100 !== 11) return 'ответ';
+      if (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) return 'ответа';
+      return 'ответов';
+    };
+    return `${num} ${getAnswerWord(num)}`;
+  };
 
   const item = [...newsData, ...announcementsData, ...contestsData].find(
     (data) => data.title === decodedTitle
@@ -21,6 +30,16 @@ export default function NewsDetail() {
     return <p>Новость не найдена.</p>;
   }
 
+    // Пример массива вопросов
+const questions = [
+  { id: 1, text: "Какой уровень подготовки необходим для начала обучения? И сколько длится обучение на одном курсе?", author: "Иван Иванов", date: "01.10.2023", time: "12:00", answers: 5 },
+  { id: 2, text: "Можно ли учиться онлайн или только офлайн?", author: "Мария Петрова", date: "02.10.2023", time: "14:30", answers: 3 },
+  { id: 3, text: "Можно ли учиться онлайн или только офлайн?", author: "Алексей Сидоров", date: "03.10.2023", time: "09:15", answers: 1 },
+  { id: 4, text: "Какой уровень подготовки необходим для начала обучения? И сколько длится обучение на одном курсе?", author: "Ольга Кузнецова", date: "04.10.2023", time: "16:45", answers: 7 },
+];
+    // Получаем последние два вопроса
+  const lastTwoQuestions = questions.slice(-2);
+  
   return (
     <>
       <div className={`${styles.newsContainer}`}>
@@ -183,16 +202,18 @@ export default function NewsDetail() {
           >
             Комментарии и вопросы
           </h2>
-          {/* <div className={`${styles.comment}`}>
-            <p>
-              <strong>Имя пользователя:</strong> Это комментарий.
-            </p>
-          </div>
-          <div className={`${styles.comment}`}>
-            <p>
-              <strong>Имя пользователя:</strong> Другой комментарий.
-            </p>
-          </div> */}
+          {lastTwoQuestions.map((question) => (
+            <div key={question.id} className={styles.question}>
+              <div className={`${montserrat.className} ${styles.questionText}`}>
+                {question.text}
+              </div>
+              <div className={styles.icons}>
+                <span className={`${montserrat.className} ${styles.nameAuthor}`}>{question.author}</span>
+                <span className={`${montserrat.className} ${styles.answers}`}>{formatAnswer(question.answers)}</span>
+                <span className={`${montserrat.className} ${styles.date}`}>{`${question.date}, ${question.time}`}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </>
