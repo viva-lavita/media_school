@@ -1,5 +1,5 @@
 .loginContainer {
-    width: 1398px;
+    max-width: 1400px;
     gap: 28px;
     margin-bottom: 120px;
 }
@@ -36,14 +36,17 @@
     gap: 12px;
 }
 
+@media screen and (max-width: 1400px) {
+    .loginImage {
+        display: none;
+    }
+}
+
 @media screen and (max-width: 1024px) {
     .loginContainer {
         width: 462px;
         gap: 0;
         margin-bottom: 40px;
-    }
-    .loginImage {
-        display: none;
     }
     .loginTitleContainer {
         gap: 12px;
@@ -68,7 +71,7 @@
         width: 541px;
     }
 }
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 550px) {
     .loginContainer {
         width: 320px;
     }

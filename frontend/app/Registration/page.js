@@ -5,13 +5,7 @@ import {montserrat} from "@/lib/fonts";
 export default function RegistrationPage() {
   return (
     <div className={styles.registration}>
-      <div className={`${styles.registrationImg} flex basis-0 grow`}>
-        <img
-          src="/images/full-length-man.png"
-          alt="full-length man"
-          style={{minWidth: '685px'}}
-        />
-      </div>
+      <div className={`${styles.registrationImg} flex basis-0 grow`}></div>
       <div className={`${styles.registrationFormWrapper} box-border flex flex-col basis-0 grow bg-light-green 
       border-green border`}>
         <div className={`flex flex-col text-center gap-4`}>
