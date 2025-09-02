@@ -6,10 +6,12 @@ import { comfortaa } from "@/lib/fonts";
 import { montserrat } from "@/lib/fonts";
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function NewsDetail() {
   const { title } = useParams();
   const decodedTitle = decodeURIComponent(title);
+  const [charCount, setCharCount] = useState(0);
 
   const item = [...newsData, ...announcementsData, ...contestsData].find(
     (data) => data.title === decodedTitle
@@ -158,15 +160,17 @@ export default function NewsDetail() {
             </div>
 
           <form className={`${styles.commentForm}`}>
-            <p
-            className={`${montserrat.className} font-normal text-base text-lg text-textblack leading-[140%]`}
-          >
-            Текст вопроса
-          </p>
+            <div className="flex flex-row justify-between">
+              <p className={`${montserrat.className} font-normal text-base text-lg text-textblack leading-[140%]`}>Текст вопроса</p>
+              <span className={`${montserrat.className} font-normal text-base text-lg text-textblack leading-[140%]`}> {charCount}/400 </span>
+            </div>
             <textarea
-                className={`${styles.commentInput}`}
+                className={`${styles.commentInput} ${montserrat.className} font-normal text-lg text-textblack leading-[140%]`}
+                maxLength="400"
+                onChange={(e) => setCharCount(e.target.value.length)}
+                style={{ resize: 'none' }}
             />
-            <button type="submit" className={`${styles.commentButton}`}>
+            <button type="submit" className={`${montserrat.className} ${styles.commentButton} b-green text-textblack`}>
               Отправить
             </button>
           </form>
@@ -175,7 +179,7 @@ export default function NewsDetail() {
         {/* Список комментариев и вопросов */}
         <div className={`${styles.commentsList}`}>
           <h2
-            className={`${montserrat.className} font-bold text-lg leading-[140%]`}
+            className={`${comfortaa.className} font-bold text-[22px] text-textblack leading-[100%]`}
           >
             Комментарии и вопросы
           </h2>

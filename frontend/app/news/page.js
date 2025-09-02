@@ -302,11 +302,11 @@ const handleTabChange = (tab) => {
     setCurrentPage(1); // Сбрасываем текущую страницу при смене таба
   };
 // Фильтрация конкурсов на основе выбранного статуса
-const filteredContests = contestsData.filter((item) => {
-  const dateEnd = new Date(item.date_end);
-  const currentDate = new Date();
-  return showCompleted ? currentDate > dateEnd : currentDate <= dateEnd;
-});
+// const filteredContests = contestsData.filter((item) => {
+//   const dateEnd = new Date(item.date_end);
+//   const currentDate = new Date();
+//   return showCompleted ? currentDate > dateEnd : currentDate <= dateEnd;
+// });
   // Определяем данные для отображения в зависимости от текущего таба
   const currentData =
     currentTab === "news"
