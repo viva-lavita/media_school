@@ -3,6 +3,8 @@ services:
   db:
     image: postgres:12
     restart: always
+    networks:
+      - default
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
@@ -11,15 +13,11 @@ services:
       timeout: 10s
     volumes:
       - db-data:/var/lib/postgresql/data
-    env_file:
-      - .env
     environment:
       # - PGDATA=/var/lib/postgresql/data
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
       - POSTGRES_USER=${POSTGRES_USER?Variable not set}
       - POSTGRES_DB=${POSTGRES_DB?Variable not set}
-    networks:
-      - default
 
   backend:
     image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
