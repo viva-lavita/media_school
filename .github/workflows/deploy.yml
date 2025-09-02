@@ -88,20 +88,20 @@ jobs:
       - name: Upload .env
         uses: actions/upload-artifact@v4
         with:
-          name: .env
+          name: ".env"
           path: .
 
       - name: Copy .env to server
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
           key: ${{ secrets.SSH_KEY }}
-          source: .env
+          source: ".env"
           target: /root/app
 
       - name: Copy docker-compose.yml
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
@@ -110,7 +110,7 @@ jobs:
           target: /root/app
 
       - name: Copy nginx.conf
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
