@@ -51,7 +51,7 @@ const questions = [
               <span
                 className={`${montserrat.className} font-normal text-base leading-[130%] text-grey-2`}
               >
-                Автор: {item.author || "Имя Автора"}
+                Автор: {item.author || "админ" }
               </span>
               <h1
                 className={`${comfortaa.className} ${styles.newsTitle} font-bold leading-[100%]`}
@@ -81,12 +81,12 @@ const questions = [
               <h2
                 className={`${montserrat.className} font-bold text-lg leading-[140%]`}
               >
-                Подзаголовок абзац1
+                {item.paragraph1}
               </h2>
               <p
                 className={`${montserrat.className} font-normal text-base leading-[140%]`}
               >
-                {item.content || item.preview}
+                {item.content1}
               </p>
             </div>
             <img
@@ -99,17 +99,33 @@ const questions = [
               <h2
                 className={`${montserrat.className} font-bold text-lg leading-[140%]`}
               >
-                Подзаголовок абзац2
+                {item.paragraph2}
               </h2>
               <p
                 className={`${montserrat.className} font-normal text-base leading-[140%]`}
               >
-                Будущие журналисты поделились с учениками 8–11 классов своими
-                знаниями, рассказали, как устроена современная медиасреда, что
-                такое фейк-ньюс и как отличить достоверную информацию
-                от манипулятивной. Формат встречи был максимально живым: ребята
-                не просто слушали, но и активно участвовали в дискуссиях,
-                задавали вопросы и выполняли практические задания.
+                {item.content2}
+              </p>
+               <ul className={`${montserrat.className} ${styles.bulletList}`}>
+                  {item.points.map((point, index) => (
+                    <li key={index} className={`${montserrat.className} font-normal text-base leading-[140%]`}>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+            </div>
+            {/* <img src="/images/news-subimage.png" alt="Дополнительное фото" className={styles.subImage} /> */}
+
+            <div className={`${styles.newsParagraph}`}>
+              <h2
+                className={`${montserrat.className} font-bold text-lg leading-[140%]`}
+              >
+                {item.paragraph3}
+              </h2>
+              <p
+                className={`${montserrat.className} font-normal text-base leading-[140%]`}
+              >
+                {item.content3}
               </p>
             </div>
             {/* <img src="/images/news-subimage.png" alt="Дополнительное фото" className={styles.subImage} /> */}
@@ -118,26 +134,15 @@ const questions = [
               <h2
                 className={`${montserrat.className} font-bold text-lg leading-[140%]`}
               >
-                Подзаголовок абзац3
+                {item.paragraph4}
               </h2>
               <p
                 className={`${montserrat.className} font-normal text-base leading-[140%]`}
               >
-                По итогам встречи школьники получили сертификаты участников
-                и приглашение поучаствовать в городском конкурсе молодёжной
-                журналистики. А самые активные ребята уже загорелись идеей
-                создать собственную школьную медиа-команду.
+                {item.content4}
               </p>
             </div>
             {/* <img src="/images/news-subimage.png" alt="Дополнительное фото" className={styles.subImage} /> */}
-
-            {/* <div className={`${styles.newsParagraph}`}>
-              <h2 className={`${montserrat.className} font-bold text-lg leading-[140%]`}>Подзаголовок абзац4</h2>
-              <p className={`${montserrat.className} font-normal text-base leading-[140%]`}>
-                Будущие журналисты поделились с учениками 8–11 классов своими знаниями, рассказали, как устроена современная медиасреда, что такое фейк-ньюс и как отличить достоверную информацию от манипулятивной. Формат встречи был максимально живым: ребята не просто слушали, но и активно участвовали в дискуссиях, задавали вопросы и выполняли практические задания.
-              </p>
-            </div>
-            <img src="/images/news-subimage.png" alt="Дополнительное фото" className={styles.subImage} /> */}
           </div>
           <a
             className={`${montserrat.className} font-bold text-lg leading-[140%]  underline`}

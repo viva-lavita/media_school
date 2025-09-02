@@ -133,7 +133,7 @@
 .answers,
 .date {
  display: inline-flex;
- color: #535353;
+ color: var(--color-grey-2);
  font-size: 14px;
  font-weight: 400;
  justify-content: center;
@@ -148,6 +148,18 @@
  height: 18px;
  background-image: url('/qa-images/message.svg');
  background-size: cover;
+}
+
+.bulletList {
+  list-style-type: disc; /* Тип маркера: disc (круглый) */
+  margin: 0; /* Убираем отступы у списка */
+  padding-left: 20px; /* Отступ слева для маркеров */
+}
+
+.bulletList li {
+  margin-bottom: 8px; /* Отступ между элементами списка */
+  font-size: 16px; /* Размер шрифта */
+  color: var(--color-textblack); 
 }
 
 .comment {
