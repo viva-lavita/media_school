@@ -1,7 +1,6 @@
 .wrap {
  display: flex;
  flex-direction: column;
- gap: 40px;
  width: 1400px;
  margin: 0 auto 40px;
 }
@@ -9,6 +8,7 @@
  font-size: 52px;
  font-weight: 700;
  text-align: center;
+ margin-bottom: 40px;
 }
 
 .tabs {
@@ -29,4 +29,26 @@
 .tabButton:hover {
  color: #3c4226;
  border-bottom: 2px solid #3c4226;
+}
+
+@media screen and (max-width: 1024px) {
+
+
+}
+@media screen and (max-width: 768px) {
+.wrap {
+ width: 768px;
+}
+.titleQA {
+ font-size: 32px;
+}
+}
+@media screen and (max-width: 360px) {
+.wrap {
+ width: 320px;
+}
+.titleQA {
+ font-size: 28px;
+ margin-bottom: 28px;
+}
 }

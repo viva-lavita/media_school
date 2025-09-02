@@ -1,0 +1,32 @@
+.pagination {
+ list-style-type: none;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 40px;
+}
+
+.paginationItem {
+ text-decoration: none;
+ color: #3c4226;
+ font-size: 16px;
+ cursor: pointer;
+ padding: 10px 15.5px;
+ user-select: none;
+ background-color: transparent;
+ border-radius: 5px;
+ transition: all 0.3s ease-in-out;
+}
+
+.nextPageBtn {
+ margin-left: 4px;
+ cursor: pointer;
+}
+
+.active {
+ border: 1.5px solid #3c4226;
+}
+
+.paginationItem:hover {
+ cursor: pointer;
+}

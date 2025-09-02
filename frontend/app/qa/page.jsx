@@ -1,20 +1,124 @@
+'use client';
 import { comfortaa, montserrat } from '@/lib/fonts';
-import Question from './components/Question';
 import styles from './QA.module.css';
+import QuestionsList from './components/QuestionsList';
+import { useState } from 'react';
+
+const QUESTIONS_DATA = [
+ {
+  question:
+   'Какой уровень подготовки необходим для начала обучения? И сколько длится обучение на одном курсе?',
+  name: 'Максим Иванов',
+  answer: '0',
+  data: '8 мая 2025',
+  time: '18:45',
+ },
+ {
+  question: 'Можно ли учиться онлайн или только офлайн?',
+  name: 'Алексей Петров',
+  answer: '1',
+  data: '4 мая 2025',
+  time: '15:45',
+ },
+ {
+  question:
+   'Есть ли у вас какие‑то пробные занятия или возможность понять, подойдёт ли мне формат, прежде чем платить?',
+  name: 'Ольга',
+  answer: '5',
+  data: '4 мая 2025',
+  time: '15:24',
+ },
+ {
+  question:
+   'Мне важно понять, кто именно будет вести занятия — это преподаватели, которые просто хорошо рассказывают теорию или это действующие профессионалы, которые могут поделиться реальными кейсами из своей практики?',
+  name: 'Борис Чуйков',
+  answer: '0',
+  data: '3 мая 2025',
+  time: '12:55',
+ },
+ {
+  question:
+   'После окончания курса будет ли у меня какой‑то документ или портфолио, которое я смогу использовать при устройстве на работу, или всё ограничивается просто получением знаний без подвтерждения? Мне 16 лет и я очень хочу начать учиться в сфере медиа уже сейч…',
+  name: 'Егор Шашков',
+  answer: '5',
+  data: '3 мая 2025',
+  time: '12:55',
+ },
+ {
+  question:
+   'Будет ли реальная практика — съёмки, проекты? Или всё ограничивается лекциями и практикой из книг, например?',
+  name: 'Алена Григорьева',
+  answer: '5',
+  data: '3 мая 2025',
+  time: '12:08',
+ },
+ {
+  question:
+   'Вы помогаете как‑то с поиском работы или стажировки после окончания обучения?',
+  name: 'Василиса',
+  answer: '1',
+  data: '3 мая 2025',
+  time: '12:08',
+ },
+ {
+  question:
+   'Вы помогаете как‑то с поиском работы или стажировки после окончания обучения?',
+  name: 'Василиса',
+  answer: '1',
+  data: '3 мая 2025',
+  time: '12:08',
+ },
+ {
+  question:
+   'Вы помогаете как‑то с поиском работы или стажировки после окончания обучения?',
+  name: 'Василиса',
+  answer: '1',
+  data: '3 мая 2025',
+  time: '12:08',
+ },
+ {
+  question:
+   'Вы помогаете как‑то с поиском работы или стажировки после окончания обучения?',
+  name: 'Василиса',
+  answer: '1',
+  data: '3 мая 2025',
+  time: '12:08',
+ },
+
+ {
+  question: '  У вас есть какие‑то скидки/льготы для студентов?',
+  name: 'Александра Шумская',
+  answer: '15',
+  data: '26 мая 2025',
+  time: '14:57',
+ },
+];
 
 export default function QAPage() {
+ const [activeTab, setActiveTab] = useState('all');
+
  return (
   <div className={styles.wrap}>
    <h3 className={`${comfortaa.className} ${styles.titleQA}`}>Вопрос-ответ</h3>
    <div className={styles.tabs}>
-    <button className={`${montserrat.className} ${styles.tabButton} ${styles.active}`}>
+    <button
+     onClick={() => setActiveTab('all')}
+     className={`${montserrat.className} ${styles.tabButton} ${
+      activeTab === 'all' ? styles.active : ''
+     }`}
+    >
      Все вопросы
     </button>
-    <button className={`${montserrat.className} ${styles.tabButton}`}>
+    <button
+     onClick={() => setActiveTab('ask')}
+     className={`${montserrat.className} ${styles.tabButton} ${
+      activeTab === 'ask' ? styles.active : ''
+     }`}
+    >
      Задать вопросы
     </button>
    </div>
-   <Question />
+   <QuestionsList questions={QUESTIONS_DATA} />
   </div>
  );
 }
