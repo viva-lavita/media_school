@@ -4,9 +4,10 @@ import { newsData, announcementsData, contestsData } from "../data.js";
 import styles from "../Onenews.module.css";
 import { comfortaa } from "@/lib/fonts";
 import { montserrat } from "@/lib/fonts";
-// import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function NewsDetail() {
   const { title } = useParams();
@@ -209,7 +210,7 @@ const questions = [
               </div>
               <div className={styles.icons}>
                 <span className={`${montserrat.className} ${styles.nameAuthor}`}>{question.author}</span>
-                <span className={`${montserrat.className} ${styles.answers}`}>{formatAnswer(question.answers)}</span>
+                <span className={`${montserrat.className} ${styles.answers}`}><Image  src={ "/images/sms.svg"}  alt={""} width={18} height={18} style={{ marginRight: "5px" }} /> {formatAnswer(question.answers)}</span>
                 <span className={`${montserrat.className} ${styles.date}`}>{`${question.date}, ${question.time}`}</span>
               </div>
             </div>
