@@ -53,7 +53,7 @@ services:
       - frontend_dist:/app/dist/
     networks:
       - default
-    command: sh -c 'rm -rf /app/dist/* && cp -r ./.next/* /app/dist/ && npm run start'
+    command: sh -c 'cp -r ./.next/* /app/dist/ && npm run start'
 
   nginx:
     image: nginx:alpine
