@@ -1,0 +1,161 @@
+.wrap {
+ display: flex;
+ flex-direction: column;
+ gap: 120px;
+ width: 1400px;
+ margin: 0 auto 40px;
+}
+.titleAbout {
+ font-size: 52px;
+ text-align: center;
+}
+.projectInfo {
+ display: flex;
+ flex-direction: column;
+ gap: 40px;
+}
+
+.projectInfo img {
+ max-width: 100%;
+ height: auto;
+}
+.textBlock {
+ display: flex;
+ flex-direction: row;
+ gap: 30px;
+}
+
+.textContent {
+ display: flex;
+ flex-direction: column;
+ width: 923px;
+ gap: 24px;
+}
+.subtitleAbout {
+ font-weight: 700;
+ font-size: 28px;
+}
+.textContent p:not(:first-child) {
+ font-weight: 400;
+ font-size: 16px;
+ color: #535353;
+}
+.founders {
+ width: 447px;
+}
+
+.teachersList {
+ background-color: #fbfff0;
+ display: flex;
+ flex-direction: column;
+ gap: 20px;
+}
+
+.teacherListHeader {
+ color: #3c4226;
+ font-size: 18px;
+ margin-bottom: 8px;
+ margin-top: 32px;
+ font-weight: 600;
+ text-align: center;
+}
+
+.teacherCard {
+ display: flex;
+ align-items: center;
+ margin-left: 32px;
+}
+
+.teacherPhoto {
+ margin-right: 20px;
+}
+
+.teacherPhoto img {
+ width: 61px;
+ height: 61px;
+ border-radius: 50%;
+ object-fit: cover;
+}
+.teacherDetails {
+ display: flex;
+ gap: 4px;
+ flex-direction: column;
+}
+
+.teacherDetails h3 {
+ font-weight: bold;
+ margin-bottom: 0;
+}
+
+.teacherDetails p {
+ font-size: 14px;
+ color: #535353;
+ font-weight: 400;
+ margin-top: 0;
+}
+.teacherName {
+ font-size: 16px;
+ font-weight: 400;
+ color: #040404;
+}
+
+@media screen and (max-width: 1024px) {
+ .wrap {
+  gap: 40px;
+  width: 944px;
+ }
+ .titleAbout {
+  font-size: 40px;
+ }
+ .projectInfo {
+  gap: 28px;
+ }
+ .textBlock {
+  gap: 20px;
+ }
+ .textContent {
+  width: 462px;
+  gap: 0px;
+ }
+ .subtitleAbout {
+  font-size: 22px;
+ }
+ .founders {
+  width: 462px;
+ }
+}
+
+@media screen and (max-width: 768px) {
+ .wrap {
+  width: 728px;
+ }
+ .titleAbout {
+  font-size: 32px;
+ }
+ .projectInfo {
+  gap: 40px;
+ }
+ .textBlock {
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+ }
+
+}
+
+@media screen and (max-width: 360px) {
+  .wrap {
+  width: 320px;
+ }
+ .titleAbout {
+  font-size: 28px;
+ }
+ .projectInfo {
+  gap: 28px;
+ }
+ .textBlock {
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+ }
+}
