@@ -126,8 +126,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd app
-            sudo docker compose pull
             sudo docker compose down
-            sudo docker volume rm frontend_dist
+            sudo docker compose pull
+            sudo docker volume rm app_frontend_dist
             sudo docker system prune -f
             sudo docker compose up -d
