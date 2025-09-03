@@ -3,6 +3,7 @@ import { comfortaa, montserrat } from '@/lib/fonts';
 import styles from './QA.module.css';
 import QuestionsList from './components/QuestionsList';
 import { useState } from 'react';
+import AskQuestion from './components/AskQuestion';
 
 const QUESTIONS_DATA = [
  {
@@ -109,16 +110,24 @@ export default function QAPage() {
     >
      Все вопросы
     </button>
+
     <button
-     onClick={() => setActiveTab('ask')}
+     onClick={() => setActiveTab('ask')} 
      className={`${montserrat.className} ${styles.tabButton} ${
       activeTab === 'ask' ? styles.active : ''
      }`}
     >
-     Задать вопросы
+     Задать вопрос
     </button>
    </div>
-   <QuestionsList questions={QUESTIONS_DATA} />
+
+   {activeTab === 'all' && (
+    <QuestionsList questions={QUESTIONS_DATA} />
+   )}
+
+   {activeTab === 'ask' && (
+    <AskQuestion /> 
+   )}
   </div>
  );
 }

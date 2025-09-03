@@ -39,10 +39,3 @@
  background-image: url('/qa-images/message.svg');
  background-size: cover;
 }
-
-@media screen and (max-width: 768px) {
-
-}
-@media screen and (max-width: 360px) {
-
-}
