@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin.sites import AdminSite
 
 from api.models import Contact, Review
 
@@ -9,7 +10,9 @@ class ContactAdmin(admin.ModelAdmin):
 
     @admin.display(description="Адрес")
     def short_address(self, obj):
-        return obj.address[:40] + "..."
+        if obj.address:
+            return obj.address[:50] + "..."
+        return AdminSite.empty_value_display
 
 
 @admin.register(Review)

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib import admin
+from django.contrib.admin.sites import AdminSite
 
 from news.models import (
     Announcement,
@@ -7,6 +8,8 @@ from news.models import (
     News,
     Paragraph,
 )
+
+AdminSite.empty_value_display = "-"
 
 
 class ParagraphInlineNews(admin.StackedInline):
@@ -43,7 +46,9 @@ class NewsAdmin(admin.ModelAdmin):
 
     @admin.display(description="Описание")
     def short_description(self, obj):
-        return obj.description[:50]
+        if obj.description:
+            return obj.description[:50] + "..."
+        return AdminSite.empty_value_display
 
     @admin.display(description="Заголовок")
     def short_title(self, obj):
@@ -94,7 +99,9 @@ class AnnouncementAdmin(admin.ModelAdmin):
 
     @admin.display(description="Описание")
     def short_description(self, obj):
-        return obj.description[:50]
+        if obj.description:
+            return obj.description[:50] + "..."
+        return AdminSite.empty_value_display
 
     @admin.display(description="Заголовок")
     def short_title(self, obj):

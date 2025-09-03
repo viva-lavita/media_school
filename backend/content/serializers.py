@@ -35,7 +35,7 @@ class DocumentContentSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "catalog_id",
-            "document_path",
+            "file",
         )
 
 

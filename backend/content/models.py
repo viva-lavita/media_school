@@ -58,14 +58,14 @@ class VideoContent(models.Model):
 
 class DocumentContent(models.Model):
     catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE, verbose_name="Категория")
-    document_path = models.URLField(verbose_name="Ссылка на файл")
+    file = models.FileField(upload_to="documents/", verbose_name="Файл")
     description = models.CharField(
         max_length=510, null=True, blank=True, verbose_name="Описание (для внутреннего использования)"
     )
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
 
     def __str__(self):
-        return self.description
+        return self.file.name
 
     class Meta:
         verbose_name = "Файловый контент"
