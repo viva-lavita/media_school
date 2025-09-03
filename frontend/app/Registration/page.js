@@ -1,6 +1,8 @@
 import styles from './Registration.module.css'
 import {comfortaa} from "@/lib/fonts";
 import {montserrat} from "@/lib/fonts";
+import ParentData from "@/app/components/Parent-data/Parent-data";
+import ChildData from "@/app/components/Child-data/Child-data";
 
 export default function RegistrationPage() {
   return (
@@ -21,95 +23,7 @@ export default function RegistrationPage() {
               Данные родителя/законного представителя ученика
             </legend>
             <div className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2 flex flex-col gap-3`}>
-              <div className={`relative`}>
-                <input
-                  placeholder="Фамилия"
-                  type="text"
-                  name="parent_lastname"
-                  id="parent_lastname"
-                  className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                  required
-                />
-                <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-22 top-3 
-                text-red-500`}>
-              *
-              </span>
-                <img className={`absolute top-4.5 right-4`}
-                     src="/images/cross.svg"
-                     alt="крестик"
-                />
-              </div>
-              <div className={`${styles.registrationFormInputCouple} flex gap-3`}>
-                <div className={`flex basis-0 grow relative`}>
-                  <input
-                    placeholder="Имя"
-                    type="text"
-                    name="parent_firstname"
-                    id="parent_firstname"
-                    className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                    required
-                  />
-                  <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-12.5 
-                  top-3 text-red-500`}>
-                    *
-                  </span>
-                  <img className={`absolute top-4.5 right-4`}
-                       src="/images/cross.svg"
-                       alt="крестик"
-                  />
-                </div>
-                <div className={`flex basis-0 grow relative`}>
-                  <input
-                    placeholder="Отчество"
-                    type="text"
-                    name="parent_middlename"
-                    id="parent_middlename"
-                    className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                  />
-                  <img className={`absolute top-4.5 right-4`}
-                       src="/images/cross.svg"
-                       alt="крестик"
-                  />
-                </div>
-              </div>
-              <div className={`${styles.registrationFormInputCouple} flex gap-3`}>
-                <div className={`flex basis-0 grow relative`}>
-                  <input
-                    placeholder="Дата рождения"
-                    type="text"
-                    name="parent_birthday"
-                    id="parent_birthday"
-                    className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                    required
-                  />
-                  <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-33 
-                  top-3 text-red-500`}>
-                    *
-                  </span>
-                  <img className={`absolute top-4.5 right-4`}
-                       src="/images/cross.svg"
-                       alt="крестик"
-                  />
-                </div>
-                <div className={`flex basis-0 grow relative`}>
-                  <input
-                    placeholder="Email"
-                    type="text"
-                    name="parent_email"
-                    id="parent_email"
-                    className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                    required
-                  />
-                  <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-14.5 
-                  top-3 text-red-500`}>
-                    *
-                  </span>
-                  <img className={`absolute top-4.5 right-4`}
-                       src="/images/cross.svg"
-                       alt="крестик"
-                  />
-                </div>
-              </div>
+              <ParentData />
               <div className={`flex flex-col gap-1`}>
                 <label
                   className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
@@ -154,113 +68,7 @@ export default function RegistrationPage() {
               Данные ученика
             </legend>
             <div className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2 flex flex-col gap-3`}>
-              <div className={`relative`}>
-                <input
-                  placeholder="Фамилия"
-                  type="text"
-                  name="child_lastname"
-                  id="child_lastname"
-                  className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                  required
-                />
-                <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-22 top-3 
-                text-red-500`}>
-              *
-              </span>
-                <img className={`absolute top-4.5 right-4`}
-                     src="/images/cross.svg"
-                     alt="крестик"
-                />
-              </div>
-              <div className={`${styles.registrationFormInputCouple} flex gap-3`}>
-                <div className={`flex basis-0 grow relative`}>
-                  <input
-                    placeholder="Имя"
-                    type="text"
-                    name="child_firstname"
-                    id="child_firstname"
-                    className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                    required
-                  />
-                  <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-12.5 
-                  top-3 text-red-500`}>
-                    *
-                  </span>
-                  <img className={`absolute top-4.5 right-4`}
-                       src="/images/cross.svg"
-                       alt="крестик"
-                  />
-                </div>
-                <div className={`flex basis-0 grow relative`}>
-                  <input
-                    placeholder="Отчество"
-                    type="text"
-                    name="child_middlename"
-                    id="child_middlename"
-                    className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                  />
-                  <img className={`absolute top-4.5 right-4`}
-                       src="/images/cross.svg"
-                       alt="крестик"
-                  />
-                </div>
-              </div>
-              <div className={`${styles.registrationFormInputCouple} flex gap-3`}>
-                <div className={`flex basis-0 grow relative`}>
-                  <input
-                    placeholder="Дата рождения"
-                    type="text"
-                    name="child_birthday"
-                    id="child_birthday"
-                    className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                    required
-                  />
-                  <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-33 
-                  top-3 text-red-500`}>
-                    *
-                  </span>
-                  <img className={`absolute top-4.5 right-4`}
-                       src="/images/cross.svg"
-                       alt="крестик"
-                  />
-                </div>
-                <div className={`flex basis-0 grow relative`}>
-                  <input
-                    placeholder="Школа"
-                    type="text"
-                    name="child_school"
-                    id="child_school"
-                    className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                    required
-                  />
-                  <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-17 
-                  top-3 text-red-500`}>
-                    *
-                  </span>
-                  <img className={`absolute top-4.5 right-4`}
-                       src="/images/cross.svg"
-                       alt="крестик"
-                  />
-                </div>
-              </div>
-              <div className={`relative`}>
-                <input
-                  placeholder="Класс"
-                  type="text"
-                  name="child_classroom"
-                  id="child_classroom"
-                  className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
-                  required
-                />
-                <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-15.5 top-3 
-                text-red-500`}>
-              *
-              </span>
-                <img className={`absolute top-4.5 right-4`}
-                     src="/images/cross.svg"
-                     alt="крестик"
-                />
-              </div>
+              <ChildData />
               <div className={`${montserrat.className} flex flex-col gap-3 font-normal text-sm leading-[100%] text-black`}>
                 <label className="flex items-start gap-2">
                   <input
