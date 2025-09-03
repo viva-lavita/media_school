@@ -94,7 +94,7 @@ jobs:
           path: .
 
       - name: Copy .env to server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
@@ -103,7 +103,7 @@ jobs:
           target: /root/app
 
       - name: Copy docker-compose.yml
-        uses: appleboy/ssh-action@master
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
@@ -112,7 +112,7 @@ jobs:
           target: /root/app
 
       - name: Copy nginx.conf
-        uses: appleboy/ssh-action@master
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
