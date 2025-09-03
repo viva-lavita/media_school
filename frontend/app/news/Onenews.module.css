@@ -18,6 +18,8 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    max-width: 1400px;
+    width: calc(100vw - 80px);
 }
 
 .newsContent {
@@ -33,10 +35,21 @@
     font-size: 42px;
 }
 
+.newsDate {
+    width: 328px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #DEEDAB;
+}
+
 .newsPreview {
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.newsPreview {
+    width: calc(50vw - 55px);
+    max-width: 685px;
 }
 
 .newsImage {
@@ -67,7 +80,7 @@
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0%;
-  text-align: center ;
+  text-align: start ;
 }
 
 .customRadio {
@@ -114,6 +127,11 @@
     gap: 20px;
 }
 
+.nameForm {
+    max-width: 1400px;
+    width: calc(100vw - 80px); 
+}
+
 .commentForm {
     display: flex;
     flex-direction: column;
@@ -131,14 +149,16 @@
 }
 
 .commentButton {
+    display: inline-block;
+    align-self: flex-start;
     padding: 16.5px 31px;
     background-color: var(--color-green)!important;
     border: none;
     cursor: pointer;
     font-size: 16px;
-    width:153px;
+    width: auto;
     font-weight: 500;
-    line-height: 100%;
+    line-height: 120%;
     letter-spacing: 0;
     vertical-align: middle;
 }
@@ -157,57 +177,57 @@
     gap: 16px;
 }
 .question {
- display: flex;
- gap: 16px;
- flex-direction: column;
- align-items: center;
- padding: 16px 0;
- border-bottom: 1px solid #DEEDAB;
+    max-width: 1400px;
+    width: calc(100vw - 80px);
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #DEEDAB;
 }
 .questionText {
- font-size: 18px;
- font-weight: 400;
- width: 100%;
+    width: 100%;
 }
 
 .icons {
- display: flex;
- gap: 20px;
- width: 100%;
- align-items: center; 
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    align-items: center; 
 }
 
 .nameAuthor,
 .answers,
 .date {
- display: inline-flex;
- color: var(--color-grey-2);
- font-size: 14px;
- font-weight: 400;
- justify-content: center;
- align-items: center;
+    display: inline-flex;
+    color: var(--color-grey-2);
+    font-size: 14px;
+    font-weight: 400;
+    justify-content: center;
+    align-items: center;
 }
 
 .answers::before {
- content: '';
- display: inline-block;
- margin-right: 8px;
- width: 18px;
- height: 18px;
- background-image: url('/qa-images/message.svg');
- background-size: cover;
+    content: '';
+    display: inline-block;
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    background-image: url('/qa-images/message.svg');
+    background-size: cover;
 }
 
 .bulletList {
-  list-style-type: disc;
-  margin: 0; 
-  padding-left: 20px; /* Отступ слева для маркеров */
+    list-style-type: disc;
+    margin: 0; 
+    padding-left: 20px; /* Отступ слева для маркеров */
 }
 
 .bulletList li {
-  margin-bottom: 8px; /* Отступ между элементами списка */
-  font-size: 16px; 
-  color: var(--color-textblack); 
+    margin-bottom: 8px; /* Отступ между элементами списка */
+    font-size: 16px; 
+    color: var(--color-textblack); 
 }
 
 .comment {
@@ -217,17 +237,28 @@
     background-color: #f9f9f9;
 }
 .underline {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 1024px) {
     .newsContainer {
-        width: 944px;
+        max-width: 944px;
+        width: calc(100vw - 80px);
         gap: 20px;
     }
     .newsTitle {
         font-size: 40px;
     }
+
+    .newsPreview {
+        width: calc(50vw - 50px);
+        max-width: 462px;
+    }
+
+    .newsDate {
+        width: calc(50vw - 50px);
+    }
+
     .newsImage {
         width: calc(50vw - 50px);
         height: auto;
@@ -235,11 +266,24 @@
         max-height: 310px;
         object-fit: cover; 
     }
+
+    .commentInput,
+    .newsAll,
+    .nameForm {
+        max-width: 944px;
+        width: calc(100vw - 80px);
+    }
+    .newsContent {
+        padding-right: 0px;
+        max-width: 944px;
+        width: calc(100vw - 80px);
+    }
 }
 
 @media screen and (max-width: 768px) {
     .newsContainer {
-        width: 728px;
+        max-width: 728px;
+        width: calc(100vw - 40px);
         gap: 40px;
     }
     .newsTitle {
@@ -252,26 +296,54 @@
         max-height: 236px;
         object-fit: cover; 
     }
+    .newsPreview,
+    .newsDate {
+        width: calc(50vw - 30px);
+    }
+
+    .commentInput,
+    .newsContent,
+    .newsAll,
+    .nameForm {
+        max-width: 728px;
+        width: calc(100vw - 40px);
+    }
 }
 
 @media screen and (max-width: 360px) {
     .newsContainer {
-        width: 320px;
+        max-width: 320px;
+        width: calc(100vw - 40px);
         gap: 40px;
-        margin: 0 auto 60px;
     }
+
     .newsTitle {
         font-size: 28px;
     }
+
     .newsImage {
         max-width: 320px;
         width: calc(100vw - 40px);
         height: auto;
     }
+
+    .commentInput,
+    .newsPreview,
+    .newsDate {
+        width: calc(100vw - 40px);
+    }
+
     .newsInfo {
         display: flex;
         flex-direction: column;
         justify-content: start;
         align-items: flex-end;
+    }
+
+    .newsContent,
+    .newsAll,
+    .nameForm {
+        max-width: 320px;
+        width: calc(100vw - 40px);
     }
 }

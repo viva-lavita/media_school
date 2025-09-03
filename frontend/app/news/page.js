@@ -326,7 +326,7 @@ const handleTabChange = (tab) => {
         <div className={`${styles.newsAll}`}>
           <div className={`${styles.announcements} flex flex-col gap-7`}>
             <h1
-              className={`${comfortaa.className} ${styles.aboutLearning}  text-textblack`}
+              className={`${comfortaa.className} ${styles.aboutLearning}`}
               style={{ paddingBottom: "9px" }}
             >
               Новости, анонсы и конкурсы
@@ -434,12 +434,12 @@ const handleTabChange = (tab) => {
                       </figure>
                       <div className={`flex flex-col gap-2`}>
                         <p
-                          className={`${montserrat.className} font-normal text-lg text-textblack leading-[140%]`}
+                          className={`${montserrat.className} font-normal text-lg leading-[140%]`}
                         >
                           {item.title}
                         </p>
                         <p
-                          className={`${montserrat.className} line-clamp-3 font-normal text-textblack leading-[130%]`}
+                          className={`${montserrat.className} line-clamp-3 font-normal leading-[130%]`}
                         >
                           {item.preview}
                         </p>
@@ -470,12 +470,12 @@ const handleTabChange = (tab) => {
                     </figure>
                     <div className={`flex flex-col gap-2`}>
                       <p
-                        className={`${montserrat.className} font-normal text-lg text-textblack leading-[140%]`}
+                        className={`${montserrat.className} font-normal text-lg leading-[140%]`}
                       >
                         {item.title}
                       </p>
                       <p
-                        className={`${montserrat.className} line-clamp-3 font-normal text-base text-textblack leading-[130%]`}
+                        className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}
                       >
                         {item.preview}
                       </p>

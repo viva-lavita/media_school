@@ -48,23 +48,30 @@ const questions = [
         <div className={`${styles.newsAll}`}>
           <div className={`${styles.newsInfo}`}>
             <div className={`${styles.newsPreview}`}>
-              <span
-                className={`${montserrat.className} font-normal text-base leading-[130%] text-grey-2`}
-              >
-                Автор: {item.author || "админ" }
-              </span>
+              <div className={`flex flex-row gap-1`}>
+                <span
+                  className={`${montserrat.className} font-normal text-base leading-[130%] text-dark-green`}
+                >
+                  Автор:
+                </span>
+                <span
+                  className={`${montserrat.className} font-normal text-base leading-[130%]`}
+                >
+                  {item.author || "админ"}
+                </span>
+              </div>
               <h1
                 className={`${comfortaa.className} ${styles.newsTitle} font-bold leading-[100%]`}
               >
                 {item.title}
               </h1>
               <span
-                className={`${montserrat.className} font-normal text-base leading-[130%] text-grey-2`}
+                className={`${montserrat.className} ${styles.newsDate} font-normal text-base leading-[130%] text-grey-2`}
               >
                 {item.date}
               </span>
               <p
-                className={`${montserrat.className} font-normal text-base leading-[140%]`}
+                className={`${montserrat.className} ${styles.newsPreview} font-normal text-base leading-[140%]`}
               >
                 {item.preview}
               </p>
@@ -174,7 +181,7 @@ const questions = [
             )}
           </div>
           <a
-            className={`${montserrat.className} font-bold text-lg leading-[140%]  underline`}
+            className={`${montserrat.className} font-bold text-lg leading-[140%] underline`}
             href={item.link}
             target="_blank"
             rel="noopener noreferrer"
@@ -183,17 +190,17 @@ const questions = [
           </a>
           .
         </div>
-        <Link href='/news'>Новости</Link>
+        <Link href='/news' className={`${montserrat.className} font-normal text-dark-green text-sm leading-[100%]`}>НОВОСТИ</Link>
 
         {/* Форма для добавления комментариев или вопросов */}
         <div className={`${styles.commentSection}`}>
           <h2
-            className={`${montserrat.className} font-bold text-lg text-textblack leading-[140%]`}
+            className={`${comfortaa.className} font-bold text-[22px] leading-[100%]`}
           >
             Добавить комментарий
           </h2>
           <p
-            className={`${montserrat.className} font-normal text-lg text-textblack leading-[140%]`}
+            className={`${montserrat.className} font-normal text-lg leading-[140%]`}
           >
             Выберите категорию вопроса
           </p>
@@ -207,7 +214,7 @@ const questions = [
                 onChange={() => setSelectedCategory('category1')}
               />
               <span className={`${styles.radioBtn}`}></span>
-              <span className={`${styles.textStyle} text-textblack`}>
+              <span className={`${styles.textStyle}`}>
                 Вопрос эксперту/ преподавателю
               </span>
             </label>
@@ -220,7 +227,7 @@ const questions = [
                 onChange={() => setSelectedCategory('category2')}
               />
               <span className={`${styles.radioBtn}`}></span>
-              <span className={`${styles.textStyle} text-textblack`}>
+              <span className={`${styles.textStyle}`}>
                 Технический вопрос
               </span>
             </label>
@@ -233,24 +240,24 @@ const questions = [
                 onChange={() => setSelectedCategory('category3')}
               />
               <span className={`${styles.radioBtn}`}></span>
-              <span className={`${styles.textStyle} text-textblack`}>
+              <span className={`${styles.textStyle}`}>
                 Другое
               </span>
             </label>
           </div>
 
           <form className={`${styles.commentForm}`}>
-            <div className="flex flex-row justify-between">
-              <p className={`${montserrat.className} font-normal text-base text-lg text-textblack leading-[140%]`}>Текст вопроса</p>
-              <span className={`${montserrat.className} font-normal text-base text-lg text-textblack leading-[140%]`}> {charCount}/400 </span>
+            <div className={`${styles.nameForm} flex flex-row justify-between`}>
+              <p className={`${montserrat.className} font-normal text-base text-lg leading-[140%]`}>Текст вопроса</p>
+              <span className={`${montserrat.className} font-normal text-base text-lg leading-[140%]`}> {charCount}/400 </span>
             </div>
             <textarea
-                className={`${styles.commentInput} ${montserrat.className} font-normal text-lg text-textblack leading-[140%]`}
+                className={`${styles.commentInput} ${montserrat.className} font-normal text-lg text-dark-green leading-[140%]`}
                 maxLength="400"
                 onChange={(e) => setCharCount(e.target.value.length)}
                 style={{ resize: 'none' }}
             />
-            <button type="submit" className={`${montserrat.className} ${styles.commentButton} b-green text-textblack`}>
+            <button type="submit" className={`${montserrat.className} ${styles.commentButton} b-green`}>
               Отправить
             </button>
           </form>
@@ -259,13 +266,13 @@ const questions = [
         {/* Список комментариев и вопросов */}
         <div className={`${styles.commentsList}`}>
           <h2
-            className={`${comfortaa.className} font-bold text-[22px] text-textblack leading-[100%]`}
+            className={`${comfortaa.className} font-bold text-[22px] leading-[100%]`}
           >
             Комментарии и вопросы
           </h2>
           {lastTwoQuestions.map((question) => (
             <div key={question.id} className={styles.question}>
-              <div className={`${montserrat.className} ${styles.questionText}`}>
+              <div className={`${montserrat.className} ${styles.questionText} font-normal text-lg leading-[140%]`}>
                 {question.text}
               </div>
               <div className={styles.icons}>
