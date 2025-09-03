@@ -52,6 +52,8 @@ class NewsAdmin(admin.ModelAdmin):
 
     @admin.display(description="Заголовок")
     def short_title(self, obj):
+        if len(obj.title) > 50:
+            return obj.title
         return obj.title[:50]
 
     @admin.display(description="Автор-админ")
@@ -100,11 +102,15 @@ class AnnouncementAdmin(admin.ModelAdmin):
     @admin.display(description="Описание")
     def short_description(self, obj):
         if obj.description:
+            if len(obj.description) > 50:
+                return obj.description
             return obj.description[:50] + "..."
         return AdminSite.empty_value_display
 
     @admin.display(description="Заголовок")
     def short_title(self, obj):
+        if len(obj.title) > 50:
+            return obj.title
         return obj.title[:50]
 
     @admin.display(description="Автор-админ")
@@ -154,10 +160,14 @@ class CompetitionAdmin(admin.ModelAdmin):
 
     @admin.display(description="Описание")
     def short_description(self, obj):
-        return obj.description[:50]
+        if len(obj.description) > 50:
+            return obj.description
+        return obj.description[:50] + "..."
 
     @admin.display(description="Заголовок")
     def short_title(self, obj):
+        if len(obj.title) > 50:
+            return obj.title
         return obj.title[:50]
 
     @admin.display(description="Автор-админ")

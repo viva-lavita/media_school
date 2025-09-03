@@ -11,6 +11,8 @@ class ContactAdmin(admin.ModelAdmin):
     @admin.display(description="Адрес")
     def short_address(self, obj):
         if obj.address:
+            if len(obj.address) > 50:
+                return obj.address
             return obj.address[:50] + "..."
         return AdminSite.empty_value_display
 
@@ -23,4 +25,6 @@ class ReviewAdmin(admin.ModelAdmin):
 
     @admin.display(description="Текст")
     def short_text(self, obj):
+        if len(obj.review) > 50:
+            return obj.review
         return obj.review[:50] + "..."
