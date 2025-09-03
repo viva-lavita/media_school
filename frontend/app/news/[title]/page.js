@@ -61,7 +61,7 @@ const questions = [
               <span
                 className={`${montserrat.className} font-normal text-base leading-[130%] text-grey-2`}
               >
-                Дата: {item.date}
+                {item.date}
               </span>
               <p
                 className={`${montserrat.className} font-normal text-base leading-[140%]`}
@@ -69,11 +69,7 @@ const questions = [
                 {item.preview}
               </p>
             </div>
-            <img
-              src={item.image}
-              alt="Фото новости"
-              className={styles.newsImage}
-            />
+            <img src={item.image} alt="Фото новости" className={styles.newsImage} />
           </div>
           {/* Текст новости с подзаголовками */}
           <div className={`${styles.newsContent}`}>
@@ -88,12 +84,19 @@ const questions = [
               >
                 {item.content1}
               </p>
+              {item.points1 && item.points1.length > 0 && (
+                <ul className={`${montserrat.className} ${styles.bulletList}`}>
+                  {item.points1.map((point, index) => (
+                    <li key={index} className={`${montserrat.className} font-normal text-base leading-[140%]`}>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-            <img
-              src="/images/news-subimage.png"
-              alt="Дополнительное фото"
-              className={styles.subImage}
-            />
+             {item.image1 && item.image1 !== "" && (
+              <img src={item.image3} alt="Фото 1" className={styles.subImage} />
+            )}
 
             <div className={`${styles.newsParagraph}`}>
               <h2
@@ -106,15 +109,19 @@ const questions = [
               >
                 {item.content2}
               </p>
-               <ul className={`${montserrat.className} ${styles.bulletList}`}>
-                  {item.points.map((point, index) => (
+              {item.points2 && item.points2.length > 0 && (
+                <ul className={`${montserrat.className} ${styles.bulletList}`}>
+                  {item.points2.map((point, index) => (
                     <li key={index} className={`${montserrat.className} font-normal text-base leading-[140%]`}>
                       {point}
                     </li>
                   ))}
                 </ul>
+              )}
             </div>
-            {/* <img src="/images/news-subimage.png" alt="Дополнительное фото" className={styles.subImage} /> */}
+            {item.image2 && item.image2 !== "" && (
+              <img src={item.image2} alt="Фото 3" className={styles.subImage} />
+            )}
 
             <div className={`${styles.newsParagraph}`}>
               <h2
@@ -127,8 +134,19 @@ const questions = [
               >
                 {item.content3}
               </p>
+              {item.points3 && item.points3.length > 0 && (
+                <ul className={`${montserrat.className} ${styles.bulletList}`}>
+                  {item.points3.map((point, index) => (
+                    <li key={index} className={`${montserrat.className} font-normal text-base leading-[140%]`}>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-            {/* <img src="/images/news-subimage.png" alt="Дополнительное фото" className={styles.subImage} /> */}
+            {item.image3 && item.image3 !== "" && (
+              <img src={item.image3} alt="Фото 3" className={styles.subImage} />
+            )}
 
             <div className={`${styles.newsParagraph}`}>
               <h2
@@ -141,17 +159,27 @@ const questions = [
               >
                 {item.content4}
               </p>
+              {item.points4 && item.points4.length > 0 && (
+                <ul className={`${montserrat.className} ${styles.bulletList}`}>
+                  {item.points4.map((point, index) => (
+                    <li key={index} className={`${montserrat.className} font-normal text-base leading-[140%]`}>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-            {/* <img src="/images/news-subimage.png" alt="Дополнительное фото" className={styles.subImage} /> */}
+            {item.image4 && item.image4 !== "" && (
+              <img src={item.image4} alt="Фото 4" className={styles.subImage} />
+            )}
           </div>
           <a
             className={`${montserrat.className} font-bold text-lg leading-[140%]  underline`}
-            href="https://www.example.com"
+            href={item.link}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Фотоотчёт и лучшие материалы с мастер-классов можно найти в школьной
-            группе в соцсетях
+            {item.link_text}
           </a>
           .
         </div>

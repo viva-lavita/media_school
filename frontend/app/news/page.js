@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const newsData = [
   {
-    title: "В школу приехали студенты-журналисты: как прошёл день МК",
+    title: "В школу приехали студенты-журналисты: как прошёл день мастер-класса",
     date: "10 апреля 2025",
     preview: "В минувший четверг в нашей школе прошёл необычный и насыщенный день — к нам приехали студенты факультета журналистики, чтобы провести серию мастер-классов и творческих встреч для школьников.",
     image: "/images/news.png",
@@ -301,12 +301,7 @@ const handleTabChange = (tab) => {
     setCurrentTab(tab);
     setCurrentPage(1); // Сбрасываем текущую страницу при смене таба
   };
-// Фильтрация конкурсов на основе выбранного статуса
-// const filteredContests = contestsData.filter((item) => {
-//   const dateEnd = new Date(item.date_end);
-//   const currentDate = new Date();
-//   return showCompleted ? currentDate > dateEnd : currentDate <= dateEnd;
-// });
+
   // Определяем данные для отображения в зависимости от текущего таба
   const currentData =
     currentTab === "news"
@@ -331,7 +326,6 @@ const handleTabChange = (tab) => {
             >
               Новости, анонсы и конкурсы
             </h1>
-
             <div className="flex justify-center space-x-[30px] text-grey-2">
               <button
                 onClick={() => handleTabChange("news")}
@@ -409,42 +403,24 @@ const handleTabChange = (tab) => {
 
                   return (
                     <Link key={index} href={`/news/${encodeURIComponent(item.title)}`} className={`flex flex-col gap-2 relative`}>
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: "12px",
-                          right: "12px",
-                          backgroundColor: "white",
-                          borderRadius: "30px",
-                          gap: "8px",
-                          paddingTop: "4px",
-                          paddingRight: "8px",
-                          paddingBottom: "4px",
-                          paddingLeft: "8px",
-                          height: "28px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontFamily: "Montserrat",
-                          fontWeight: 500,
-                          fontSize: "16px",
-                          lineHeight: "100%",
-                          letterSpacing: "0%",
-                          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                        }}
-                      >
-
+                      <div  className={`${styles.newsLabel}`}>
                         <Image
                           src={isCompleted ? "/images/checkmark.svg" : "/images/Anons_news.svg"}
                           alt={isCompleted ? "check" : "anons"}
                           width={16} 
                           height={16} 
-                          style={{ marginRight: "5px" }}
                         />
                         {isCompleted ? "завершен" : `c ${item.date_start}`}
                       </div>
                       <figure className={`flex flex-col gap-3`}>
-                        <img src={item.image} alt="новости" />
+                        {/* <img src={item.image} alt="новости" /> */}
+                        <Image 
+                          src={item.image} 
+                          alt={"конкурс"} 
+                          width={447} 
+                          height={300}
+                          layout="responsive" 
+                        />
                         <figcaption
                           className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
                         >
@@ -474,7 +450,13 @@ const handleTabChange = (tab) => {
                 return (
                   <Link key={index} href={`/news/${encodeURIComponent(item.title)}`} className={`flex flex-col gap-2 relative`}>
                     <figure className={`flex flex-col gap-3`}>
-                      <img src={item.image} alt="новости" />
+                        <Image 
+                          src={item.image} 
+                          alt={"новость"} 
+                          width={447} 
+                          height={300}
+                          layout="responsive" 
+                        />
                       <figcaption
                         className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
                       >
@@ -509,38 +491,16 @@ const handleTabChange = (tab) => {
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={` ${
-                    currentPage === 1 ? "opacity-0 cursor-not-allowed" : ""
-                  }`}
-                  style={{
-                    paddingRight: "12px",
-                  }}
+                  className={` ${ currentPage === 1 ? "opacity-0 cursor-not-allowed" : "" } pr-3`}
                 >
-                  <img src="/images/ArrowLeftBlack.svg" alt="" />
+                <Image src={"/images/ArrowLeftBlack.svg"} alt={""} width={18} height={12}/>
                 </button>
                 {Array.from({ length: totalPages }, (_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentPage(index + 1)}
-                    style={{
-                      paddingBottom: "9px",
-                      paddingLeft: "auto",
-                      paddingRight: "auto",
-                      paddingTop: "9px",
-                      lineHeight: "19px",
-                      border:
-                        currentPage === index + 1
-                          ? "1.5px solid #3C4226"
-                          : "none",
-                      fontFamily: "Inter",
-                      fontWeight: 400,
-                      fontStyle: "normal",
-                      fontSize: "16px",
-                      lineHeight: "19px",
-                      letterSpacing: "0%",
-                      textAlign: "center",
-                      width: "39px",
-                    }}
+                    className={`${styles.currentNumber}`}
+                    style={{ border: currentPage === index + 1 ? "1.5px solid #3C4226" : "none"}}
                   >
                     {index + 1}
                   </button>
@@ -548,16 +508,9 @@ const handleTabChange = (tab) => {
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className={` ${
-                    currentPage === totalPages
-                      ? "opacity-50 cursor-not-allowed"
-                      : ""
-                  }`}
-                  style={{
-                    paddingLeft: "12px",
-                  }}
+                  className={` ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "" } pl-3`}
                 >
-                  <img src="/images/ArrowRightBlack.svg" alt="" />
+                  <Image src={"/images/ArrowRightBlack.svg"} alt={""} width={18} height={12}/>
                 </button>
               </>
             )}
