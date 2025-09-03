@@ -247,7 +247,7 @@
         gap: 20px;
     }
     .newsTitle {
-        font-size: 40px;
+        font-size: 36px;
     }
 
     .newsPreview {
@@ -266,7 +266,7 @@
         max-height: 310px;
         object-fit: cover; 
     }
-
+    .subImage,
     .commentInput,
     .newsAll,
     .nameForm {
@@ -287,7 +287,7 @@
         gap: 40px;
     }
     .newsTitle {
-        font-size: 32px;
+        font-size: 28px;
     }
     .newsImage {
         width: calc(50vw - 30px);
@@ -301,6 +301,7 @@
         width: calc(50vw - 30px);
     }
 
+    .subImage,
     .commentInput,
     .newsContent,
     .newsAll,
@@ -318,7 +319,7 @@
     }
 
     .newsTitle {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     .newsImage {
@@ -340,6 +341,7 @@
         align-items: flex-end;
     }
 
+    .subImage,
     .newsContent,
     .newsAll,
     .nameForm {

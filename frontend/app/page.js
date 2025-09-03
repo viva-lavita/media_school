@@ -205,9 +205,9 @@ export default function Home() {
                 <img
                   src="/images/news.png"
                   alt="новости"/>
-                <figcapture className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}>
+                <figcaption className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}>
                   НОВОСТИ
-                </figcapture>
+                </figcaption>
               </figure>
               <div className={`flex flex-col gap-2`}>
                 <p className={`${montserrat.className} font-normal text-lg leading-[140%]`}>
@@ -228,9 +228,9 @@ export default function Home() {
                 <img
                   src="/images/announcements.png"
                   alt="анонсы"/>
-                <figcapture className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}>
+                <figcaption className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}>
                   АНОНСЫ
-                </figcapture>
+                </figcaption>
               </figure>
               <div className={`flex flex-col gap-2`}>
                 <p className={`${montserrat.className} font-normal text-lg leading-[140%]`}>
@@ -251,9 +251,9 @@ export default function Home() {
                 <img
                   src="/images/news-together.png"
                   alt="новости"/>
-                <figcapture className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}>
+                <figcaption className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}>
                   НОВОСТИ
-                </figcapture>
+                </figcaption>
               </figure>
               <div className={`flex flex-col gap-2`}>
                 <p className={`${montserrat.className} font-normal text-lg leading-[140%]`}>

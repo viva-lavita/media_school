@@ -158,3 +158,21 @@
   letter-spacing: 0%;
   text-align: center;
 }
+
+@media (max-width: 1024px) {
+  .aboutLearning {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutLearning {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 360px) {
+  .aboutLearning {
+    font-size: 28px;
+  }
+}
