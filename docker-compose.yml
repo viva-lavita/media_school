@@ -1,7 +1,7 @@
 services:
 
   db:
-    image: postgres:12
+    image: postgres:14
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
@@ -10,14 +10,14 @@ services:
       start_period: 30s
       timeout: 10s
     volumes:
-      - app-db-data:/var/lib/postgresql/data/pgdata
-    env_file:
-      - .env
+      - app-db-data:/var/lib/postgresql/data
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
       - POSTGRES_USER=${POSTGRES_USER?Variable not set}
       - POSTGRES_DB=${POSTGRES_DB?Variable not set}
+      - POSTGRES_HOST=${POSTGRES_HOST?Variable not set}
+      - POSTGRES_PORT=${POSTGRES_PORT?Variable not set}
 
   backend:
     image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
@@ -59,9 +59,7 @@ services:
     image: nginx:alpine
     restart: always
     depends_on:
-      backend:
-        condition: service_healthy
-        restart: true
+      - frontend
     ports:
       - "9000:80"
     volumes:
