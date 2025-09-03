@@ -4,7 +4,6 @@ import { newsData, announcementsData, contestsData } from "../data.js";
 import styles from "../Onenews.module.css";
 import { comfortaa } from "@/lib/fonts";
 import { montserrat } from "@/lib/fonts";
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -13,6 +12,7 @@ export default function NewsDetail() {
   const { title } = useParams();
   const decodedTitle = decodeURIComponent(title);
   const [charCount, setCharCount] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const formatAnswer = (num) => {
     const getAnswerWord = (n) => {
@@ -188,29 +188,56 @@ const questions = [
         {/* Форма для добавления комментариев или вопросов */}
         <div className={`${styles.commentSection}`}>
           <h2
-            className={`${montserrat.className} font-bold text-lg leading-[140%]`}
+            className={`${montserrat.className} font-bold text-lg text-textblack leading-[140%]`}
           >
             Добавить комментарий
           </h2>
           <p
-            className={`${montserrat.className} font-normal text-base text-lg text-textblack leading-[140%]`}
+            className={`${montserrat.className} font-normal text-lg text-textblack leading-[140%]`}
           >
             Выберите категорию вопроса
           </p>
-          <div className="flex flex-col mt-2">
-            <label>
-                <input type="radio" name="category" value="category1" />
+          <div className="flex flex-col mt-2 gap-4">
+            <label className={`${styles.customRadio}`}>
+              <input
+                type="radio"
+                name="category"
+                value="category1"
+                checked={selectedCategory === 'category1'}
+                onChange={() => setSelectedCategory('category1')}
+              />
+              <span className={`${styles.radioBtn}`}></span>
+              <span className={`${styles.textStyle} text-textblack`}>
                 Вопрос эксперту/ преподавателю
+              </span>
             </label>
-            <label>
-                <input type="radio" name="category" value="category2" />
+            <label className={`${styles.customRadio}`}>
+              <input
+                type="radio"
+                name="category"
+                value="category2"
+                checked={selectedCategory === 'category2'}
+                onChange={() => setSelectedCategory('category2')}
+              />
+              <span className={`${styles.radioBtn}`}></span>
+              <span className={`${styles.textStyle} text-textblack`}>
                 Технический вопрос
+              </span>
             </label>
-            <label>
-                <input type="radio" name="category" value="category3" />
+            <label className={`${styles.customRadio}`}>
+              <input
+                type="radio"
+                name="category"
+                value="category3"
+                checked={selectedCategory === 'category3'}
+                onChange={() => setSelectedCategory('category3')}
+              />
+              <span className={`${styles.radioBtn}`}></span>
+              <span className={`${styles.textStyle} text-textblack`}>
                 Другое
+              </span>
             </label>
-            </div>
+          </div>
 
           <form className={`${styles.commentForm}`}>
             <div className="flex flex-row justify-between">
