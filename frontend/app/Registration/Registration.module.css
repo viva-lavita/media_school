@@ -5,6 +5,15 @@
     margin: 0 auto 80px;
 }
 
+.registrationImg {
+    background-image: url('/images/full-length-man.png');
+    background-repeat: no-repeat;
+    min-width: 685px;
+    background-position: center;
+    background-size: 112% 100%;
+    object-fit: cover;
+}
+
 .registrationFormWrapper {
     padding: 60px;
     gap: 32px;
