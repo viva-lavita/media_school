@@ -1,0 +1,62 @@
+.form {
+
+}
+
+.accountPage {
+    width: 1400px;
+    gap: 30px;
+    margin: 0 auto 80px;
+}
+
+.accountPageData {
+    padding: 60px;
+    gap: 32px;
+}
+
+@media screen and (max-width: 1400px) {
+    .accountPage {
+        width: 92%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .accountPage {
+        width: 92%;
+        gap: 20px;
+    }
+    .accountPageData {
+        padding: 28px 16px;
+        gap: 16px;
+    }
+    .childData {
+        margin-top: 16px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .accountPage {
+        flex-direction: column;
+        width: 94.8%;
+    }
+    .accountPageData {
+        padding: 60px;
+        gap: 32px;
+    }
+    .childData {
+        margin-top: 0;
+    }
+    .accountPagePasswordChange {
+        min-height: 472px;
+    }
+}
+@media screen and (max-width: 585px) {
+    .accountPage {
+        width: 320px;
+    }
+    .accountPageData {
+        padding: 28px 16px;
+        gap: 32px;
+    }
+    .childData {
+        margin-top: 0;
+    }
+}

@@ -3,6 +3,7 @@ import {comfortaa} from "@/lib/fonts";
 import {montserrat} from "@/lib/fonts";
 import ParentData from "@/app/components/Parent-data/Parent-data";
 import ChildData from "@/app/components/Child-data/Child-data";
+import CreatePassword from "@/app/components/CreatePassword/CreatePassword";
 
 export default function RegistrationPage() {
   return (
@@ -24,42 +25,7 @@ export default function RegistrationPage() {
             </legend>
             <div className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2 flex flex-col gap-3`}>
               <ParentData />
-              <div className={`flex flex-col gap-1`}>
-                <label
-                  className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
-                  htmlFor="password">
-                  Пароль должен содержать не&nbsp;менее 8&nbsp;символов, используйте латиницу,
-                  спецсимволы (@#$%&*!), заглавные и&nbsp;прописные буквы, цифры
-                </label>
-                <div className={`relative`}>
-                  <input
-                    placeholder="Пароль"
-                    type="text"
-                    name="parent_password"
-                    id="parent_password"
-                    className="w-full h-[41px] border border-green bg-white py-3 px-4 focus:outline-none"
-                    required
-                  />
-                  <img className={`absolute top-4.5 right-4`}
-                       src="/images/eye.svg"
-                       alt="глаз просмотра"
-                  />
-                </div>
-              </div>
-              <div className={`relative`}>
-                <input
-                  placeholder="Повторите пароль"
-                  type="text"
-                  name="parent_passwordRepeat"
-                  id="parent_passwordRepeat"
-                  className="w-full h-[41px] border border-green bg-white py-3 px-4 focus:outline-none"
-                  required
-                />
-                <img className={`absolute top-4.5 right-4`}
-                     src="/images/eye.svg"
-                     alt="глаз просмотра"
-                />
-              </div>
+              <CreatePassword />
             </div>
           </fieldset>
 

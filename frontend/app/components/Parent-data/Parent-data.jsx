@@ -1,9 +1,9 @@
 import {montserrat} from "@/lib/fonts";
 import styles from "@/app/Registration/Registration.module.css";
 
-export default function ParentData() {
+export default function ParentData({dataRequired, imgUrl, direction}) {
   return (
-    <>
+    <div className={`flex flex-col gap-3`}>
       <div className={`relative`}>
         <input
           placeholder="Фамилия"
@@ -13,16 +13,23 @@ export default function ParentData() {
           className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           required
         />
-        <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-22 top-3 
-                text-red-500`}>
-              *
-              </span>
+        {dataRequired && (
+          <span
+            className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-22 top-3 text-red-500`}
+          >
+          *
+        </span>
+        )}
         <img className={`absolute top-4.5 right-4`}
-             src="/images/cross.svg"
+             src={imgUrl ? imgUrl : "/images/cross.svg"}
              alt="крестик"
         />
       </div>
-      <div className={`${styles.registrationFormInputCouple} flex gap-3`}>
+      <div className={`${styles.registrationFormInputCouple} 
+      ${direction === "column"
+        ? "min-[769px]:max-[1025px]:flex-col"
+        : "min-[769px]:max-[1025px]:flex-row"} 
+        flex gap-3`}>
         <div className={`flex basis-0 grow relative`}>
           <input
             placeholder="Имя"
@@ -32,12 +39,16 @@ export default function ParentData() {
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
           />
-          <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-12.5 
-                  top-3 text-red-500`}>
-                    *
-                  </span>
+          {dataRequired && (
+            <span
+              className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-12.5 top-3 
+              text-red-500`}
+            >
+          *
+        </span>
+          )}
           <img className={`absolute top-4.5 right-4`}
-               src="/images/cross.svg"
+               src={imgUrl ? imgUrl : "/images/cross.svg"}
                alt="крестик"
           />
         </div>
@@ -50,12 +61,16 @@ export default function ParentData() {
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           />
           <img className={`absolute top-4.5 right-4`}
-               src="/images/cross.svg"
+               src={imgUrl ? imgUrl : "/images/cross.svg"}
                alt="крестик"
           />
         </div>
       </div>
-      <div className={`${styles.registrationFormInputCouple} flex gap-3`}>
+      <div className={`${styles.registrationFormInputCouple} 
+      ${direction === "column"
+        ? "min-[769px]:max-[1025px]:flex-col"
+        : "min-[769px]:max-[1025px]:flex-row"} 
+         flex gap-3`}>
         <div className={`flex basis-0 grow relative`}>
           <input
             placeholder="Дата рождения"
@@ -65,12 +80,15 @@ export default function ParentData() {
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
           />
-          <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-33 
-                  top-3 text-red-500`}>
-                    *
-                  </span>
+          {dataRequired && (
+            <span
+              className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-33 top-3 text-red-500`}
+            >
+          *
+        </span>
+          )}
           <img className={`absolute top-4.5 right-4`}
-               src="/images/cross.svg"
+               src={imgUrl ? imgUrl : "/images/cross.svg"}
                alt="крестик"
           />
         </div>
@@ -83,15 +101,18 @@ export default function ParentData() {
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
           />
-          <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-14.5 
-                  top-3 text-red-500`}>
-                    *
-                  </span>
+          {dataRequired && (
+            <span
+              className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-14.5 top-3 text-red-500`}
+            >
+          *
+        </span>
+          )}
           <img className={`absolute top-4.5 right-4`}
-               src="/images/cross.svg"
+               src={imgUrl ? imgUrl : "/images/cross.svg"}
                alt="крестик"
           />
         </div>
-      </div></>
+      </div></div>
   )
 }
