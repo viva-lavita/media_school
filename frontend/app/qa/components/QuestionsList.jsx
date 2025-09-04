@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Question from './Question';
 import styles from './QuestionsList.module.css';
 import { inter } from '@/lib/fonts';
+import Question from './Question';
 
 export default function QuestionsList({ questions }) {
   const [currentPage, setCurrentPage] = useState(1);

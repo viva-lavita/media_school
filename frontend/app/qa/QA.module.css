@@ -32,13 +32,18 @@
 }
 
 @media screen and (max-width: 1024px) {
-
-
+.wrap {
+ width: 944px;
+}
+.titleQA {
+ font-size: 40px;
+}
 }
 @media screen and (max-width: 768px) {
 .wrap {
  width: 768px;
 }
+
 .titleQA {
  font-size: 32px;
 }

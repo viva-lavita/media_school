@@ -1,18 +1,55 @@
-import { montserrat } from '@/lib/fonts';
+import { useState } from 'react';
+import QuestionForm from './QuestionForm';
+import AnswerForm from './AnswerForm';
 import styles from './Question.module.css';
 import formatAnswer from '@/app/utils/formatAnswer';
+import { montserrat } from '@/lib/fonts';
 
-export default function Question({ question, name, answer, data, time}) {
+export default function Question({ question, name, answers, data, time }) {
+ const [isExpanded, setIsExpanded] = useState(false);
+
+ const handleToggleAnswers = () => {
+  setIsExpanded(!isExpanded);
+ };
+
+ const hideAll = () => {
+  setIsExpanded(false);
+ };
  return (
-  <div className={styles.question}>
-   <div className={`${montserrat.className} ${styles.questionText}`}>
-    {question}
-   </div>
-   <div className={styles.icons}>
-    <span className={`${montserrat.className} ${styles.nameAuthor}`}>{name}</span>
-    <span className={`${montserrat.className} ${styles.answers}`}>{formatAnswer(answer)}</span>
-    <span className={ `${montserrat.className} ${styles.date}`}>{`${data}, ${time}`}</span>
-   </div>
-  </div>
+  <>
+   <QuestionForm
+    question={question}
+    name={name}
+    answers={answers}
+    data={data}
+    time={time}
+    toggleAnswers={handleToggleAnswers}
+   />
+   {isExpanded && Array.isArray(answers) && answers.length > 0 && (
+    <>
+     <div className={styles.answerContainer}>
+      <div className={`${montserrat.className} ${styles.answersCount}`}>
+       {formatAnswer(answers.length)}
+      </div>
+      {answers.map((item, index) => (
+       <AnswerForm
+        key={index}
+        answer={item.answer}
+        name={item.name}
+        position={item.position}
+        data={item.data}
+        time={item.time}
+       />
+      ))}
+      <button
+       className={`${montserrat.className} ${styles.hideBtn}`}
+       onClick={hideAll}
+      >
+       Свернуть
+      </button>
+     </div>
+    </>
+   )}
+  </>
  );
 }
