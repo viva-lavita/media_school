@@ -48,30 +48,30 @@ const questions = [
         <div className={`${styles.newsAll}`}>
           <div className={`${styles.newsInfo}`}>
             <div className={`${styles.newsPreview}`}>
-              <div className={`flex flex-row gap-1`}>
+              <div className={`flex flex-row gap-1 lg:mb-7`}>
                 <span
-                  className={`${montserrat.className} font-normal text-base leading-[130%] text-dark-green`}
+                  className={`${montserrat.className} font-normal text-sm leading-[130%] text-dark-green`}
                 >
                   Автор:
                 </span>
                 <span
-                  className={`${montserrat.className} font-normal text-base leading-[130%]`}
+                  className={`${montserrat.className} font-normal text-sm leading-[130%]`}
                 >
                   {item.author || "админ"}
                 </span>
               </div>
               <h1
-                className={`${comfortaa.className} ${styles.newsTitle} font-bold leading-[100%]`}
+                className={`${comfortaa.className} ${styles.newsTitle} font-bold leading-[111%]`}
               >
                 {item.title}
               </h1>
               <span
-                className={`${montserrat.className} ${styles.newsDate} font-normal text-base leading-[130%] text-grey-2`}
+                className={`${montserrat.className} ${styles.newsDate} font-normal text-sm leading-[130%] text-grey-2`}
               >
                 {item.date}
               </span>
               <p
-                className={`${montserrat.className} ${styles.newsPreview} font-normal text-base leading-[140%]`}
+                className={`${montserrat.className} ${styles.newsPreview} font-normal text-base leading-[140%] lg:mt-3`}
               >
                 {item.preview}
               </p>
@@ -81,11 +81,11 @@ const questions = [
           {/* Текст новости с подзаголовками */}
           <div className={`${styles.newsContent}`}>
             <div className={`${styles.newsParagraph}`}>
-              <h2
-                className={`${montserrat.className} font-bold text-lg leading-[140%]`}
+              <h3
+                className={`${comfortaa.className} font-bold text-[22px] lg:text-[28px] leading-[130%]`}
               >
                 {item.paragraph1}
-              </h2>
+              </h3>
               <p
                 className={`${montserrat.className} font-normal text-base leading-[140%]`}
               >
@@ -94,7 +94,7 @@ const questions = [
               {item.points1 && item.points1.length > 0 && (
                 <ul className={`${montserrat.className} ${styles.bulletList}`}>
                   {item.points1.map((point, index) => (
-                    <li key={index} className={`${montserrat.className} font-normal text-base leading-[140%]`}>
+                    <li key={index} className={`${montserrat.className} font-normal text-base leading-[110%]`}>
                       {point}
                     </li>
                   ))}
@@ -106,16 +106,23 @@ const questions = [
             )}
 
             <div className={`${styles.newsParagraph}`}>
-              <h2
-                className={`${montserrat.className} font-bold text-lg leading-[140%]`}
+              <h3
+                className={`${comfortaa.className} font-bold text-[22px] lg:text-[28px] leading-[130%]`}
               >
                 {item.paragraph2}
-              </h2>
+              </h3>
               <p
                 className={`${montserrat.className} font-normal text-base leading-[140%]`}
               >
                 {item.content2}
               </p>
+              {item.titleList2 && item.titleList2.length > 0 && (
+                <p
+                  className={`${montserrat.className} font-normal text-lg leading-[140%]`}
+                >
+                  {item.titleList2}
+                </p>
+              )}
               {item.points2 && item.points2.length > 0 && (
                 <ul className={`${montserrat.className} ${styles.bulletList}`}>
                   {item.points2.map((point, index) => (
@@ -131,11 +138,11 @@ const questions = [
             )}
 
             <div className={`${styles.newsParagraph}`}>
-              <h2
-                className={`${montserrat.className} font-bold text-lg leading-[140%]`}
+              <h3
+                className={`${comfortaa.className} font-bold text-[22px] lg:text-[28px] leading-[130%]`}
               >
                 {item.paragraph3}
-              </h2>
+              </h3>
               <p
                 className={`${montserrat.className} font-normal text-base leading-[140%]`}
               >
@@ -156,11 +163,11 @@ const questions = [
             )}
 
             <div className={`${styles.newsParagraph}`}>
-              <h2
-                className={`${montserrat.className} font-bold text-lg leading-[140%]`}
+              <h3
+                className={`${comfortaa.className} font-bold text-[22px] lg:text-[28px] leading-[130%]`}
               >
                 {item.paragraph4}
-              </h2>
+              </h3>
               <p
                 className={`${montserrat.className} font-normal text-base leading-[140%]`}
               >
@@ -188,23 +195,23 @@ const questions = [
           >
             {item.link_text}
           </a>
-          .
+          <Link href='/news' className={`${montserrat.className} font-normal text-dark-green text-sm leading-[100%] mt-[-12px]`}>НОВОСТИ</Link>
         </div>
-        <Link href='/news' className={`${montserrat.className} font-normal text-dark-green text-sm leading-[100%]`}>НОВОСТИ</Link>
+        {/* <Link href='/news' className={`${montserrat.className} font-normal text-dark-green text-sm leading-[100%]`}>НОВОСТИ</Link> */}
 
         {/* Форма для добавления комментариев или вопросов */}
         <div className={`${styles.commentSection}`}>
           <h2
-            className={`${comfortaa.className} font-bold text-[22px] leading-[100%]`}
+            className={`${comfortaa.className} font-bold text-[18px] lg:text-[22px] leading-[100%]`}
           >
             Добавить комментарий
           </h2>
           <p
-            className={`${montserrat.className} font-normal text-lg leading-[140%]`}
+            className={`${montserrat.className} font-normal text-lg leading-[140%] mt-3`}
           >
             Выберите категорию вопроса
           </p>
-          <div className="flex flex-col mt-2 gap-4">
+          <div className="flex flex-col gap-4">
             <label className={`${styles.customRadio}`}>
               <input
                 type="radio"
@@ -247,7 +254,7 @@ const questions = [
           </div>
 
           <form className={`${styles.commentForm}`}>
-            <div className={`${styles.nameForm} flex flex-row justify-between`}>
+            <div className={`${styles.nameForm} flex flex-row justify-between mt-[22px]`}>
               <p className={`${montserrat.className} font-normal text-base text-lg leading-[140%]`}>Текст вопроса</p>
               <span className={`${montserrat.className} font-normal text-base text-lg leading-[140%]`}> {charCount}/400 </span>
             </div>
@@ -257,7 +264,7 @@ const questions = [
                 onChange={(e) => setCharCount(e.target.value.length)}
                 style={{ resize: 'none' }}
             />
-            <button type="submit" className={`${montserrat.className} ${styles.commentButton} b-green`}>
+            <button type="submit" className={`${montserrat.className} ${styles.commentButton} b-green mt-7`}>
               Отправить
             </button>
           </form>
@@ -266,7 +273,7 @@ const questions = [
         {/* Список комментариев и вопросов */}
         <div className={`${styles.commentsList}`}>
           <h2
-            className={`${comfortaa.className} font-bold text-[22px] leading-[100%]`}
+            className={`${comfortaa.className} font-bold text-[18px] lg:text-[22px] leading-[100%] mb-[14px]`}
           >
             Комментарии и вопросы
           </h2>
@@ -276,9 +283,11 @@ const questions = [
                 {question.text}
               </div>
               <div className={styles.icons}>
-                <span className={`${montserrat.className} ${styles.nameAuthor}`}>{question.author}</span>
-                <span className={`${montserrat.className} ${styles.answers}`}><Image  src={ "/images/sms.svg"}  alt={""} width={18} height={18} style={{ marginRight: "5px" }} /> {formatAnswer(question.answers)}</span>
-                <span className={`${montserrat.className} ${styles.date}`}>{`${question.date}, ${question.time}`}</span>
+                <span className={`${montserrat.className} ${styles.nameAuthor} whitespace-nowrap`}>{question.author}</span>
+                <div className={`flex flex-row gap-5`}>
+                  <span className={`${montserrat.className} ${styles.answers}`}>{formatAnswer(question.answers)}</span>
+                  <span className={`${montserrat.className} ${styles.date}`}>{`${question.date}, ${question.time}`}</span>
+                </div>
               </div>
             </div>
           ))}
