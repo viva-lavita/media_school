@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin.sites import AdminSite
 
-from api.models import Contact, Review
+from api.models import Contact, LegalDocuments, Review
 
 
 @admin.register(Contact)
@@ -28,3 +28,16 @@ class ReviewAdmin(admin.ModelAdmin):
         if len(obj.review) > 50:
             return obj.review
         return obj.review[:50] + "..."
+
+
+@admin.register(LegalDocuments)
+class LegalDocumentsAdmin(admin.ModelAdmin):
+    list_display = ("id", "short_privacy_policy", "short_user_agreement", "created_at", "updated_at")
+
+    @admin.display(description="Политика конфиденциальности")
+    def short_privacy_policy(self, obj):
+        return obj.privacy_policy.name.split("/")[-1]
+
+    @admin.display(description="Пользовательское соглашение")
+    def short_user_agreement(self, obj):
+        return obj.user_agreement.name.split("/")[-1]

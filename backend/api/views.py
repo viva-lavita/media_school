@@ -4,8 +4,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from api.mixins import RetrieveListViewSet
-from api.models import Contact, Review
-from api.serializers import ContactSerializer, ReviewSerializer
+from api.models import Contact, LegalDocuments, Review
+from api.serializers import ContactSerializer, LegalDocumentsSerializer, ReviewSerializer
 
 
 @extend_schema(responses={status.HTTP_200_OK: None}, request=None)
@@ -40,3 +40,19 @@ class ReviewViewSet(RetrieveListViewSet):
 
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+
+@extend_schema(responses={status.HTTP_200_OK: LegalDocumentsSerializer})
+@api_view(["GET"])
+def get_legal_documents(request):
+    """
+    Лицензии и документы.
+
+    Доступно всем.
+    """
+    instance = LegalDocuments.objects.last()
+
+    if not instance:
+        return Response({"error": "Документы не найдены"}, status=status.HTTP_404_NOT_FOUND)
+    serializer = LegalDocumentsSerializer(instance)
+    return Response(serializer.data, status=status.HTTP_200_OK)

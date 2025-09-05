@@ -12,3 +12,9 @@ class RetrieveListViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, Gene
     """Миксин только для чтения и получения списка экземпляров."""
 
     pass
+
+
+class RetrieveViewSet(mixins.RetrieveModelMixin, GenericViewSet):
+    """Миксин только для чтения экземпляра."""
+
+    pass
