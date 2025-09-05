@@ -80,7 +80,8 @@
 @media screen and (max-width: 360px) {
  .icons {
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: space-between;
+  align-items: center;
  }
 
  .nameAuthor {
@@ -93,11 +94,8 @@
  .date {
   order: 1;
   width: auto;
- }
-
- .iconsAnswer {
-  flex-wrap: wrap;
-  justify-content: space-between;
+  line-height: normal;
+  vertical-align: middle;
  }
 
  .authorInfo {
@@ -111,5 +109,12 @@
  .nameAuthor,
  .position {
   width: 100%;
+ }
+
+ span.answers,
+ span.date {
+  display: inline-flex; 
+  align-items: center;
+  min-height: 20px;
  }
 }

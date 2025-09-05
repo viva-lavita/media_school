@@ -96,7 +96,7 @@ export default function AskQuestion() {
    </div>
 
    <form className={styles.commentForm} onSubmit={handleSubmit}>
-    <div>
+    <div className={styles.headerBlock}>
      <p className={`${montserrat.className} ${styles.ourQuestion}`}>
       Ваш вопрос
      </p>
@@ -104,7 +104,6 @@ export default function AskQuestion() {
       {charCount}/400
      </span>
     </div>
-
     <textarea
      className={`${styles.commentInput} ${montserrat.className} ${
       questionError ? styles.hasQuestionError : ''

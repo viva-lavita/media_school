@@ -1,5 +1,5 @@
 .title {
- font-size: 18px;
+ font-size: clamp(14px, 2vw, 18px);
  font-weight: 400;
  margin-top: 42px;
  margin-bottom: 20px;
@@ -18,8 +18,9 @@
  outline: none;
  transition: all 0.2s ease-in-out;
 }
+
 .titleError {
- color:  #db0000;
+ color: #db0000;
 }
 
 .inputCategories:checked::after {
@@ -54,16 +55,16 @@
  margin-bottom: 19px;
 }
 
-.textCategories{
-    font-weight: 400;
-    font-size: 16px;
-    color: #040404;
+.textCategories {
+ font-weight: 400;
+ font-size: 16px;
+ color: #040404;
 }
 
 .questionContainer {
  display: flex;
  flex-direction: column;
- align-items: center;
+ align-items: stretch;
  gap: 16px;
  width: 100%;
  max-width: 500px;
@@ -80,24 +81,34 @@
  line-height: 1.5;
  background-color: #fafafa;
  color: black;
+ width: 100%;
 }
 
 .commentForm {
  display: flex;
  flex-direction: column;
  gap: 12px;
+ width: 100%;
 }
+
 .commentForm div {
  display: flex;
- flex-direction: row;
  justify-content: space-between;
 }
+
+.headerBlock {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin-bottom: 16px;
+}
+
 .ourQuestion {
  font-weight: normal;
  font-size: 18px;
  color: #040404;
  line-height: 140%;
- margin-top: 40px;
+ margin: 0;
 }
 
 .count {
@@ -106,15 +117,16 @@
  font-size: 1.125rem;
  color: black;
  line-height: 140%;
+ margin: 0;
 }
+
 .commentInput {
  padding: 12px;
  border: 1px solid #deedab;
  border-radius: 4px;
  font-size: 16px;
- max-width: 1400px;
- width: calc(100vw - 80px);
- height: 116px;
+ width: 100%;
+ min-height: 116px;
  font-weight: normal;
  color: #000;
  line-height: 140%;
@@ -126,7 +138,7 @@
  border: none;
  cursor: pointer;
  font-size: 16px;
- width: 153px;
+ width: fit-content;
  font-weight: 500;
  line-height: 100%;
  letter-spacing: 0;
@@ -144,32 +156,44 @@
  background-color: var(--color-green-hover);
 }
 
-.categoriesContainer{
-display: flex;
-flex-direction: column;
+.categoriesContainer {
+ display: flex;
+ flex-direction: column;
 }
 
 .categoriesContainer:not(:last-child) {
-  margin-bottom: 19px; 
+ margin-bottom: 19px;
 }
 
-.categoriesContainer.hasError input {
- border-color: #db0000;
+@media screen and (max-width: 768px) {
+ .commentInput {
+  height: auto;
+ }
+ .textarea {
+  font-size: 16px;
+ }
 }
 
-.categoriesContainer.hasError span {
- color: #db0000;
+@media screen and (max-width: 480px) {
+ .inputCategories {
+  width: 20px;
+  height: 20px;
+ }
+ .textCategories {
+  font-size: 14px;
+ }
+ .count {
+  font-size: 14px;
+ }
+ .title {
+  font-size: clamp(14px, 2vw, 18px);
+ }
+ .commentButton {
+  padding: 12px 24px;
+ }
 }
-
-.errorMessage {
- color: #db0000;
- font-size: 14px;
- margin-bottom: 8px;
- font-weight: 400;
-}
-
-.hasQuestionError {
-  border-color: #db0000; 
-  border-style: solid;
-  border-width: 2px;
+@media screen and (max-width: 360px) {
+ .commentButton {
+  margin: 0 auto;
+ }
 }

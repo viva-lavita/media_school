@@ -1,11 +1,15 @@
 .wrap {
- display: flex;
- flex-direction: column;
- width: 1400px;
- margin: 0 auto 40px;
+ max-width: 1400px; 
+ width: 100%;
+ margin: 0 auto 40px; 
 }
+
 .titleQA {
- font-size: 52px;
+ font-size: clamp(
+  28px,
+  5vw + 1rem,
+  52px
+ );
  font-weight: 700;
  text-align: center;
  margin-bottom: 40px;
@@ -15,7 +19,9 @@
  display: flex;
  justify-content: left;
  gap: 18px;
+ overflow-x: auto;
 }
+
 .tabButton {
  font-size: 16px;
  font-weight: 500;
@@ -23,6 +29,7 @@
  cursor: pointer;
  padding-bottom: 12px;
  color: #535353;
+ white-space: nowrap;
 }
 
 .active,
@@ -31,29 +38,26 @@
  border-bottom: 2px solid #3c4226;
 }
 
+
 @media screen and (max-width: 1024px) {
-.wrap {
- width: 944px;
-}
-.titleQA {
- font-size: 40px;
-}
-}
-@media screen and (max-width: 768px) {
-.wrap {
- width: 768px;
+ .titleQA {
+  font-size: clamp(28px, 4vw + 1rem, 40px);
+ }
 }
 
-.titleQA {
- font-size: 32px;
+@media screen and (max-width: 768px) {
+ .titleQA {
+  font-size: clamp(28px, 3vw + 1rem, 32px);
+ }
 }
-}
+
 @media screen and (max-width: 360px) {
-.wrap {
- width: 320px;
-}
-.titleQA {
- font-size: 28px;
- margin-bottom: 28px;
+ .titleQA {
+  font-size: clamp(28px, 2vw + 1rem, 28px);
+  margin-bottom: 28px;
+ }
+ .tabButton {
+  flex-basis: 100%;
+  margin-bottom: 10px;
 }
 }
