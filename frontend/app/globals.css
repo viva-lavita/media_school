@@ -6,8 +6,9 @@
   --color-green: #DEEDAB;
   --color-green-hover: #ADBC7B;
   --color-light-green: #FBFFF0;
-  --color-textblack: #040404;
+  --color-black: #040404;
   --color-anonsblack: #161616;
+  --color-red: #DB0000;
 }
 
 :root {

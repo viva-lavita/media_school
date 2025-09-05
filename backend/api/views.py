@@ -3,8 +3,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from api.models import Contact
-from api.serializers import ContactSerializer
+from api.mixins import RetrieveListViewSet
+from api.models import Contact, Review
+from api.serializers import ContactSerializer, ReviewSerializer
 
 
 @extend_schema(responses={status.HTTP_200_OK: None}, request=None)
@@ -17,17 +18,25 @@ def health_check(request):
 @api_view(["GET"])
 def get_contact(request):
     """
-    Возвращает последний экземпляр контактной информации школы
-    Используется для раздела 'Контакты' и для футера сайта
-    JSON содержит поля: 'address', 'phone_number', 'contact_email', 'school_website',
-    'school_website', 'social_vk', 'social_ok', 'latitude', 'longitude'
-    Доступ публичный, без аутентификации
+    Контактная информация школы.
+    Используется для раздела 'Контакты' и для футера сайта.
+
+    Доступно всем.
     """
     instance = Contact.objects.last()
 
     if not instance:
         return Response({"error": "Контакты не найдены"}, status=status.HTTP_404_NOT_FOUND)
-
     serializer = ContactSerializer(instance)
-
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ReviewViewSet(RetrieveListViewSet):
+    """
+    Отзывы о проекте.
+
+    Доступно всем.
+    """
+
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
