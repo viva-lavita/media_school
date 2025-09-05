@@ -232,8 +232,6 @@
 
 .bulletList li {
     margin-bottom: 0px; /* Отступ между элементами списка */
-    font-size: 16px; 
-    color: var(--color-textblack); 
 }
 
 .comment {

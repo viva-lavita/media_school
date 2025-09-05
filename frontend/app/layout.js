@@ -3,7 +3,8 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import './globals.css';
 import Navigation from './components/Navigation/Navigation';
-import { PageWidthProvider } from './context/PageWidthProvider'; // Импортируем PageWidthProvider отдельно
+import { PageWidthProvider } from './context/PageWidthProvider';
+import { montserrat, comfortaa, inter } from '../lib/fonts';
 
 export const metadata = {
  title: 'Create Next App',
@@ -12,7 +13,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
  return (
-  <html lang="ru">
+  <html lang="ru" className={`${montserrat.variable} ${comfortaa.variable} ${inter.variable}`}>
    <body>
     <PageWidthProvider>
      <Suspense fallback={<div>Loading...</div>}>

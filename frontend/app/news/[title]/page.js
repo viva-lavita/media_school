@@ -149,7 +149,7 @@ const questions = [
                 {item.content3}
               </p>
               {item.points3 && item.points3.length > 0 && (
-                <ul className={`${montserrat.className} ${styles.bulletList}`}>
+                <ul className={`${montserrat.className} ${styles.bulletList}  text-base`}>
                   {item.points3.map((point, index) => (
                     <li key={index} className={`${montserrat.className} font-normal text-base leading-[140%]`}>
                       {point}

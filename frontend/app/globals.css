@@ -11,6 +11,14 @@
   --color-red: #DB0000;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #040404;
@@ -19,5 +27,19 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family:  Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.text-base {
+  font-size: 16px !important;
+}
+
+.text-lg {
+  font-size: 18px !important;
+}
+.text-sm {
+  font-size: 14px !important;
 }
