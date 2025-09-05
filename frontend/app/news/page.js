@@ -375,7 +375,7 @@ const handleTabChange = (tab) => {
                     onChange={() => setShowCompleted(false)}
                   />
                   <span className={`${styles.radioBtn}`}></span>
-                  <span className={`${styles.textStyle} ${!showCompleted ? 'text-textblack' : 'text-grey-2'}`}>
+                  <span className={`${styles.textStyle} ${!showCompleted ? 'text-black' : 'text-grey-2'}`}>
                     Текущие
                   </span>
                 </label>
@@ -388,7 +388,7 @@ const handleTabChange = (tab) => {
                     onChange={() => setShowCompleted(true)}
                   />
                   <span className={`${styles.radioBtn}`}></span>
-                  <span className={`${styles.textStyle} ${showCompleted ? 'text-textblack' : 'text-grey-2'}`}>
+                  <span className={`${styles.textStyle} ${showCompleted ? 'text-black' : 'text-grey-2'}`}>
                     Завершенные
                   </span>
                 </label>
