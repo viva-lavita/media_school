@@ -1,3 +1,5 @@
+@import './../globals.css';
+
 .wrap {
  max-width: 1400px; 
  width: 100%;
@@ -28,14 +30,14 @@
  border: none;
  cursor: pointer;
  padding-bottom: 12px;
- color: #535353;
+ color: var(--color-grey-2);
  white-space: nowrap;
 }
 
 .active,
 .tabButton:hover {
- color: #3c4226;
- border-bottom: 2px solid #3c4226;
+ color: var(--color-dark-green);
+ border-bottom: 2px solid var(--color-dark-green);
 }
 
 
