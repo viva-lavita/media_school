@@ -1,13 +1,17 @@
+from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from api.mixins import RetrieveListViewSet
+from api.mixins import ListCreateRetrieveViewSet, RetrieveListViewSet
 from api.permissions import IsStuffOrReadOnly
-from news.filters import CompetitionFilter
-from news.models import Announcement, Competition, News
+from news.filters import CommentFilter, CompetitionFilter
+from news.models import Announcement, Comment, Competition, News
 from news.serializers import (
     AnnouncementSerializer,
+    CommentSerializer,
     CompetitionSerializer,
+    CreateCommentSerializer,
     NewsSerializer,
     ShortAnnouncementSerializer,
     ShortCompetitionSerializer,
@@ -101,4 +105,62 @@ class CompetitionViewSet(RetrieveListViewSet):
     def get_serializer_class(self):
         if self.action == "list":
             return ShortCompetitionSerializer
+        return super().get_serializer_class()
+
+
+# 1. Пользователь должен получить все комментарии с флагом is_published=True
+# 2. А также свои комментарии, если он автор
+# 3. Должен иметь возможность создать комментарии к новостям, анонсам и конкурсам
+# 4. Эндпоинты:
+#    - получить все комментарии для страницы вопрос-ответ,
+#    - комментарии только к новости, анонсу или конкурсу, (фильтр с категорией и id),
+#    - создать комментарии,
+#    - один комментарий с ответами. Ретрив
+
+
+class CommentViewSet(ListCreateRetrieveViewSet):
+    """
+    Комментарии к новостям, анонсам и конкурсам.
+
+    Создание комментариев доступно только авторизованным пользователям.
+    При создании комментария к новости, анонсу или конкурсу указывается
+    ключ ('news', 'announcement', 'competition') и
+    значение (id новости, анонса или конкурса).
+    При создании комментария в разделе вопрос-ответ, не нужно указывать ключ.
+
+    Пользователь получает все одобренные администратором комментарии,
+    а также свои комментарии, если он автор.
+
+    Фильтром можно получить комментарии к конкретной новости, анонсу или конкурсу.
+    Ключи фильтра: "news", "announcement", "competition".
+    Значения фильтра - id новости, анонса или конкурса.
+    Можно использовать только один фильтр этого типа.
+    Для раздела вопрос-ответ фильтры не нужны, там выводятся все комментарии.
+
+    Элементы выводятся от более свежих к более старым по дефолту,
+    но также доступна сортировка по полю created_at.
+    Например '?ordering=-created_at' - от свежих к старым,
+    '?ordering=created_at' - от старых к свежим.
+    """
+
+    serializer_class = CommentSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    filter_backends = (
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+    )
+    filterset_class = CommentFilter
+    ordering_fields = ("created_at",)
+
+    def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return Comment.objects.filter(is_approved=True)
+        return Comment.objects.filter(Q(author=self.request.user) | Q(is_approved=True))
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+    def get_serializer_class(self):
+        if self.action == "create":
+            return CreateCommentSerializer
         return super().get_serializer_class()

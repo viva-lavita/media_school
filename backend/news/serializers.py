@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from news.models import Announcement, Competition, News, Paragraph
+from news.models import Announcement, Answer, Comment, Competition, News, Paragraph
 
 
 class ParagraphSerializer(serializers.ModelSerializer):
@@ -122,3 +122,82 @@ class ShortCompetitionSerializer(serializers.ModelSerializer):
             "end_date",
             "created_at",
         )
+
+
+class AnswerSerializer(serializers.ModelSerializer):
+    """Сериализатор ответов."""
+
+    class Meta:
+        model = Answer
+        fields = "__all__"
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    """Сериализатор комментариев."""
+
+    answers = AnswerSerializer(many=True)
+
+    class Meta:
+        model = Comment
+        fields = (
+            "id",
+            "news",
+            "announcement",
+            "competition",
+            "author",
+            "question_category",
+            "text",
+            "created_at",
+            "answers",
+        )
+
+    def to_representation(self, instance):
+        """Только не пустые поля."""
+        representation = super().to_representation(instance)
+        representation = {k: v for k, v in representation.items() if v}
+        return representation
+
+
+class ShortCommentSerializer(serializers.ModelSerializer):
+    """Сериализатор комментариев, сокращенный вывод."""
+
+    class Meta:
+        model = Comment
+        fields = (
+            "id",
+            "news",
+            "announcement",
+            "competition",
+            "author",
+            "question_category",
+            "text",
+            "created_at",
+        )
+
+    def to_representation(self, instance):
+        """Только не пустые поля."""
+        representation = super().to_representation(instance)
+        representation = {k: v for k, v in representation.items() if v}
+        return representation
+
+
+class CreateCommentSerializer(serializers.ModelSerializer):
+    """Сериализатор комментариев для создания."""
+
+    class Meta:
+        model = Comment
+        fields = (
+            "id",
+            "news",
+            "announcement",
+            "competition",
+            "question_category",
+            "text",
+            "created_at",
+        )
+
+    def to_representation(self, instance):
+        """Только не пустые поля."""
+        representation = super().to_representation(instance)
+        representation = {k: v for k, v in representation.items() if v}
+        return representation

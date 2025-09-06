@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin.sites import AdminSite
 
+from api.constants import ADMIN_TEXT_LEN
 from api.models import Contact, LegalDocuments, Review
 
 
@@ -11,9 +12,9 @@ class ContactAdmin(admin.ModelAdmin):
     @admin.display(description="Адрес")
     def short_address(self, obj):
         if obj.address:
-            if len(obj.address) > 50:
+            if len(obj.address) <= ADMIN_TEXT_LEN:
                 return obj.address
-            return obj.address[:50] + "..."
+            return obj.address[:ADMIN_TEXT_LEN] + "..."
         return AdminSite.empty_value_display
 
 
@@ -25,9 +26,9 @@ class ReviewAdmin(admin.ModelAdmin):
 
     @admin.display(description="Текст")
     def short_text(self, obj):
-        if len(obj.review) > 50:
+        if len(obj.review) <= ADMIN_TEXT_LEN:
             return obj.review
-        return obj.review[:50] + "..."
+        return obj.review[:ADMIN_TEXT_LEN] + "..."
 
 
 @admin.register(LegalDocuments)

@@ -35,7 +35,9 @@ class PhotoContent(models.Model):
         verbose_name_plural = "Фотоконтент"
 
     def __str__(self):
-        return self.description
+        if self.description:
+            return self.description[:20]
+        return self.image_path[:20]
 
 
 class VideoContent(models.Model):
@@ -53,7 +55,9 @@ class VideoContent(models.Model):
         verbose_name_plural = "Видеоконтент"
 
     def __str__(self):
-        return self.description
+        if self.description:
+            return self.description[:20]
+        return self.video_path[:20]
 
 
 class DocumentContent(models.Model):
@@ -65,7 +69,7 @@ class DocumentContent(models.Model):
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
 
     def __str__(self):
-        return self.file.name
+        return self.file.name[:20] + "..."
 
     class Meta:
         verbose_name = "Файловый контент"

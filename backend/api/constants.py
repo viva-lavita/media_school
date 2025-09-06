@@ -1,0 +1,1 @@
+ADMIN_TEXT_LEN = 20
