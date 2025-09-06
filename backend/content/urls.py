@@ -12,10 +12,10 @@ app_name = "content"
 
 
 router = DefaultRouter()
-router.register("catalog", CatalogViewSet, basename="catalog")
-router.register("document", DocumentContentViewSet, basename="document")
-router.register("photo", PhotoContentViewSet, basename="photo")
-router.register("video", VideoContentViewSet, basename="video")
-router.register("expert", ExpertViewSet, basename="expert")
+router.register("catalogs", CatalogViewSet, basename="catalog")
+router.register("documents", DocumentContentViewSet, basename="document")
+router.register("photos", PhotoContentViewSet, basename="photo")
+router.register("videos", VideoContentViewSet, basename="video")
+router.register("experts", ExpertViewSet, basename="expert")
 
 urlpatterns = router.urls

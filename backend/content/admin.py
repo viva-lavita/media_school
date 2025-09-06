@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin.sites import AdminSite
 
+from api.constants import ADMIN_TEXT_LEN
 from content.models import (
     Catalog,
     DocumentContent,
@@ -29,10 +30,12 @@ class DocumentContentAdmin(admin.ModelAdmin):
     @admin.display(description="Описание")
     def short_description(self, obj):
         if obj.description:
-            if len(obj.description) > 50:
+            if len(obj.description) <= ADMIN_TEXT_LEN:
                 return obj.description
-            return obj.description[:50] + "..."
-        return AdminSite.empty_value_display
+            return obj.description[:ADMIN_TEXT_LEN] + "..."
+        if len(obj.file.name) <= ADMIN_TEXT_LEN:
+            return obj.file.name
+        return obj.file.name[:ADMIN_TEXT_LEN] + "..."
 
 
 @admin.register(PhotoContent)
@@ -46,9 +49,9 @@ class PhotoContentAdmin(admin.ModelAdmin):
     @admin.display(description="Описание")
     def short_description(self, obj):
         if obj.description:
-            if len(obj.description) > 50:
+            if len(obj.description) <= ADMIN_TEXT_LEN:
                 return obj.description
-            return obj.description[:50] + "..."
+            return obj.description[:ADMIN_TEXT_LEN] + "..."
         return AdminSite.empty_value_display
 
 
@@ -63,9 +66,9 @@ class VideoContentAdmin(admin.ModelAdmin):
     @admin.display(description="Описание")
     def short_description(self, obj):
         if obj.description:
-            if len(obj.description) > 50:
+            if len(obj.description) <= ADMIN_TEXT_LEN:
                 return obj.description
-            return obj.description[:50] + "..."
+            return obj.description[:ADMIN_TEXT_LEN] + "..."
         return AdminSite.empty_value_display
 
 
@@ -78,6 +81,6 @@ class ExpertAdmin(admin.ModelAdmin):
 
     @admin.display(description="ФИО")
     def short_full_name(self, obj):
-        if len(obj.full_name) > 50:
+        if len(obj.full_name) <= ADMIN_TEXT_LEN:
             return obj.full_name
-        return obj.full_name[:50] + "..."
+        return obj.full_name[:ADMIN_TEXT_LEN] + "..."

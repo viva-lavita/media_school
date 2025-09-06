@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from api.views import ReviewViewSet, get_contact, health_check
+from api.views import ReviewViewSet, get_contact, get_legal_documents, health_check
 
 app_name = "api"
 
@@ -17,4 +17,5 @@ urlpatterns = [
     path("contacts/", get_contact, name="contacts"),
     path("content/", include("content.urls")),
     path("events/", include("news.urls")),
+    path("legal-documents/", get_legal_documents, name="legal-documents"),
 ]

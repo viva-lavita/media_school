@@ -46,3 +46,17 @@ class Review(models.Model):
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
         ordering = ["-created_at", "-updated_at"]
+
+
+class LegalDocuments(models.Model):
+    privacy_policy = models.FileField(upload_to="documents_privacy/", verbose_name="Политика конфиденциальности")
+    user_agreement = models.FileField(upload_to="documents_user/", verbose_name="Пользовательское соглашение")
+    created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name="Дата изменения", auto_now=True)
+
+    def __str__(self):
+        return f"Служебные документы от {self.created_at}"
+
+    class Meta:
+        verbose_name = "Служебные документы"
+        verbose_name_plural = "Служебные документы"
