@@ -7,14 +7,15 @@ import RadioButtons from "./components/RadioButtons";
 import NewsCard from "./components/NewsCard";
 import Pagination from "./components/Pagination";
 
-import { newsData, announcementsData, contestsData } from "./data";
-
 export default function NewsPage() {
   const [pageWidth, setPageWidth] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [newsPerPage, setNewsPerPage] = useState(9);
   const [currentTab, setCurrentTab] = useState("news");
   const [showCompleted, setShowCompleted] = useState(false);
+  const [newsData, setNewsData] = useState([]);
+  const [announcementsData, setAnnouncementsData] = useState([]);
+  const [contestsData, setContestsData] = useState([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,6 +31,26 @@ export default function NewsPage() {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    // Fetch news data from local API proxy
+    fetch("/api/news")
+      .then((response) => response.json())
+      .then((data) => setNewsData(data.results))
+      .catch((error) => console.error("Error fetching news:", error));
+
+    // Fetch announcements data from local API proxy
+    fetch("/api/announcements")
+      .then((response) => response.json())
+      .then((data) => setAnnouncementsData(data.results))
+      .catch((error) => console.error("Error fetching announcements:", error));
+
+    // Fetch contests data from local API proxy
+    fetch("/api/contests")
+      .then((response) => response.json())
+      .then((data) => setContestsData(data.results))
+      .catch((error) => console.error("Error fetching contests:", error));
   }, []);
 
   const handleTabChange = (tab) => {
