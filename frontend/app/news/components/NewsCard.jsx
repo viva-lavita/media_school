@@ -26,13 +26,20 @@ export default function NewsCard({ item, index, currentTab }) {
         </div>
         <figure className="flex flex-col gap-3">
           {item.image_path && item.image_path.trim() !== '' ? (
-            <Image
-              src={item.image_path}
-              alt="конкурс"
-              width={447}
-              height={300}
-              layout="responsive"
-            />
+            <div className="w-full h-[300px] overflow-hidden">
+              <img
+                src={item.image_path}
+                alt="конкурс"
+                className="w-full h-full object-cover object-center"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+              <div className="w-full h-full bg-gray-200 flex items-center justify-center hidden">
+                <span className="text-gray-500">Ошибка загрузки изображения</span>
+              </div>
+            </div>
           ) : (
             <div className="w-full h-[300px] bg-gray-200 flex items-center justify-center">
               <span className="text-gray-500">Изображение отсутствует</span>
@@ -48,18 +55,18 @@ export default function NewsCard({ item, index, currentTab }) {
           <p
             className={`${montserrat.className} font-normal text-lg leading-[140%]`}
           >
-            {item.title || 'Без названия'}
+            {item.title}
           </p>
           <p
             className={`${montserrat.className} line-clamp-3 font-normal leading-[130%]`}
           >
-            {item.description || 'Описание отсутствует'}
+            {item.description }
           </p>
         </div>
         <p
           className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
         >
-          {item.created_at || ''}
+          {item.created_at }
         </p>
       </Link>
     );
@@ -69,13 +76,20 @@ export default function NewsCard({ item, index, currentTab }) {
     <Link key={index} href={`/news/${encodeURIComponent(item.title || 'news')}`} className="flex flex-col gap-2 relative">
       <figure className="flex flex-col gap-3">
         {item.image_path && item.image_path.trim() !== '' ? (
-          <Image
-            src={item.image_path}
-            alt="новость"
-            width={447}
-            height={300}
-            layout="responsive"
-          />
+          <div className="w-full h-[300px] overflow-hidden">
+            <img
+              src={item.image_path}
+              alt="новость"
+              className="w-full h-full object-cover object-center"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center hidden">
+              <span className="text-gray-500">Ошибка загрузки изображения</span>
+            </div>
+          </div>
         ) : (
           <div className="w-full h-[300px] bg-gray-200 flex items-center justify-center">
             <span className="text-gray-500">Изображение отсутствует</span>
@@ -91,18 +105,18 @@ export default function NewsCard({ item, index, currentTab }) {
         <p
           className={`${montserrat.className} font-normal text-lg leading-[140%]`}
         >
-          {item.title || 'Без названия'}
+          {item.title}
         </p>
         <p
           className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}
         >
-          {item.description || 'Описание отсутствует'}
+          {item.description}
         </p>
       </div>
       <p
         className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
       >
-        {item.created_at || ''}
+        {item.created_at}
       </p>
     </Link>
   );
