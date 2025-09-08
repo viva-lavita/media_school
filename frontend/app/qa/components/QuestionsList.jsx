@@ -50,7 +50,7 @@ export default function QuestionsList({ questions }) {
               className={styles.nextPageBtn}
               onClick={handleNextPage}
             >
-              ➜ 
+              <img src="/qa-images/arrow-next.svg" alt="next-arrow" width={18} height={12} /> 
             </li>
           )}
         </ul>

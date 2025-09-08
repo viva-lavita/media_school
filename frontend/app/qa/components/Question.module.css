@@ -41,8 +41,14 @@
 }
 .authorInfo {
  display: flex;
- flex-direction: column;
+ flex-direction: row;
  align-items: flex-start;
+ white-space: nowrap; 
+}
+.answers {
+ display: flex;
+ align-items: center;
+ cursor: pointer;
 }
 
 .answers:focus {
@@ -76,6 +82,9 @@
  height: 18px;
  background-image: url('/qa-images/message.svg');
  background-size: cover;
+}
+.authorInfo > * + *::before {
+ content: ', ';
 }
 @media screen and (max-width: 360px) {
  .icons {
@@ -113,7 +122,7 @@
 
  span.answers,
  span.date {
-  display: inline-flex; 
+  display: inline-flex;
   align-items: center;
   min-height: 20px;
  }

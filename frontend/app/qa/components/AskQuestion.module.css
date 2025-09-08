@@ -3,7 +3,7 @@
  font-weight: 400;
  margin-top: 42px;
  margin-bottom: 20px;
- color: #040404;
+ color: var(--color-black);
 }
 
 .inputCategories {
@@ -16,7 +16,6 @@
  position: relative;
  appearance: none;
  outline: none;
- transition: all 0.2s ease-in-out;
 }
 
 .titleError {
@@ -73,14 +72,12 @@
 
 .textarea {
  resize: none;
- border-radius: 8px;
- box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
  padding: 10px;
  overflow-y: auto;
- font-family: inherit;
  line-height: 1.5;
  background-color: #fafafa;
- color: black;
+ border-color: #DEEDAB;
+ color: #040404;
  width: 100%;
 }
 
