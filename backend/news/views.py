@@ -17,6 +17,7 @@ from news.serializers import (
     ShortCompetitionSerializer,
     ShortNewsSerializer,
 )
+from news.signals_handlers import auto_delete_file_on_delete  # noqa: F401
 
 
 class NewsViewSet(RetrieveListViewSet):
@@ -35,8 +36,16 @@ class NewsViewSet(RetrieveListViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     permission_classes = (IsStuffOrReadOnly,)
-    filter_backends = (filters.OrderingFilter,)
+    filter_backends = (filters.OrderingFilter, filters.SearchFilter)
     ordering_fields = ("created_at",)
+    search_fields = (
+        "title",
+        "description",
+        "author__first_name",
+        "author__last_name",
+        "paragraphs__text",
+        "paragraphs__title",
+    )
 
     def get_queryset(self):
         return self.queryset.filter(is_published=True)

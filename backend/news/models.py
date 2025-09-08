@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Q
@@ -25,7 +27,7 @@ class BaseContent(models.Model):
     author_for_display = models.CharField(max_length=100, blank=True, null=True, verbose_name="Автор для отображения")
     title = models.CharField(max_length=255, verbose_name="Заголовок")
     description = models.TextField(verbose_name="Описание")
-    image_path = models.URLField(verbose_name="Ссылка на картинку-заголовок", blank=True, null=True)
+    image = models.FileField(upload_to="news/", blank=True, null=True, verbose_name="Картинка")
     is_published = models.BooleanField(verbose_name="Опубликовано", default=False)
     updated_at = models.DateTimeField(verbose_name="Дата изменения", auto_now=True)
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
@@ -43,6 +45,12 @@ class BaseContent(models.Model):
         if not self.author_for_display:
             self.author_for_display = f"{self.author.get_full_name()}"
         super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.image:
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
+        super().delete(*args, **kwargs)
 
 
 class News(BaseContent):
@@ -105,7 +113,7 @@ class Paragraph(models.Model):
     )
     title = models.CharField(max_length=510, null=True, blank=True, verbose_name="Заголовок")
     text = models.TextField(blank=True, null=True, verbose_name="Текст")
-    image = models.URLField(null=True, blank=True, verbose_name="Ссылка на картинку")
+    image = models.FileField(upload_to="paragraphs/", blank=True, null=True, verbose_name="Картинка")
     link_text = models.CharField(max_length=255, blank=True, null=True, verbose_name="Текст ссылки")
     link_url = models.URLField(max_length=200, blank=True, null=True, verbose_name="Ссылка")
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
