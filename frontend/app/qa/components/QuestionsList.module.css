@@ -1,0 +1,44 @@
+.pagination {
+ position: relative;
+ left: 50%;
+ list-style-type: none;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 40px;
+ max-width: 100%;
+ width: fit-content;
+ flex-grow: 1;
+}
+
+.paginationItem {
+ text-decoration: none;
+ color: #3c4226;
+ font-size: 16px;
+ cursor: pointer;
+ padding: 10px 15.5px;
+ user-select: none;
+ background-color: transparent;
+ white-space: nowrap;
+ flex-shrink: 0;
+}
+
+.nextPageBtn {
+ margin-left: 4px;
+ cursor: pointer;
+}
+
+.active {
+ border: 1.5px solid #3c4226;
+}
+
+.paginationItem:hover {
+ cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+ .pagination {
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+ }
+}
