@@ -1,6 +1,6 @@
 export async function GET() {
   try {
-    const response = await fetch('http://217.114.11.243/api/v1/events/contests/', {
+    const response = await fetch('http://217.114.11.243/api/v1/events/competitions/', {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

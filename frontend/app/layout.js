@@ -17,10 +17,14 @@ export default function RootLayout({ children }) {
    <body>
     <PageWidthProvider>
      <Suspense fallback={<div>Loading...</div>}>
-      <Header />
-      <Navigation />
-      {children}
-      <Footer />
+      <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
+       <Header />
+       <Navigation />
+       <main style={{flex: 1}}>
+        {children}
+       </main>
+       <Footer />
+      </div>
      </Suspense>
     </PageWidthProvider>
    </body>

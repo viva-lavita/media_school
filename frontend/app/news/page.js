@@ -49,7 +49,10 @@ export default function NewsPage() {
     // Fetch contests data from local API proxy
     fetch("/api/contests")
       .then((response) => response.json())
-      .then((data) => setContestsData(data.results))
+      .then((data) => {
+        console.log("Contests data from API:", data.results);
+        setContestsData(data.results);
+      })
       .catch((error) => console.error("Error fetching contests:", error));
   }, []);
 
@@ -60,9 +63,11 @@ export default function NewsPage() {
 
   // Filter contests based on showCompleted state
   const filteredContests = contestsData.filter((item) => {
-    const parts = item.date_end.split(".");
-    const formattedDateEnd = `${parts[2]}-${parts[1]}-${parts[0]}`;
-    const dateEnd = new Date(formattedDateEnd);
+    if (!item.end_date) {
+      console.log("Item with undefined end_date:", item);
+      return false;
+    }
+    const dateEnd = new Date(item.end_date);
     const currentDate = new Date();
     return showCompleted ? currentDate > dateEnd : currentDate <= dateEnd;
   });

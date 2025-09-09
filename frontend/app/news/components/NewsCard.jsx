@@ -5,10 +5,8 @@ import styles from "./NewsCard.module.css";
 
 export default function NewsCard({ item, index, currentTab }) {
   if (currentTab === "contests") {
-    // Преобразуем дату завершения в формат ГГГГ-ММ-ДД
-    const parts = item.date_end ? item.date_end.split(".") : [];
-    const formattedDateEnd = parts.length === 3 ? `${parts[2]}-${parts[1]}-${parts[0]}` : '';
-    const dateEnd = formattedDateEnd ? new Date(formattedDateEnd) : new Date();
+    // Проверяем дату завершения
+    const dateEnd = item.end_date ? new Date(item.end_date) : new Date();
     const currentDate = new Date();
     // Проверяем, завершен ли конкурс
     const isCompleted = currentDate > dateEnd;
@@ -22,7 +20,7 @@ export default function NewsCard({ item, index, currentTab }) {
             width={16}
             height={16}
           />
-          {isCompleted ? "завершен" : `c ${item.date_start || ''}`}
+          {isCompleted ? "завершен" : `c ${item.start_date  || ''}`}
         </div>
         <figure className="flex flex-col gap-3">
           {item.image && item.image.trim() !== '' ? (
