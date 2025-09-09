@@ -15,7 +15,7 @@ class PhotoContentSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "catalog_id",
-            "image_path",
+            "image",
         )
 
 
