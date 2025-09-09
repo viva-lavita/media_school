@@ -35,7 +35,7 @@ class NewsSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "author_for_display",
             "created_at",
             "paragraphs",
@@ -51,7 +51,7 @@ class ShortNewsSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "created_at",
         )
 
@@ -67,7 +67,7 @@ class AnnouncementSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "author_for_display",
             "created_at",
             "paragraphs",
@@ -83,7 +83,7 @@ class ShortAnnouncementSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "created_at",
         )
 
@@ -99,7 +99,7 @@ class CompetitionSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "author_for_display",
             "start_date",
             "end_date",
@@ -117,7 +117,7 @@ class ShortCompetitionSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "start_date",
             "end_date",
             "created_at",
