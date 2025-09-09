@@ -25,10 +25,10 @@ export default function NewsCard({ item, index, currentTab }) {
           {isCompleted ? "завершен" : `c ${item.date_start || ''}`}
         </div>
         <figure className="flex flex-col gap-3">
-          {item.image_path && item.image_path.trim() !== '' ? (
+          {item.image && item.image.trim() !== '' ? (
             <div className="w-full h-[300px] overflow-hidden">
               <img
-                src={item.image_path}
+                src={item.image}
                 alt="конкурс"
                 className="w-full h-full object-cover object-center"
                 onError={(e) => {
@@ -75,10 +75,10 @@ export default function NewsCard({ item, index, currentTab }) {
   return (
     <Link key={index} href={`/news/${encodeURIComponent(item.title || 'news')}`} className="flex flex-col gap-2 relative">
       <figure className="flex flex-col gap-3">
-        {item.image_path && item.image_path.trim() !== '' ? (
+        {item.image && item.image.trim() !== '' ? (
           <div className="w-full h-[300px] overflow-hidden">
             <img
-              src={item.image_path}
+              src={item.image}
               alt="новость"
               className="w-full h-full object-cover object-center"
               onError={(e) => {
