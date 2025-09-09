@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from 'next/image';
 import { montserrat } from "@/lib/fonts";
 import styles from "./NewsCard.module.css";
 
@@ -14,13 +13,12 @@ export default function NewsCard({ item, index, currentTab }) {
     return (
       <Link key={index} href={`/news/${encodeURIComponent(item.title || 'contest')}`} className="flex flex-col gap-2 relative">
         <div className={styles.newsLabel}>
-          <Image
+          <img
             src={isCompleted ? "/images/checkmark.svg" : "/images/Anons_news.svg"}
             alt={isCompleted ? "check" : "anons"}
-            width={16}
-            height={16}
+            style={{ width: '16px', height: '16px' }}
           />
-          {isCompleted ? "завершен" : `c ${item.start_date  || ''}`}
+          {isCompleted ? "завершен" : `c ${item.start_date || ''}`}
         </div>
         <figure className="flex flex-col gap-3">
           {item.image && item.image.trim() !== '' ? (
