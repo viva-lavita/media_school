@@ -8,7 +8,7 @@ class Catalog(models.Model):
     """Модель категорий материалов."""
 
     name = models.CharField(max_length=255, unique=True, db_index=True, verbose_name="Название")
-    image_path = models.URLField(verbose_name="Ссылка на картинку-заголовок категории")
+    image = models.FileField(upload_to="catalogs/", verbose_name="Картинка категории")
     title = models.CharField(max_length=510, verbose_name="Заголовок категории")
     description = models.TextField(blank=True, null=True, verbose_name="Описание категории")
 
@@ -24,7 +24,7 @@ class PhotoContent(models.Model):
     """Фотоконтент школы."""
 
     catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE, verbose_name="Категория")
-    image_path = models.URLField(verbose_name="Ссылка на картинку")
+    image = models.FileField(upload_to="photos/", verbose_name="Картинка")
     description = models.CharField(
         max_length=510, null=True, blank=True, verbose_name="Описание картинки (для внутреннего использования)"
     )
@@ -37,7 +37,7 @@ class PhotoContent(models.Model):
     def __str__(self):
         if self.description:
             return self.description[:20]
-        return self.image_path[:20]
+        return self.image[:20]
 
 
 class VideoContent(models.Model):
@@ -80,7 +80,7 @@ class Expert(models.Model):
     """Эксперты и наставники."""
 
     full_name = models.CharField(max_length=255, verbose_name="ФИО")
-    image = models.URLField(verbose_name="Ссылка на картинку")
+    image = models.FileField(upload_to="experts/", verbose_name="Картинка")
     position = models.CharField(max_length=255, verbose_name="Должность")
     catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Категория")
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)

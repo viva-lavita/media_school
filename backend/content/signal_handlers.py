@@ -3,13 +3,12 @@ import os
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
-from news.models import Announcement, Competition, News, Paragraph
+from content.models import Catalog, Expert, PhotoContent
 
 
-@receiver(post_delete, sender=News)
-@receiver(post_delete, sender=Announcement)
-@receiver(post_delete, sender=Competition)
-@receiver(post_delete, sender=Paragraph)
+@receiver(post_delete, sender=PhotoContent)
+@receiver(post_delete, sender=Catalog)
+@receiver(post_delete, sender=Expert)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     """Удаляет файл из файловой системы при удалении объекта."""
     if instance.image:

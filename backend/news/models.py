@@ -1,5 +1,3 @@
-import os
-
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Q
@@ -45,12 +43,6 @@ class BaseContent(models.Model):
         if not self.author_for_display:
             self.author_for_display = f"{self.author.get_full_name()}"
         super().save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        if self.image:
-            if os.path.isfile(self.image.path):
-                os.remove(self.image.path)
-        super().delete(*args, **kwargs)
 
 
 class News(BaseContent):

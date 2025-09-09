@@ -9,6 +9,7 @@ from content.serializers import (
     PhotoContentSerializer,
     VideoContentSerializer,
 )
+from content.signal_handlers import auto_delete_file_on_delete  # noqa: F401
 
 
 # TODO: Расширить после новостей, анонсов и конкурсов.
