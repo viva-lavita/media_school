@@ -16,7 +16,7 @@ export default function NewsContent({ item }) {
             <span
               className={`${montserrat.className} font-normal text-sm leading-[130%]`}
             >
-              {item.author || "админ"}
+              {item.author_for_display || "админ"}
             </span>
           </div>
           <h1
@@ -27,19 +27,19 @@ export default function NewsContent({ item }) {
           <span
             className={`${montserrat.className} ${styles.newsDate} font-normal text-sm leading-[130%] text-grey-2`}
           >
-            {item.date}
+            {item.created_at}
           </span>
           <p
             className={`${montserrat.className} ${styles.newsPreview} font-normal text-base leading-[140%] lg:mt-3`}
           >
-            {item.preview}
+            {item.description}
           </p>
         </div>
         <img src={item.image} alt="Фото новости" className={styles.newsImage} />
       </div>
 
       {/* Текст новости с подзаголовками */}
-      <div className={`${styles.newsContent}`}>
+      {/* <div className={`${styles.newsContent}`}>
         <div className={`${styles.newsParagraph}`}>
           <h3
             className={`${comfortaa.className} font-bold text-[22px] lg:text-[28px] leading-[130%]`}
@@ -145,8 +145,8 @@ export default function NewsContent({ item }) {
         </div>
         {item.image4 && item.image4 !== "" && (
           <img src={item.image4} alt="Фото 4" className={styles.subImage} />
-        )}
-      </div>
+        )} */}
+      {/* </div> */}
 
       <a
         className={`${montserrat.className} font-bold text-lg leading-[140%] underline`}
