@@ -4,6 +4,7 @@ import styles from './layoutCatalog.module.css';
 import { useState } from 'react';
 import DescriptionSection from '../about/components/DescriptionSection';
 import TeachersList from '../about/components/TeachersList';
+import DocumentsSection from './components/DocumentsSection';
 
 export default function layoutPage() {
  const TABS_CATALOG = [
@@ -42,6 +43,38 @@ export default function layoutPage() {
    photo: '/about-images/Ivanova.png',
   },
  ];
+ const files = [
+  {
+   id: 1,
+   name: 'resume.pdf',
+   createdAt: new Date('2023-08-15'),
+   format: 'PDF',
+  },
+  {
+   id: 2,
+   name: 'cover_letter.docx',
+   createdAt: new Date('2023-08-16'),
+   format: 'DOCX',
+  },
+  {
+   id: 3,
+   name: 'portfolio.zip',
+   createdAt: new Date('2023-08-17'),
+   format: 'ZIP',
+  },
+  {
+   id: 4,
+   name: 'references.txt',
+   createdAt: new Date('2023-08-18'),
+   format: 'TXT',
+  },
+  {
+   id: 5,
+   name: 'additional_info.xlsx',
+   createdAt: new Date('2023-08-19'),
+   format: 'XLSX',
+  },
+ ];
  const titleListCatalog = 'Наставники';
  const initialActiveTab = 'Интервьюирование';
  const [activeTab, setActiveTab] = useState(initialActiveTab);
@@ -75,7 +108,7 @@ export default function layoutPage() {
       {<TeachersList titleList={titleListCatalog} teachers={TEACHERS_DATA} />}
      </div>
     </section>
-    
+    <DocumentsSection documents={files} />
    </main>
   </div>
  );
