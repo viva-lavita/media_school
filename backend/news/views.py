@@ -31,6 +31,11 @@ class NewsViewSet(RetrieveListViewSet):
     В detail - полная версия сразу с параграфами новости,
     отсортированными по порядку отображения.
     В параграфах новости пустые поля не отображаются.
+
+    Доступен поиск по полям title, description, author_for_display,
+    paragraphs__text, paragraphs__title.
+    Использование: ?search=поисковой текст.
+    Частичное совпадение, регистрозависимый.
     """
 
     queryset = News.objects.all()
@@ -41,8 +46,7 @@ class NewsViewSet(RetrieveListViewSet):
     search_fields = (
         "title",
         "description",
-        "author__first_name",
-        "author__last_name",
+        "author_for_display",
         "paragraphs__text",
         "paragraphs__title",
     )
@@ -67,13 +71,25 @@ class AnnouncementViewSet(RetrieveListViewSet):
     В detail - полная версия сразу с параграфами анонса,
     отсортированными по порядку отображения.
     В параграфах анонса пустые поля не отображаются.
+
+    Доступен поиск по полям title, description, author_for_display,
+    paragraphs__text, paragraphs__title.
+    Использование: ?search=поисковой текст.
+    Частичное совпадение, регистрозависимый.
     """
 
     queryset = Announcement.objects.all()
     serializer_class = AnnouncementSerializer
     permission_classes = (IsStuffOrReadOnly,)
-    filter_backends = (filters.OrderingFilter,)
+    filter_backends = (filters.OrderingFilter, filters.SearchFilter)
     ordering_fields = ("created_at",)
+    search_fields = (
+        "title",
+        "description",
+        "author_for_display",
+        "paragraphs__text",
+        "paragraphs__title",
+    )
 
     def get_queryset(self):
         return self.queryset.filter(is_published=True)
@@ -97,6 +113,11 @@ class CompetitionViewSet(RetrieveListViewSet):
     В параграфах конкурса пустые поля не отображаются.
 
     Выдачу можно фильтровать по датам начала и окончания конкурса, а также по флагу is_active.
+
+    Доступен поиск по полям title, description, author_for_display,
+    paragraphs__text, paragraphs__title.
+    Использование: ?search=поисковой текст.
+    Частичное совпадение, регистрозависимый.
     """
 
     queryset = Competition.objects.all()
@@ -104,9 +125,17 @@ class CompetitionViewSet(RetrieveListViewSet):
     filter_backends = (
         DjangoFilterBackend,
         filters.OrderingFilter,
+        filters.SearchFilter,
     )
     filterset_class = CompetitionFilter
     ordering_fields = ("start_date", "end_date", "created_at")
+    search_fields = (
+        "title",
+        "description",
+        "author_for_display",
+        "paragraphs__text",
+        "paragraphs__title",
+    )
 
     def get_queryset(self):
         return self.queryset.filter(is_published=True)
