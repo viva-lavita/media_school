@@ -8,34 +8,11 @@ export default function NewsContent({ item }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchDetailedNews() {
-      if (!item?.id) {
-        setDetailedItem(item);
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const response = await fetch(`http://217.114.11.243/api/v1/events/news/${item.id}/`, {
-          cache: 'no-store',
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch detailed news');
-        }
-
-        const data = await response.json();
-        setDetailedItem(data);
-      } catch (error) {
-        console.error('Error fetching detailed news:', error);
-        setDetailedItem(item); // fallback to original item
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchDetailedNews();
-  }, [item?.id]);
+    // Since the detail page already fetches the data, we just use the item prop
+    console.log('NewsContent received item:', item);
+    setDetailedItem(item);
+    setLoading(false);
+  }, [item]);
 
   if (loading) {
     return <div>Загрузка...</div>;
@@ -56,7 +33,7 @@ export default function NewsContent({ item }) {
             <span
               className={`${montserrat.className} font-normal text-sm leading-[130%]`}
             >
-              {displayItem.author_for_display || "админ"}
+              {displayItem.author_for_display}
             </span>
           </div>
           <h1
