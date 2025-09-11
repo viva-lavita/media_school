@@ -8,7 +8,6 @@ export default function NewsContent({ item }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Since the detail page already fetches the data, we just use the item prop
     console.log('NewsContent received item:', item);
     setDetailedItem(item);
     setLoading(false);
