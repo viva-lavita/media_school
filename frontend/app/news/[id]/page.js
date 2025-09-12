@@ -1,65 +1,57 @@
 "use client";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "../Onenews.module.css";
 import NewsContent from "./components/NewsContent";
 import CommentForm from "./components/CommentForm";
 import CommentsList from "./components/CommentsList";
+import { usePageTitle } from "../../context/PageTitleContext";
 
 export default function NewsDetail() {
-  const { title } = useParams();
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
-  const type = searchParams.get('type');
+  const { id } = useParams();
+  const { setPageTitle } = usePageTitle();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!id || !type) {
+    if (!id) {
       setError("Неверные параметры URL");
       setLoading(false);
       return;
     }
 
-    // Определяем локальный API endpoint на основе типа
-    let apiEndpoint = '';
-    if (type === 'news') {
-      apiEndpoint = '/api/news';
-    } else if (type === 'announcements') {
-      apiEndpoint = '/api/announcements';
-    } else if (type === 'contests') {
-      apiEndpoint = '/api/contests';
-    } else {
-      setError("Неизвестный тип контента");
-      setLoading(false);
-      return;
-    }
+    // Since id is unique across types, fetch from all APIs
+    const fetchItem = async () => {
+      const apis = [
+        { endpoint: '/api/news', type: 'news' },
+        { endpoint: '/api/announcements', type: 'announcements' },
+        { endpoint: '/api/contests', type: 'contests' }
+      ];
 
-    // Загружаем список данных и находим элемент по id
-    fetch(apiEndpoint)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+      for (const api of apis) {
+        try {
+          const response = await fetch(api.endpoint);
+          if (!response.ok) continue;
+          const data = await response.json();
+          const results = data.results || [];
+          const foundItem = results.find((item) => item.id == id);
+          if (foundItem) {
+            setItem(foundItem);
+            setPageTitle(foundItem.title);
+            setLoading(false);
+            return;
+          }
+        } catch (error) {
+          console.error(`Error fetching from ${api.endpoint}:`, error);
         }
-        return response.json();
-      })
-      .then((data) => {
-        const results = data.results || [];
-        const foundItem = results.find((item) => item.id == id);
-        if (foundItem) {
-          setItem(foundItem);
-        } else {
-          setError("Новость не найдена");
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching item:', error);
-        setError("Ошибка загрузки данных");
-        setLoading(false);
-      });
-  }, [id, type]);
+      }
+      setError("Новость не найдена");
+      setLoading(false);
+    };
+
+    fetchItem();
+  }, [id, setPageTitle]);
 
   if (loading) {
     return <p>Загрузка...</p>;

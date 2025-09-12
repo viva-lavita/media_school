@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google';
 import styles from "./Navigation.module.css";
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { usePageTitle } from '../../context/PageTitleContext';
 
 const path = {
  '/': 'Главная',
@@ -20,6 +21,7 @@ const montserrat = Montserrat({
 })
 export default function Navigation() {
  const pathname = usePathname();
+ const { pageTitle } = usePageTitle();
   if (pathname === "/") return null;
  let crumbs = pathname.split('/').filter(Boolean);
  return (
@@ -33,9 +35,13 @@ export default function Navigation() {
      const currentPath = '/' + crumb;
 
      if (index === crumbs.length - 1) {
+      let lastCrumb = path[currentPath] || ' / ' + decodeURIComponent(crumb);
+      if (pathname.startsWith('/news/') && pageTitle) {
+       lastCrumb = ' / ' + pageTitle;
+      }
       return (
        <li key={currentPath} className={`${styles.breadcrumbItem} ${styles.active}`}>
-        {path[currentPath] || ' / ' + decodeURIComponent(crumb)}
+        {lastCrumb}
        </li>
       );
      }

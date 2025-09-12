@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import './globals.css';
 import Navigation from './components/Navigation/Navigation';
 import { PageWidthProvider } from './context/PageWidthProvider';
+import { PageTitleProvider } from './context/PageTitleContext';
 import { montserrat, comfortaa, inter } from '../lib/fonts';
 
 export const metadata = {
@@ -15,18 +16,20 @@ export default function RootLayout({ children }) {
  return (
   <html lang="ru" className={`${montserrat.variable} ${comfortaa.variable} ${inter.variable}`}>
    <body>
-    <PageWidthProvider>
-     <Suspense fallback={<div>Loading...</div>}>
-      <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
-       <Header />
-       <Navigation />
-       <main style={{flex: 1}}>
-        {children}
-       </main>
-       <Footer />
-      </div>
-     </Suspense>
-    </PageWidthProvider>
+    <PageTitleProvider>
+     <PageWidthProvider>
+      <Suspense fallback={<div>Loading...</div>}>
+       <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
+        <Header />
+        <Navigation />
+        <main style={{flex: 1}}>
+         {children}
+        </main>
+        <Footer />
+       </div>
+      </Suspense>
+     </PageWidthProvider>
+    </PageTitleProvider>
    </body>
   </html>
  );
