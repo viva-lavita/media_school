@@ -21,12 +21,11 @@ export default function NewsDetail() {
       return;
     }
 
-    // Since id is unique across types, fetch from all APIs
     const fetchItem = async () => {
       const apis = [
-        { endpoint: '/api/news', type: 'news' },
-        { endpoint: '/api/announcements', type: 'announcements' },
-        { endpoint: '/api/contests', type: 'contests' }
+        { endpoint: '/api/news/' + id, type: 'news' },
+        { endpoint: '/api/announcements/' + id, type: 'announcements' },
+        { endpoint: '/api/contests/' + id, type: 'contests' }
       ];
 
       for (const api of apis) {
@@ -34,11 +33,9 @@ export default function NewsDetail() {
           const response = await fetch(api.endpoint);
           if (!response.ok) continue;
           const data = await response.json();
-          const results = data.results || [];
-          const foundItem = results.find((item) => item.id == id);
-          if (foundItem) {
-            setItem(foundItem);
-            setPageTitle(foundItem.title);
+          if (data) {
+            setItem(data);
+            setPageTitle(data.title);
             setLoading(false);
             return;
           }
