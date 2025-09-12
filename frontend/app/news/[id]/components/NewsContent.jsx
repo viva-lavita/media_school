@@ -78,7 +78,7 @@ export default function NewsContent({ item }) {
               )}
               {paragraph.link_text && paragraph.link_url && (
                 <a
-                  className={`${montserrat.className} font-normal text-base leading-[140%] underline text-blue-600`}
+                  className={`${montserrat.className} mt-5 font-bold text-lg leading-[140%] underline`}
                   href={paragraph.link_url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -91,7 +91,7 @@ export default function NewsContent({ item }) {
         </div>
       )}
 
-      {displayItem.link && displayItem.link_text && (
+      {/* {displayItem.link && displayItem.link_text && (
         <a
           className={`${montserrat.className} font-bold text-lg leading-[140%] underline`}
           href={displayItem.link}
@@ -100,7 +100,7 @@ export default function NewsContent({ item }) {
         >
           {displayItem.link_text}
         </a>
-      )}
+      )} */}
       <Link href='/news' className={`${montserrat.className} font-normal text-dark-green text-sm leading-[100%] mt-[-12px]`}>
         НОВОСТИ
       </Link>
