@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { montserrat } from "@/lib/fonts";
 import styles from "./NewsCard.module.css";
+import { formatDate } from "@/lib/formatDate";
 
 export default function NewsCard({ item, index, currentTab }) {
   if (currentTab === "contests") {
@@ -18,7 +19,7 @@ export default function NewsCard({ item, index, currentTab }) {
             alt={isCompleted ? "check" : "anons"}
             style={{ width: '16px', height: '16px' }}
           />
-          {isCompleted ? "завершен" : `c ${item.start_date || ''}`}
+          {isCompleted ? "завершен" : `c ${item.start_date ? formatDate(item.start_date) : ''}`}
         </div>
         <figure className="flex flex-col gap-3">
           {item.image && item.image.trim() !== '' ? (
@@ -62,7 +63,7 @@ export default function NewsCard({ item, index, currentTab }) {
         <p
           className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
         >
-          {item.created_at }
+        {formatDate(item.created_at)}
         </p>
       </Link>
     );
@@ -112,7 +113,7 @@ export default function NewsCard({ item, index, currentTab }) {
       <p
         className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
       >
-        {item.created_at}
+        {formatDate(item.created_at)}
       </p>
     </Link>
   );

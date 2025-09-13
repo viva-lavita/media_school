@@ -2,6 +2,7 @@ import { comfortaa, montserrat } from "@/lib/fonts";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import styles from "../../Onenews.module.css";
+import { formatDate } from "@/lib/formatDate";
 
 export default function NewsContent({ item }) {
   const [detailedItem, setDetailedItem] = useState(null);
@@ -43,7 +44,7 @@ export default function NewsContent({ item }) {
           <span
             className={`${montserrat.className} ${styles.newsDate} font-normal text-sm leading-[130%] text-grey-2`}
           >
-            {displayItem.created_at}
+            {formatDate(displayItem.created_at)}
           </span>
           <p
             className={`${montserrat.className} ${styles.newsPreview} font-normal text-base leading-[140%] lg:mt-3`}
@@ -54,7 +55,7 @@ export default function NewsContent({ item }) {
         <img src={displayItem.image} alt="Фото новости" className={styles.newsImage} />
       </div>
 
-      {/* Текст новости с параграфами из API */}
+
       {displayItem.paragraphs && displayItem.paragraphs.length > 0 && (
         <div className={`${styles.newsContent}`}>
           {displayItem.paragraphs.map((paragraph, index) => (
@@ -91,16 +92,6 @@ export default function NewsContent({ item }) {
         </div>
       )}
 
-      {/* {displayItem.link && displayItem.link_text && (
-        <a
-          className={`${montserrat.className} font-bold text-lg leading-[140%] underline`}
-          href={displayItem.link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {displayItem.link_text}
-        </a>
-      )} */}
       <Link href='/news' className={`${montserrat.className} font-normal text-dark-green text-sm leading-[100%] mt-[-12px]`}>
         НОВОСТИ
       </Link>
