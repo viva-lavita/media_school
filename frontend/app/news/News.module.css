@@ -1,0 +1,94 @@
+.newsContainer {
+    max-width: 1400px;
+    width: calc(100vw - 80px);
+    margin: 0 auto 80px;
+    display: flex; 
+    flex-direction: column;
+    gap: 60px;
+}
+
+.newsAll {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.newsCard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.currentNumber {
+  padding-bottom: 9px;
+  padding-top: 9px;
+  line-height: 19px;
+  border: none; 
+  font-family: "Inter", sans-serif; 
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: 0%;
+  text-align: center;
+  width: 39px;
+}
+
+@media screen and (max-width: 1024px) {
+    .newsContainer {
+        max-width: 944px;
+        width: calc(100vw - 80px);
+        gap: 20px;
+    }
+    .newsCard {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .newsContainer {
+        max-width: 728px;
+        width: calc(100vw - 40px);
+        gap: 40px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .newsContainer {
+        max-width: 320px;
+        width: calc(100vw - 40px);
+        gap: 40px;
+        margin: 0 auto 60px;
+    }
+    .newsCard {
+        grid-template-columns: 1fr;
+    }
+}
+
+.aboutLearning {
+  font-family: var(--font-comfortaa);
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 52px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .aboutLearning {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutLearning {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 360px) {
+  .aboutLearning {
+    font-size: 28px;
+  }
+}
