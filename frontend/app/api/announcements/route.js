@@ -1,19 +1,34 @@
 export async function GET() {
   try {
-    const response = await fetch('http://217.114.11.243/api/v1/events/announcements/', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Accept-Charset': 'utf-8',
-      },
-    });
+    let allResults = [];
+    let nextUrl = 'http://217.114.11.243/api/v1/events/announcements/';
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    while (nextUrl) {
+      const response = await fetch(nextUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Accept-Charset': 'utf-8',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      allResults = allResults.concat(data.results);
+      nextUrl = data.next;
     }
 
-    const data = await response.json();
-    return new Response(JSON.stringify(data), {
+    const aggregatedData = {
+      count: allResults.length,
+      next: null,
+      previous: null,
+      results: allResults
+    };
+
+    return new Response(JSON.stringify(aggregatedData), {
       status: 200,
       headers: {
         'Content-Type': 'application/json; charset=utf-8',

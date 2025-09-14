@@ -58,7 +58,11 @@ export default function NewsPage() {
     setCurrentPage(1);
   };
 
-  // Filter contests based on showCompleted state
+  const handleShowCompletedChange = (value) => {
+    setShowCompleted(value);
+    setCurrentPage(1);
+  };
+
   const filteredContests = contestsData.filter((item) => {
     if (!item.end_date) {
       return false;
@@ -90,7 +94,7 @@ export default function NewsPage() {
             </h1>
             <TabButtons currentTab={currentTab} handleTabChange={handleTabChange} />
             {currentTab === "contests" && (
-              <RadioButtons showCompleted={showCompleted} setShowCompleted={setShowCompleted} />
+              <RadioButtons showCompleted={showCompleted} setShowCompleted={handleShowCompletedChange} />
             )}
             <div className={styles.newsCard}>
               {currentItems.map((item, index) => (
