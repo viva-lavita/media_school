@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { montserrat } from "@/lib/fonts";
 import styles from "./NewsCard.module.css";
-import { formatDate } from "@/lib/formatDate";
+import { formatDate } from "@/app/utils/formatDate";
 
 export default function NewsCard({ item, index, currentTab }) {
   if (currentTab === "contests") {

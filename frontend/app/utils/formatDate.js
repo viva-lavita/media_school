@@ -1,5 +1,5 @@
 export function formatDate(dateString) {
   const date = new Date(dateString);
   const options = { day: 'numeric', month: 'long', year: 'numeric' };
-  return date.toLocaleDateString('ru-RU', options);
+  return date.toLocaleDateString('ru-RU', options).slice(0, -2);
 }

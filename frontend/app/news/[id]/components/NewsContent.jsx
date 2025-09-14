@@ -2,7 +2,7 @@ import { comfortaa, montserrat } from "@/lib/fonts";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import styles from "../../Onenews.module.css";
-import { formatDate } from "@/lib/formatDate";
+import { formatDate } from "@/app/utils/formatDate";
 
 export default function NewsContent({ item }) {
   const [detailedItem, setDetailedItem] = useState(null);
