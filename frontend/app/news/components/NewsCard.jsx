@@ -10,16 +10,19 @@ export default function NewsCard({ item, index, currentTab }) {
     const currentDate = new Date();
     // Проверяем, завершен ли конкурс
     const isCompleted = currentDate > dateEnd;
+    // Проверяем дату начала
+    const dateStart = item.start_date ? new Date(item.start_date) : new Date();
+    const isStarted = currentDate > dateStart;
 
     return (
       <Link key={index} href={`/news/${item.id}`} className="flex flex-col gap-2 relative">
         <div className={styles.newsLabel}>
           <img
-            src={isCompleted ? "/images/checkmark.svg" : "/images/Anons_news.svg"}
-            alt={isCompleted ? "check" : "anons"}
+            src={isCompleted ? "/images/checkmark.svg" : isStarted ? "/images/Star_news.svg" : "/images/Anons_news.svg"}
+            alt={isCompleted ? "check" : isStarted ? "competition" : "anons"}
             style={{ width: '16px', height: '16px' }}
           />
-          {isCompleted ? "завершен" : `c ${item.start_date ? formatDate(item.start_date) : ''}`}
+          {isCompleted ? "завершен" : isStarted ? `до ${item.end_date ? formatDate(item.end_date) : ''}` : `c ${item.start_date ? formatDate(item.start_date) : ''}`}
         </div>
         <figure className="flex flex-col gap-3">
           {item.image && item.image.trim() !== '' ? (
