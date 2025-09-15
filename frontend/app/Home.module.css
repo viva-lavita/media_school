@@ -22,7 +22,8 @@
   gap: 120px;
   margin: 0 auto;
   line-height: 100%;
-  width: 1400px;
+  max-width:  1400px;;
+  width: calc(100vw-80px);
 }
 
 .mainImage {
@@ -68,7 +69,7 @@
 .skillsTrainingAbout,
 .announcementsContainer {
   display: flex;
-  gap: 30px
+  gap: 30px;
 }
 
 .aboutLearningTitleContainer {

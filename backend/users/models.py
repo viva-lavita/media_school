@@ -19,6 +19,8 @@ class CustomUserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    """Пользователь-родитель."""
+
     first_name = models.CharField(
         verbose_name="Имя",
         max_length=50,
@@ -73,17 +75,20 @@ class User(AbstractUser):
 
     @property
     def username(self):
+        """Поле username упразднено из модели, но необходимо для работы."""
         return self.get_username()
 
     class Meta:
-        verbose_name = "Родитель"
-        verbose_name_plural = "Родители"
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
 
 class Child(models.Model):
+    """Данные ребенка."""
+
     parent = models.OneToOneField(
         User,
         related_name="child",
