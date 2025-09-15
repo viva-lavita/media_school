@@ -9,9 +9,9 @@ export default function Experts() {
     const { pageWidth } = useContext(PageWidthContext);
  return (
   <div className={`${styles.mediaSchoolExperience} flex flex-col`}>
-   <h1 className={`${comfortaa.className} ${styles.aboutLearning}`}>
+   <h2 className={`${comfortaa.className} ${styles.aboutLearning}`}>
     Журналисты и&nbsp;эксперты, которые делятся опытом
-   </h1>
+   </h2>
    <div className={`${styles.mediaSchoolExperienceTeachers}`}>
     <div className={`flex flex-col basis-0 grow-1 gap-4`}>
      <img

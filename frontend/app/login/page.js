@@ -27,10 +27,12 @@ export default function LoginPage() {
               <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-15.5 top-3 text-red-500`}>
               *
               </span>
-              <img className={`absolute top-4.5 right-4`}
-                   src="/images/cross.svg"
-                   alt="крестик"
-              />
+              <button aria-label="убрать">
+                <img className={`absolute top-4.5 right-4`}
+                     src="/images/cross.svg"
+                     alt=""
+                />
+              </button>
             </div>
             <div className="relative">
               <input
@@ -44,9 +46,11 @@ export default function LoginPage() {
               <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-18.5 top-2 text-red-500`}>
               *
             </span>
-              <img className={`absolute top-3.5 right-4`}
-                   src="/images/eye.svg"
-                   alt="крестик"/>
+              <button aria-label="скрыть или показать данные">
+                <img className={`absolute top-3.5 right-4`}
+                     src="/images/eye.svg"
+                     alt=""/>
+              </button>
             </div>
           </div>
           <div className={`flex gap-3`}>

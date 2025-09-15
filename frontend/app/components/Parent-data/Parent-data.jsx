@@ -1,5 +1,6 @@
 import {montserrat} from "@/lib/fonts";
-import styles from "@/app/Registration/Registration.module.css";
+import styles from "@/app/registration/Registration.module.css";
+import ButtonImage from "@/app/components/Button-Image/Button-Image";
 
 export default function ParentData({dataRequired, imgUrl, direction}) {
   return (
@@ -20,10 +21,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           *
         </span>
         )}
-        <img className={`absolute top-4.5 right-4`}
-             src={imgUrl ? imgUrl : "/images/cross.svg"}
-             alt="крестик"
-        />
+        <ButtonImage imgUrl={imgUrl} />
       </div>
       <div className={`${styles.registrationFormInputCouple} 
       ${direction === "column"
@@ -47,10 +45,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           *
         </span>
           )}
-          <img className={`absolute top-4.5 right-4`}
-               src={imgUrl ? imgUrl : "/images/cross.svg"}
-               alt="крестик"
-          />
+          <ButtonImage imgUrl={imgUrl} />
         </div>
         <div className={`flex basis-0 grow relative`}>
           <input
@@ -60,10 +55,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
             id="parent_middlename"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           />
-          <img className={`absolute top-4.5 right-4`}
-               src={imgUrl ? imgUrl : "/images/cross.svg"}
-               alt="крестик"
-          />
+          <ButtonImage imgUrl={imgUrl} />
         </div>
       </div>
       <div className={`${styles.registrationFormInputCouple} 
@@ -87,10 +79,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           *
         </span>
           )}
-          <img className={`absolute top-4.5 right-4`}
-               src={imgUrl ? imgUrl : "/images/cross.svg"}
-               alt="крестик"
-          />
+          <ButtonImage imgUrl={imgUrl} />
         </div>
         <div className={`flex basis-0 grow relative`}>
           <input
@@ -108,10 +97,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           *
         </span>
           )}
-          <img className={`absolute top-4.5 right-4`}
-               src={imgUrl ? imgUrl : "/images/cross.svg"}
-               alt="крестик"
-          />
+          <ButtonImage imgUrl={imgUrl} />
         </div>
       </div></div>
   )

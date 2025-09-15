@@ -9,6 +9,7 @@ import WhatAreWeStudyingSection from './components/WhatAreWeStudyingSection/What
 import Advantages from './components/Advantages/Advantages';
 import Experts from './components/Experts/Experts';
 import PageWidthContext from './context/PageWidthProvider';
+import Link from "next/link";
 
 export default function Home() {
  const { pageWidth } = useContext(PageWidthContext);
@@ -19,11 +20,11 @@ export default function Home() {
      className={`${styles.mainImageContent} text-white flex flex-col text-wrap gap-7 text-center absolute
          items-center`}
     >
-     <p
+     <h1
       className={`${comfortaa.className} ${styles.mainImageTextTop} font-bold`}
      >
       Онлайн-библиотека по журналистике и медиа для школьников
-     </p>
+     </h1>
      <p
       className={`${montserrat.className} ${styles.mainImageTextBottom} font-normal`}
      >
@@ -32,14 +33,14 @@ export default function Home() {
      </p>
     </div>
    </div>
-   <div className={styles.mainContent}>
+   <main className={styles.mainContent}>
     <WhatAreWeStudyingSection />
     <div className={`${styles.skillsTraining} flex flex-col gap-10`}>
-     <h1
+     <h2
       className={`${comfortaa.className} ${styles.aboutLearning} ${styles.aboutLearningTitleContainer}`}
      >
       Хотите научиться делать интервью, видео и&nbsp;блоги?
-     </h1>
+     </h2>
      <div className={`${styles.skillsTrainingAbout}`}>
       <div className={`flex flex-col gap-5 grow-1 basis-0`}>
        <p
@@ -91,18 +92,18 @@ export default function Home() {
        </p>
       </div>
      </div>
-     <p
+     <Link href="/about"
       className={`${montserrat.className} ${styles.materialCatalog} text-lg font-semibold text-dark-green`}
      >
       ПОДРОБНЕЕ О&nbsp;ПРОЕКТЕ
-     </p>
+     </Link>
     </div>
     <Advantages />
     <Experts />
     <div className={`${styles.announcements} flex flex-col gap-10`}>
-     <h1 className={`${comfortaa.className} ${styles.aboutLearning}`}>
+     <h2 className={`${comfortaa.className} ${styles.aboutLearning}`}>
       Новости, анонсы и конкурсы
-     </h1>
+     </h2>
      <div className={`${styles.announcementsContainer}`}>
       <div className={`flex flex-col basis-0 grow gap-2`}>
        <figure className={`flex flex-col gap-3`}>
@@ -212,25 +213,25 @@ export default function Home() {
     </div>
     <div className={`${styles.feedback} relative flex flex-col gap-7`}>
      <div className={`flex flex-col gap-10`}>
-      <h1 className={`${comfortaa.className} ${styles.aboutLearning}`}>
+      <h2 className={`${comfortaa.className} ${styles.aboutLearning}`}>
        Отзывы о&nbsp;проекте
-      </h1>
+      </h2>
       <div className={`${styles.feedbackContent}`}>
        <div
         className={`flex flex-col basis-0 grow gap-2 p-4 border-green border bg-light-green`}
        >
-        <figure className={`flex items-center gap-2`}>
+        <div className={`flex items-center gap-2`}>
          <img
           src="/images/avatar.png"
           alt="аватар"
           className={`h-[100px] w-[100px] rounded-full`}
          />
-         <figcaption
+         <p
           className={`${montserrat.className} font-medium text-base leading-[100%]`}
          >
           Анна, 15&nbsp;лет
-         </figcaption>
-        </figure>
+         </p>
+        </div>
         <div className={`flex flex-col gap-3`}>
          <p
           className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}
@@ -260,18 +261,18 @@ export default function Home() {
           : 'hidden'
         }`}
        >
-        <figure className={`flex items-center gap-2`}>
+        <div className={`flex items-center gap-2`}>
          <img
           src="/images/feedback-kirill.png"
           alt="отзывы Кирилл"
           className={`h-[100px] w-[100px] rounded-full`}
          />
-         <figcaption
+         <p
           className={`${montserrat.className} font-medium text-base leading-[100%]`}
          >
           Кирилл, 17&nbsp;лет
-         </figcaption>
-        </figure>
+         </p>
+        </div>
         <div className={`flex flex-col gap-3`}>
          <p
           className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}
@@ -300,18 +301,18 @@ export default function Home() {
           : 'hidden'
         }`}
        >
-        <figure className={`flex items-center gap-2`}>
+        <div className={`flex items-center gap-2`}>
          <img
           src="/images/feedback-liza.png"
           alt="аватар"
           className={`h-[100px] w-[100px] rounded-full`}
          />
-         <figcaption
+         <p
           className={`${montserrat.className} font-medium text-base leading-[100%]`}
          >
           Лиза, 14&nbsp;лет
-         </figcaption>
-        </figure>
+         </p>
+        </div>
         <div className={`flex flex-col gap-3`}>
          <p
           className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}
@@ -340,18 +341,18 @@ export default function Home() {
           : 'hidden'
         }`}
        >
-        <figure className={`flex items-center gap-2`}>
+        <div className={`flex items-center gap-2`}>
          <img
           src="/images/avatar.png"
           alt="аватар"
           className={`h-[100px] w-[100px] rounded-full`}
          />
-         <figcaption
+         <p
           className={`${montserrat.className} font-medium text-base leading-[100%]`}
          >
           Даниил, 16&nbsp;лет
-         </figcaption>
-        </figure>
+         </p>
+        </div>
         <div className={`flex flex-col gap-3`}>
          <p
           className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}
@@ -381,18 +382,23 @@ export default function Home() {
        pageWidth >= 1920 ? 'absolute top-[7px] right-0' : 'justify-center'
       } flex gap-3`}
      >
-      <img src="/images/ArrowLeft.svg" alt="ArrowLeft" />
-      <img src="/images/ArrowRight.svg" alt="ArrowRight" />
+      <button aria-label="Previous">
+       <img src="/images/ArrowLeft.svg" alt="" />
+      </button>
+
+      <button aria-label="Next">
+       <img src="/images/ArrowRight.svg" alt="" />
+      </button>
      </div>
     </div>
     <div className={`${styles.contactUs} border-green border py-10 mb-20`}>
-     <h1
+     <h2
       className={`${comfortaa.className} ${styles.contactUsTitle} font-bold`}
      >
       Остались вопросы? Свяжитесь с&nbsp;нами
-     </h1>
+     </h2>
      <div className={`${styles.contactUsContent} flex flex-col items-center`}>
-      <div className={`${styles.contactUsInfo} flex`}>
+      <address className={`${styles.contactUsInfo} flex`}>
        <div className={`${styles.contactUsInfoItem} flex items-center`}>
         <span
          className={`${montserrat.className} ${styles.contactInfo} text-grey-2 font-normal`}
@@ -411,11 +417,11 @@ export default function Home() {
         >
          Телефон:
         </span>
-        <span
+        <a href="tel:+73822716769"
          className={`${montserrat.className} ${styles.contactInfoValue} font-normal text-lg leading-[140%]`}
         >
          +7&nbsp;(3822)&nbsp;71-67-69
-        </span>
+        </a>
        </div>
        <div className={`${styles.contactUsInfoItem} flex items-center`}>
         <span
@@ -423,28 +429,32 @@ export default function Home() {
         >
          Почта:
         </span>
-        <span
+        <a href="mailto:perspectiva@education70.ru"
          className={`${montserrat.className} ${styles.contactInfoValue} font-normal text-lg leading-[140%]`}
         >
          perspectiva@education70.ru
-        </span>
+        </a>
        </div>
-      </div>
+      </address>
       <div className={`flex gap-3`}>
-       <img
-        src="/header-images/ok-button.png"
-        alt="Одноклассники"
-        className={`h-8 w-8`}
-       />
-       <img
-        src="/header-images/vk-button.png"
-        alt="Вконтакте"
-        className={`h-8 w-8`}
-       />
+        <button aria-label='Одноклассники'>
+          <img
+            src="/header-images/ok-button.png"
+            alt=""
+            className={`h-8 w-8`}
+          />
+        </button>
+        <button aria-label='Вконтакте'>
+          <img
+            src="/header-images/vk-button.png"
+            alt=""
+            className={`h-8 w-8`}
+          />
+        </button>
       </div>
      </div>
     </div>
-   </div>
+   </main>
   </div>
  );
 }
