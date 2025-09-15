@@ -9,7 +9,7 @@ export default function ChildData({dataRequired, imgUrl, direction}) {
         <input
           placeholder="Фамилия"
           type="text"
-          name="child_lastname"
+          name="child_last_name"
           id="child_lastname"
           className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           required
@@ -31,7 +31,7 @@ export default function ChildData({dataRequired, imgUrl, direction}) {
           <input
             placeholder="Имя"
             type="text"
-            name="child_firstname"
+            name="child_first_name"
             id="child_firstname"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
@@ -49,7 +49,7 @@ export default function ChildData({dataRequired, imgUrl, direction}) {
           <input
             placeholder="Отчество"
             type="text"
-            name="child_middlename"
+            name="child_patronymic_name"
             id="child_middlename"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           />
@@ -64,7 +64,7 @@ export default function ChildData({dataRequired, imgUrl, direction}) {
           <input
             placeholder="Дата рождения"
             type="text"
-            name="child_birthday"
+            name="child_date_of_birth"
             id="child_birthday"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
