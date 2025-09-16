@@ -6,11 +6,13 @@ import NewsContent from "./components/NewsContent";
 import CommentForm from "./components/CommentForm";
 import CommentsList from "./components/CommentsList";
 import { usePageTitle } from "../../context/PageTitleContext";
+import { formatDate } from "../../utils/formatDate";
 
 export default function NewsDetail() {
   const { id } = useParams();
   const { setPageTitle } = usePageTitle();
   const [item, setItem] = useState(null);
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -20,6 +22,29 @@ export default function NewsDetail() {
       setLoading(false);
       return;
     }
+
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(`/api/comments?news=${id}&ordering=-created_at`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Fetched comments data:', data);
+          const results = data.results || data;
+          const lastTwo = results.slice(0, 2);
+          const formatted = lastTwo.map(comment => ({
+            id: comment.id,
+            text: comment.text,
+            author: `Автор ${comment.author}`,
+            date: formatDate(comment.created_at),
+            time: new Date(comment.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            answers: comment.answers ? comment.answers.length : 0
+          }));
+          setComments(formatted);
+        }
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      }
+    };
 
     const fetchItem = async () => {
       const apis = [
@@ -36,6 +61,7 @@ export default function NewsDetail() {
           if (data) {
             setItem(data);
             setPageTitle(data.title);
+            await fetchComments();
             setLoading(false);
             return;
           }
@@ -62,22 +88,12 @@ export default function NewsDetail() {
     return <p>Новость не найдена.</p>;
   }
 
-  // Пример массива вопросов
-  const questions = [
-    { id: 1, text: "Какой уровень подготовки необходим для начала обучения? И сколько длится обучение на одном курсе?", author: "Иван Иванов", date: "01.10.2023", time: "12:00", answers: 5 },
-    { id: 2, text: "Можно ли учиться онлайн или только офлайн?", author: "Мария Петрова", date: "02.10.2023", time: "14:30", answers: 44 },
-    { id: 3, text: "Можно ли учиться онлайн или только офлайн?", author: "Алексей Сидоров", date: "03.10.2023", time: "09:15", answers: 44 },
-    { id: 4, text: "Какой уровень подготовки необходим для начала обучения? И сколько длится обучение на одном курсе?", author: "Ольга Кузнецова", date: "04.10.2023", time: "16:45", answers: 7 },
-  ];
-  // Получаем последние два вопроса
-  const lastTwoQuestions = questions.slice(-2);
-
   return (
     <>
       <div className={`${styles.newsContainer}`}>
         <NewsContent item={item} />
         <CommentForm />
-        <CommentsList questions={lastTwoQuestions} />
+        <CommentsList questions={comments} />
       </div>
     </>
   );
