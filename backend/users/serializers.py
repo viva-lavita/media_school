@@ -124,7 +124,7 @@ class ShortReadUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "email", "child")
+        fields = ("id", "first_name", "last_name", "post", "email", "child")
 
 
 class UserDeleteSerializer(serializers.Serializer):

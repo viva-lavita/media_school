@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from news.models import Announcement, Answer, Comment, Competition, News, Paragraph
+from users.serializers import ShortReadUserSerializer
 
 
 class ParagraphSerializer(serializers.ModelSerializer):
@@ -127,6 +128,8 @@ class ShortCompetitionSerializer(serializers.ModelSerializer):
 class AnswerSerializer(serializers.ModelSerializer):
     """Сериализатор ответов."""
 
+    author = ShortReadUserSerializer()
+
     class Meta:
         model = Answer
         fields = "__all__"
@@ -136,6 +139,7 @@ class CommentSerializer(serializers.ModelSerializer):
     """Сериализатор комментариев."""
 
     answers = AnswerSerializer(many=True)
+    author = ShortReadUserSerializer()
 
     class Meta:
         model = Comment
@@ -160,6 +164,8 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class ShortCommentSerializer(serializers.ModelSerializer):
     """Сериализатор комментариев, сокращенный вывод."""
+
+    author = ShortReadUserSerializer()
 
     class Meta:
         model = Comment
