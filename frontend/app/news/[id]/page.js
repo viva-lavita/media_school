@@ -1,5 +1,5 @@
 "use client";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "../Onenews.module.css";
 import NewsContent from "./components/NewsContent";
@@ -10,6 +10,7 @@ import { formatDate } from "../../utils/formatDate";
 
 export default function NewsDetail() {
   const { id } = useParams();
+  const searchParams = useSearchParams();
   const { setPageTitle } = usePageTitle();
   const [item, setItem] = useState(null);
   const [comments, setComments] = useState([]);
@@ -23,9 +24,12 @@ export default function NewsDetail() {
       return;
     }
 
+    const type = searchParams.get('type') || 'news';
+    const queryParam = type === 'news' ? 'news' : type === 'announcements' ? 'announcement' : 'competition';
+
     const fetchComments = async () => {
       try {
-        const response = await fetch(`/api/comments?news=${id}&ordering=-created_at`);
+        const response = await fetch(`/api/comments?${queryParam}=${id}&ordering=-created_at`);
         if (response.ok) {
           const data = await response.json();
           console.log('Fetched comments data:', data);
@@ -35,6 +39,7 @@ export default function NewsDetail() {
             id: comment.id,
             text: comment.text,
             author: `Автор ${comment.author}`,
+            // author: comment.author ? `${comment.author.first_name} ${comment.author.last_name}`.trim() || comment.author.username : 'Аноним',
             date: formatDate(comment.created_at),
             time: new Date(comment.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
             answers: comment.answers ? comment.answers.length : 0
@@ -47,34 +52,30 @@ export default function NewsDetail() {
     };
 
     const fetchItem = async () => {
-      const apis = [
-        { endpoint: '/api/news/' + id, type: 'news' },
-        { endpoint: '/api/announcements/' + id, type: 'announcements' },
-        { endpoint: '/api/contests/' + id, type: 'contests' }
-      ];
+      const endpoint = `/api/${type}/${id}`;
 
-      for (const api of apis) {
-        try {
-          const response = await fetch(api.endpoint);
-          if (!response.ok) continue;
-          const data = await response.json();
-          if (data) {
-            setItem(data);
-            setPageTitle(data.title);
-            await fetchComments();
-            setLoading(false);
-            return;
-          }
-        } catch (error) {
-          console.error(`Error fetching from ${api.endpoint}:`, error);
+      try {
+        const response = await fetch(endpoint);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch ${type} with id ${id}`);
         }
+        const data = await response.json();
+        if (data) {
+          setItem(data);
+          setPageTitle(data.title);
+          await fetchComments();
+          setLoading(false);
+          return;
+        }
+      } catch (error) {
+        console.error(`Error fetching from ${endpoint}:`, error);
+        setError(`${type.charAt(0).toUpperCase() + type.slice(1)} не найдена`);
+        setLoading(false);
       }
-      setError("Новость не найдена");
-      setLoading(false);
     };
 
     fetchItem();
-  }, [id, setPageTitle]);
+  }, [id, searchParams, setPageTitle]);
 
   if (loading) {
     return <p>Загрузка...</p>;

@@ -14,8 +14,8 @@ export default function NewsCard({ item, index, currentTab }) {
     const dateStart = item.start_date ? new Date(item.start_date) : new Date();
     const isStarted = currentDate > dateStart;
 
-    return (
-      <Link key={index} href={`/news/${item.id}`} className="flex flex-col gap-2 relative">
+  return (
+    <Link key={index} href={`/news/${item.id}?type=${currentTab}`} className="flex flex-col gap-2 relative">
         <div className={styles.newsLabel}>
           <img
             src={isCompleted ? "/images/checkmark.svg" : isStarted ? "/images/Star_news.svg" : "/images/Anons_news.svg"}
@@ -73,7 +73,7 @@ export default function NewsCard({ item, index, currentTab }) {
   }
 
   return (
-    <Link key={index} href={`/news/${item.id}`} className="flex flex-col gap-2 relative">
+    <Link key={index} href={`/news/${item.id}?type=${currentTab}`} className="flex flex-col gap-2 relative">
       <figure className="flex flex-col gap-3">
         {item.image && item.image.trim() !== '' ? (
           <div className="w-full h-[300px] overflow-hidden">

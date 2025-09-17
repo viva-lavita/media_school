@@ -52,7 +52,7 @@ export default function NewsContent({ item }) {
             {displayItem.description}
           </p>
         </div>
-        <img src={displayItem.image} alt="Фото новости" className={styles.newsImage} />
+        <img src={displayItem.image} alt="Фото события" className={styles.newsImage} />
       </div>
 
 
