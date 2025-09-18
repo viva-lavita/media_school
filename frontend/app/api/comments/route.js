@@ -2,12 +2,17 @@ export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const newsId = searchParams.get('news') || '';
+    const announcementId = searchParams.get('announcement') || '';
+    const competitionId = searchParams.get('competition') || '';
     const ordering = searchParams.get('ordering') || '';
 
-    let backendUrl = `http://217.114.11.243/api/v1/events/comments/?news=${newsId}`;
-    if (ordering) {
-      backendUrl += `&ordering=${ordering}`;
-    }
+    let backendUrl = `http://217.114.11.243/api/v1/events/comments/`;
+    const params = [];
+    if (newsId) params.push(`news=${newsId}`);
+    if (announcementId) params.push(`announcement=${announcementId}`);
+    if (competitionId) params.push(`competition=${competitionId}`);
+    if (ordering) params.push(`ordering=${ordering}`);
+    if (params.length > 0) backendUrl += '?' + params.join('&');
 
     const response = await fetch(backendUrl, {
       headers: {

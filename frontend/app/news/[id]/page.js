@@ -38,8 +38,7 @@ export default function NewsDetail() {
           const formatted = lastTwo.map(comment => ({
             id: comment.id,
             text: comment.text,
-            author: `Автор ${comment.author}`,
-            // author: comment.author ? `${comment.author.first_name} ${comment.author.last_name}`.trim() || comment.author.username : 'Аноним',
+            author: comment.author ? `${comment.author.first_name} ${comment.author.last_name}`.trim() || comment.author.username : 'Аноним',
             date: formatDate(comment.created_at),
             time: new Date(comment.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
             answers: comment.answers ? comment.answers.length : 0
