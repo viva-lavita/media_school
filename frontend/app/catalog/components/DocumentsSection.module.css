@@ -26,13 +26,22 @@
 
 .documentBox {
  display: flex;
- width: 100%;
  flex-direction: column;
  gap: 16px;
 }
+.nameContainer {
+ max-width: 1000px;
+ flex-grow: 0;
+}
+.propertyContainer {
+ display: flex;
+ justify-content: space-between;
+}
+
 .fileName,
 .fileDate,
-.fileFormat .downloadLink {
+.fileFormat,
+.downloadLink {
  font-size: 16px;
  font-weight: 400;
  line-height: 130%;
@@ -44,15 +53,14 @@
 }
 
 .fileRow {
- display: grid;
- grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
- justify-items: start;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
  align-items: center;
- gap: 1rem;
  border-bottom: 1px solid #f8f8f8;
  padding-bottom: 8px;
- width: 100%;
 }
+
 .downloadLink {
  text-decoration: none;
  cursor: pointer;
@@ -97,4 +105,9 @@
 
 .toggleButtonHover {
  background-color: #eee;
+}
+.mediaBox{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
 }

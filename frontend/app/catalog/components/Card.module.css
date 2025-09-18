@@ -1,0 +1,22 @@
+
+.media{
+    margin-bottom: 18px;
+}
+.masterClass{
+    font-size: 14px;
+    font-weight: 400;
+    color: #3C4226;
+    margin-bottom: 8px;
+}
+.titleCard{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 140%;
+    color: #040404;
+    margin-bottom: 24px;
+}
+.dateCard{
+  font-size: 14px;
+    font-weight: 400;
+    color: #535353;  
+}

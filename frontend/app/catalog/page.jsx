@@ -5,6 +5,7 @@ import { useState } from 'react';
 import DescriptionSection from '../about/components/DescriptionSection';
 import TeachersList from '../about/components/TeachersList';
 import DocumentsSection from './components/DocumentsSection';
+import ListCard from './components/ListCard';
 
 export default function layoutPage() {
  const TABS_CATALOG = [
@@ -75,8 +76,27 @@ export default function layoutPage() {
    format: 'XLSX',
   },
  ];
+
+ const documentSection = [
+  {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+  {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+  {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+ ];
  const titleListCatalog = 'Наставники';
  const initialActiveTab = 'Интервьюирование';
+ const titleCardSectionVideo = 'Видео-материалы';
  const [activeTab, setActiveTab] = useState(initialActiveTab);
  return (
   <div className={styles.wrap}>
@@ -109,6 +129,9 @@ export default function layoutPage() {
      </div>
     </section>
     <DocumentsSection documents={files} />
+    <section className={styles.mediaSection}>
+     <ListCard titleCardList={titleCardSectionVideo} documents={documentSection}/>
+    </section>
    </main>
   </div>
  );

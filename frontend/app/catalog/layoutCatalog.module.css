@@ -46,6 +46,14 @@
  flex-direction: row;
  gap: 30px;
 }
+
+.mediaSection{
+display: flex;
+flex-direction: column;
+gap: 28px;
+}
+
+
 @media screen and (max-width: 768px) {
  .title {
   font-size: clamp(28px, 3vw + 1rem, 32px);

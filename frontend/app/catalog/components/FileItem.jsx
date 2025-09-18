@@ -16,15 +16,15 @@ export default function FileItem({ file }) {
  const icon = iconsByExtension[extension] || iconsByExtension['default'];
 
  return (
-  <div className={styles.fileRow}>
-   <span className={`${montserrat.className} ${styles.fileName}`}>
-    {icon} {file.name}
-   </span>
-   <span className={`${montserrat.className} ${styles.fileDate}`}>{new Intl.DateTimeFormat('ru-RU').format(file.createdAt)}</span>
-   <span className={`${montserrat.className} ${styles.fileFormat}`}>Формат {file.format}</span>
-   <a href="#" download className={`${montserrat.className} ${styles.downloadLink}`}>
-    Скачать
-   </a>
+<div className={styles.fileRow}>
+  <div className={styles.nameContainer}>
+    <span className={`${montserrat.className} ${styles.fileName}`}>{icon} {file.name}</span>
   </div>
+  <div className={styles.propertyContainer}>
+    <span className={`${montserrat.className} ${styles.fileDate}`}>{new Intl.DateTimeFormat('ru-RU').format(file.createdAt)}</span>
+    <span className={`${montserrat.className} ${styles.fileFormat}`}>Формат {file.format}</span>
+    <a href="#" download className={`${montserrat.className} ${styles.downloadLink}`}>Скачать</a>
+  </div>
+</div>
  );
 }
