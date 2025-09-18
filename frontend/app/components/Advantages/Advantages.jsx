@@ -6,9 +6,9 @@ import { montserrat } from '@/lib/fonts';
 export default function Advantages() {
  return (
   <div className={`${styles.mediaSchoolSpecial}`}>
-   <h1 className={`${comfortaa.className} ${styles.aboutLearning}`}>
+   <h2 className={`${comfortaa.className} ${styles.aboutLearning}`}>
     Что&nbsp;делает Медиашколу особенной
-   </h1>
+   </h2>
    <div className={`${styles.mediaSchoolSpecialContent}`}>
     <div
      className={`${styles.mediaSchoolSpecialItem}`}

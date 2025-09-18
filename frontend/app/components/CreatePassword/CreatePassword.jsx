@@ -14,7 +14,7 @@ export default function CreatePassword() {
           <input
             placeholder="Пароль"
             type="text"
-            name="parent_password"
+            name="password"
             id="parent_password"
             className="w-full h-[41px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
@@ -29,7 +29,7 @@ export default function CreatePassword() {
         <input
           placeholder="Повторите пароль"
           type="text"
-          name="parent_passwordRepeat"
+          name="re_password"
           id="parent_passwordRepeat"
           className="w-full h-[41px] border border-green bg-white py-3 px-4 focus:outline-none"
           required

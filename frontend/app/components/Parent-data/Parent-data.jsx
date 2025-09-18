@@ -1,5 +1,6 @@
 import {montserrat} from "@/lib/fonts";
-import styles from "@/app/Registration/Registration.module.css";
+import styles from "@/app/registration/Registration.module.css";
+import ButtonImage from "@/app/components/Button-Image/Button-Image";
 
 export default function ParentData({dataRequired, imgUrl, direction}) {
   return (
@@ -8,7 +9,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
         <input
           placeholder="Фамилия"
           type="text"
-          name="parent_lastname"
+          name="last_name"
           id="parent_lastname"
           className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           required
@@ -20,10 +21,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           *
         </span>
         )}
-        <img className={`absolute top-4.5 right-4`}
-             src={imgUrl ? imgUrl : "/images/cross.svg"}
-             alt="крестик"
-        />
+        <ButtonImage imgUrl={imgUrl} />
       </div>
       <div className={`${styles.registrationFormInputCouple} 
       ${direction === "column"
@@ -34,7 +32,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           <input
             placeholder="Имя"
             type="text"
-            name="parent_firstname"
+            name="first_name"
             id="parent_firstname"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
@@ -47,23 +45,17 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           *
         </span>
           )}
-          <img className={`absolute top-4.5 right-4`}
-               src={imgUrl ? imgUrl : "/images/cross.svg"}
-               alt="крестик"
-          />
+          <ButtonImage imgUrl={imgUrl} />
         </div>
         <div className={`flex basis-0 grow relative`}>
           <input
             placeholder="Отчество"
             type="text"
-            name="parent_middlename"
+            name="patronymic_name"
             id="parent_middlename"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           />
-          <img className={`absolute top-4.5 right-4`}
-               src={imgUrl ? imgUrl : "/images/cross.svg"}
-               alt="крестик"
-          />
+          <ButtonImage imgUrl={imgUrl} />
         </div>
       </div>
       <div className={`${styles.registrationFormInputCouple} 
@@ -75,7 +67,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           <input
             placeholder="Дата рождения"
             type="text"
-            name="parent_birthday"
+            name="date_of_birth"
             id="parent_birthday"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
@@ -87,16 +79,13 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           *
         </span>
           )}
-          <img className={`absolute top-4.5 right-4`}
-               src={imgUrl ? imgUrl : "/images/cross.svg"}
-               alt="крестик"
-          />
+          <ButtonImage imgUrl={imgUrl} />
         </div>
         <div className={`flex basis-0 grow relative`}>
           <input
             placeholder="Email"
             type="text"
-            name="parent_email"
+            name="email"
             id="parent_email"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
@@ -108,10 +97,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           *
         </span>
           )}
-          <img className={`absolute top-4.5 right-4`}
-               src={imgUrl ? imgUrl : "/images/cross.svg"}
-               alt="крестик"
-          />
+          <ButtonImage imgUrl={imgUrl} />
         </div>
       </div></div>
   )

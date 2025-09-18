@@ -16,8 +16,8 @@ export default function Footer() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   return (
-      <div className={`${styles.bg} gap-10 flex flex-col w-screen`}>
-          <footer className={`${montserrat.className} ${styles.fontColor} ${styles.footer} ${pageWidth >= 768 && 
+      <footer className={`${styles.bg} gap-10 flex flex-col w-screen`}>
+          <div className={`${montserrat.className} ${styles.fontColor} ${styles.footer} ${pageWidth >= 768 && 
           pageWidth < 1024 ? 'flex-wrap' : '' } flex mx-auto h-full`}>
               <div className={`${pageWidth >= 1400 ? 'mr-[5%]':''} flex flex-col justify-between`}>
                   <div className={`font-semibold text-lg flex flex-col gap-2`}>
@@ -63,24 +63,39 @@ export default function Footer() {
                       </nav>
                   </div>
               </div>
-          </footer>
+          </div>
           <div className={`${styles.footerBottom} ${pageWidth < 768 ? 'flex-col':''} ${pageWidth <= 360 ? 'gap-2 w-80' : ''} mx-auto flex 
           ${montserrat.className}`}>
             <div className={`flex ${styles.footerAbout} ${pageWidth >= 768 && pageWidth < 1024 ? 'gap-2' : ''} gap-1`}>
               <p className={`${pageWidth >= 1024 && pageWidth < 1400 ? 'mr-[2.4%] w-[301px]':''} shrink-0 font-normal text-sm`}>
                 © 2025 МАОУ Школа {pageWidth <= 360 || (pageWidth >= 1024 && pageWidth < 1400) ? <br/> : ''} «Перспектива» г. Томск
               </p>
-              <p className={`w-[145px] flex items-end 
-              shrink-0 text-sm font-normal`}>Designed by Freepik</p>
+              <Link href='/pop-up-attribution' className={`w-[145px] flex items-end 
+              shrink-0 text-sm font-normal`}>Designed by Freepik</Link>
             </div>
             <p className={`${inter.className} ${pageWidth >= 768 && pageWidth < 1024 ? 'ml-[5.6%]' : ''}
              ${pageWidth >= 1400 ? 'ml-[15.5%]':''} text-xs font-medium flex items-center gap-2`}>
               Сделано в
-              <img src="/footer-images/logo.svg" alt="1t" className="w-[28.8px] h-6 inline-block" />
-              <img src="/footer-images/union.svg" alt="Союз рф" className="w-[70px] h-[10.5px] inline-block" />
-              | TEAMCODE
+              <a
+                href="https://1t.ru/"
+                target="_blank"
+                rel="noopener noreferrer">
+                <img src="/footer-images/logo.svg" alt="1t" className="w-[28.8px] h-6 inline-block" />
+              </a>
+              <a
+                href="https://союз.рф/"
+                target="_blank"
+                rel="noopener noreferrer">
+                <img src="/footer-images/union.svg" alt="Союз рф" className="w-[70px] h-[10.5px] inline-block" />
+              </a>
+              <a
+                href="https://союз.рф/my/teams/2921529416099541128?name=TEAMCODE&space=622"
+                target="_blank"
+                rel="noopener noreferrer">
+                | TEAMCODE
+              </a>
             </p>
           </div>
-      </div>
+      </footer>
   );
 }

@@ -6,9 +6,9 @@ import {montserrat} from "@/lib/fonts";
 export default function WhatAreWeStudyingSection() {
  return (
   <div className={`flex flex-col gap-10`}>
-   <h1 className={`${comfortaa.className} ${styles.aboutLearning} w-1/1`}>
+   <h2 className={`${comfortaa.className} ${styles.aboutLearning} w-1/1`}>
     Что мы изучаем в&nbsp;Медиашколе
-   </h1>
+   </h2>
    <div className={`${comfortaa.className} ${styles.aboutLearningContainer}`}>
     <div className={`relative`}>
      <img

@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import styles from './Registration.module.css'
 import {comfortaa} from "@/lib/fonts";
 import {montserrat} from "@/lib/fonts";
@@ -6,6 +9,49 @@ import ChildData from "@/app/components/Child-data/Child-data";
 import CreatePassword from "@/app/components/CreatePassword/CreatePassword";
 
 export default function RegistrationPage() {
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+
+    const formData = new FormData(e.target);
+    const data = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      re_password: formData.get("re_password"),
+      first_name: formData.get("first_name"),
+      last_name: formData.get("last_name"),
+      patronymic_name: formData.get("patronymic_name"),
+      date_of_birth: formData.get("date_of_birth"),
+      child: {
+        first_name: formData.get("child_first_name"),
+        last_name: formData.get("child_last_name"),
+        patronymic_name: formData.get("child_patronymic_name"),
+        date_of_birth: formData.get("child_date_of_birth"),
+        school: formData.get("child_school"),
+        classroom: formData.get("child_classroom"),
+      },
+    };
+
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) throw new Error(result.detail || "Ошибка регистрации");
+
+      setSuccess(true);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <div className={styles.registration}>
       <div className={`${styles.registrationImg} flex basis-0 grow`}></div>
@@ -18,7 +64,7 @@ export default function RegistrationPage() {
             представитель ученика Медиашколы.
           </h2>
         </div>
-        <form action="/register" method="post" className={`${styles.registrationForm} flex flex-col`}>
+        <form onSubmit={handleSubmit} className={`${styles.registrationForm} flex flex-col`}>
           <fieldset className={`flex flex-col`}>
             <legend className={`${montserrat.className} font-normal text-base leading-[130%] mb-4`}>
               Данные родителя/законного представителя ученика
@@ -63,9 +109,9 @@ export default function RegistrationPage() {
           </fieldset>
 
           <div className={`${styles.registrationAccept} flex gap-3`}>
-            <button className={`${montserrat.className}  font-medium text-base leading-[100%] flex basis-0 grow 
+            <button type="submit" className={`${montserrat.className}  font-medium text-base leading-[100%] flex basis-0 grow 
             bg-green border border-green py-3 px-6 justify-center `}>Зарегестрироваться</button>
-            <button className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow 
+            <button type="reset" className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow 
             bg-white border border-green py-3 px-6 justify-center `}>
               Отменить
             </button>
@@ -74,7 +120,6 @@ export default function RegistrationPage() {
             <p>Уже&nbsp;есть&nbsp;аккаунт? <span className={`underline text-dark-green`}>Войти в&nbsp;личный кабинет</span></p>
           </div>
         </form>
-
       </div>
 
     </div>

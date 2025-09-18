@@ -1,8 +1,30 @@
 from django.contrib import admin
+from django.contrib.admin.sites import AdminSite
 
-from api.models import Contact
+from api.models import Contact, Review
 
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("id", "short_address", "phone_number", "contact_email", "school_website")
+
+    @admin.display(description="Адрес")
+    def short_address(self, obj):
+        if obj.address:
+            if len(obj.address) > 50:
+                return obj.address
+            return obj.address[:50] + "..."
+        return AdminSite.empty_value_display
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ("id", "full_name", "age", "short_text", "created_at", "updated_at")
+    search_fields = ("full_name", "review")
+    date_hierarchy = "created_at"
+
+    @admin.display(description="Текст")
+    def short_text(self, obj):
+        if len(obj.review) > 50:
+            return obj.review
+        return obj.review[:50] + "..."

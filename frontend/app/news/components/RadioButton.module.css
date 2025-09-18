@@ -1,0 +1,54 @@
+
+
+.textStyle {
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: 0%;
+}
+
+.verticalLine {
+    width: 1.5px;
+    height: 25px; 
+    background-color: #BAC720;
+}
+
+.customRadio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.customRadio input[type="radio"] {
+  display: none; /* Скрываем стандартные радиокнопки */
+}
+
+.radioBtn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #BAC720; 
+  background-color: white; 
+  position: relative;
+  margin-right: 10px; 
+}
+
+.radioBtn::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #BAC720; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s; 
+}
+
+.customRadio input[type="radio"]:checked + .radioBtn::after {
+  opacity: 1; 
+}
