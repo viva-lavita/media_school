@@ -34,14 +34,13 @@ export default function NewsDetail() {
           const data = await response.json();
           console.log('Fetched comments data:', data);
           const results = data.results || data;
-          const lastTwo = results.slice(0, 2);
-          const formatted = lastTwo.map(comment => ({
+          const formatted = results.map(comment => ({
             id: comment.id,
             text: comment.text,
             author: comment.author ? `${comment.author.first_name} ${comment.author.last_name}`.trim() || comment.author.username : 'Аноним',
             date: formatDate(comment.created_at),
             time: new Date(comment.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
-            answers: comment.answers ? comment.answers.length : 0
+            answers: comment.answers || []
           }));
           setComments(formatted);
         }

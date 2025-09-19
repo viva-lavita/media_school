@@ -1,7 +1,23 @@
+"use client";
 import { comfortaa, montserrat } from "@/lib/fonts";
+import { useState } from "react";
 import styles from "../../Onenews.module.css";
+import { formatDate } from "@/app/utils/formatDate";
 
-export default function CommentsList({ questions }) {
+export default function CommentsList({ questions, newsId, type, setComments }) {
+  const [expandedComments, setExpandedComments] = useState(new Set());
+
+  const toggleAnswers = (id) => {
+    setExpandedComments(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
   const formatAnswer = (num) => {
     const getAnswerWord = (n) => {
       if (n % 10 === 1 && n % 100 !== 11) return 'ответ';
@@ -28,14 +44,45 @@ export default function CommentsList({ questions }) {
               {question.author}
             </span>
             <div className={`flex flex-row gap-5`}>
-              <span className={`${montserrat.className} ${styles.answers}`}>
-                {formatAnswer(question.answers)}
-              </span>
-              <span className={`${montserrat.className} ${styles.date}`}>
-                {`${question.date}, ${question.time}`}
+              <span
+                className={`${montserrat.className} ${styles.answers}`}
+                style={{ cursor: 'pointer' }}
+                onClick={() => toggleAnswers(question.id)}
+              >
+                {formatAnswer(question.answers.length)}
               </span>
             </div>
           </div>
+          <span className={`${montserrat.className} ${styles.date}`}>
+            {`${question.date}, ${question.time}`}
+          </span>
+          {expandedComments.has(question.id) && (
+            <div className={styles.answersList}>
+              {question.answers.map((answer) => (
+                <div key={answer.id} className={styles.answer}>
+                  <div className={`${montserrat.className} ${styles.answerText}`}>
+                    {answer.text}
+                  </div>
+                  <div className={styles.answerMeta}>
+                    <span className={styles.answerAuthor}>
+                      {answer.author
+                        ? `${answer.author.first_name} ${answer.author.last_name}`.trim() || answer.author.username
+                        : 'Аноним'}
+                    </span>
+                    <span className={styles.answerDate}>
+                      {formatDate(answer.created_at)}, {new Date(answer.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                  </div>
+                  <button
+                    className={styles.collapseButton}
+                    onClick={() => toggleAnswers(question.id)}
+                  >
+                    СВЕРНУТЬ
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </div>

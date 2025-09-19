@@ -49,3 +49,43 @@ export async function GET(request) {
     });
   }
 }
+
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const backendUrl = `http://217.114.11.243/api/v1/events/comments/`;
+
+    const response = await fetch(backendUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Accept-Charset': 'utf-8',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return new Response(JSON.stringify(data), {
+      status: 201,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    });
+  } catch (error) {
+    console.error('Error creating comment:', error);
+    return new Response(JSON.stringify({
+      error: 'Failed to create comment'
+    }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    });
+  }
+}
