@@ -51,36 +51,38 @@ export default function CommentsList({ questions, newsId, type, setComments }) {
               >
                 {formatAnswer(question.answers.length)}
               </span>
+              <span className={`${montserrat.className} ${styles.date}`}>
+                {`${question.date}, ${question.time}`}
+              </span>
             </div>
           </div>
-          <span className={`${montserrat.className} ${styles.date}`}>
-            {`${question.date}, ${question.time}`}
-          </span>
           {expandedComments.has(question.id) && (
             <div className={styles.answersList}>
+              <span className={`${montserrat.className} ${styles.answersOpen} pb-2`}>
+                {formatAnswer(question.answers.length)}
+              </span>
               {question.answers.map((answer) => (
                 <div key={answer.id} className={styles.answer}>
-                  <div className={`${montserrat.className} ${styles.answerText}`}>
+                  <div className={`${montserrat.className} ${styles.questionText} font-normal text-lg leading-[140%] pb-2`}>
                     {answer.text}
                   </div>
-                  <div className={styles.answerMeta}>
-                    <span className={styles.answerAuthor}>
+                  <div className={`${styles.answerMeta} pb-2`}>
+                    <span className={`${montserrat.className} ${styles.nameAuthor} whitespace-nowrap`}>
                       {answer.author
                         ? `${answer.author.first_name} ${answer.author.last_name}`.trim() || answer.author.username
                         : 'Аноним'}
                     </span>
-                    <span className={styles.answerDate}>
+                    <span className={`${montserrat.className} ${styles.date}`}>
                       {formatDate(answer.created_at)}, {new Date(answer.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
-                  <button
-                    className={styles.collapseButton}
-                    onClick={() => toggleAnswers(question.id)}
-                  >
-                    СВЕРНУТЬ
-                  </button>
                 </div>
               ))}
+              {question.answers.length > 0 && (
+                <button className={`${styles.collapseButton} underline`} onClick={() => toggleAnswers(question.id)}>
+                  Свернуть
+                </button>
+              )}
             </div>
           )}
         </div>
