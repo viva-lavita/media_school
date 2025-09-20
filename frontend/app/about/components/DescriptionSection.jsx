@@ -1,14 +1,13 @@
 import { comfortaa, montserrat } from '@/lib/fonts';
 import styles from './About.module.css';
 
-export default function DescriptionSection({ text }) {
+export default function DescriptionSection({ title, description }) {
  return (
   <div className={styles.textContent}>
    <p className={`${comfortaa.className} ${styles.subtitleAbout}`}>
-    <strong>{text.title}</strong>
+    <strong>{title}</strong>
    </p>
-   <p className={montserrat.className}>{text.paragraph1}</p>
-   <p className={montserrat.className}>{text.paragraph1}</p>
+   <p className={montserrat.className}>{description}</p>
   </div>
  );
 }
