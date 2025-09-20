@@ -3,6 +3,7 @@ import { comfortaa, montserrat } from "@/lib/fonts";
 import { useState } from "react";
 import styles from "../../Onenews.module.css";
 import { formatDate } from "@/app/utils/formatDate";
+import { formatText } from "@/app/utils/formatText";
 
 export default function CommentsList({ questions, newsId, type, setComments }) {
   const [expandedComments, setExpandedComments] = useState(new Set());
@@ -37,7 +38,7 @@ export default function CommentsList({ questions, newsId, type, setComments }) {
       {questions.map((question) => (
         <div key={question.id} className={styles.question}>
           <div className={`${montserrat.className} ${styles.questionText} font-normal text-lg leading-[140%]`}>
-            {question.text}
+            {formatText(question.text)}
           </div>
           <div className={styles.icons}>
             <span className={`${montserrat.className} ${styles.nameAuthor} whitespace-nowrap`}>
@@ -64,7 +65,7 @@ export default function CommentsList({ questions, newsId, type, setComments }) {
               {question.answers.map((answer) => (
                 <div key={answer.id} className={styles.answer}>
                   <div className={`${montserrat.className} ${styles.questionText} font-normal text-lg leading-[140%] pb-2`}>
-                    {answer.text}
+                    {formatText(answer.text)}
                   </div>
                   <div className={`${styles.answerMeta} pb-2`}>
                     <span className={`${montserrat.className} ${styles.nameAuthor} whitespace-nowrap`}>
