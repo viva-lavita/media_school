@@ -32,8 +32,21 @@ export default function Header() {
           <div className={`${pageWidth > 360 ? 'notHidden' : 'hidden'} flex items-center gap-10`}>
             <img src="/header-images/search.svg" alt="search" className="size-9"/>
             <div className="flex gap-5">
-              <img src="/header-images/vk-button.png" alt="Вконтакте"  className="size-11.5"/>
-              <img src="/header-images/ok-button.png" alt="Одноклассники"  className="size-11.5"/>
+              <a href="#" aria-label="ВКонтакте">
+                <img
+                  src="/header-images/vk-button.png"
+                  alt=""
+                  tabIndex={0}
+                  className="size-11.5" />
+              </a>
+
+              <a href="#" aria-label="Одноклассники">
+                <img
+                  src="/header-images/ok-button.png"
+                  alt=""
+                  tabIndex={0}
+                  className="size-11.5" />
+              </a>
             </div>
           </div>
           <button className={`${styles.btn} flex items-center h-9 py-2 px-4`}>

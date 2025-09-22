@@ -7,6 +7,33 @@ import { useContext } from 'react';
 
 export default function Experts() {
     const { pageWidth } = useContext(PageWidthContext);
+
+    const teachers = [
+      {
+       src: '/images/Olga-Sergeevna-Dumcheva.png',
+       alt: 'Думчева Ольга Сергеевна',
+       name: 'Думчева Ольга Сергеевна',
+       role: 'Учитель английского языка'
+      },
+      {
+       src: '/images/Maria-Sergeyevna-Gauer.png',
+       alt: 'Гауэр Мария Сергеевна',
+       name: 'Гауэр Мария Сергеевна',
+       role: 'Учитель английского языка'
+      },
+      {
+       src: '/images/Nadezhda-Leonidovna-Mikhalchuk.png',
+       alt: 'Михальчук Надежда Леонидовна',
+       name: 'Михальчук Надежда Леонидовна',
+       role: 'Учитель математики'
+      },
+      {
+       src: '/images/Evgeny-Pavlovich-Zaitsev.png',
+       alt: 'Зайцев Евгений Павлович',
+       name: 'Зайцев Евгений Павлович',
+       role: 'Учитель физики'
+      }
+    ]
  return (
   <div className={`${styles.mediaSchoolExperience} flex flex-col`}>
    <h2 className={`${comfortaa.className} ${styles.aboutLearning}`}>
@@ -103,8 +130,12 @@ export default function Experts() {
     </div>
    </div>
    <div className={`flex gap-3 justify-center`}>
-    <img src="/images/ArrowLeft.svg" alt="ArrowLeft" />
-    <img src="/images/ArrowRight.svg" alt="ArrowRight" />
+    <button aria-label={'Предыдущее'}>
+     <img src="/images/ArrowLeft.svg" alt="" />
+    </button>
+    <button aria-label={'Следующее'}>
+     <img src="/images/ArrowRight.svg" alt="" />
+    </button>
    </div>
   </div>
  );

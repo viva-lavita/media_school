@@ -14,6 +14,7 @@ export default function ChildData({dataRequired, imgUrl, direction}) {
           className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           required
         />
+        <label className={`visually-hidden`} htmlFor="child_lastname">Фамилия</label>
         {dataRequired && (
           <span
             className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-22 top-3 text-red-500`}
@@ -36,6 +37,7 @@ export default function ChildData({dataRequired, imgUrl, direction}) {
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
           />
+          <label className={`visually-hidden`} htmlFor="child_firstname">Имя</label>
           {dataRequired && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-12.5 top-3 text-red-500`}
@@ -53,6 +55,7 @@ export default function ChildData({dataRequired, imgUrl, direction}) {
             id="child_middlename"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           />
+          <label className={`visually-hidden`} htmlFor="child_middlename">Отчество</label>
           <ButtonImage imgUrl={imgUrl}/>
         </div>
       </div>
@@ -69,6 +72,7 @@ export default function ChildData({dataRequired, imgUrl, direction}) {
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
           />
+          <label className={`visually-hidden`} htmlFor="child_birthday">Дата рождения</label>
           {dataRequired && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-33 top-3 text-red-500`}
@@ -87,6 +91,7 @@ export default function ChildData({dataRequired, imgUrl, direction}) {
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
           />
+          <label className={`visually-hidden`} htmlFor="child_school">Школа</label>
           {dataRequired && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-17 top-3 text-red-500`}
@@ -106,6 +111,7 @@ export default function ChildData({dataRequired, imgUrl, direction}) {
           className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           required
         />
+        <label className={`visually-hidden`} htmlFor="child_classroom">Класс</label>
         {dataRequired && (
           <span
             className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-15.5 top-3 text-red-500`}

@@ -22,7 +22,7 @@ export default function AccountPage() {
           </legend>
           <ChildData direction={'column'} imgUrl={'/images/pencil.svg'} />
         </fieldset>
-        <button className={`${montserrat.className} font-medium text-base leading-[100%] py-3.5 px-6 bg-green w-[197px] 
+        <button type="button" className={`${montserrat.className} font-medium text-base leading-[100%] py-3.5 px-6 bg-green w-[197px] 
         self-center`}>
           Сохранить
         </button>
