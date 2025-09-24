@@ -4,51 +4,49 @@ import styles from './layoutCatalog.module.css';
 import { useEffect, useState } from 'react';
 import DescriptionSection from '../about/components/DescriptionSection';
 import TeachersList from '../about/components/TeachersList';
-import DocumentsSection from './components/DocumentsSection';
-import ListCard from './components/ListCard';
+import handleFetch from '../utils/fetchErrorHandle';
+//import DocumentsSection from './components/DocumentsSection';
+//import ListCard from './components/ListCard';
 
-export default function layoutPage() {
-
- //const titleListCatalog = 'Наставники';
+export default function LayoutPage() {
  const initialActiveTab = 'Интервьюирование';
- const titleCardSectionVideo = 'Видео-материалы';
- const [activeTab, setActiveTab] = useState(initialActiveTab);
-
  const [categories, setCategories] = useState([]);
  const [activeCategory, setActiveCategory] = useState({});
- //const [description, setDescription] = useState('');
- const [titleListCatalog, setTitleListCatalog] = useState('');
+ const [expertsData, setExpertsData] = useState([]);
 
  useEffect(() => {
-  fetch('/api/categories')
-   .then((response) => response.json())
+  handleFetch('/api/categories')
    .then((data) => {
     setCategories(data.results);
     setActiveCategory(data.results[0]);
    })
-   .catch((error) => console.error('Error fetching news:', error));
-
-   fetch('/api/categories')
-   .then((response) => response.json())
-   .then((data) => {
-    setCategories(data.results);
-    setActiveCategory(data.results[0]);
-   })
-   .catch((error) => console.error('Error fetching news:', error));
+   .catch(console.error);
  }, []);
- console.log(activeCategory);
+
+useEffect(() => {
+  if (activeCategory.id) {
+   handleFetch(`/api/expertsCategory/${activeCategory.id}`)
+    .then((data) => {
+     setExpertsData(data.results);
+    })
+    .catch(console.error);
+  }
+ }, [activeCategory]);
+
+ console.log(activeCategory.id);
  return (
   <div className={styles.wrap}>
    <h3 className={`${comfortaa.className} ${styles.title}`}>
     Каталог материалов
    </h3>
+
    <div className={styles.tabs}>
     {categories.map((tabItem) => (
      <button
       key={tabItem.name}
-      onClick={() => setActiveCategory(tabItem)} // Меняем активную категорию
+      onClick={() => setActiveCategory(tabItem)}
       className={`${styles.tabButton} ${
-       activeCategory?.name === tabItem.name && styles.active
+       activeCategory?.name === tabItem.name ? styles.active : ''
       }`}
      >
       {tabItem.name}
@@ -56,26 +54,26 @@ export default function layoutPage() {
     ))}
    </div>
    <main className={styles.mainCatalog}>
-    {activeCategory && ( // Только если активная категория установлена
-     <img
-      className={styles.imgPrevue}
-      src={activeCategory.image} // Используем картинку активного элемента
-      alt={`Image of ${activeCategory.name}`}
-     />
+    {activeCategory && (
+     <>
+      <img
+       className={styles.imgPreview}
+       src={activeCategory.image}
+       alt={`Картинка ${activeCategory.name}`}
+      />
+
+      <section className={styles.description}>
+       <DescriptionSection
+        title={activeCategory.title}
+        description={activeCategory.description}
+       />
+
+       <div className={styles.founders}>
+        <TeachersList titleList="Эксперты" teachers={expertsData} />
+       </div>
+      </section>
+     </>
     )}
-    <section className={styles.description}>
-     <DescriptionSection title={activeCategory.title}  description={activeCategory.description} />
-     <div className={styles.founders}>
-      {<TeachersList titleList={titleListCatalog} teachers={TEACHERS_DATA} />}
-     </div>
-    </section>
-    <DocumentsSection documents={files} />
-    <section className={styles.mediaSection}>
-     <ListCard
-      titleCardList={titleCardSectionVideo}
-      documents={documentSection}
-     />
-    </section>
    </main>
   </div>
  );

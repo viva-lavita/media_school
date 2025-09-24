@@ -5,6 +5,10 @@ import FileItem from './FileItem';
 import { useState } from 'react';
 
 export default function DocumentsSection({ documents }) {
+ if (!Array.isArray(documents)) {
+  console.error('Документы отсутствуют или имеют неверный формат.');
+  return null; 
+ }
  const visibleFilesCount = Math.min(documents.length, 4);
  const [isCollapsed, setIsCollapsed] = useState(true);
 
