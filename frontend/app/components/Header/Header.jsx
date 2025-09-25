@@ -1,25 +1,14 @@
 'use client';
-import { Montserrat } from 'next/font/google'
 import Link from "next/link";
 import styles from "./Header.module.css"
-import { useState, useEffect } from 'react';
 import { montserrat } from '@/lib/fonts'
 
 export default function Header() {
-  const [pageWidth, setPageWidth] = useState(360);
-
-  useEffect(() => {
-    const handleResize = () => setPageWidth(window.innerWidth);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
       <header className={`${montserrat.className} ${styles.header} text-base flex items-center justify-between mx-auto`}>
         <img src="/images/logo.svg" alt="logo" className={styles.logo}/>
-        <nav className={`${pageWidth <= 1024 ? 'hidden' : ''} flex items-center`}>
+        <nav className={`${styles.headerList} flex items-center`}>
           <ul className="flex gap-7 h-5">
             <li><Link href="/about">О проекте</Link></li>
             <li><Link href="/news">Новости</Link></li>
@@ -28,9 +17,11 @@ export default function Header() {
             <li><Link href="/contacts">Контакты</Link></li>
           </ul>
         </nav>
-        <div className={`flex items-center ${pageWidth > 360 ? 'gap-10' : 'gap-7'}`}>
-          <div className={`${pageWidth > 360 ? 'notHidden' : 'hidden'} flex items-center gap-10`}>
-            <img src="/header-images/search.svg" alt="search" className="size-9"/>
+        <div className={`${styles.headerActions} flex items-center`}>
+          <div className={`${styles.headerSocialMedia} flex items-center gap-10`}>
+            <button aria-label={'Поиск'}>
+              <img src="/header-images/search.svg" alt="" className="size-9"/>
+            </button>
             <div className="flex gap-5">
               <a href="#" aria-label="ВКонтакте">
                 <img
@@ -49,10 +40,12 @@ export default function Header() {
               </a>
             </div>
           </div>
-          <button className={`${styles.btn} flex items-center h-9 py-2 px-4`}>
-            Личный кабинет
+          <button className={`${montserrat.className} ${styles.btn} font-medium text-base leading-[100%] flex items-center`}>
+            <Link href={'/account'}>Личный кабинет</Link>
           </button>
-          <img src="/header-images/menu.svg" alt="menu"/>
+          <button aria-label={'Меню'} className={`${styles.headerMenu}`}>
+            <img src="/header-images/menu.svg" alt=""/>
+          </button>
         </div>
       </header>
   );

@@ -52,7 +52,7 @@ export default function Home() {
         от идеи до готового материала.
        </p>
        <div
-        className={`${montserrat.className} flex flex-col gap-3 font-medium text-base leading-[100%] 
+        className={`${montserrat.className} flex flex-col gap-3 font-normal text-base leading-[130%] 
               text-grey-2`}
        >
         <p>
