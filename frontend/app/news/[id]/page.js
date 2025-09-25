@@ -16,6 +16,7 @@ export default function NewsDetail() {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [type, setType] = useState('news');
 
   useEffect(() => {
     if (!id) {
@@ -24,8 +25,9 @@ export default function NewsDetail() {
       return;
     }
 
-    const type = searchParams.get('type') || 'news';
-    const queryParam = type === 'news' ? 'news' : type === 'announcements' ? 'announcement' : 'competition';
+    const typeValue = searchParams.get('type') || 'news';
+    setType(typeValue);
+    const queryParam = typeValue === 'news' ? 'news' : typeValue === 'announcements' ? 'announcement' : 'competition';
 
     const fetchComments = async () => {
       try {
@@ -50,12 +52,12 @@ export default function NewsDetail() {
     };
 
     const fetchItem = async () => {
-      const endpoint = `/api/${type}/${id}`;
+      const endpoint = `/api/${typeValue}/${id}`;
 
       try {
         const response = await fetch(endpoint);
         if (!response.ok) {
-          throw new Error(`Failed to fetch ${type} with id ${id}`);
+          throw new Error(`Failed to fetch ${typeValue} with id ${id}`);
         }
         const data = await response.json();
         if (data) {
@@ -67,7 +69,7 @@ export default function NewsDetail() {
         }
       } catch (error) {
         console.error(`Error fetching from ${endpoint}:`, error);
-        setError(`${type.charAt(0).toUpperCase() + type.slice(1)} не найдена`);
+        setError(`${typeValue.charAt(0).toUpperCase() + typeValue.slice(1)} не найдена`);
         setLoading(false);
       }
     };
@@ -91,7 +93,7 @@ export default function NewsDetail() {
     <>
       <div className={`${styles.newsContainer}`}>
         <NewsContent item={item} />
-        <CommentForm />
+        <CommentForm itemId={id} itemType={type} />
         <CommentsList questions={comments} />
       </div>
     </>
