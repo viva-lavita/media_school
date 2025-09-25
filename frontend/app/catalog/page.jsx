@@ -5,15 +5,65 @@ import { useEffect, useState } from 'react';
 import DescriptionSection from '../about/components/DescriptionSection';
 import TeachersList from '../about/components/TeachersList';
 import handleFetch from '../utils/fetchErrorHandle';
-//import DocumentsSection from './components/DocumentsSection';
-//import ListCard from './components/ListCard';
+import DocumentsSection from './components/DocumentsSection';
+import ListCard from './components/ListCard';
 
 export default function LayoutPage() {
- const initialActiveTab = 'Интервьюирование';
+ const titleExpertList = 'Наставники';
  const [categories, setCategories] = useState([]);
  const [activeCategory, setActiveCategory] = useState({});
  const [expertsData, setExpertsData] = useState([]);
+ const [documentsData, setDocumentsData] = useState([]);
 
+ const documentSection = [
+  {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+  {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+  {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+ ];
+ const files = [
+  {
+   id: 1,
+   name: 'resume.pdf',
+   createdAt: new Date('2023-08-15'),
+   format: 'PDF',
+  },
+  {
+   id: 2,
+   name: 'cover_letter.docx',
+   createdAt: new Date('2023-08-16'),
+   format: 'DOCX',
+  },
+  {
+   id: 3,
+   name: 'portfolio.zip',
+   createdAt: new Date('2023-08-17'),
+   format: 'ZIP',
+  },
+  {
+   id: 4,
+   name: 'references.txt',
+   createdAt: new Date('2023-08-18'),
+   format: 'TXT',
+  },
+  {
+   id: 5,
+   name: 'additional_info.xlsx',
+   createdAt: new Date('2023-08-19'),
+   format: 'XLSX',
+  },
+ ];
  useEffect(() => {
   handleFetch('/api/categories')
    .then((data) => {
@@ -23,17 +73,26 @@ export default function LayoutPage() {
    .catch(console.error);
  }, []);
 
-useEffect(() => {
+/*useEffect(() => {
   if (activeCategory.id) {
-   handleFetch(`/api/expertsCategory/${activeCategory.id}`)
-    .then((data) => {
-     setExpertsData(data.results);
-    })
-    .catch(console.error);
+    fetch(`/api/experts/${activeCategory.id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        return response.json();
+      })
+      .then(data => {
+        setExpertsData(data.results);
+      })
+      .catch(error => {
+        console.error("Ошибка при получении экспертов:", error);
+      });
   }
- }, [activeCategory]);
+}, [activeCategory]); */
 
- console.log(activeCategory.id);
+ console.log(expertsData);
  return (
   <div className={styles.wrap}>
    <h3 className={`${comfortaa.className} ${styles.title}`}>
@@ -69,11 +128,15 @@ useEffect(() => {
        />
 
        <div className={styles.founders}>
-        <TeachersList titleList="Эксперты" teachers={expertsData} />
+        <TeachersList titleList={titleExpertList} teachers={expertsData} />
        </div>
       </section>
      </>
     )}
+    <DocumentsSection documents={files} />
+    <section className={styles.mediaSection}>
+     <ListCard titleCardList='Видео-материалы' documents={documentSection}/>
+    </section>
    </main>
   </div>
  );
