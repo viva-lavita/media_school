@@ -3,11 +3,13 @@ import { comfortaa, montserrat } from '@/lib/fonts';
 import styles from './DocumentsSection.module.css';
 import FileItem from './FileItem';
 import { useState } from 'react';
+import stylesDocument from './DocumentsSection.module.css';
+import formatDocument from '@/app/utils/formatDocument';
 
 export default function DocumentsSection({ documents }) {
  if (!Array.isArray(documents)) {
   console.error('Документы отсутствуют или имеют неверный формат.');
-  return null; 
+  return null;
  }
  const visibleFilesCount = Math.min(documents.length, 4);
  const [isCollapsed, setIsCollapsed] = useState(true);
@@ -23,30 +25,29 @@ export default function DocumentsSection({ documents }) {
      Документы для интервью
     </h2>
     <p className={`${montserrat.className} ${styles.count}`}>
-     {documents.length} документов
+     {(documents.length)}
     </p>
    </div>
    <div className={styles.documentBox}>
     {documents.slice(0, visibleFilesCount).map((file) => (
      <FileItem key={file.id} file={file} />
     ))}
-
-    {documents.length > 4 && isCollapsed && (
-     <button
-      className={`${montserrat.className} ${styles.toggleButton}`}
-      onClick={handleToggleClick}
-     >
-      РАСКРЫТЬ СПИСОК
-     </button>
-    )}
-    {!isCollapsed && documents.length > 4 && (
-     <>
-      {documents.slice(visibleFilesCount).map((file) => (
-       <FileItem key={file.id} file={file} />
-      ))}
-     </>
-    )}
    </div>
+   {documents.length > 4 && isCollapsed && (
+    <button
+     className={`${montserrat.className} ${stylesDocument.toggleButton}`}
+     onClick={handleToggleClick}
+    >
+     РАСКРЫТЬ СПИСОК
+    </button>
+   )}
+   {!isCollapsed && documents.length > 4 && (
+    <>
+     {documents.slice(visibleFilesCount).map((file) => (
+      <FileItem key={file.id} file={file} />
+     ))}
+    </>
+   )}
   </section>
  );
 }

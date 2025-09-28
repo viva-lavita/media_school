@@ -1,30 +1,29 @@
 import { useState } from 'react';
 import Card from './Card';
 import styles from './DocumentsSection.module.css';
+import styleSection from '../layoutCatalog.module.css';
 import { comfortaa, montserrat } from '@/lib/fonts';
+import formatDocument from '@/app/utils/formatDocument';
 
-export default function ListCard({ documents }, titleCardList) {
- const visibleFilesCount = Math.min(documents.length, 3);
- const [isCollapsed, setIsCollapsed] = useState(true);
+export default function SectionListCard({ title, documents }) {
+ const visibleFilesCount = Math.min(documents.length, 3); // Показываем первые три элемента
+ const [isCollapsed, setIsCollapsed] = useState(true); // Начальное состояние - свернуто
 
  const handleToggleClick = () => {
-  setIsCollapsed(!isCollapsed);
+  setIsCollapsed((prevState) => !prevState); // Инвертируем состояние кнопки
  };
 
  return (
-  <>
+  <section className={styles.mediaSection}>
    <div className={styles.info}>
-    <h2 className={`${comfortaa.className} ${styles.title}`}>
-     {titleCardList}
-    </h2>
-    <p className={`${montserrat.className} ${styles.count}`}>
-     {documents.length} документов
-    </p>
+    <h2 className={`${styles.title}`}>{title}</h2>
+    <p className={`${styles.count}`}>{formatDocument(documents.length)}</p>
    </div>
+
    <div className={styles.mediaBox}>
     {documents.slice(0, visibleFilesCount).map((file) => (
      <Card
-      key={file.id}
+      key={`item-`+ Math.random().toString(36).substr(2, 9)}
       imageUrl={file.imageUrl}
       videoUrl={file.videoUrl}
       title={file.title}
@@ -32,22 +31,30 @@ export default function ListCard({ documents }, titleCardList) {
      />
     ))}
 
-    {documents.length > 4 && isCollapsed && (
-     <button
-      className={`${montserrat.className} ${styles.toggleButton}`}
-      onClick={handleToggleClick}
-     >
-      РАСКРЫТЬ СПИСОК
-     </button>
-    )}
-    {!isCollapsed && documents.length > 4 && (
-     <>
-      {documents.slice(visibleFilesCount).map((file) => (
-       <FileItem key={file.id} file={file} />
+    {!isCollapsed &&
+     documents.length > 3 &&
+     documents
+      .slice(visibleFilesCount)
+      .map((file) => (
+       <Card
+         imageUrl={file.imageUrl}
+      videoUrl={file.videoUrl}
+      title={file.title}
+      date={file.date}
+
+        key={`item-`+ Math.random().toString(36).substr(2, 9)}
+       />
       ))}
-     </>
-    )}
    </div>
-  </>
+
+   {
+    /* Кнопка появляется, если документов больше трех */
+    documents.length > 3 && (
+     <button className={`${styles.toggleButton}`} onClick={handleToggleClick}>
+      {isCollapsed ? 'РАСКРЫТЬ СПИСОК' : 'СВЕРНУТЬ'}
+     </button>
+    )
+   }
+  </section>
  );
 }

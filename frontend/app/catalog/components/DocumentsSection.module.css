@@ -29,13 +29,47 @@
  flex-direction: column;
  gap: 16px;
 }
-.nameContainer {
- max-width: 1000px;
- flex-grow: 0;
+.fileRow {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ border-bottom: 1px solid #f8f8f8;
+ padding-bottom: 8px;
 }
+
+.nameContainer {
+ flex-basis: 65%;
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+}
+
 .propertyContainer {
  display: flex;
  justify-content: space-between;
+ flex-basis: 35%;
+}
+
+.fileDate,
+.fileFormat,
+.downloadLink {
+ flex-shrink: 0;
+ text-align: right;
+}
+
+.downloadLink::after {
+ content: '';
+ background-image: url('/catalog-images/download.svg');
+ width: 13.3px;
+ height: 13.3px;
+ display: inline-block;
+ vertical-align: middle;
+ margin-left: 5px;
+}
+
+.propertyContainer span {
+ flex-basis: calc(33.33%);
+ min-width: 0;
 }
 
 .fileName,
@@ -52,29 +86,11 @@
  color: #040404;
 }
 
-.fileRow {
- display: flex;
- flex-direction: row;
- justify-content: space-between;
- align-items: center;
- border-bottom: 1px solid #f8f8f8;
- padding-bottom: 8px;
-}
-
 .downloadLink {
  text-decoration: none;
  cursor: pointer;
 }
 
-.downloadLink::after {
- content: '';
- background-image: url('/catalog-images/download.svg');
- width: 13.3px;
- height: 13.3px;
- display: inline-block;
- vertical-align: middle;
- margin-left: 5px;
-}
 .toggleButton {
  text-align: left;
  align-items: center;
@@ -106,8 +122,12 @@
 .toggleButtonHover {
  background-color: #eee;
 }
-.mediaBox{
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
+.mediaBox {
+ display: flex;
+ flex-wrap: wrap; /* разрешаем перенос строки */
+ gap: 30px; /* расстояние между карточками */
+ justify-content: center; /* центрируем карточку по горизонтали */
+ max-width: 100%;
+ margin: auto;
+ justify-content: flex-start;
 }

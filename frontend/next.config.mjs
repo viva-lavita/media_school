@@ -19,8 +19,8 @@ const nextConfig = {
  async rewrites() {
   return [
    {
-    source: '/api/:path*',
-    destination: 'http://217.114.11.243/api/v1/content/:path*',
+    source: '/api/v1/content/experts/:path*',
+    destination: 'http://217.114.11.243/api/v1/content/experts/:path*',
    },
   ];
  },

@@ -6,16 +6,43 @@ import DescriptionSection from '../about/components/DescriptionSection';
 import TeachersList from '../about/components/TeachersList';
 import handleFetch from '../utils/fetchErrorHandle';
 import DocumentsSection from './components/DocumentsSection';
-import ListCard from './components/ListCard';
+import SectionListCard from './components/ListCard';
 
 export default function LayoutPage() {
  const titleExpertList = 'Наставники';
  const [categories, setCategories] = useState([]);
  const [activeCategory, setActiveCategory] = useState({});
  const [expertsData, setExpertsData] = useState([]);
- const [documentsData, setDocumentsData] = useState([]);
+ //const [documentsData, setDocumentsData] = useState([]);
 
  const documentSection = [
+  {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+    {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+    {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+  {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+  {
+   imageUrl: '/about-images/Ivanova.png',
+   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
+   date: '10 апреля 2025',
+  },
+ ];
+ const documentSectionPhoto = [
   {
    imageUrl: '/about-images/Ivanova.png',
    title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
@@ -73,26 +100,19 @@ export default function LayoutPage() {
    .catch(console.error);
  }, []);
 
-/*useEffect(() => {
+ useEffect(() => {
   if (activeCategory.id) {
-    fetch(`/api/experts/${activeCategory.id}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        
-        return response.json();
-      })
-      .then(data => {
-        setExpertsData(data.results);
-      })
-      .catch(error => {
-        console.error("Ошибка при получении экспертов:", error);
-      });
+   fetch(`/api/experts`)
+    .then((data) => {
+     setExpertsData(data.results);
+     console.log(data.results);
+    })
+    .catch((error) => {
+     console.error('Ошибка при получении экспертов:', error);
+    });
   }
-}, [activeCategory]); */
+ }, []);
 
- console.log(expertsData);
  return (
   <div className={styles.wrap}>
    <h3 className={`${comfortaa.className} ${styles.title}`}>
@@ -134,9 +154,8 @@ export default function LayoutPage() {
      </>
     )}
     <DocumentsSection documents={files} />
-    <section className={styles.mediaSection}>
-     <ListCard titleCardList='Видео-материалы' documents={documentSection}/>
-    </section>
+    <SectionListCard title={'Видео-материалы'} documents={documentSection} />
+    <SectionListCard title={'Фотогалерея'} documents={documentSectionPhoto} />
    </main>
   </div>
  );

@@ -1,22 +1,36 @@
-
-.media{
-    margin-bottom: 18px;
+.card {
+ width: calc(33.33% - 30px * 2 / 3); /* рассчитываем ширину так, чтобы помещалось ровно три карточки в одном ряду */
+  min-height: 150px;
+  margin-bottom: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  font-family: sans-serif;
+  line-height: 1.5;
 }
-.masterClass{
-    font-size: 14px;
-    font-weight: 400;
-    color: #3C4226;
-    margin-bottom: 8px;
+.media {
+ margin-bottom: 18px;
 }
-.titleCard{
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 140%;
-    color: #040404;
-    margin-bottom: 24px;
+.masterClass {
+ font-size: 14px;
+ font-weight: 400;
+ color: #3c4226;
+ margin-bottom: 8px;
 }
-.dateCard{
-  font-size: 14px;
-    font-weight: 400;
-    color: #535353;  
+.titleCard {
+ font-size: 18px;
+ font-weight: 400;
+ line-height: 140%;
+ color: #040404;
+ margin-bottom: 24px;
+}
+.dateCard {
+ font-size: 14px;
+ font-weight: 400;
+ color: #535353;
 }
