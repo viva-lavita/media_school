@@ -17,16 +17,19 @@ export default function LayoutPage() {
 
  const documentSection = [
   {
+   id: 1,
    imageUrl: '/about-images/Ivanova.png',
    title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
    date: '10 апреля 2025',
   },
   {
+   id: 2,
    imageUrl: '/about-images/Ivanova.png',
    title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
    date: '10 апреля 2025',
   },
   {
+   id: 3,
    imageUrl: '/about-images/Ivanova.png',
    title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
    date: '10 апреля 2025',
@@ -73,24 +76,19 @@ export default function LayoutPage() {
    .catch(console.error);
  }, []);
 
-/*useEffect(() => {
+useEffect(() => {
   if (activeCategory.id) {
-    fetch(`/api/experts/${activeCategory.id}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        
-        return response.json();
+    handleFetch(`/api/experts/${activeCategory.id}`)
+      .then((data) => {
+        setExpertsData(data.results.filter(expert => expert && expert.catalog_id == activeCategory.id).map(expert => ({
+          ...expert,
+          photo: expert.image,
+          name: expert.full_name
+        })));
       })
-      .then(data => {
-        setExpertsData(data.results);
-      })
-      .catch(error => {
-        console.error("Ошибка при получении экспертов:", error);
-      });
+      .catch(console.error);
   }
-}, [activeCategory]); */
+}, [activeCategory]);
 
  console.log(expertsData);
  return (
