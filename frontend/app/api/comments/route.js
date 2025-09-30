@@ -4,6 +4,7 @@ export async function GET(request) {
     const newsId = searchParams.get('news') || '';
     const announcementId = searchParams.get('announcement') || '';
     const competitionId = searchParams.get('competition') || '';
+    const questionCategory = searchParams.get('question_category') || '';
     const ordering = searchParams.get('ordering') || '';
 
     let backendUrl = `http://217.114.11.243/api/v1/events/comments/`;
@@ -11,6 +12,7 @@ export async function GET(request) {
     if (newsId) params.push(`news=${newsId}`);
     if (announcementId) params.push(`announcement=${announcementId}`);
     if (competitionId) params.push(`competition=${competitionId}`);
+    if (questionCategory) params.push(`question_category=${questionCategory}`);
     if (ordering) params.push(`ordering=${ordering}`);
     if (params.length > 0) backendUrl += '?' + params.join('&');
 
