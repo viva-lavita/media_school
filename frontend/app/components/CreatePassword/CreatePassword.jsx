@@ -19,10 +19,13 @@ export default function CreatePassword() {
             className="w-full h-[41px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
           />
-          <img className={`absolute top-3 right-4`}
-               src="/images/eye.svg"
-               alt="глаз просмотра"
-          />
+          <label className={`visually-hidden`} htmlFor="parent_password">Пароль</label>
+          <button type="button">
+            <img className={`absolute top-3 right-4`}
+                 src="/images/eye.svg"
+                 alt="глаз просмотра"
+            />
+          </button>
         </div>
       </div>
       <div className={`relative`}>
@@ -34,10 +37,13 @@ export default function CreatePassword() {
           className="w-full h-[41px] border border-green bg-white py-3 px-4 focus:outline-none"
           required
         />
-        <img className={`absolute top-3 right-4`}
-             src="/images/eye.svg"
-             alt="глаз просмотра"
-        />
+        <label className={`visually-hidden`} htmlFor="parent_passwordRepeat">Повторите пароль</label>
+        <button type="button">
+          <img className={`absolute top-3 right-4`}
+               src="/images/eye.svg"
+               alt="глаз просмотра"
+          />
+        </button>
       </div>
     </div>
   )

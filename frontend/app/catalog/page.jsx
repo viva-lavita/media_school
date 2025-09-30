@@ -102,7 +102,7 @@ export default function LayoutPage() {
 
  useEffect(() => {
   if (activeCategory.id) {
-   fetch(`/api/experts`)
+   handleFetch(`/api/experts/${activeCategory.id}`)
     .then((data) => {
      setExpertsData(data.results);
      console.log(data.results);
@@ -111,8 +111,9 @@ export default function LayoutPage() {
      console.error('Ошибка при получении экспертов:', error);
     });
   }
- }, []);
-
+ }, [activeCategory.id]);
+console.log(activeCategory)
+console.log(expertsData)
  return (
   <div className={styles.wrap}>
    <h3 className={`${comfortaa.className} ${styles.title}`}>

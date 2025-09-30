@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import styles from './Registration.module.css'
 import {comfortaa} from "@/lib/fonts";
 import {montserrat} from "@/lib/fonts";
@@ -117,7 +118,10 @@ export default function RegistrationPage() {
             </button>
           </div>
           <div className={`${montserrat.className} flex text-wrap font-medium text-base leading-[100%] justify-center`}>
-            <p>Уже&nbsp;есть&nbsp;аккаунт? <span className={`underline text-dark-green`}>Войти в&nbsp;личный кабинет</span></p>
+            <p>Уже&nbsp;есть&nbsp;аккаунт? <span className={`underline text-dark-green`}>
+              <Link href="/account">Войти в&nbsp;личный кабинет</Link>
+            </span>
+            </p>
           </div>
         </form>
       </div>

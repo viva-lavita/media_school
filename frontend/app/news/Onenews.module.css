@@ -204,6 +204,7 @@
 
 .nameAuthor,
 .answers,
+.answersOpen,
 .date {
     display: inline-flex;
     color: var(--color-grey-2);
@@ -211,6 +212,15 @@
     font-weight: 400;
     justify-content: center;
     align-items: center;
+}
+
+.answersOpen {
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #040404;
 }
 
 .answers::before {
@@ -242,6 +252,30 @@
 }
 .underline {
     text-decoration: underline;
+}
+
+.answersList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    align-items: start; 
+    padding-left: 24px;
+    padding-top: 11px;
+}
+
+.collapseButton {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 0%;
+    text-decoration-skip-ink: auto;
+    padding-bottom: 3px;
 }
 
 @media screen and (max-width: 1024px) {

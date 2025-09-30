@@ -1,10 +1,12 @@
 'use client'
 
 import { useState } from 'react';
+import Link from "next/link";
 import styles from './Login.module.css'
 import {comfortaa} from "@/lib/fonts";
 import {montserrat} from "@/lib/fonts";
 import { useRouter } from 'next/navigation';
+import ButtonImage from "@/app/components/Button-Image/Button-Image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -46,7 +48,10 @@ export default function LoginPage() {
         <div className={`${styles.loginTitleContainer} flex flex-col items-center`}>
           <h1 className={`${comfortaa.className} ${styles.loginTitle} font-bold`}>Вход</h1>
           <div className={`${montserrat.className} flex text-wrap font-medium text-base leading-[100%] text-center`}>
-            <p>Нет&nbsp;аккаунта? <span className={`underline text-dark-green`}>Зарегистрироваться</span></p>
+            <p>Нет&nbsp;аккаунта? <span className={`underline text-dark-green`}>
+              <Link href="/registration">Зарегистрироваться</Link>
+            </span>
+            </p>
           </div>
         </div>
         <form onSubmit={handleSubmit} className={`${styles.loginForm} flex flex-col`}>
@@ -65,12 +70,7 @@ export default function LoginPage() {
               <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-17.5 top-3 text-red-500`}>
               *
               </span>
-              <button aria-label="убрать">
-                <img className={`absolute top-4.5 right-4`}
-                     src="/images/cross.svg"
-                     alt=""
-                />
-              </button>
+              <ButtonImage />
             </div>
             <div className="relative">
               <input
@@ -86,7 +86,7 @@ export default function LoginPage() {
               <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-19.5 top-2 text-red-500`}>
               *
             </span>
-              <button aria-label="скрыть или показать данные">
+              <button type="button" aria-label="скрыть или показать данные">
                 <img className={`absolute top-3.5 right-4`}
                      src="/images/eye.svg"
                      alt=""/>
@@ -98,7 +98,8 @@ export default function LoginPage() {
               type="submit"
               disabled={loading}
               className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow 
-            bg-green border border-green py-3 px-6 justify-center `}>{loading ? 'Вход...' : 'Войти'}</button>
+            bg-green border border-green py-3 px-6 justify-center `}>{loading ? 'Вход...' : 'Войти'}
+            </button>
             <button
               type="reset"
               onClick={() => { setEmail(''); setPassword(''); setError(''); }}
@@ -109,7 +110,13 @@ export default function LoginPage() {
           </div>
         </form>
         <div className={`${montserrat.className} flex text-wrap font-medium text-base leading-[100%] justify-center`}>
-          <p>Забыли пароль? <span className={`underline text-dark-green`}>Восстановить</span></p>
+          <p>Забыли пароль?
+            <span className={`underline text-dark-green`}>
+              <Link href="/password-recovery">
+                Восстановить
+              </Link>
+            </span>
+          </p>
         </div>
       </div>
     </div>

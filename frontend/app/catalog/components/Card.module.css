@@ -1,5 +1,5 @@
 .card {
- width: calc(33.33% - 30px * 2 / 3); /* рассчитываем ширину так, чтобы помещалось ровно три карточки в одном ряду */
+ width: calc(33.33% - 30px * 2 / 3);
   min-height: 150px;
   margin-bottom: 1rem;
   background-color: white;

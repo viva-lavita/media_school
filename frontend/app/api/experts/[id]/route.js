@@ -1,7 +1,7 @@
 export async function GET(request, { params }) {
-  const { id } = await params;
+  const { id } = params;
   try {
-    const response = await fetch(`http://217.114.11.243/api/v1/content/experts/?catalog=${id}/`, {
+    const response = await fetch(`http://217.114.11.243/api/v1/content/experts/?catalog=${id}`, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

@@ -14,6 +14,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           required
         />
+        <label className={`visually-hidden`} htmlFor="parent_lastname">Фамилия</label>
         {dataRequired && (
           <span
             className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-22 top-3 text-red-500`}
@@ -37,6 +38,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
           />
+          <label className={`visually-hidden`} htmlFor="parent_firstname">Имя</label>
           {dataRequired && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-12.5 top-3 
@@ -55,6 +57,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
             id="parent_middlename"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
           />
+          <label className={`visually-hidden`} htmlFor="parent_middlename">Отчество</label>
           <ButtonImage imgUrl={imgUrl} />
         </div>
       </div>
@@ -72,6 +75,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
           />
+          <label className={`visually-hidden`} htmlFor="parent_birthday">Дата рождения</label>
           {dataRequired && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-33 top-3 text-red-500`}
@@ -90,6 +94,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             required
           />
+          <label className={`visually-hidden`} htmlFor="parent_email">Email</label>
           {dataRequired && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-14.5 top-3 text-red-500`}
@@ -99,6 +104,7 @@ export default function ParentData({dataRequired, imgUrl, direction}) {
           )}
           <ButtonImage imgUrl={imgUrl} />
         </div>
-      </div></div>
+      </div>
+    </div>
   )
 }

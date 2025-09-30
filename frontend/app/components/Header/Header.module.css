@@ -1,31 +1,55 @@
-.hidden {
-    display: none;
-}
 .notHidden {
     display: flex;
 }
 .btn {
-    background: #DEEDAB
+    background: #DEEDAB;
+    padding: 12px 24px;
 }
 
 .header{
     font-size: 16px;
+    width: 1400px;
+    padding: 8px 40px;
 }
 
-@media (max-width: 360px) {
-    .header{
-        width: 320px;
-        padding: 5px 0;
+.logo {
+    width: 74px;
+    height: 64px;
+}
+
+.headerMenu {
+    display: none;
+}
+
+.headerActions {
+    gap: 40px;
+}
+
+@media screen and (max-width: 1400px) {
+    .headerList {
+        display: none;
     }
-    .logo {
-        width: 42px;
-        height: 36px;
+    .headerMenu {
+        display: flex;
+    }
+    .header {
+        width: 95%;
     }
 }
-@media (min-width: 361px) and (max-width: 768px) {
+
+@media screen and (max-width: 1024px) {
     .header{
-        max-width: 728px;
-        min-width: 580px;
+        width: 92%;
+        padding: 8px 0;
+    }
+    .logo {
+        width: 74px;
+        height: 64px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header{
         padding: 3px 0;
     }
     .logo {
@@ -33,23 +57,24 @@
         height: 64px;
     }
 }
-@media (min-width: 769px) and (max-width: 1024px) {
+
+@media (max-width: 640px) {
     .header{
-        max-width: 944px;
-        padding: 8px 0;
+        width: 92%;
+        padding: 5px 0;
     }
     .logo {
-        width: 74px;
-        height: 64px;
+        width: 42px;
+        height: 36px;
     }
-}
-@media (min-width: 1025px) {
-    .header{
-        max-width: 1400px;
-        padding: 8px 0;
+    .headerSocialMedia {
+        display: none;
     }
-    .logo {
-        width: 74px;
-        height: 64px;
+    .btn {
+        background: #DEEDAB;
+        padding: 8px 16px;
+    }
+    .headerActions {
+        gap: 28px;
     }
 }

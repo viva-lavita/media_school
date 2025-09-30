@@ -31,16 +31,28 @@ export default function ContactsPage () {
             </div>
           </address>
           <div className="flex gap-5">
-            <img src="/header-images/vk-button.png" alt="Вконтакте"  className="size-11.5"/>
-            <img src="/header-images/ok-button.png" alt="Одноклассники"  className="size-11.5"/>
+            <a href="#" aria-label="ВКонтакте">
+              <img
+                src="/header-images/vk-button.png"
+                alt=""
+                className="size-11.5" />
+            </a>
+
+            <a href="#" aria-label="Одноклассники">
+              <img
+                src="/header-images/ok-button.png"
+                alt=""
+                className="size-11.5" />
+            </a>
           </div>
         </div>
         <div className={`flex basis-0 grow`}>
-          <img
-            src="/images/imageSchool.png"
-            alt="Школа Перспектива"
-            className={styles.contactsImage}
-          />
+            <img
+              src="/images/imageSchool.png"
+              alt="Школа Перспектива"
+              className={styles.contactsImage}
+              tabIndex={0}
+            />
         </div>
       </div>
       <div className={styles.contactsMap}></div>
