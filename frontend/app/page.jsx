@@ -21,15 +21,15 @@ export default function Home() {
          items-center`}
     >
      <h1
-      className={`${comfortaa.className} ${styles.mainImageTextTop} font-bold`}
+      className={`${comfortaa.className} ${styles.mainImageTextTop} text-wrap font-bold`}
      >
-      Онлайн-библиотека по журналистике и медиа для школьников
+      Твоя медиашкола: создавай контент как профи!
      </h1>
      <p
       className={`${montserrat.className} ${styles.mainImageTextBottom} font-normal`}
      >
-      Проект, который объединяет школьников и журналистов. Учи жанры, тренируй
-      навыки и возвращайся к лучшим мастер-классам в медиабиблиотеке.
+      Проект, который объединяет школьников и&nbsp;журналистов. Учи&nbsp;жанры, тренируй навыки и&nbsp;возвращайся
+      к&nbsp;лучшим мастер-классам в&nbsp;медиабиблиотеке.
      </p>
     </div>
    </div>
