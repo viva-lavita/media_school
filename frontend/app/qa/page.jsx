@@ -2,209 +2,57 @@
 import { comfortaa, montserrat } from '@/lib/fonts';
 import styles from './QA.module.css';
 import QuestionsList from './components/QuestionsList';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AskQuestion from './components/AskQuestion';
-
-const QUESTIONS_DATA = [
- {
-  question:
-   'Какой уровень подготовки необходим для начала обучения? И сколько длится обучение на одном курсе?',
-  name: 'Максим Иванов',
-  answers: [],
-  data: '8 мая 2025',
-  time: '18:45',
- },
- {
-  question: 'Можно ли учиться онлайн или только офлайн?',
-  name: 'Алексей Петров',
-  answers: [
-   {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
-  ],
-  data: '4 мая 2025',
-  time: '15:45',
- },
- {
-  question:
-   'Есть ли у вас какие‑то пробные занятия или возможность понять, подойдёт ли мне формат, прежде чем платить?',
-  name: 'Ольга',
-  answers: [ {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
- {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
- {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
- {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
- {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   }
-],
-  data: '4 мая 2025',
-  time: '15:24',
- },
- {
-  question:
-   'Мне важно понять, кто именно будет вести занятия — это преподаватели, которые просто хорошо рассказывают теорию или это действующие профессионалы, которые могут поделиться реальными кейсами из своей практики?',
-  name: 'Борис Чуйков',
-  answers: [],
-  data: '3 мая 2025',
-  time: '12:55',
- },
- {
-  question:
-   'После окончания курса будет ли у меня какой‑то документ или портфолио, которое я смогу использовать при устройстве на работу, или всё ограничивается просто получением знаний без подвтерждения? Мне 16 лет и я очень хочу начать учиться в сфере медиа уже сейч…',
-  name: 'Егор Шашков',
-  answers: [ {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
- {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
- {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
- {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   }
-],
-  data: '3 мая 2025',
-  time: '12:55',
- },
- {
-  question:
-   'Будет ли реальная практика — съёмки, проекты? Или всё ограничивается лекциями и практикой из книг, например?',
-  name: 'Алена Григорьева',
-  answers: [ {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
- {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
- {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   }
-],
-  data: '3 мая 2025',
-  time: '12:08',
- },
- {
-  question:
-   'Вы помогаете как‑то с поиском работы или стажировки после окончания обучения?',
-  name: 'Василиса',
-  answers: [
-   {
-    answer:
-     'Вы помогаете как‑то с поиском работы или стажировки после окончания обучения?',
-    name: 'Василиса',
-    data: '3 мая 2025',
-    time: '12:08',
-   },
-  ],
-  data: '3 мая 2025',
-  time: '12:08',
- },
- {
-  question:
-   'Вы помогаете как‑то с поиском работы или стажировки после окончания обучения?',
-  name: 'Василиса',
-  answers: '1',
-  data: '3 мая 2025',
-  time: '12:08',
- },
- {
-  question:
-   'Вы помогаете как‑то с поиском работы или стажировки после окончания обучения?',
-  name: 'Василиса',
-  answers: [],
-  data: '3 мая 2025',
-  time: '12:08',
- },
- {
-  question:
-   'Вы помогаете как‑то с поиском работы или стажировки после окончания обучения?',
-  name: 'Василиса',
-  answers: [
-     {
-    answer: 'Мы практикуем в основном онлайн обучение',
-    name: 'Маркова Дарья Ивановна',
-    position: 'педагог по речи',
-    data: '3 мая 2025',
-    time: '12:08',
-   }
-  ],
-  data: '3 мая 2025',
-  time: '12:08',
- },
-
- {
-  question: '  У вас есть какие‑то скидки/льготы для студентов?',
-  name: 'Александра Шумская',
-  answers: [],
-  data: '26 мая 2025',
-  time: '14:57',
- },
-];
+import { formatDate } from '../utils/formatDate';
 
 export default function QAPage() {
  const [activeTab, setActiveTab] = useState('all');
+ const [questions, setQuestions] = useState([]);
+ const [loading, setLoading] = useState(true);
+ const [error, setError] = useState(null);
+
+ useEffect(() => {
+  const fetchQuestions = async () => {
+   try {
+    const response = await fetch('/api/comments?question_category=expert&ordering=-created_at');
+    if (!response.ok) {
+     throw new Error('Failed to fetch questions');
+    }
+    const data = await response.json();
+    const results = data.results || data;
+    const formatted = results.map(comment => ({
+     question: comment.text,
+     name: comment.author ? `${comment.author.first_name} ${comment.author.last_name}`.trim() || comment.author.username : 'Аноним',
+     answers: comment.answers ? comment.answers.map(answer => ({
+      answer: answer.text,
+      name: answer.author ? `${answer.author.first_name} ${answer.author.last_name}`.trim() || answer.author.username : 'Аноним',
+      position: answer.author?.post || '',
+      data: formatDate(answer.created_at),
+      time: new Date(answer.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
+     })) : [],
+     data: formatDate(comment.created_at),
+     time: new Date(comment.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
+    }));
+    setQuestions(formatted);
+    setLoading(false);
+   } catch (error) {
+    console.error('Error fetching questions:', error);
+    setError('Не удалось загрузить вопросы');
+    setLoading(false);
+   }
+  };
+
+  fetchQuestions();
+ }, []);
+
+ if (loading) {
+  return <p>Загрузка...</p>;
+ }
+
+ if (error) {
+  return <p>{error}</p>;
+ }
 
  return (
   <div className={styles.wrap}>
@@ -229,7 +77,7 @@ export default function QAPage() {
     </button>
    </div>
 
-   {activeTab === 'all' && <QuestionsList questions={QUESTIONS_DATA} />}
+   {activeTab === 'all' && <QuestionsList questions={questions} />}
 
    {activeTab === 'ask' && <AskQuestion />}
   </div>

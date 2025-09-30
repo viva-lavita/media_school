@@ -30,21 +30,43 @@ export default function AskQuestion() {
    setQuestionError(false);
   }
 
-  if (categoryError || questionError) {
+  if (!selectedCategory || !questionText.trim()) {
    alert('Заполните все необходимые поля!');
    return;
   }
 
-  try {
-   console.log(
-    `Отправляем категорию: ${selectedCategory}, вопрос: ${questionText}`
-   );
+  const categoryMap = {
+   'Вопрос к эксперту/преподавателю': 'expert',
+   'Технический вопрос': 'technical',
+   'Другое': 'other'
+  };
 
+  const questionCategory = categoryMap[selectedCategory] || 'other';
+
+  try {
+   const response = await fetch('/api/comments', {
+    method: 'POST',
+    headers: {
+     'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+     text: questionText,
+     question_category: questionCategory,
+    }),
+   });
+
+   if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Ошибка отправки вопроса');
+   }
+
+   alert('Вопрос отправлен успешно!');
    setSelectedCategory('');
    setQuestionText('');
    setCharCount(0);
   } catch (err) {
    console.error('Ошибка отправки:', err.message);
+   alert('Ошибка отправки вопроса: ' + err.message);
   }
  };
  const checkForErrors = (newValue) => {
