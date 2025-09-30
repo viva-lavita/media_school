@@ -25,7 +25,7 @@ export default function DocumentsSection({ documents }) {
      Документы для интервью
     </h2>
     <p className={`${montserrat.className} ${styles.count}`}>
-     {(documents.length)}
+     {formatDocument(documents.length)}
     </p>
    </div>
    <div className={styles.documentBox}>

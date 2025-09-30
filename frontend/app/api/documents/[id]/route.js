@@ -3,7 +3,7 @@ export async function GET(request, { params }) {
  try {
   let allResults = [];
   let currentNextUrl = '';
- let nextUrl = `http://217.114.11.243/api/v1/content/experts/?catalog_id=${id}`;
+  let nextUrl = `http://217.114.11.243/api/v1/content/documents/?catalog=${id}`;
 
   while (nextUrl && nextUrl !== currentNextUrl) {
    currentNextUrl = nextUrl;
@@ -21,8 +21,23 @@ export async function GET(request, { params }) {
    }
 
    const data = await response.json();
+   const transformedResults = data.results.map((doc) => {
+    const url = decodeURIComponent(doc.file);
+    const filename = url.split('/').pop();
+    const extension = filename.split('.').pop().toLowerCase();
+    const name = filename.replace('.' + extension, '');
+    const format = extension.toUpperCase();
 
-   allResults = allResults.concat(data.results);
+    return {
+     id: doc.id,
+     name: name,
+     createdAt: new Date(),
+     extension: extension,
+     fileUrl: doc.file,
+    };
+   });
+
+   allResults = allResults.concat(transformedResults);
    nextUrl = data.next || null;
   }
 
@@ -40,7 +55,7 @@ export async function GET(request, { params }) {
    },
   });
  } catch (error) {
-  console.error('Error fetching experts:', error.message);
+  console.error('Error fetching documents:', error.message);
   return new Response(JSON.stringify({ error: error.message }), {
    status: 500,
    headers: {

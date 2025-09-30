@@ -13,7 +13,7 @@ export default function LayoutPage() {
  const [categories, setCategories] = useState([]);
  const [activeCategory, setActiveCategory] = useState({});
  const [expertsData, setExpertsData] = useState([]);
- //const [documentsData, setDocumentsData] = useState([]);
+ const [documentsData, setDocumentsData] = useState([]);
 
  const documentSection = [
   {
@@ -62,38 +62,7 @@ export default function LayoutPage() {
    date: '10 апреля 2025',
   },
  ];
- const files = [
-  {
-   id: 1,
-   name: 'resume.pdf',
-   createdAt: new Date('2023-08-15'),
-   format: 'PDF',
-  },
-  {
-   id: 2,
-   name: 'cover_letter.docx',
-   createdAt: new Date('2023-08-16'),
-   format: 'DOCX',
-  },
-  {
-   id: 3,
-   name: 'portfolio.zip',
-   createdAt: new Date('2023-08-17'),
-   format: 'ZIP',
-  },
-  {
-   id: 4,
-   name: 'references.txt',
-   createdAt: new Date('2023-08-18'),
-   format: 'TXT',
-  },
-  {
-   id: 5,
-   name: 'additional_info.xlsx',
-   createdAt: new Date('2023-08-19'),
-   format: 'XLSX',
-  },
- ];
+
  useEffect(() => {
   handleFetch('/api/categories')
    .then((data) => {
@@ -112,6 +81,16 @@ useEffect(() => {
           photo: expert.image,
           name: expert.full_name
         })));
+      })
+      .catch(console.error);
+  }
+}, [activeCategory]);
+
+useEffect(() => {
+  if (activeCategory.id) {
+    handleFetch(`/api/documents/${activeCategory.id}`)
+      .then((data) => {
+        setDocumentsData(data.results.map(doc => ({ ...doc, createdAt: new Date(doc.createdAt) })));
       })
       .catch(console.error);
   }
@@ -158,7 +137,7 @@ useEffect(() => {
       </section>
      </>
     )}
-    <DocumentsSection documents={files} />
+    <DocumentsSection documents={documentsData} />
     <SectionListCard title={'Видео-материалы'} documents={documentSection} />
     <SectionListCard title={'Фотогалерея'} documents={documentSectionPhoto} />
    </main>

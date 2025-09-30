@@ -23,7 +23,7 @@ export default function FileItem({ file }) {
   <div className={styles.propertyContainer}>
     <span className={`${montserrat.className} ${styles.fileDate}`}>{new Intl.DateTimeFormat('ru-RU').format(file.createdAt)}</span>
     <span className={`${montserrat.className} ${styles.fileFormat}`}>Формат {file.format}</span>
-    <a href="#" download className={`${montserrat.className} ${styles.downloadLink}`}>Скачать</a>
+    <a href={file.fileUrl} download className={`${montserrat.className} ${styles.downloadLink}`}>Скачать</a>
   </div>
 </div>
  );
