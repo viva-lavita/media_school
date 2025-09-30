@@ -26,6 +26,9 @@ class VideoContentSerializer(serializers.ModelSerializer):
             "id",
             "catalog_id",
             "video_path",
+            "title",
+            "category",
+            "created_at",
         )
 
 

@@ -57,9 +57,9 @@ class PhotoContentAdmin(admin.ModelAdmin):
 
 @admin.register(VideoContent)
 class VideoContentAdmin(admin.ModelAdmin):
-    list_display = ("id", "catalog", "created_at", "short_description")
+    list_display = ("id", "catalog", "category", "created_at", "short_description")
     search_fields = ("catalog__name", "description")
-    list_filter = ("catalog__name",)
+    list_filter = ("catalog__name", "category")
     show_facets = admin.ShowFacets.ALWAYS
     date_hierarchy = "created_at"
 
