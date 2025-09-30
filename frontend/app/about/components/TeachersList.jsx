@@ -12,8 +12,8 @@ export default function TeachersList({ teachers, titleList }) {
    <p className={`${montserrat.className} ${styles.teacherListHeader}`}>
     {titleList}
    </p>
-   {teachers.map((teacher, index) => (
-    <TeacherCard key={index} teacher={teacher} />
+   {teachers.map((teacher) => (
+    <TeacherCard key={teacher.id} teacher={teacher} />
    ))}
   </div>
  );

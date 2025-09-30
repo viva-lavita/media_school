@@ -39,13 +39,13 @@ export default function Experts() {
 
   const prevSlide = () => {
     setCurrentIndex((prev) => {
-      prev === 0 ? teachers.length - 1 : prev - 1;
+      return prev === 0 ? teachers.length - 1 : prev - 1;
     });
   }
 
   const nextSlide = () => {
     setCurrentIndex((prev) => {
-      prev === teachers.length - 1 ? 0 : prev + 1;
+      return prev === teachers.length - 1 ? 0 : prev + 1;
     });
   }
 
