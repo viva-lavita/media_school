@@ -1,32 +1,51 @@
 export async function GET(request, { params }) {
-  const { id } = params;
-  try {
-    const response = await fetch(`http://217.114.11.243/api/v1/content/experts/?catalog=${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Accept-Charset': 'utf-8',
-      },
-    });
+ const { id } = params;
+ try {
+  let allResults = [];
+  let currentNextUrl = '';
+ let nextUrl = `http://217.114.11.243/api/v1/content/experts/?catalog_id=${id}`;
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+  while (nextUrl && nextUrl !== currentNextUrl) {
+   currentNextUrl = nextUrl;
+   const response = await fetch(nextUrl, {});
 
-    const data = await response.json();
-    return new Response(JSON.stringify(data), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-    });
-  } catch (error) {
-    console.error('Error fetching news detail:', error);
-    return new Response(JSON.stringify({ error: 'Not found' }), {
-      status: 404,
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-    });
+   if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+   }
+
+   const contentType = response.headers.get('Content-Type');
+   if (!contentType.includes('application/json')) {
+    throw new Error(
+     `Invalid Content Type received: ${contentType}. Expected application/json.`
+    );
+   }
+
+   const data = await response.json();
+
+   allResults = allResults.concat(data.results);
+   nextUrl = data.next || null;
   }
+
+  const aggregatedData = {
+   count: allResults.length,
+   next: null,
+   previous: null,
+   results: allResults,
+  };
+
+  return new Response(JSON.stringify(aggregatedData), {
+   status: 200,
+   headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+   },
+  });
+ } catch (error) {
+  console.error('Error fetching experts:', error.message);
+  return new Response(JSON.stringify({ error: error.message }), {
+   status: 500,
+   headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+   },
+  });
+ }
 }

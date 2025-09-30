@@ -17,6 +17,7 @@ export default function LayoutPage() {
 
  const documentSection = [
   {
+   id: 1,
    imageUrl: '/about-images/Ivanova.png',
    title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
    date: '10 апреля 2025',
@@ -49,11 +50,13 @@ export default function LayoutPage() {
    date: '10 апреля 2025',
   },
   {
+   id: 2,
    imageUrl: '/about-images/Ivanova.png',
    title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
    date: '10 апреля 2025',
   },
   {
+   id: 3,
    imageUrl: '/about-images/Ivanova.png',
    title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
    date: '10 апреля 2025',
@@ -100,20 +103,21 @@ export default function LayoutPage() {
    .catch(console.error);
  }, []);
 
- useEffect(() => {
+useEffect(() => {
   if (activeCategory.id) {
-   handleFetch(`/api/experts/${activeCategory.id}`)
-    .then((data) => {
-     setExpertsData(data.results);
-     console.log(data.results);
-    })
-    .catch((error) => {
-     console.error('Ошибка при получении экспертов:', error);
-    });
+    handleFetch(`/api/experts/${activeCategory.id}`)
+      .then((data) => {
+        setExpertsData(data.results.filter(expert => expert && expert.catalog_id == activeCategory.id).map(expert => ({
+          ...expert,
+          photo: expert.image,
+          name: expert.full_name
+        })));
+      })
+      .catch(console.error);
   }
- }, [activeCategory.id]);
-console.log(activeCategory)
-console.log(expertsData)
+}, [activeCategory]);
+
+ console.log(expertsData);
  return (
   <div className={styles.wrap}>
    <h3 className={`${comfortaa.className} ${styles.title}`}>

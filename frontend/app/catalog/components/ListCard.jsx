@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Card from './Card';
+import FileItem from './FileItem';
 import styles from './DocumentsSection.module.css';
 import styleSection from '../layoutCatalog.module.css';
 import { comfortaa, montserrat } from '@/lib/fonts';

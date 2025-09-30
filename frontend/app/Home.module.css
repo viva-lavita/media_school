@@ -18,12 +18,12 @@
 .mainContent {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 120px;
   margin: 0 auto;
   line-height: 100%;
   max-width:  1400px;;
-  width: calc(100vw-80px);
+  width: calc(100vw - 80px);
 }
 
 .mainImage {
@@ -31,29 +31,29 @@
   background-repeat: no-repeat;
   box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.4);
   height: 850px;
-  background-position: top left;
-  background-size: 100% 140%;
+  background-position: center 10%;
+  background-size: cover;
 }
 
-.mainImageContent{
-  width: 1129px;
+.mainImageContent {
+  max-width: 1129px;
   top: 69%;
   letter-spacing: 0;
 }
 
 .mainImageTextTop {
   font-size: 52px;
+  line-height: 110%;
 }
 
 .mainImageTextBottom {
-  width: 841px;
-  font-size: 18px
+  max-width: 841px;
+  font-size: 18px;
+  line-height: 140%;
 }
 
 .aboutLearning {
   text-align: center;
-  line-height: 100%;
-  font-weight: 700;
   font-size: 42px;
 }
 
@@ -79,13 +79,14 @@
 
 .aboutLearningContainer {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 
 
 .topicsStudy {
   width: 447px;
+  min-width: 301px;
   height: 200px;
 }
 
@@ -96,7 +97,6 @@
   transform: translate(-50%, -50%);
   font-size: 28px;
   font-weight: 700;
-  letter-spacing: 0;
   line-height: 130%;
   color: #ffffff;
   text-align: center;
@@ -196,8 +196,14 @@
   line-height: 140%;
 }
 
+@media screen and (max-width: 1200px) {
+  .topicsStudyText {
+    font-size: 22px;
+    line-height: 100%;
+  }
+}
+
 @media screen and (max-width: 1024px) {
-  .mainContent,
   .skillsTraining,
   .mediaSchoolSpecial,
   .mediaSchoolExperience,
@@ -225,7 +231,7 @@
     font-size: 36px;
   }
   .mainImageContent {
-    width: 936px;
+    max-width: 936px;
     top: 60%;
   }
   .topicsStudy {
@@ -262,8 +268,18 @@
     gap: 8px;
   }
 }
+
+@media screen and (max-width: 970px) {
+  .aboutLearningContainer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .topicsStudy {
+    width: 354px;
+    height: 135px;
+  }
+}
+
 @media screen and (max-width: 768px) {
-  .mainContent,
   .skillsTraining,
   .mediaSchoolSpecial,
   .mediaSchoolExperience,
@@ -276,7 +292,6 @@
     height: 550px;
   }
   .aboutLearningContainer {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
   }
   .mainImageTextTop {
@@ -286,14 +301,10 @@
     font-size: 28px;
   }
   .mainImageTextBottom {
-    width: 728px;
+    max-width: 728px;
   }
   .mainImageContent {
-    width: 728px;
-  }
-  .topicsStudy {
-    width: 354px;
-    height: 135px;
+    max-width: 728px;
   }
   .topicsStudyText {
     font-size: 22px;
@@ -337,7 +348,22 @@
     line-height: 100%;
   }
 }
-@media screen and (max-width: 360px) {
+
+@media screen and (max-width: 730px) {
+  .aboutLearningContainer {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .topicsStudy {
+    width: 482px;
+    height: 240px;
+  }
+  .topicsStudyText {
+    font-size: 28px;
+    line-height: 130%;
+  }
+}
+
+@media screen and (max-width: 500px) {
   .mainContent,
   .skillsTraining,
   .mediaSchoolSpecial,
@@ -349,7 +375,7 @@
   }
   .mainImage {
     height: 750px;
-    background-size: 300% 100%;
+    background-size: cover;
   }
   .aboutLearningContainer {
     display: flex;
@@ -357,7 +383,7 @@
     gap: 20px;
   }
   .mainImageContent {
-    width: 320px;
+    max-width: 320px;
     top: 50%;
   }
   .aboutLearning {
@@ -367,8 +393,9 @@
     font-size: 28px;
   }
   .mainImageTextBottom {
-    width: 320px;
+    max-width: 320px;
     font-size: 16px;
+    line-height: 130%;
   }
   .topicsStudy {
     width: 320px;
