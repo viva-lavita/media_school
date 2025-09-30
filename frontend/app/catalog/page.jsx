@@ -14,35 +14,8 @@ export default function LayoutPage() {
  const [activeCategory, setActiveCategory] = useState({});
  const [expertsData, setExpertsData] = useState([]);
  const [documentsData, setDocumentsData] = useState([]);
+ const [videosData, setVideosData] = useState([]);
 
- const documentSection = [
-  {
-   id: 1,
-   imageUrl: '/about-images/Ivanova.png',
-   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
-   date: '10 апреля 2025',
-  },
-    {
-   imageUrl: '/about-images/Ivanova.png',
-   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
-   date: '10 апреля 2025',
-  },
-    {
-   imageUrl: '/about-images/Ivanova.png',
-   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
-   date: '10 апреля 2025',
-  },
-  {
-   imageUrl: '/about-images/Ivanova.png',
-   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
-   date: '10 апреля 2025',
-  },
-  {
-   imageUrl: '/about-images/Ivanova.png',
-   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
-   date: '10 апреля 2025',
-  },
- ];
  const documentSectionPhoto = [
   {
    imageUrl: '/about-images/Ivanova.png',
@@ -96,7 +69,18 @@ useEffect(() => {
   }
 }, [activeCategory]);
 
+useEffect(() => {
+  if (activeCategory.id) {
+    handleFetch(`/api/videos/${activeCategory.id}`)
+      .then((data) => {
+        setVideosData(data.results);
+      })
+      .catch(console.error);
+  }
+}, [activeCategory]);
+
  console.log(expertsData);
+ console.log(videosData);
  return (
   <div className={styles.wrap}>
    <h3 className={`${comfortaa.className} ${styles.title}`}>
@@ -138,7 +122,7 @@ useEffect(() => {
      </>
     )}
     <DocumentsSection documents={documentsData} />
-    <SectionListCard title={'Видео-материалы'} documents={documentSection} />
+    <SectionListCard title={'Видео-материалы'} documents={videosData} />
     <SectionListCard title={'Фотогалерея'} documents={documentSectionPhoto} />
    </main>
   </div>
