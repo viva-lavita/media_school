@@ -30,10 +30,13 @@ class PhotoContentViewSet(RetrieveListViewSet):
     Эндпоинты для работы с фотографиями по категориям.
 
     Доступно всем.
+    Фильтрация по id категории.
     """
 
     queryset = PhotoContent.objects.all()
     serializer_class = PhotoContentSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ("catalog",)
 
 
 class VideoContentViewSet(RetrieveListViewSet):
@@ -41,10 +44,13 @@ class VideoContentViewSet(RetrieveListViewSet):
     Эндпоинты для работы с видео по категориям.
 
     Доступно всем.
+    Фильтрация по id категории.
     """
 
     queryset = VideoContent.objects.all()
     serializer_class = VideoContentSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ("catalog",)
 
 
 class DocumentContentViewSet(RetrieveListViewSet):
@@ -52,10 +58,13 @@ class DocumentContentViewSet(RetrieveListViewSet):
     Эндпоинты для работы с документами по категориям.
 
     Доступно всем.
+    Фильтрация по id категории.
     """
 
     queryset = DocumentContent.objects.all()
     serializer_class = DocumentContentSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ("catalog",)
 
 
 class ExpertViewSet(RetrieveListViewSet):
