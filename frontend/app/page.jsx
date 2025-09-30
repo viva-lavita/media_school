@@ -1,18 +1,74 @@
 'use client';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import styles from './Home.module.css';
 import { comfortaa } from '@/lib/fonts';
 import { montserrat } from '@/lib/fonts';
-import { hidden } from 'next/dist/lib/picocolors';
-import { c } from 'react/compiler-runtime';
 import WhatAreWeStudyingSection from './components/WhatAreWeStudyingSection/WhatAreWeStudyingSection';
 import Advantages from './components/Advantages/Advantages';
 import Experts from './components/Experts/Experts';
 import PageWidthContext from './context/PageWidthProvider';
 import Link from "next/link";
 
+const feedbacks = [
+ {
+  src: '/images/avatar.png',
+  alt: 'аватар Анна',
+  name: 'Анна, 15 лет',
+  text: '«Я всегда любила снимать видео на телефон, но делала это скорее интуитивно. На мастер-классе по видеосъёмке нам объяснили, как строить кадр, зачем нужен сценарий и как пользоваться светом. Всё было интересно и понятно — не просто лекция, а живая работа с камерой. Мы сразу пробовали снимать сами. Я даже попробовала себя в роли режиссёра и поняла, что хочу продолжать этим заниматься. Теперь мечтаю поступить в вуз, связанный с медиа»',
+ },
+ {
+  src: '/images/feedback-kirill.png',
+  alt: 'отзывы Кирилл',
+  name: 'Кирилл, 17 лет',
+  text: '«На одном из занятий у нас был гость — настоящий журналист с телевидения. Он рассказал, как проводить интервью, что такое открытые и закрытые вопросы, и как не бояться камеры. А потом мы сами брали интервью у учителей и учеников. Это был новый опыт, и я понял, что мне нравится быть в центре событий. До этого я вообще не знал, что журналистика может быть такой живой и интересной».',
+ },
+ {
+  src: '/images/feedback-liza.png',
+  alt: 'аватар Лиза',
+  name: 'Лиза, 14 лет',
+  text: '«Я попала на мастер-класс по блогингу — и это было лучше, чем любой урок! Нас научили, как вести себя в кадре, о чём говорить, чтобы было интересно, и как монтировать видео. Мы сразу начали снимать свой блог, и я даже записала первое видео про школьный праздник. Поняла, что это не просто развлечение, а настоящая работа, которая требует подготовки. Теперь я веду свой видеодневник для школьного канала».',
+ },
+ {
+  src: '/images/avatar.png',
+  alt: 'аватар Даниил',
+  name: 'Даниил, 16 лет',
+  text: '«Я в медиагруппе почти с самого начала. За это время мы научились снимать, писать тексты, брать интервью и даже делать простые новостные сюжеты. У нас уже есть несколько видео на сайте — приятно видеть результат своей работы. Мне нравится, что всё по‑настоящему: у нас есть задачи, дедлайны, съёмки. Это развивает и ответственность, и креативность. После школы хочу поступать на журналиста, и опыт в Медиашколе точно поможет».',
+ },
+];
+
 export default function Home() {
  const { pageWidth } = useContext(PageWidthContext);
+
+ const [currentIndex, setCurrentIndex] = useState(0);
+
+ const prevSlide = () => {
+  setCurrentIndex((prev) => {
+   return prev === 0 ? feedbacks.length - 1 : prev - 1;
+  });
+ };
+
+ const nextSlide = () => {
+  setCurrentIndex((prev) => {
+   return prev === feedbacks.length - 1 ? 0 : prev + 1;
+  });
+ };
+
+ let visibleCount = 1;
+ if (pageWidth >= 768 && pageWidth < 1024) visibleCount = 2;
+ else if (pageWidth >= 1024 && pageWidth < 1400) visibleCount = 3;
+ else if (pageWidth >= 1400) visibleCount = 4;
+
+ const visibleFeedbacks = feedbacks.slice(
+   currentIndex,
+   currentIndex + visibleCount
+ );
+
+ if (visibleFeedbacks.length < visibleCount) {
+  visibleFeedbacks.push(
+    ...feedbacks.slice(0, visibleCount - visibleFeedbacks.length)
+  );
+ }
+
  return (
   <div className={styles.main}>
    <div className={`${styles.mainImage} flex justify-center relative`}>
@@ -37,7 +93,7 @@ export default function Home() {
     <WhatAreWeStudyingSection />
     <div className={`${styles.skillsTraining} flex flex-col gap-10`}>
      <h2
-      className={`${comfortaa.className} ${styles.aboutLearning} ${styles.aboutLearningTitleContainer}`}
+      className={`${comfortaa.className} ${styles.aboutLearning} ${styles.aboutLearningTitleContainer} font-bold leading-[110%]`}
      >
       Хотите научиться делать интервью, видео и&nbsp;блоги?
      </h2>
@@ -101,13 +157,13 @@ export default function Home() {
     <Advantages />
     <Experts />
     <div className={`${styles.announcements} flex flex-col gap-10`}>
-     <h2 className={`${comfortaa.className} ${styles.aboutLearning}`}>
+     <h2 className={`${comfortaa.className} ${styles.aboutLearning} font-bold leading-[100%]`}>
       Новости, анонсы и конкурсы
      </h2>
      <div className={`${styles.announcementsContainer}`}>
-      <div className={`flex flex-col basis-0 grow gap-2`}>
+      <div className={`${styles.announcementsContainerItem} flex flex-col gap-2`}>
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/news.png" alt="новости" />
+        <img src="/images/news.png" alt="новости" className={`h-[300px]`}/>
         <figcapture
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
@@ -137,11 +193,11 @@ export default function Home() {
       </div>
       <div
        className={`${
-        pageWidth < 768 ? 'hidden' : ''
-       } flex flex-col basis-0 grow gap-2`}
+        pageWidth < 729 ? 'hidden' : ''
+       } ${styles.announcementsContainerItem} flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/announcements.png" alt="анонсы" />
+        <img src="/images/announcements.png" alt="анонсы" className={`h-[300px]`} />
         <figcapture
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
@@ -172,17 +228,17 @@ export default function Home() {
       <div
        className={`${
         pageWidth < 1920 ? 'hidden' : ''
-       } flex flex-col basis-0 grow gap-2`}
+       } flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/news-together.png" alt="новости" />
+        <img src="/images/news-together.png" alt="новости" className={`h-[300px]`}/>
         <figcapture
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
          НОВОСТИ
         </figcapture>
        </figure>
-       <div className={`flex flex-col gap-2`}>
+       <div className={`${styles.announcementsContainerItem} flex flex-col gap-2`}>
         <p
          className={`${montserrat.className} font-normal text-lg leading-[140%]`}
         >
@@ -213,180 +269,57 @@ export default function Home() {
     </div>
     <div className={`${styles.feedback} relative flex flex-col gap-7`}>
      <div className={`flex flex-col gap-10`}>
-      <h2 className={`${comfortaa.className} ${styles.aboutLearning}`}>
+      <h2
+        className={`${comfortaa.className} ${styles.aboutLearning} font-bold leading-[100%]`}
+      >
        Отзывы о&nbsp;проекте
       </h2>
-      <div className={`${styles.feedbackContent}`}>
-       <div
-        className={`flex flex-col basis-0 grow gap-2 p-4 border-green border bg-light-green`}
-       >
-        <div className={`flex items-center gap-2`}>
-         <img
-          src="/images/avatar.png"
-          alt="аватар"
-          className={`h-[100px] w-[100px] rounded-full`}
-         />
-         <p
-          className={`${montserrat.className} font-medium text-base leading-[100%]`}
+
+      <div className={`${styles.feedbackContent} flex gap-6 transition-all duration-500`}>
+       {visibleFeedbacks.map((item, idx) => (
+         <div
+           key={idx}
+           className={`${styles.feedbackContentItem} flex flex-col gap-2 p-4 border-green border bg-light-green`}
          >
-          Анна, 15&nbsp;лет
-         </p>
-        </div>
-        <div className={`flex flex-col gap-3`}>
-         <p
-          className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}
-         >
-          «Я&nbsp;всегда любила снимать видео на&nbsp;телефон, но&nbsp;делала
-          это&nbsp;скорее интуитивно. На&nbsp;мастер-классе по&nbsp;видеосъёмке
-          нам&nbsp;объяснили, как&nbsp;строить кадр, зачем нужен сценарий
-          и&nbsp;как&nbsp;пользоваться светом. Всё&nbsp;было интересно
-          и&nbsp;понятно&nbsp;— не&nbsp;просто лекция, а&nbsp;живая работа
-          с&nbsp;камерой. Мы&nbsp;сразу пробовали снимать сами.
-          Я&nbsp;даже&nbsp;попробовала себя в&nbsp;роли режиссёра и&nbsp;поняла,
-          что&nbsp;хочу продолжать этим заниматься. Теперь мечтаю поступить
-          в&nbsp;вуз, связанный с&nbsp;медиа»
-         </p>
-         <p
-          className={`${montserrat.className} ${styles.materialCatalog} font-medium text-base leading-[100%] 
-                  text-grey-2`}
-         >
-          ЧИТАТЬ ПОЛНОСТЬЮ
-         </p>
-        </div>
-       </div>
-       <div
-        className={`${
-         pageWidth >= 768
-          ? 'flex flex-col basis-0 grow gap-2 p-4 border-green border bg-light-green'
-          : 'hidden'
-        }`}
-       >
-        <div className={`flex items-center gap-2`}>
-         <img
-          src="/images/feedback-kirill.png"
-          alt="отзывы Кирилл"
-          className={`h-[100px] w-[100px] rounded-full`}
-         />
-         <p
-          className={`${montserrat.className} font-medium text-base leading-[100%]`}
-         >
-          Кирилл, 17&nbsp;лет
-         </p>
-        </div>
-        <div className={`flex flex-col gap-3`}>
-         <p
-          className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}
-         >
-          «На&nbsp;одном из&nbsp;занятий у&nbsp;нас&nbsp;был гость&nbsp;—
-          настоящий журналист с&nbsp;телевидения. Он&nbsp;рассказал,
-          как&nbsp;проводить интервью, что&nbsp;такое открытые и&nbsp;закрытые
-          вопросы, и&nbsp;как&nbsp;не&nbsp;бояться камеры. А&nbsp;потом
-          мы&nbsp;сами брали интервью у&nbsp;учителей и&nbsp;учеников.
-          Это&nbsp;был&nbsp;новый опыт, и&nbsp;я&nbsp;понял,
-          что&nbsp;мне&nbsp;нравится быть в&nbsp;центре событий.
-          До&nbsp;этого&nbsp;я&nbsp;вообще не&nbsp;знал, что&nbsp;журналистика
-          может быть такой живой и&nbsp;интересной».
-         </p>
-         <p
-          className={`${montserrat.className} ${styles.materialCatalog} font-medium text-base leading-[100%] text-grey-2`}
-         >
-          ЧИТАТЬ ПОЛНОСТЬЮ
-         </p>
-        </div>
-       </div>
-       <div
-        className={`${
-         pageWidth >= 1024
-          ? 'flex flex-col basis-0 grow gap-2 p-4 border-green border bg-light-green'
-          : 'hidden'
-        }`}
-       >
-        <div className={`flex items-center gap-2`}>
-         <img
-          src="/images/feedback-liza.png"
-          alt="аватар"
-          className={`h-[100px] w-[100px] rounded-full`}
-         />
-         <p
-          className={`${montserrat.className} font-medium text-base leading-[100%]`}
-         >
-          Лиза, 14&nbsp;лет
-         </p>
-        </div>
-        <div className={`flex flex-col gap-3`}>
-         <p
-          className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}
-         >
-          «Я&nbsp;попала на&nbsp;мастер-класс по&nbsp;блогингу&nbsp;—
-          и&nbsp;это&nbsp;было лучше, чем&nbsp;любой урок! Нас&nbsp;научили,
-          как&nbsp;вести себя в&nbsp;кадре, о&nbsp;чём&nbsp;говорить,
-          чтобы&nbsp;было интересно, и&nbsp;как&nbsp;монтировать видео.
-          Мы&nbsp;сразу начали снимать свой блог,
-          и&nbsp;я&nbsp;даже&nbsp;записала первое видео про&nbsp;школьный
-          праздник. Поняла, что&nbsp;это&nbsp;не&nbsp;просто развлечение,
-          а&nbsp;настоящая работа, которая требует подготовки. Теперь
-          я&nbsp;веду свой видеодневник для&nbsp;школьного канала».
-         </p>
-         <p
-          className={`${montserrat.className} ${styles.materialCatalog} font-medium text-base leading-[100%] text-grey-2`}
-         >
-          ЧИТАТЬ ПОЛНОСТЬЮ
-         </p>
-        </div>
-       </div>
-       <div
-        className={`${
-         pageWidth >= 1920
-          ? 'flex flex-col basis-0 grow gap-2 p-4 border-green border bg-light-green'
-          : 'hidden'
-        }`}
-       >
-        <div className={`flex items-center gap-2`}>
-         <img
-          src="/images/avatar.png"
-          alt="аватар"
-          className={`h-[100px] w-[100px] rounded-full`}
-         />
-         <p
-          className={`${montserrat.className} font-medium text-base leading-[100%]`}
-         >
-          Даниил, 16&nbsp;лет
-         </p>
-        </div>
-        <div className={`flex flex-col gap-3`}>
-         <p
-          className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}
-         >
-          «Я&nbsp;в&nbsp;медиагруппе почти с&nbsp;самого начала.
-          За&nbsp;это&nbsp;время мы&nbsp;научились снимать, писать тексты, брать
-          интервью и&nbsp;даже&nbsp;делать простые новостные сюжеты.
-          У&nbsp;нас&nbsp;уже есть&nbsp;несколько видео на&nbsp;сайте&nbsp;—
-          приятно видеть результат своей работы. Мне&nbsp;нравится,
-          что&nbsp;всё&nbsp;по‑настоящему: у&nbsp;нас&nbsp;есть&nbsp;задачи,
-          дедлайны, съёмки. Это&nbsp;развивает и&nbsp;ответственность,
-          и&nbsp;креативность. После&nbsp;школы хочу поступать
-          на&nbsp;журналиста, и&nbsp;опыт в&nbsp;Медиашколе точно поможет».
-         </p>
-         <p
-          className={`${montserrat.className} ${styles.materialCatalog} 
-                  font-medium text-base leading-[100%] text-grey-2`}
-         >
-          ЧИТАТЬ ПОЛНОСТЬЮ
-         </p>
-        </div>
-       </div>
+          <div className={`flex items-center gap-2`}>
+           <img
+             src={item.src}
+             alt={item.alt}
+             className={`h-[100px] w-[100px] rounded-full`}
+           />
+           <p
+             className={`${montserrat.className} font-medium text-base leading-[100%]`}
+           >
+            {item.name}
+           </p>
+          </div>
+          <div className={`flex flex-col gap-3`}>
+           <p
+             className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}
+           >
+            {item.text}
+           </p>
+           <p
+             className={`${montserrat.className} ${styles.materialCatalog} font-medium text-base leading-[100%] text-grey-2`}
+           >
+            ЧИТАТЬ ПОЛНОСТЬЮ
+           </p>
+          </div>
+         </div>
+       ))}
       </div>
      </div>
+
      <div
-      className={`${
-       pageWidth >= 1920 ? 'absolute top-[7px] right-0' : 'justify-center'
-      } flex gap-3`}
+       className={`${
+         pageWidth >= 1920 ? 'absolute top-[7px] right-0' : 'justify-center'
+       } flex gap-3`}
      >
-      <button aria-label="Previous">
+      <button aria-label="Предыдущее" onClick={prevSlide}>
        <img src="/images/ArrowLeft.svg" alt="" />
       </button>
 
-      <button aria-label="Next">
+      <button aria-label="Следующее" onClick={nextSlide}>
        <img src="/images/ArrowRight.svg" alt="" />
       </button>
      </div>

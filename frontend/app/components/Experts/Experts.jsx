@@ -67,13 +67,13 @@ export default function Experts() {
 
   return (
     <div className={`${styles.mediaSchoolExperience} flex flex-col`}>
-      <h2 className={`${comfortaa.className} ${styles.aboutLearning}`}>
+      <h2 className={`${comfortaa.className} ${styles.aboutLearning} font-bold leading-[100%]`}>
         Журналисты и&nbsp;эксперты, которые делятся опытом
       </h2>
       <div className={`${styles.mediaSchoolExperienceTeachers} flex gap-6 transition-all duration-500`}>
         {visibleTeachers.map((teacher, idx) => (
-          <div key={idx} className="flex flex-col basis-0 grow gap-4">
-            <img src={teacher.src} alt={teacher.alt} className="h-100" />
+          <div key={idx} className={`${styles.mediaSchoolTeacher} flex flex-col gap-4`}>
+            <img src={teacher.src} alt={teacher.alt} className={`h-100`} />
             <div className={`flex flex-col gap-2`}>
               <h3
                 className={`${comfortaa.className} ${styles.mediaSchoolExperienceTeacher} font-bold leading-[100%]`}
@@ -89,11 +89,11 @@ export default function Experts() {
           </div>
         ))}
       </div>
-      <div className={`flex gap-3 justify-center mt-4`}>
-        <button aria-label="Предыдущее" onClick={prevSlide}>
+      <div className={`flex gap-3 justify-center mt-22`}>
+        <button aria-label="Предыдущее" onClick={prevSlide} className={`cursor-pointer`}>
           <img src="/images/ArrowLeft.svg" alt="" />
         </button>
-        <button aria-label="Следующее" onClick={nextSlide}>
+        <button aria-label="Следующее" onClick={nextSlide} className={`cursor-pointer`}>
           <img src="/images/ArrowRight.svg" alt="" />
         </button>
       </div>
