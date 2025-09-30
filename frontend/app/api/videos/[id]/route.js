@@ -1,5 +1,5 @@
 export async function GET(request, { params }) {
- const { id } = params;
+ const { id } = await params;
  try {
   let allResults = [];
   let currentNextUrl = '';

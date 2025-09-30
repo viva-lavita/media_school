@@ -3,8 +3,6 @@ import { useContext } from 'react';
 import styles from './Home.module.css';
 import { comfortaa } from '@/lib/fonts';
 import { montserrat } from '@/lib/fonts';
-import { hidden } from 'next/dist/lib/picocolors';
-import { c } from 'react/compiler-runtime';
 import WhatAreWeStudyingSection from './components/WhatAreWeStudyingSection/WhatAreWeStudyingSection';
 import Advantages from './components/Advantages/Advantages';
 import Experts from './components/Experts/Experts';
@@ -108,11 +106,11 @@ export default function Home() {
       <div className={`flex flex-col basis-0 grow gap-2`}>
        <figure className={`flex flex-col gap-3`}>
         <img src="/images/news.png" alt="новости" />
-        <figcapture
+        <figcaption
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
          НОВОСТИ
-        </figcapture>
+        </figcaption>
        </figure>
        <div className={`flex flex-col gap-2`}>
         <p
@@ -142,11 +140,11 @@ export default function Home() {
       >
        <figure className={`flex flex-col gap-3`}>
         <img src="/images/announcements.png" alt="анонсы" />
-        <figcapture
+        <figcaption
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
          АНОНСЫ
-        </figcapture>
+        </figcaption>
        </figure>
        <div className={`flex flex-col gap-2`}>
         <p
@@ -176,11 +174,11 @@ export default function Home() {
       >
        <figure className={`flex flex-col gap-3`}>
         <img src="/images/news-together.png" alt="новости" />
-        <figcapture
+        <figcaption
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
          НОВОСТИ
-        </figcapture>
+        </figcaption>
        </figure>
        <div className={`flex flex-col gap-2`}>
         <p

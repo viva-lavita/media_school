@@ -2,6 +2,7 @@
 import { comfortaa } from '@/lib/fonts';
 import styles from './layoutCatalog.module.css';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import DescriptionSection from '../about/components/DescriptionSection';
 import TeachersList from '../about/components/TeachersList';
 import handleFetch from '../utils/fetchErrorHandle';
@@ -15,6 +16,7 @@ export default function LayoutPage() {
  const [expertsData, setExpertsData] = useState([]);
  const [documentsData, setDocumentsData] = useState([]);
  const [videosData, setVideosData] = useState([]);
+ const searchParams = useSearchParams();
 
  const documentSectionPhoto = [
   {
@@ -41,6 +43,26 @@ export default function LayoutPage() {
    .then((data) => {
     setCategories(data.results);
     setActiveCategory(data.results[0]);
+
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      const reverseMap = {
+        'blogging': 'Блогинг',
+        'videotaping': 'Видеосъемка',
+        'videotaping-uas': 'Видеосъемка с помощью БАС',
+        'video-editing': 'Монтаж видео',
+        'photographing': 'Фотографирование',
+        'photo-processing': 'Обработка фото',
+        'storytelling': 'Сторителлинг',
+        'interviewing': 'Интервьюирование',
+        'longread': 'Лонгрид',
+      };
+      const categoryName = reverseMap[categoryParam];
+      if (categoryName) {
+        const found = data.results.find(cat => cat.name === categoryName);
+        if (found) setActiveCategory(found);
+      }
+    }
    })
    .catch(console.error);
  }, []);
