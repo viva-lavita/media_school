@@ -172,7 +172,7 @@ class Comment(models.Model):
                     (Q(news__isnull=False) & Q(announcement__isnull=True) & Q(competition__isnull=True))
                     | (Q(news__isnull=True) & Q(announcement__isnull=False) & Q(competition__isnull=True))
                     | (Q(news__isnull=True) & Q(announcement__isnull=True) & Q(competition__isnull=False))
-                    | (Q(news__isnull=False) & Q(announcement__isnull=False) & Q(competition__isnull=False))
+                    | (Q(news__isnull=True) & Q(announcement__isnull=True) & Q(competition__isnull=True))
                 ),
             ),
         ]
