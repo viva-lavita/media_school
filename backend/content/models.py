@@ -40,14 +40,20 @@ class PhotoContent(models.Model):
         return self.image[:20]
 
 
+# TODO: расширить категории
 class VideoContent(models.Model):
     """Видеоконтент школы."""
+
+    class Category(models.TextChoices):
+        MASTERCLASS = "masterclass", "Мастер-класс"
 
     catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE, verbose_name="Категория")
     video_path = models.URLField(verbose_name="Ссылка на видео")
     description = models.CharField(
         max_length=510, null=True, blank=True, verbose_name="Описание видео (для внутреннего использования)"
     )
+    title = models.CharField(max_length=510, null=True, blank=True, verbose_name="Заголовок")
+    category = models.CharField(max_length=255, choices=Category.choices, default=Category.MASTERCLASS)
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
 
     class Meta:
