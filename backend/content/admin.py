@@ -1,11 +1,14 @@
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.sites import AdminSite
 
 from api.constants import ADMIN_TEXT_LEN
 from content.models import (
     Catalog,
+    ContentCategory,
     DocumentContent,
     Expert,
+    Photo,
     PhotoContent,
     VideoContent,
 )
@@ -15,6 +18,12 @@ AdminSite.empty_value_display = "-"
 
 @admin.register(Catalog)
 class CatalogAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    search_fields = ("name",)
+
+
+@admin.register(ContentCategory)
+class ContentCategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name",)
 
@@ -38,13 +47,19 @@ class DocumentContentAdmin(admin.ModelAdmin):
         return obj.file.name[:ADMIN_TEXT_LEN] + "..."
 
 
+class PhotoInline(admin.TabularInline):
+    model = Photo
+    extra = 2
+
+
 @admin.register(PhotoContent)
 class PhotoContentAdmin(admin.ModelAdmin):
-    list_display = ("id", "catalog", "created_at", "short_description")
+    list_display = ("id", "catalog", "category", "created_at", "short_description")
     search_fields = ("catalog__name", "description")
     list_filter = ("catalog__name",)
     show_facets = admin.ShowFacets.ALWAYS
     date_hierarchy = "created_at"
+    inlines = [PhotoInline]
 
     @admin.display(description="Описание")
     def short_description(self, obj):
@@ -84,3 +99,11 @@ class ExpertAdmin(admin.ModelAdmin):
         if len(obj.full_name) <= ADMIN_TEXT_LEN:
             return obj.full_name
         return obj.full_name[:ADMIN_TEXT_LEN] + "..."
+
+
+if settings.DEBUG:
+
+    @admin.register(Photo)
+    class PhotoAdmin(admin.ModelAdmin):
+        list_display = ("id", "image", "album_id")
+        search_fields = ("album_id",)

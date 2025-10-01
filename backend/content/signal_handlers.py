@@ -3,10 +3,10 @@ import os
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
-from content.models import Catalog, Expert, PhotoContent
+from content.models import Catalog, Expert, Photo
 
 
-@receiver(post_delete, sender=PhotoContent)
+@receiver(post_delete, sender=Photo)
 @receiver(post_delete, sender=Catalog)
 @receiver(post_delete, sender=Expert)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
