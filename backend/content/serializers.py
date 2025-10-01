@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from content.models import Catalog, DocumentContent, Expert, PhotoContent, VideoContent
+from content.models import Catalog, ContentCategory, DocumentContent, Expert, Photo, PhotoContent, VideoContent
 
 
 class CatalogSerializer(serializers.ModelSerializer):
@@ -9,17 +9,40 @@ class CatalogSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ContentCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContentCategory
+        fields = "__all__"
+
+
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = (
+            "id",
+            "image",
+        )
+
+
 class PhotoContentSerializer(serializers.ModelSerializer):
+    images = PhotoSerializer(many=True)
+    category = ContentCategorySerializer()
+
     class Meta:
         model = PhotoContent
         fields = (
             "id",
             "catalog_id",
-            "image",
+            "images",
+            "title",
+            "category",
+            "created_at",
         )
 
 
 class VideoContentSerializer(serializers.ModelSerializer):
+    category = ContentCategorySerializer()
+
     class Meta:
         model = VideoContent
         fields = (

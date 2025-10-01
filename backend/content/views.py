@@ -33,7 +33,7 @@ class PhotoContentViewSet(RetrieveListViewSet):
     Фильтрация по id категории.
     """
 
-    queryset = PhotoContent.objects.all()
+    queryset = PhotoContent.objects.select_related("category").all()
     serializer_class = PhotoContentSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ("catalog",)
@@ -47,7 +47,7 @@ class VideoContentViewSet(RetrieveListViewSet):
     Фильтрация по id категории.
     """
 
-    queryset = VideoContent.objects.all()
+    queryset = VideoContent.objects.select_related("category").all()
     serializer_class = VideoContentSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ("catalog",)

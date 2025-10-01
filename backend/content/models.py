@@ -20,13 +20,34 @@ class Catalog(models.Model):
         return self.name
 
 
+class ContentCategory(models.Model):
+    """Модель категорий контента."""
+
+    name = models.CharField(max_length=255, unique=True, db_index=True, verbose_name="Название")
+
+    class Meta:
+        verbose_name = "Категория контента"
+        verbose_name_plural = "Категории контента"
+
+    def __str__(self):
+        return self.name
+
+
 class PhotoContent(models.Model):
     """Фотоконтент школы."""
 
-    catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE, verbose_name="Категория")
-    image = models.FileField(upload_to="photos/", verbose_name="Картинка")
+    catalog = models.ForeignKey(Catalog, related_name="photos", on_delete=models.CASCADE, verbose_name="Категория")
     description = models.CharField(
         max_length=510, null=True, blank=True, verbose_name="Описание картинки (для внутреннего использования)"
+    )
+    title = models.CharField(max_length=510, null=True, blank=True, verbose_name="Заголовок")
+    category = models.ForeignKey(
+        ContentCategory,
+        related_name="photos",
+        on_delete=models.PROTECT,
+        null=True,
+        default=None,
+        verbose_name="Категория",
     )
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
 
@@ -37,15 +58,22 @@ class PhotoContent(models.Model):
     def __str__(self):
         if self.description:
             return self.description[:20]
-        return self.image[:20]
+        return "Без описания"
 
 
-# TODO: расширить категории
+class Photo(models.Model):
+    """Фотографии."""
+
+    image = models.FileField(upload_to="photos/", verbose_name="Картинка")
+    album = models.ForeignKey(PhotoContent, related_name="images", on_delete=models.CASCADE, verbose_name="Альбом")
+
+    class Meta:
+        verbose_name = "Фотография"
+        verbose_name_plural = "Фотографии"
+
+
 class VideoContent(models.Model):
     """Видеоконтент школы."""
-
-    class Category(models.TextChoices):
-        MASTERCLASS = "masterclass", "Мастер-класс"
 
     catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE, verbose_name="Категория")
     video_path = models.URLField(verbose_name="Ссылка на видео")
@@ -53,7 +81,9 @@ class VideoContent(models.Model):
         max_length=510, null=True, blank=True, verbose_name="Описание видео (для внутреннего использования)"
     )
     title = models.CharField(max_length=510, null=True, blank=True, verbose_name="Заголовок")
-    category = models.CharField(max_length=255, choices=Category.choices, default=Category.MASTERCLASS)
+    category = models.ForeignKey(
+        ContentCategory, on_delete=models.PROTECT, null=True, default=None, verbose_name="Категория"
+    )
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
 
     class Meta:
