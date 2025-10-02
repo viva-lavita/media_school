@@ -32,9 +32,9 @@ class Review(models.Model):
     Отзывы о проекте.
     """
 
-    full_name = models.CharField(verbose_name="ФИО", max_length=255)
+    full_name = models.CharField(verbose_name="Имя", max_length=255)
     age = models.PositiveIntegerField(verbose_name="Возраст", blank=True, null=True)
-    image = models.URLField(verbose_name="Ссылка на картинку", blank=True, null=True)
+    image = models.FileField(upload_to="reviews/", verbose_name="Картинка")
     review = models.TextField(verbose_name="Отзыв")
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name="Дата изменения", auto_now=True)
