@@ -3,6 +3,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
+# from api.paginations import CustomPagination
 from api.mixins import ListCreateRetrieveViewSet, RetrieveListViewSet
 from api.permissions import IsStuffOrReadOnly
 from news.filters import CommentFilter, CompetitionFilter
@@ -50,6 +51,7 @@ class NewsViewSet(RetrieveListViewSet):
         "paragraphs__text",
         "paragraphs__title",
     )
+    # pagination_class = CustomPagination
 
     def get_queryset(self):
         return self.queryset.filter(is_published=True)
