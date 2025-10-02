@@ -83,7 +83,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-19.5 top-2 text-red-500`}>
+              <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-20.5 top-2 text-red-500`}>
               *
             </span>
               <button type="button" aria-label="скрыть или показать данные">

@@ -5,7 +5,9 @@ import './globals.css';
 import Navigation from './components/Navigation/Navigation';
 import { PageWidthProvider } from './context/PageWidthProvider';
 import { PageTitleProvider } from './context/PageTitleContext';
-import { montserrat, comfortaa, inter } from '../lib/fonts';
+import { montserrat, comfortaa, inter } from '@/lib/fonts';
+import {PopUpProvider} from "@/app/context/PopUpContext";
+import PopUpAttribution from "@/app/components/PopUpAttribution/PopUpAttribution";
 
 export const metadata = {
  title: 'Create Next App',
@@ -14,22 +16,25 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
  return (
-  <html lang="ru" className={`${montserrat.variable} ${comfortaa.variable} ${inter.variable}`}>
+  <html lang="ru" className={`${montserrat.className} ${comfortaa.className} ${inter.className}`}>
    <body>
-    <PageTitleProvider>
-     <PageWidthProvider>
-      <Suspense fallback={<div>Loading...</div>}>
-       <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
-        <Header />
-        <Navigation />
-        <main style={{flex: 1}}>
-         {children}
-        </main>
-        <Footer />
-       </div>
-      </Suspense>
-     </PageWidthProvider>
-    </PageTitleProvider>
+    <PopUpProvider>
+     <PopUpAttribution />
+     <PageTitleProvider>
+      <PageWidthProvider>
+       <Suspense fallback={<div>Loading...</div>}>
+        <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
+         <Header />
+         <Navigation />
+         <main style={{flex: 1}}>
+          {children}
+         </main>
+         <Footer />
+        </div>
+       </Suspense>
+      </PageWidthProvider>
+     </PageTitleProvider>
+    </PopUpProvider>
    </body>
   </html>
  );

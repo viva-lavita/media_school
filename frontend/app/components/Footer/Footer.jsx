@@ -4,9 +4,11 @@ import { montserrat } from '@/lib/fonts'
 import { inter } from '@/lib/fonts'
 import Link from 'next/link'
 import styles from './Footer.module.css'
+import {usePopUp} from "@/app/context/PopUpContext";
 
 export default function Footer() {
-  const [pageWidth, setPageWidth] = useState(360);
+  const [pageWidth, setPageWidth] = useState(0);
+  const {setIsPopUpOpen} = usePopUp();
 
   useEffect(() => {
     const handleResize = () => setPageWidth(window.innerWidth);
@@ -81,8 +83,8 @@ export default function Footer() {
                 © 2025 МАОУ Школа {pageWidth <= 360 || (pageWidth >= 1024 && pageWidth < 1401) ? <br/> : ''}
                 «Перспектива» г. Томск
               </p>
-              <Link href='/pop-up-attribution' className={`w-[145px] mb-[4px] flex items-end 
-              shrink-0 text-sm font-normal`}>Designed by Freepik</Link>
+              <button onClick={() => setIsPopUpOpen(true)} className={`cursor-pointer w-[145px] mb-[4px] flex items-end 
+              shrink-0 text-sm font-normal`}>Designed by Freepik</button>
             </div>
             <p className={`${inter.className} ${styles.performer} ${pageWidth > 1400 ? 'ml-[15.5%]':''} text-xs font-medium 
             flex items-center gap-2`}>

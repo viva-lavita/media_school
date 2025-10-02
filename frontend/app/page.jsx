@@ -8,6 +8,7 @@ import Advantages from './components/Advantages/Advantages';
 import Experts from './components/Experts/Experts';
 import PageWidthContext from './context/PageWidthProvider';
 import Link from "next/link";
+import PopUpAttribution from "@/app/components/PopUpAttribution/PopUpAttribution";
 
 const feedbacks = [
  {
@@ -170,7 +171,7 @@ export default function Home() {
      <div className={`${styles.announcementsContainer}`}>
       <div className={`${styles.announcementsContainerItem} flex flex-col gap-2`}>
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/news.png" alt="новости" className={`h-[300px]`}/>
+        <img src="/images/news.png" alt="новости" className={`h-[300px] object-cover object-left md:object-contain`}/>
         <figcapture
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
@@ -204,7 +205,7 @@ export default function Home() {
        } ${styles.announcementsContainerItem} flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/announcements.png" alt="анонсы" className={`h-[300px]`} />
+        <img src="/images/announcements.png" alt="анонсы" className={`h-[300px] object-cover object-left md:object-contain`} />
         <figcapture
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
@@ -238,7 +239,7 @@ export default function Home() {
        } flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/news-together.png" alt="новости" className={`h-[300px]`}/>
+        <img src="/images/news-together.png" alt="новости" className={`h-[300px] object-cover object-left md:object-contain`}/>
         <figcapture
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >

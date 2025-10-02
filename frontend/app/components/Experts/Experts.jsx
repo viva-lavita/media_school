@@ -68,7 +68,7 @@ export default function Experts() {
   return (
     <div className={`${styles.mediaSchoolExperience} flex flex-col`}>
       <h2 className={`${comfortaa.className} ${styles.aboutLearning} font-bold leading-[100%]`}>
-        Журналисты и&nbsp;эксперты, которые делятся опытом
+        Журналисты и&nbsp;эксперты, которые делятся&nbsp;опытом
       </h2>
       <div className={`${styles.mediaSchoolExperienceTeachers} flex gap-6 transition-all duration-500`}>
         {visibleTeachers.map((teacher, idx) => (
