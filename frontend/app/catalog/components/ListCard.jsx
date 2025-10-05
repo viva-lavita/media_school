@@ -29,6 +29,7 @@ export default function SectionListCard({ title, documents }) {
       videoUrl={file.videoUrl}
       title={file.title}
       date={file.date}
+      categoryName={file.categoryName}
      />
     ))}
 
@@ -42,6 +43,7 @@ export default function SectionListCard({ title, documents }) {
       videoUrl={file.videoUrl}
       title={file.title}
       date={file.date}
+      categoryName={file.categoryName}
 
         key={`item-`+ Math.random().toString(36).substr(2, 9)}
        />

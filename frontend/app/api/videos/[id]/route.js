@@ -1,3 +1,5 @@
+import { formatDate } from '@/app/utils/formatDate';
+
 export async function GET(request, { params }) {
  const { id } = await params;
  try {
@@ -22,14 +24,12 @@ export async function GET(request, { params }) {
 
    const data = await response.json();
 
-   const sampleImage = 'https://via.placeholder.com/300x200?text=Video+Preview';
-   const sampleVideo = 'https://www.w3schools.com/html/mov_bbb.mp4';
-
    const transformedResults = data.results.map((video) => ({
-    imageUrl: sampleImage,
-    videoUrl: sampleVideo,
-    title: `Видео ${video.id}`,
-    date: new Date().toLocaleDateString('ru-RU'),
+    imageUrl: 'https://via.placeholder.com/300x200?text=Video+Preview',
+    videoUrl: video.video_path,
+    title: video.title,
+    date: formatDate(video.created_at),
+    categoryName: video.category.name,
    }));
 
    allResults = allResults.concat(transformedResults);
