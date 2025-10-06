@@ -67,7 +67,7 @@ export default function CommentsList({ questions, newsId, type, setComments }) {
                   <div className={`${montserrat.className} ${styles.questionText} font-normal text-lg leading-[140%] pb-2`}>
                     {formatText(answer.text)}
                   </div>
-                  <div className={`${styles.answerMeta} pb-2`}>
+                  <div className={`${styles.answerMeta} ${styles.icons} pb-2`}>
                     <span className={`${montserrat.className} ${styles.nameAuthor} whitespace-nowrap`}>
                       {answer.author
                         ? `${answer.author.first_name} ${answer.author.last_name}`.trim() || answer.author.username
