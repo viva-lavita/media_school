@@ -2,33 +2,39 @@
  display: flex;
  align-items: center;
  margin: 40px auto;
- width: 1400px;
+ max-width: 1400px;
+ flex-wrap: wrap;
 }
 
 .breadcrumbItem {
  color: #535353;
  text-decoration: none;
  font-size: 14px;
+ min-width: 0;
+ overflow-wrap: break-word;
 }
 
 .active {
  color: #040404 !important;
 }
 
+@media screen and (max-width: 1400px) {
+ .breadcrumb {
+  max-width: calc(100vw - 80px);
+  flex-wrap: wrap;
+ }
+}
+
 @media screen and (max-width: 1024px) {
  .breadcrumb {
-   width: 944px;
+  max-width: calc(100vw - 80px);
+  flex-wrap: wrap;
  }
 }
 
 @media screen and (max-width: 768px) {
  .breadcrumb {
-   width: 728px;
- }
-}
-
-@media screen and (max-width: 360px) {
- .breadcrumb {
-   width: 320px;
+   max-width: calc(100vw - 40px);
+   flex-wrap: wrap;
  }
 }
