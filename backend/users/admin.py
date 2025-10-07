@@ -35,7 +35,7 @@ class UserAdmin(BaseUserAdmin):
 
     inlines = [ChildInline]
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (None, {"fields": ("email", "password", "post")}),
         ("Персональная информация", {"fields": ("first_name", "last_name")}),
         (
             "Права доступа",
