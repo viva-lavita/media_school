@@ -129,19 +129,21 @@
 }
 
 .commentButton {
- padding: 16.5px 31px;
+ padding: 14.5px 31px;
  background-color: #deedab !important;
  border: none;
  cursor: pointer;
  font-size: 16px;
  width: fit-content;
  font-weight: 500;
- line-height: 100%;
+ line-height: auto;
  letter-spacing: 0;
  vertical-align: middle;
  background-color: green;
  color: #000;
- margin-top: 24px;
+ margin: 0 auto;
+ margin-top: 48px;
+ margin-bottom: 80px;
 }
 
 .commentInput:focus {
@@ -193,12 +195,8 @@
  .title {
   font-size: clamp(14px, 2vw, 18px);
  }
- .commentButton {
-  padding: 12px 24px;
+ .commentButton{
+ margin-top: 36px;
  }
 }
-@media screen and (max-width: 360px) {
- .commentButton {
-  margin: 0 auto;
- }
-}
+

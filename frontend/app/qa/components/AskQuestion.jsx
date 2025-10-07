@@ -144,7 +144,7 @@ export default function AskQuestion() {
      type="submit"
      className={`${montserrat.className} ${styles.commentButton}`}
     >
-     Отправить
+     Спросить
     </button>
    </form>
   </>
