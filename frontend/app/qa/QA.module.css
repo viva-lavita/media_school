@@ -38,6 +38,11 @@
  border-bottom: 2px solid var(--color-dark-green);
 }
 
+@media screen and (max-width: 1400px) {
+ .wrap {
+  width: calc(100vw - 80px);
+ }
+}
 
 @media screen and (max-width: 1024px) {
  .titleQA {
@@ -48,6 +53,9 @@
 @media screen and (max-width: 768px) {
  .titleQA {
   font-size: clamp(28px, 3vw + 1rem, 32px);
+ }
+ .wrap {
+  width: calc(100vw - 40px);
  }
 }
 

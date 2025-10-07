@@ -162,7 +162,16 @@
  margin-bottom: 19px;
 }
 
+@media screen and (max-width:1024px) {
+ .wrap {
+  width: calc(100vw - 80px);
+ }
+}
+
 @media screen and (max-width: 768px) {
+.wrap {
+  width: calc(100vw - 40px);
+ }
  .commentInput {
   height: auto;
  }
