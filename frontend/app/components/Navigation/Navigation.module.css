@@ -21,20 +21,11 @@
 @media screen and (max-width: 1400px) {
  .breadcrumb {
   max-width: calc(100vw - 80px);
-  flex-wrap: wrap;
- }
-}
-
-@media screen and (max-width: 1024px) {
- .breadcrumb {
-  max-width: calc(100vw - 80px);
-  flex-wrap: wrap;
- }
+  }
 }
 
 @media screen and (max-width: 768px) {
  .breadcrumb {
    max-width: calc(100vw - 40px);
-   flex-wrap: wrap;
  }
 }
