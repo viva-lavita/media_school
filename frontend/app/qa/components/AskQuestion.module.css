@@ -44,10 +44,9 @@
 .labelCategory {
  display: flex;
  align-items: center;
- gap: 0.5rem;
  display: inline-flex;
  align-items: center;
- gap: 16px;
+ gap: 0px;
 }
 
 .labelCategory:not(:last-child) {
