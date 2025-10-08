@@ -23,7 +23,7 @@
   margin: 0 auto;
   line-height: 100%;
   max-width:  1400px;;
-  width: calc(100vw - 80px);
+  width: calc(100vw - 40px);
 }
 
 .mainImage {

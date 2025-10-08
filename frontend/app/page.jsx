@@ -163,7 +163,6 @@ export default function Home() {
      </Link>
     </div>
     <Advantages />
-    <Experts />
     <div className={`${styles.announcements} flex flex-col gap-10`}>
      <h2 className={`${comfortaa.className} ${styles.aboutLearning} font-bold leading-[100%]`}>
       Новости, анонсы и конкурсы
@@ -235,7 +234,7 @@ export default function Home() {
       </div>
       <div
        className={`${
-        pageWidth < 1920 ? 'hidden' : ''
+        pageWidth < 1401 ? 'hidden' : ''
        } flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>

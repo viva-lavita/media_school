@@ -10,6 +10,25 @@ export default function Footer() {
   const [pageWidth, setPageWidth] = useState(0);
   const {setIsPopUpOpen} = usePopUp();
 
+  const [documents, setDocuments] = useState(null);
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchDocuments() {
+      try {
+        const response = await fetch('/api/documents');
+        const data = await response.json();
+        setDocuments(data);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchDocuments();
+  }, []);
+
   useEffect(() => {
     const handleResize = () => setPageWidth(window.innerWidth);
     handleResize();
@@ -17,6 +36,12 @@ export default function Footer() {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  if (loading) return <p>Загрузка файлов...</p>;
+  if (!documents) return null;
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   return (
       <footer className={`${styles.bg} gap-10 flex flex-col w-screen`}>
           <div className={`${montserrat.className} ${styles.fontColor} ${styles.footer} flex-wrap flex mx-auto h-full`}>
@@ -43,11 +68,30 @@ export default function Footer() {
                   </nav>
                 </div>
                 {pageWidth !== null && pageWidth <= 944 && (
-                  <div className={`${montserrat.className} ${styles.terms} font-medium text-base leading-[100%] flex flex-col justify-between`}>
+                  <div className={`${montserrat.className} ${styles.terms} font-medium text-base leading-[100%] flex 
+                  flex-col justify-between`}>
                     <nav>
                       <ul className={`flex flex-col gap-2`}>
-                        <li><Link href="/terms">Пользовательское соглашение</Link></li>
-                        <li><Link href="/privacy">Политика конфиденциальности</Link></li>
+                        <li>
+                          <a
+                            className={`cursor-pointer`}
+                            href={`${API_URL}${documents.user_agreement}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download={true}>
+                            Пользовательское соглашение
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className={`cursor-pointer`}
+                            href={`${API_URL}${documents.privacy_policy}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download={true}>
+                            Политика конфиденциальности
+                          </a>
+                        </li>
                       </ul>
                     </nav>
                   </div>
@@ -69,8 +113,26 @@ export default function Footer() {
             <div className={`${montserrat.className} ${styles.terms} font-medium text-base leading-[100%] flex flex-col justify-between`}>
               <nav>
                 <ul className={`flex flex-col gap-2`}>
-                  <li><Link href="/terms">Пользовательское соглашение</Link></li>
-                  <li><Link href="/privacy">Политика конфиденциальности</Link></li>
+                  <li>
+                    <a
+                      className={`cursor-pointer`}
+                      href={`${API_URL}${documents.user_agreement}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download={true}>
+                      Пользовательское соглашение
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={`cursor-pointer`}
+                      href={`${API_URL}${documents.privacy_policy}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download={true}>
+                      Политика конфиденциальности
+                    </a>
+                  </li>
                 </ul>
               </nav>
             </div>
