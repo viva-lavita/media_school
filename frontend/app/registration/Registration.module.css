@@ -1,0 +1,110 @@
+.registration {
+    display: flex;
+    width: 1400px;
+    gap: 30px;
+    margin: 0 auto 80px;
+}
+
+.registrationImg {
+    background-image: url('/images/full-length-man.png');
+    background-repeat: no-repeat;
+    min-width: 685px;
+    background-position: center;
+    background-size: 112% 100%;
+    object-fit: cover;
+}
+
+.registrationFormWrapper {
+    padding: 60px;
+    gap: 32px;
+}
+
+.registrationFormTitle {
+    font-size: 28px;
+    line-height: 130%;
+}
+
+.registrationFormWarning {
+    font-size: 18px;
+    line-height: 140%;
+}
+
+.registrationForm {
+    gap: 32px;
+}
+
+.checkbox {
+    appearance: none;
+    margin-top: 0;
+}
+
+.checkbox:focus {
+    outline: none;
+}
+
+.checkbox:before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: #fff; /* цвет фона */
+    border: 1px solid rgba(50, 48, 52, 0.61); /* ширина и цвет рамки */
+}
+
+.checkbox:checked:before {
+    background-image: url('/images/checkbox.svg'); /* ссылка из файлового хранилища с иконкой галочки */
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center 70%;
+
+}
+
+@media screen and (max-width: 1400px) {
+    .registration {
+        width: 73%;
+        gap: 0;
+    }
+    .registrationImg {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .registration {
+        width: 622px;
+        margin: 0 auto 40px;
+    }
+    .registrationFormTitle {
+        font-size: 22px;
+        line-height: 100%;
+    }
+    .registrationFormWarning {
+        font-size: 16px;
+        line-height: 130%;
+    }
+    .registrationFormWrapper {
+        padding: 32px;
+        gap: 28px;
+    }
+    .registrationForm {
+        gap: 28px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .registration {
+        width: 70%;
+    }
+}
+@media screen and (max-width: 585px) {
+    .registration {
+        width: 89%;
+    }
+    .registrationFormWrapper {
+        width: 100%;
+        padding: 28px 16px;
+    }
+    .registrationFormInputCouple,
+    .registrationAccept {
+        flex-direction: column;
+    }
+}
