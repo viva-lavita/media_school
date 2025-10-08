@@ -185,7 +185,7 @@ export default function CommentForm({ itemId, itemType }) {
           className={`${montserrat.className} ${styles.commentButton} b-green mt-7 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Отправляем...' : 'Отправить'}
+          {isSubmitting ? 'Отправляем...' : 'Добавить'}
         </button>
       </form>
     </div>

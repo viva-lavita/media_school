@@ -171,11 +171,11 @@ export default function Home() {
       <div className={`${styles.announcementsContainerItem} flex flex-col gap-2`}>
        <figure className={`flex flex-col gap-3`}>
         <img src="/images/news.png" alt="новости" className={`h-[300px] object-cover object-left md:object-contain`}/>
-        <figcapture
+        <figcaption
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
          НОВОСТИ
-        </figcapture>
+        </figcaption>
        </figure>
        <div className={`flex flex-col gap-2`}>
         <p
@@ -205,11 +205,11 @@ export default function Home() {
       >
        <figure className={`flex flex-col gap-3`}>
         <img src="/images/announcements.png" alt="анонсы" className={`h-[300px] object-cover object-left md:object-contain`} />
-        <figcapture
+        <figcaption
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
          АНОНСЫ
-        </figcapture>
+        </figcaption>
        </figure>
        <div className={`flex flex-col gap-2`}>
         <p
@@ -239,11 +239,11 @@ export default function Home() {
       >
        <figure className={`flex flex-col gap-3`}>
         <img src="/images/news-together.png" alt="новости" className={`h-[300px] object-cover object-left md:object-contain`}/>
-        <figcapture
+        <figcaption
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
          НОВОСТИ
-        </figcapture>
+        </figcaption>
        </figure>
        <div className={`${styles.announcementsContainerItem} flex flex-col gap-2`}>
         <p
