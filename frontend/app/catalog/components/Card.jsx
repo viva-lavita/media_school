@@ -5,11 +5,13 @@ import styles from './Card.module.css';
 export default function Card({ imageUrl, videoUrl, title, date, categoryName }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [imgSrc, setImgSrc] = useState(imageUrl);
-  const [showModal, setShowModal] = useState(false);
   const videoRef = useRef(null);
 
   const handlePlayClick = () => {
-    setShowModal(true);
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+    setIsPlaying(true);
   };
 
   const handleImgError = () => {
@@ -39,19 +41,6 @@ export default function Card({ imageUrl, videoUrl, title, date, categoryName }) 
       <h2 className={`${montserrat.className} ${styles.masterClass}`}>{categoryName}</h2>
       <h3 className={`${montserrat.className} ${styles.titleCard}`}>{title}</h3>
       <p className={`${montserrat.className} ${styles.dateCard}`}>{date}</p>
-      {showModal && (
-        <div className={styles.modal} onClick={() => setShowModal(false)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeButton} onClick={() => setShowModal(false)}>×</button>
-            <video
-              src={videoUrl}
-              controls
-              autoPlay
-              className={styles.modalVideo}
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
