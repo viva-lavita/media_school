@@ -2,8 +2,11 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.sites import AdminSite
 
+from api.constants import ADMIN_TEXT_LEN
 from news.models import (
     Announcement,
+    Answer,
+    Comment,
     Competition,
     News,
     Paragraph,
@@ -36,6 +39,15 @@ class NewsAdmin(admin.ModelAdmin):
     empty_value_display = "-"
     inlines = [ParagraphInlineNews]
     date_hierarchy = "created_at"
+    actions = ("publish", "unpublish")
+
+    @admin.action(description="Опубликовать")
+    def publish(self, request, queryset):
+        queryset.update(is_published=True)
+
+    @admin.action(description="Снять с публикации")
+    def unpublish(self, request, queryset):
+        queryset.update(is_published=False)
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -47,14 +59,16 @@ class NewsAdmin(admin.ModelAdmin):
     @admin.display(description="Описание")
     def short_description(self, obj):
         if obj.description:
-            return obj.description[:50] + "..."
+            if len(obj.description) <= ADMIN_TEXT_LEN:
+                return obj.description
+            return obj.description[:ADMIN_TEXT_LEN] + "..."
         return AdminSite.empty_value_display
 
     @admin.display(description="Заголовок")
     def short_title(self, obj):
-        if len(obj.title) > 50:
+        if len(obj.title) <= ADMIN_TEXT_LEN:
             return obj.title
-        return obj.title[:50]
+        return obj.title[:ADMIN_TEXT_LEN]
 
     @admin.display(description="Автор-админ")
     def author_admin(self, obj):
@@ -91,6 +105,15 @@ class AnnouncementAdmin(admin.ModelAdmin):
     empty_value_display = "-"
     inlines = [ParagraphInlineAnnouncement]
     date_hierarchy = "created_at"
+    actions = ("publish", "unpublish")
+
+    @admin.action(description="Опубликовать")
+    def publish(self, request, queryset):
+        queryset.update(is_published=True)
+
+    @admin.action(description="Снять с публикации")
+    def unpublish(self, request, queryset):
+        queryset.update(is_published=False)
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -102,16 +125,16 @@ class AnnouncementAdmin(admin.ModelAdmin):
     @admin.display(description="Описание")
     def short_description(self, obj):
         if obj.description:
-            if len(obj.description) > 50:
+            if len(obj.description) <= ADMIN_TEXT_LEN:
                 return obj.description
-            return obj.description[:50] + "..."
+            return obj.description[:ADMIN_TEXT_LEN] + "..."
         return AdminSite.empty_value_display
 
     @admin.display(description="Заголовок")
     def short_title(self, obj):
-        if len(obj.title) > 50:
+        if len(obj.title) <= ADMIN_TEXT_LEN:
             return obj.title
-        return obj.title[:50]
+        return obj.title[:ADMIN_TEXT_LEN] + "..."
 
     @admin.display(description="Автор-админ")
     def author_admin(self, obj):
@@ -150,6 +173,15 @@ class CompetitionAdmin(admin.ModelAdmin):
     empty_value_display = "-"
     inlines = [ParagraphInlineCompetition]
     date_hierarchy = "created_at"
+    actions = ("publish", "unpublish")
+
+    @admin.action(description="Опубликовать")
+    def publish(self, request, queryset):
+        queryset.update(is_published=True)
+
+    @admin.action(description="Снять с публикации")
+    def unpublish(self, request, queryset):
+        queryset.update(is_published=False)
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -160,15 +192,15 @@ class CompetitionAdmin(admin.ModelAdmin):
 
     @admin.display(description="Описание")
     def short_description(self, obj):
-        if len(obj.description) > 50:
+        if len(obj.description) <= ADMIN_TEXT_LEN:
             return obj.description
-        return obj.description[:50] + "..."
+        return obj.description[:ADMIN_TEXT_LEN] + "..."
 
     @admin.display(description="Заголовок")
     def short_title(self, obj):
-        if len(obj.title) > 50:
+        if len(obj.title) <= ADMIN_TEXT_LEN:
             return obj.title
-        return obj.title[:50]
+        return obj.title[:ADMIN_TEXT_LEN]
 
     @admin.display(description="Автор-админ")
     def author_admin(self, obj):
@@ -188,3 +220,72 @@ if settings.DEBUG:
         list_display = ("id", "news", "announcement", "competition", "created_at")
         show_facets = admin.ShowFacets.ALWAYS
         date_hierarchy = "created_at"
+
+
+class AnswerInline(admin.StackedInline):
+    model = Answer
+    extra = 1
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "is_approved",
+        "count_answers",
+        "news",
+        "announcement",
+        "competition",
+        "author",
+        "question_category",
+        "short_text",
+        "created_at",
+    )
+    show_facets = admin.ShowFacets.ALWAYS
+    date_hierarchy = "created_at"
+    list_filter = ("is_approved", "question_category")
+    inlines = [AnswerInline]
+    actions = ["approve", "disapprove"]
+
+    @admin.display(description="Количество ответов")
+    def count_answers(self, obj):
+        return obj.answers.count()
+
+    @admin.display(description="Текст")
+    def short_text(self, obj):
+        if len(obj.text) <= ADMIN_TEXT_LEN:
+            return obj.text
+        return obj.text[:ADMIN_TEXT_LEN] + "..."
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.author = request.user
+            return super().save_model(request, obj, form, change)
+        return super().save_model(request, obj, form, change)
+
+    @admin.action(description="Одобрить")
+    def approve(self, request, queryset):
+        queryset.update(is_approved=True)
+
+    @admin.action(description="Отклонить")
+    def disapprove(self, request, queryset):
+        queryset.update(is_approved=False)
+
+
+@admin.register(Answer)
+class AnswerAdmin(admin.ModelAdmin):
+    list_display = ("id", "comment", "author", "short_text", "created_at")
+    show_facets = admin.ShowFacets.ALWAYS
+    date_hierarchy = "created_at"
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.author = request.user
+            return super().save_model(request, obj, form, change)
+        return super().save_model(request, obj, form, change)
+
+    @admin.display(description="Текст")
+    def short_text(self, obj):
+        if len(obj.text) <= ADMIN_TEXT_LEN:
+            return obj.text
+        return obj.text[:ADMIN_TEXT_LEN] + "..."

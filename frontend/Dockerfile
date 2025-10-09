@@ -31,7 +31,6 @@ COPY --from=builder /app/package*.json ./
 # Устанавливаем только продакшен-зависимости
 RUN npm install --only=production
 
-# Закоментировано для релиза, nginx раздаст
 # Указываем порт, который будет использоваться приложением
 ENV PORT 3000
 # ENV NODE_ENV production
@@ -39,5 +38,6 @@ ENV PORT 3000
 # Открываем порт
 EXPOSE 3000
 
+# Перенесено в компоуз
 # Команда для запуска приложения
 # CMD ["npm", "start"]

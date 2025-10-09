@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from news.models import Announcement, Competition, News, Paragraph
+from news.models import Announcement, Answer, Comment, Competition, News, Paragraph
+from users.serializers import ShortReadUserSerializer
 
 
 class ParagraphSerializer(serializers.ModelSerializer):
@@ -35,7 +36,7 @@ class NewsSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "author_for_display",
             "created_at",
             "paragraphs",
@@ -51,7 +52,7 @@ class ShortNewsSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "created_at",
         )
 
@@ -67,7 +68,7 @@ class AnnouncementSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "author_for_display",
             "created_at",
             "paragraphs",
@@ -83,7 +84,7 @@ class ShortAnnouncementSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "created_at",
         )
 
@@ -99,7 +100,7 @@ class CompetitionSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "author_for_display",
             "start_date",
             "end_date",
@@ -117,8 +118,92 @@ class ShortCompetitionSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "image_path",
+            "image",
             "start_date",
             "end_date",
             "created_at",
         )
+
+
+class AnswerSerializer(serializers.ModelSerializer):
+    """Сериализатор ответов."""
+
+    author = ShortReadUserSerializer()
+
+    class Meta:
+        model = Answer
+        fields = "__all__"
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    """Сериализатор комментариев."""
+
+    answers = AnswerSerializer(many=True)
+    author = ShortReadUserSerializer()
+
+    class Meta:
+        model = Comment
+        fields = (
+            "id",
+            "news",
+            "announcement",
+            "competition",
+            "author",
+            "question_category",
+            "text",
+            "created_at",
+            "answers",
+        )
+
+    def to_representation(self, instance):
+        """Только не пустые поля."""
+        representation = super().to_representation(instance)
+        representation = {k: v for k, v in representation.items() if v}
+        return representation
+
+
+class ShortCommentSerializer(serializers.ModelSerializer):
+    """Сериализатор комментариев, сокращенный вывод."""
+
+    author = ShortReadUserSerializer()
+
+    class Meta:
+        model = Comment
+        fields = (
+            "id",
+            "news",
+            "announcement",
+            "competition",
+            "author",
+            "question_category",
+            "text",
+            "created_at",
+        )
+
+    def to_representation(self, instance):
+        """Только не пустые поля."""
+        representation = super().to_representation(instance)
+        representation = {k: v for k, v in representation.items() if v}
+        return representation
+
+
+class CreateCommentSerializer(serializers.ModelSerializer):
+    """Сериализатор комментариев для создания."""
+
+    class Meta:
+        model = Comment
+        fields = (
+            "id",
+            "news",
+            "announcement",
+            "competition",
+            "question_category",
+            "text",
+            "created_at",
+        )
+
+    def to_representation(self, instance):
+        """Только не пустые поля."""
+        representation = super().to_representation(instance)
+        representation = {k: v for k, v in representation.items() if v}
+        return representation

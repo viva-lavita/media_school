@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.models import Contact, Review
+from api.models import Contact, LegalDocuments, Review
 
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -28,4 +28,13 @@ class ReviewSerializer(serializers.ModelSerializer):
             "image",
             "review",
             "created_at",
+        ]
+
+
+class LegalDocumentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LegalDocuments
+        fields = [
+            "privacy_policy",
+            "user_agreement",
         ]

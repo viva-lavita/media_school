@@ -59,6 +59,13 @@ class User(AbstractUser):
             "max_length": "Email слишком длинный.",
         },
     )
+    post = models.CharField(
+        verbose_name="Должность",
+        max_length=70,
+        blank=True,
+        null=True,
+        help_text="Не более 50 символов.",
+    )
     created_at = models.DateTimeField(
         verbose_name="Дата создания",
         auto_now_add=True,

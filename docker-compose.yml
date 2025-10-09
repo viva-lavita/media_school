@@ -10,7 +10,7 @@ services:
       start_period: 30s
       timeout: 10s
     volumes:
-      - app-db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data/pgdata
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
@@ -75,7 +75,7 @@ networks:
     driver: bridge
 
 volumes:
-  app-db-data:
+  db-data:
   static:
   media:
   frontend_dist:
