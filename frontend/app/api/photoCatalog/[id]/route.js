@@ -30,7 +30,6 @@ export async function GET(request, { params }) {
     title: video.title,
     date: formatDate(video.created_at),
     categoryName: video.category.name,
-    isVideo: true,
    }));
 
    allResults = allResults.concat(transformedResults);

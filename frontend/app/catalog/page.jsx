@@ -4,39 +4,20 @@ import styles from './layoutCatalog.module.css';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import DescriptionSection from '../about/components/DescriptionSection';
-import TeachersList from '../about/components/TeachersList';
+//import TeachersList from '../about/components/TeachersList';
 import handleFetch from '../utils/fetchErrorHandle';
 import DocumentsSection from './components/DocumentsSection';
 import SectionListCard from './components/ListCard';
 
 export default function LayoutPage() {
- const titleExpertList = 'Наставники';
+ //const titleExpertList = 'Наставники';
  const [categories, setCategories] = useState([]);
  const [activeCategory, setActiveCategory] = useState({});
  const [expertsData, setExpertsData] = useState([]);
  const [documentsData, setDocumentsData] = useState([]);
  const [videosData, setVideosData] = useState([]);
+ const [photosData, setPhotosData] = useState([]);
  const searchParams = useSearchParams();
-
- const documentSectionPhoto = [
-  {
-   imageUrl: '/about-images/Ivanova.png',
-   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
-   date: '10 апреля 2025',
-  },
-  {
-   id: 2,
-   imageUrl: '/about-images/Ivanova.png',
-   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
-   date: '10 апреля 2025',
-  },
-  {
-   id: 3,
-   imageUrl: '/about-images/Ivanova.png',
-   title: 'Завлеки собеседника — 3 простых правила от «Осторожно Новости»',
-   date: '10 апреля 2025',
-  },
- ];
 
  useEffect(() => {
   handleFetch('/api/categories')
@@ -67,7 +48,7 @@ export default function LayoutPage() {
    .catch(console.error);
  }, []);
 
-useEffect(() => {
+/*useEffect(() => {
   if (activeCategory.id) {
     handleFetch(`/api/experts/${activeCategory.id}`)
       .then((data) => {
@@ -79,7 +60,7 @@ useEffect(() => {
       })
       .catch(console.error);
   }
-}, [activeCategory]);
+}, [activeCategory]);*/
 
 useEffect(() => {
   if (activeCategory.id) {
@@ -101,7 +82,16 @@ useEffect(() => {
   }
 }, [activeCategory]);
 
- console.log(expertsData);
+useEffect(() => {
+  if (activeCategory.id) {
+    handleFetch(`/api/photos/${activeCategory.id}`)
+      .then((data) => {
+        setPhotosData(data.results);
+      })
+      .catch(console.error);
+  }
+}, [activeCategory]);
+
  console.log(videosData);
  return (
   <div className={styles.wrap}>
@@ -137,15 +127,15 @@ useEffect(() => {
         description={activeCategory.description}
        />
 
-       <div className={styles.founders}>
+       {/*<div className={styles.founders}>
         <TeachersList titleList={titleExpertList} teachers={expertsData} />
-       </div>
+       </div>*/}
       </section>
      </>
     )}
     <DocumentsSection documents={documentsData} />
     <SectionListCard title={'Видео-материалы'} documents={videosData} />
-    <SectionListCard title={'Фотогалерея'} documents={documentSectionPhoto} />
+    <SectionListCard title={'Фотогалерея'} documents={photosData} />
    </main>
   </div>
  );

@@ -5,7 +5,7 @@ export async function GET(request, { params }) {
  try {
   let allResults = [];
   let currentNextUrl = '';
-  let nextUrl = `http://217.114.11.243/api/v1/content/videos/?catalog=${id}`;
+  let nextUrl = `http://217.114.11.243/api/v1/content/photos/?catalog=${id}`;
 
   while (nextUrl && nextUrl !== currentNextUrl) {
    currentNextUrl = nextUrl;
@@ -24,14 +24,18 @@ export async function GET(request, { params }) {
 
    const data = await response.json();
 
-   const transformedResults = data.results.map((video) => ({
-    imageUrl: 'https://via.placeholder.com/300x200?text=Video+Preview',
-    videoUrl: video.video_path,
-    title: video.title,
-    date: formatDate(video.created_at),
-    categoryName: video.category.name,
-    isVideo: true,
-   }));
+   const transformedResults = data.results
+    .filter(photo => photo.images && photo.images.length > 0 && photo.title)
+    .map((photo) => ({
+     imageUrl: photo.images[0].image,
+     videoUrl: '',
+     title: photo.title,
+     date: formatDate(photo.created_at),
+     categoryName: photo.category ? photo.category.name : '',
+     photoCount: photo.images.length,
+     images: photo.images,
+     isVideo: false,
+    }));
 
    allResults = allResults.concat(transformedResults);
    nextUrl = data.next || null;
@@ -51,7 +55,7 @@ export async function GET(request, { params }) {
    },
   });
  } catch (error) {
-  console.error('Error fetching videos:', error.message);
+  console.error('Error fetching photos:', error.message);
   return new Response(JSON.stringify({ error: error.message }), {
    status: 500,
    headers: {

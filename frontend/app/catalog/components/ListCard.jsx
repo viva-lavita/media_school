@@ -30,6 +30,9 @@ export default function SectionListCard({ title, documents }) {
       title={file.title}
       date={file.date}
       categoryName={file.categoryName}
+      photoCount={file.photoCount}
+      images={file.images}
+      isVideo={file.isVideo !== undefined ? file.isVideo : true}
      />
     ))}
 
@@ -44,10 +47,12 @@ export default function SectionListCard({ title, documents }) {
       title={file.title}
       date={file.date}
       categoryName={file.categoryName}
+      isVideo={file.isVideo !== undefined ? file.isVideo : true}
 
         key={`item-`+ Math.random().toString(36).substr(2, 9)}
        />
       ))}
+
    </div>
 
    {
