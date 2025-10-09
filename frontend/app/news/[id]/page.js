@@ -1,6 +1,6 @@
 "use client";
 import { useParams, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../Onenews.module.css";
 import NewsContent from "./components/NewsContent";
 import CommentForm from "./components/CommentForm";
@@ -17,6 +17,22 @@ export default function NewsDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [type, setType] = useState('news');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/users/me');
+        console.log('Auth check result:', response.ok, response.status);
+        setIsAuthenticated(response.ok);
+      } catch (error) {
+        console.error('Auth check error:', error);
+        setIsAuthenticated(false);
+      }
+    };
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     if (!id) {
@@ -89,12 +105,22 @@ export default function NewsDetail() {
     return <p>Новость не найдена.</p>;
   }
 
+  // return (
+  //   <>
+  //     <div className={`${styles.newsContainer}`}>
+  //       <NewsContent item={item} />
+  //       {isAuthenticated ? <CommentForm itemId={id} itemType={type} /> : <div className={`${styles.textInfo} border-l-1 border-grass`}><p>Возможность комментирования доступна только для авторизованных пользователей</p></div>}
+  //       <CommentsList questions={comments} />
+  //     </div>
+  //   </>
+  // );
   return (
     <>
       <div className={`${styles.newsContainer}`}>
         <NewsContent item={item} />
-        <CommentForm itemId={id} itemType={type} />
+        {isAuthenticated ? <CommentForm itemId={id} itemType={type} /> : <div ></div>}
         <CommentsList questions={comments} />
+        {isAuthenticated ? <div ></div> : <div className={`${styles.textInfo} border-l-1 border-grass`}><p>Возможность комментирования доступна только для авторизованных пользователей</p></div>}
       </div>
     </>
   );
