@@ -1,6 +1,5 @@
 .pagination {
  position: relative;
- left: 50%;
  list-style-type: none;
  display: flex;
  justify-content: center;
@@ -9,6 +8,8 @@
  max-width: 100%;
  width: fit-content;
  flex-grow: 1;
+ margin-left: auto;
+ margin-right: auto;
 }
 
 .paginationItem {

@@ -64,8 +64,8 @@
   font-size: clamp(28px, 2vw + 1rem, 28px);
   margin-bottom: 28px;
  }
- .tabButton {
+ /* .tabButton {
   flex-basis: 100%;
   margin-bottom: 10px;
-}
+} */
 }
