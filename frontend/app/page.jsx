@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import styles from './Home.module.css';
 import { comfortaa } from '@/lib/fonts';
 import { montserrat } from '@/lib/fonts';
@@ -47,6 +47,10 @@ const feedbacks = [
 export default function Home() {
  const { pageWidth } = useContext(PageWidthContext);
 
+ const [mounted, setMounted] = useState(false);
+
+ useEffect(() => setMounted(true), []);
+
  const [currentIndex, setCurrentIndex] = useState(0);
 
  const prevSlide = () => {
@@ -62,9 +66,11 @@ export default function Home() {
  };
 
  let visibleCount = 1;
- if (pageWidth >= 768 && pageWidth < 1024) visibleCount = 2;
- else if (pageWidth >= 1024 && pageWidth < 1400) visibleCount = 3;
- else if (pageWidth >= 1400) visibleCount = 4;
+ if (mounted) {
+  if (pageWidth >= 768 && pageWidth < 1024) visibleCount = 2;
+  else if (pageWidth >= 1024 && pageWidth < 1400) visibleCount = 3;
+  else if (pageWidth >= 1400) visibleCount = 4;
+ }
 
  const visibleFeedbacks = feedbacks.slice(
    currentIndex,
@@ -201,7 +207,7 @@ export default function Home() {
       </div>
       <div
        className={`${
-        pageWidth < 729 ? 'hidden' : ''
+        mounted && pageWidth < 729 ? 'hidden' : ''
        } ${styles.announcementsContainerItem} flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>
@@ -235,7 +241,7 @@ export default function Home() {
       </div>
       <div
        className={`${
-        pageWidth < 1920 ? 'hidden' : ''
+        mounted && pageWidth < 1920 ? 'hidden' : ''
        } flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>
@@ -320,7 +326,7 @@ export default function Home() {
 
      <div
        className={`${
-         pageWidth >= 1920 ? 'absolute top-[7px] right-0' : 'justify-center'
+         mounted && pageWidth >= 1920 ? 'absolute top-[7px] right-0' : 'justify-center'
        } flex gap-3`}
      >
       <button aria-label="Предыдущее" onClick={prevSlide} className={`cursor-pointer`}>

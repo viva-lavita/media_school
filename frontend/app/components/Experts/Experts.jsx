@@ -3,10 +3,14 @@ import PageWidthContext from '@/app/context/PageWidthProvider';
 import styles from '../../Home.module.css';
 import { comfortaa } from '@/lib/fonts';
 import { montserrat } from '@/lib/fonts';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
 export default function Experts() {
   const { pageWidth } = useContext(PageWidthContext);
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const teachers = [
     {
@@ -50,9 +54,11 @@ export default function Experts() {
   }
 
   let visibleCount = 1;
-  if (pageWidth >= 768 && pageWidth < 1024) visibleCount = 2;
-  else if (pageWidth >= 1024 && pageWidth < 1920) visibleCount = 3;
-  else if (pageWidth >= 1920) visibleCount = 4;
+  if (mounted) {
+    if (pageWidth >= 768 && pageWidth < 1024) visibleCount = 2;
+    else if (pageWidth >= 1024 && pageWidth < 1920) visibleCount = 3;
+    else if (pageWidth >= 1920) visibleCount = 4;
+  }
 
   const visibleTeachers = teachers.slice(
     currentIndex,
