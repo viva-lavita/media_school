@@ -90,7 +90,7 @@ export default function AskQuestion() {
      categoryError ? styles.titleError : ''
     }`}
    >
-    Выберите категорию вопроса:
+    Категория вопроса
    </h1>
    <div
     className={`${styles.categoriesContainer} ${
@@ -120,7 +120,7 @@ export default function AskQuestion() {
    <form className={styles.commentForm} onSubmit={handleSubmit}>
     <div className={styles.headerBlock}>
      <p className={`${montserrat.className} ${styles.ourQuestion}`}>
-      Ваш вопрос
+      Текст вопроса
      </p>
      <span className={`${montserrat.className} ${styles.count}`}>
       {charCount}/400
