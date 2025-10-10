@@ -65,7 +65,7 @@ export default function QAPage() {
  }
 
  if (error) {
-  return <p>{error}</p>;
+  return <p className={styles.loading}>{error}</p>;
  }
 
  return (

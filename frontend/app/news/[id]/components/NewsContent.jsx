@@ -15,7 +15,7 @@ export default function NewsContent({ item }) {
   }, [item]);
 
   if (loading) {
-    return <div>Загрузка...</div>;
+    return <div  className={styles.loading}>Загрузка...</div>;
   }
 
   const displayItem = detailedItem || item;

@@ -38,11 +38,6 @@ export default function AskQuestion() {
    setQuestionError(false);
   }
 
-  if (questionText.length > 400) {
-   setSubmitError('Текст вопроса не должен превышать 400 символов');
-   return;
-  }
-
   setIsSubmitting(true);
   setSubmitError('');
 
