@@ -114,14 +114,12 @@ export default function AskQuestion() {
     Категория вопроса
    </h1>
    <div
-    className={`${styles.categoriesContainer} ${
-     categoryError ? styles.hasError : ''
-    }`}
+    className={`${styles.categoriesContainer} `}
    >
     {categories.map((category, index) => (
      <label key={index} className={styles.labelCategory}>
       <input
-       className={`${montserrat.className} ${styles.inputCategories}`}
+       className={`${montserrat.className} ${styles.inputCategories} ${categoryError ? styles.hasError : ''}`}
        type="radio"
        name="category"
        value={category}

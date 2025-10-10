@@ -103,7 +103,9 @@
   position: relative;
   margin-right: 16px; 
 }
-
+.hasError {
+   border: 2px solid #DB0000;  
+}
 .radioBtn::after {
   content: '';
   width: 12px;

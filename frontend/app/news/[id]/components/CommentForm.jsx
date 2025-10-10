@@ -116,7 +116,7 @@ export default function CommentForm({ itemId, itemType }) {
               setCategoryError(false);
             }}
           />
-          <span className={`${styles.radioBtn} ${categoryError ? 'border-red-500' : ''}`}></span>
+          <span className={`${styles.radioBtn} ${categoryError ? styles.hasError : ''}`}></span>
           <span className={`${styles.textStyle}`}>
             Вопрос эксперту/ преподавателю
           </span>
@@ -132,7 +132,7 @@ export default function CommentForm({ itemId, itemType }) {
               setCategoryError(false);
             }}
           />
-          <span className={`${styles.radioBtn} ${categoryError ? 'border-red-500' : ''}`}></span>
+          <span className={`${styles.radioBtn} ${categoryError ? styles.hasError : ''}`}></span>
           <span className={`${styles.textStyle}`}>
             Технический вопрос
           </span>
@@ -148,7 +148,7 @@ export default function CommentForm({ itemId, itemType }) {
               setCategoryError(false);
             }}
           />
-          <span className={`${styles.radioBtn} ${categoryError ? 'border-red-500' : ''}`}></span>
+          <span className={`${styles.radioBtn} ${categoryError ? styles.hasError : ''}`}></span>
           <span className={`${styles.textStyle}`}>
             Другое
           </span>

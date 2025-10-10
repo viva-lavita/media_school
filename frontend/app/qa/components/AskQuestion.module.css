@@ -22,6 +22,10 @@
  color: #db0000;
 }
 
+.hasError {
+   border: 2px solid #DB0000;  
+}
+
 .inputCategories:checked::after {
  content: '';
  display: block;
