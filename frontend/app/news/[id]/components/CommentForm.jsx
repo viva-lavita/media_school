@@ -6,6 +6,7 @@ export default function CommentForm({ itemId, itemType }) {
   const [charCount, setCharCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [text, setText] = useState('');
+  const [categoryError, setCategoryError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -15,17 +16,15 @@ export default function CommentForm({ itemId, itemType }) {
 
     // Validation
     if (!selectedCategory) {
+      setCategoryError(true);
       setSubmitError('Пожалуйста, выберите категорию вопроса');
       return;
+    } else {
+      setCategoryError(false);
     }
 
     if (!text.trim()) {
       setSubmitError('Пожалуйста, введите текст вопроса');
-      return;
-    }
-
-    if (text.length > 400) {
-      setSubmitError('Текст вопроса не должен превышать 400 символов');
       return;
     }
 
@@ -101,7 +100,7 @@ export default function CommentForm({ itemId, itemType }) {
         Добавить комментарий
       </h2>
       <p
-        className={`${montserrat.className} font-normal text-lg leading-[140%] mt-3`}
+        className={`${montserrat.className} font-normal text-lg leading-[140%] mt-3 ${categoryError ? 'text-red-500' : ''}`}
       >
         Выберите категорию вопроса
       </p>
@@ -112,9 +111,12 @@ export default function CommentForm({ itemId, itemType }) {
             name="category"
             value="category1"
             checked={selectedCategory === 'category1'}
-            onChange={() => setSelectedCategory('category1')}
+            onChange={() => {
+              setSelectedCategory('category1');
+              setCategoryError(false);
+            }}
           />
-          <span className={`${styles.radioBtn}`}></span>
+          <span className={`${styles.radioBtn} ${categoryError ? 'border-red-500' : ''}`}></span>
           <span className={`${styles.textStyle}`}>
             Вопрос эксперту/ преподавателю
           </span>
@@ -125,9 +127,12 @@ export default function CommentForm({ itemId, itemType }) {
             name="category"
             value="category2"
             checked={selectedCategory === 'category2'}
-            onChange={() => setSelectedCategory('category2')}
+            onChange={() => {
+              setSelectedCategory('category2');
+              setCategoryError(false);
+            }}
           />
-          <span className={`${styles.radioBtn}`}></span>
+          <span className={`${styles.radioBtn} ${categoryError ? 'border-red-500' : ''}`}></span>
           <span className={`${styles.textStyle}`}>
             Технический вопрос
           </span>
@@ -138,9 +143,12 @@ export default function CommentForm({ itemId, itemType }) {
             name="category"
             value="category3"
             checked={selectedCategory === 'category3'}
-            onChange={() => setSelectedCategory('category3')}
+            onChange={() => {
+              setSelectedCategory('category3');
+              setCategoryError(false);
+            }}
           />
-          <span className={`${styles.radioBtn}`}></span>
+          <span className={`${styles.radioBtn} ${categoryError ? 'border-red-500' : ''}`}></span>
           <span className={`${styles.textStyle}`}>
             Другое
           </span>

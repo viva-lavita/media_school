@@ -11,6 +11,7 @@ export default function QAPage() {
  const [questions, setQuestions] = useState([]);
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState(null);
+ const [isAuthenticated, setIsAuthenticated] = useState(false);
 
  useEffect(() => {
   const fetchQuestions = async () => {
@@ -46,8 +47,21 @@ export default function QAPage() {
   fetchQuestions();
  }, []);
 
+ useEffect(() => {
+  const checkAuth = async () => {
+   try {
+    const response = await fetch('/api/users/me');
+    setIsAuthenticated(response.ok);
+   } catch (error) {
+    console.error('Auth check error:', error);
+    setIsAuthenticated(false);
+   }
+  };
+  checkAuth();
+ }, []);
+
  if (loading) {
-  return <p>Загрузка...</p>;
+  return <p className={styles.loading}>Загрузка...</p>;
  }
 
  if (error) {
@@ -79,7 +93,7 @@ export default function QAPage() {
 
    {activeTab === 'all' && <QuestionsList questions={questions} />}
 
-   {activeTab === 'ask' && <AskQuestion />}
+   {activeTab === 'ask' && (isAuthenticated ? <AskQuestion /> : <div className={`${styles.textInfo} border-l-1 border-grass pl-3 pt-3 pb-3 mt-10`}><p>Задавать вопросы могут только авторизованные пользователи</p></div>)}
   </div>
  );
 }

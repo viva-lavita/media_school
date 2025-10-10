@@ -415,3 +415,7 @@
         width: calc(100vw - 40px);
     }
 }
+
+.loading {
+ text-align: center;
+}

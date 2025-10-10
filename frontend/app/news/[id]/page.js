@@ -94,15 +94,15 @@ export default function NewsDetail() {
   }, [id, searchParams, setPageTitle]);
 
   if (loading) {
-    return <p>Загрузка...</p>;
+    return <p className={styles.loading}>Загрузка...</p>;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p className={styles.loading}>{error}</p>;
   }
 
   if (!item) {
-    return <p>Новость не найдена.</p>;
+    return <p className={styles.loading}>Новость не найдена.</p>;
   }
 
   // return (
