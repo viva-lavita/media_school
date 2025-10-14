@@ -1,17 +1,14 @@
 import { useState } from 'react';
 import Card from './Card';
-import FileItem from './FileItem';
 import styles from './DocumentsSection.module.css';
-import styleSection from '../layoutCatalog.module.css';
-import { comfortaa, montserrat } from '@/lib/fonts';
 import formatDocument from '@/app/utils/formatDocument';
 
 export default function SectionListCard({ title, documents }) {
- const visibleFilesCount = Math.min(documents.length, 3); // Показываем первые три элемента
- const [isCollapsed, setIsCollapsed] = useState(true); // Начальное состояние - свернуто
+ const visibleFilesCount = Math.min(documents.length, 3);
+ const [isCollapsed, setIsCollapsed] = useState(true);
 
  const handleToggleClick = () => {
-  setIsCollapsed((prevState) => !prevState); // Инвертируем состояние кнопки
+  setIsCollapsed((prevState) => !prevState); 
  };
 
  const totalCount = title === 'Фотогалерея'
@@ -51,6 +48,8 @@ export default function SectionListCard({ title, documents }) {
       title={file.title}
       date={file.date}
       categoryName={file.categoryName}
+      photoCount={file.photoCount}
+      images={file.images}
       isVideo={file.isVideo !== undefined ? file.isVideo : true}
 
         key={`item-`+ Math.random().toString(36).substr(2, 9)}

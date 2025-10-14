@@ -64,9 +64,9 @@ export default function LayoutPage() {
 
 useEffect(() => {
   if (activeCategory.id) {
-    handleFetch(`/api/documents/${activeCategory.id}`)
+    handleFetch(`/api/documents/${activeCategory.id}?page=1&limit=10`)
       .then((data) => {
-        setDocumentsData(data.results.map(doc => ({ ...doc, createdAt: new Date(doc.createdAt) })));
+        setDocumentsData(data);
       })
       .catch(console.error);
   }
@@ -133,7 +133,7 @@ useEffect(() => {
       </section>
      </>
     )}
-    <DocumentsSection documents={documentsData} />
+    <DocumentsSection documents={documentsData} categoryId={activeCategory.id} />
     <SectionListCard title={'Видео-материалы'} documents={videosData} />
     <SectionListCard title={'Фотогалерея'} documents={photosData} />
    </main>

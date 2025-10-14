@@ -1,30 +1,58 @@
-import { montserrat } from '@/lib/fonts';
 import styles from './DocumentsSection.module.css';
+import { Montserrat } from 'next/font/google';
+const montserrat = Montserrat({ subsets: ['latin'] });
+
+import {
+ faFileWord,
+ faFilePdf,
+ faFileText,
+ faImage,
+ faFileAlt,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function FileItem({ file }) {
  const iconsByExtension = {
-  doc: '\uD83D\uDCC4',
-  docx: '\uD83D\uDCC4',
-  pdf: '\uD83D\uDDCE',
-  txt: '\uD83D\uDDD2',
-  jpg: '\uD83D\uDFBC',
-  jpeg: '\uD83D\uDFBC',
-  png: '\uD83D\uDFBC',
-  default: '\uD83D\uDCDA',
+  doc: { icon: faFileWord, color: '#007bff', label: 'doc' },
+  docx: { icon: faFileWord, color: '#007bff', label: 'docx' },
+  pdf: { icon: faFilePdf, color: '#dc3545', label: 'pdf' },
+  txt: { icon: faFileText, color: '#6c757d', label: 'txt' },
+  jpg: { icon: faImage, color: '#28a745', label: 'jpg' },
+  jpeg: { icon: faImage, color: '#28a745', label: 'jpeg' },
+  png: { icon: faImage, color: '#28a745', label: 'png' },
+  default: { icon: faFileAlt, color: '#6c757d', label: 'file' },
  };
+
  const extension = (file.extension || '').toLowerCase();
- const icon = iconsByExtension[extension] || iconsByExtension['default'];
+ const iconData = iconsByExtension[extension] || iconsByExtension['default'];
 
  return (
-<div className={styles.fileRow}>
-  <div className={styles.nameContainer}>
-    <span className={`${montserrat.className} ${styles.fileName}`}>{icon} {file.name}</span>
+  <div className={styles.fileRow}>
+   <div className={styles.nameContainer}>
+    <FontAwesomeIcon
+     icon={iconData.icon}
+     size="lg"
+     style={{ color: iconData.color }}
+    />
+    <span className={`${montserrat.className} ${styles.fileName}`}>
+     {file.name}
+    </span>
+   </div>
+   <div className={styles.propertyContainer}>
+    <span className={`${montserrat.className} ${styles.fileDate}`}>
+     {new Intl.DateTimeFormat('ru-RU').format(new Date(file.createdAt))}
+    </span>
+    <span className={`${montserrat.className} ${styles.fileFormat}`}>
+     Формат {iconData.label}
+    </span>
+    <a
+     href={file.fileUrl}
+     download
+     className={`${montserrat.className} ${styles.downloadLink}`}
+    >
+     Скачать
+    </a>
+   </div>
   </div>
-  <div className={styles.propertyContainer}>
-    <span className={`${montserrat.className} ${styles.fileDate}`}>{new Intl.DateTimeFormat('ru-RU').format(file.createdAt)}</span>
-    <span className={`${montserrat.className} ${styles.fileFormat}`}>Формат {file.format}</span>
-    <a href={file.fileUrl} download className={`${montserrat.className} ${styles.downloadLink}`}>Скачать</a>
-  </div>
-</div>
  );
 }

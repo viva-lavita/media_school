@@ -1,54 +1,48 @@
 export async function GET(request, { params }) {
  const { id } = await params;
+ const url = new URL(request.url);
+ const page = parseInt(url.searchParams.get('page')) || 1;
+ const limit = parseInt(url.searchParams.get('limit')) || 10;
+
  try {
-  let allResults = [];
-  let currentNextUrl = '';
-  let nextUrl = `http://217.114.11.243/api/v1/content/documents/?catalog=${id}`;
+  const response = await fetch(`http://217.114.11.243/api/v1/content/documents/?catalog=${id}&page=${page}&page_size=${limit}`, {});
 
-  while (nextUrl && nextUrl !== currentNextUrl) {
-   currentNextUrl = nextUrl;
-   const response = await fetch(nextUrl, {});
-
-   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
-   }
-
-   const contentType = response.headers.get('Content-Type');
-   if (!contentType.includes('application/json')) {
-    throw new Error(
-     `Invalid Content Type received: ${contentType}. Expected application/json.`
-    );
-   }
-
-   const data = await response.json();
-   const transformedResults = data.results.map((doc) => {
-    const url = decodeURIComponent(doc.file);
-    const filename = url.split('/').pop();
-    const extension = filename.split('.').pop().toLowerCase();
-    const name = filename.replace('.' + extension, '');
-    const format = extension.toUpperCase();
-
-    return {
-     id: doc.id,
-     name: name,
-     createdAt: new Date(),
-     extension: extension,
-     fileUrl: doc.file,
-    };
-   });
-
-   allResults = allResults.concat(transformedResults);
-   nextUrl = data.next || null;
+  if (!response.ok) {
+   throw new Error(`HTTP error! Status: ${response.status}`);
   }
 
-  const aggregatedData = {
-   count: allResults.length,
-   next: null,
-   previous: null,
-   results: allResults,
+  const contentType = response.headers.get('Content-Type');
+  if (!contentType.includes('application/json')) {
+   throw new Error(
+    `Invalid Content Type received: ${contentType}. Expected application/json.`
+   );
+  }
+
+  const data = await response.json();
+  const transformedResults = data.results.map((doc) => {
+   const url = decodeURIComponent(doc.file);
+   const filename = url.split('/').pop();
+   const extension = filename.split('.').pop().toLowerCase();
+   const name = filename.replace('.' + extension, '');
+   const format = extension.toUpperCase();
+
+   return {
+    id: doc.id,
+    name: name,
+    createdAt: new Date().toISOString(),
+    extension: extension,
+    fileUrl: doc.file,
+   };
+  });
+
+  const paginatedData = {
+   count: data.count,
+   next: data.next ? `${request.url}?page=${page + 1}&limit=${limit}` : null,
+   previous: data.previous ? `${request.url}?page=${page - 1}&limit=${limit}` : null,
+   results: transformedResults,
   };
 
-  return new Response(JSON.stringify(aggregatedData), {
+  return new Response(JSON.stringify(paginatedData), {
    status: 200,
    headers: {
     'Content-Type': 'application/json; charset=utf-8',
