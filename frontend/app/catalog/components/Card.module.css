@@ -1,11 +1,11 @@
 .card {
  width: calc(33.33% - 30px * 2 / 3);
-  min-height: 150px;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  color: inherit;
+ min-height: 150px;
+ margin-bottom: 1rem;
+ overflow: hidden;
+ cursor: pointer;
+ position: relative;
+ color: inherit;
 }
 .media {
  margin-bottom: 18px;
@@ -24,23 +24,7 @@
 .mediaContainer {
  position: relative;
 }
-.playButton {
- position: absolute;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
- background: rgba(0, 0, 0, 0.7);
- color: white;
- border: none;
- border-radius: 50%;
- width: 50px;
- height: 50px;
- font-size: 20px;
- cursor: pointer;
- display: flex;
- align-items: center;
- justify-content: center;
-}
+
 .masterClass {
  font-size: 14px;
  font-weight: 400;

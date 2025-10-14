@@ -1,5 +1,6 @@
 import { comfortaa, montserrat } from '@/lib/fonts';
 import styles from './About.module.css';
+import { formatText } from '@/app/utils/formatText';
 
 export default function DescriptionSection({ title, description }) {
  return (
@@ -7,7 +8,7 @@ export default function DescriptionSection({ title, description }) {
    <p className={`${comfortaa.className} ${styles.subtitleAbout}`}>
     <strong>{title}</strong>
    </p>
-   <p className={montserrat.className}>{description}</p>
+   <div className={montserrat.className}>{formatText(description)}</div>
   </div>
  );
 }
