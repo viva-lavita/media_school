@@ -14,11 +14,15 @@ export default function SectionListCard({ title, documents }) {
   setIsCollapsed((prevState) => !prevState); // Инвертируем состояние кнопки
  };
 
+ const totalCount = title === 'Фотогалерея'
+  ? documents.reduce((sum, doc) => sum + (doc.photoCount || 0), 0)
+  : documents.length;
+
  return (
   <section className={styles.mediaSection}>
    <div className={styles.info}>
     <h2 className={`${styles.title}`}>{title}</h2>
-    <p className={`${styles.count}`}>{formatDocument(documents.length)}</p>
+    <p className={`${styles.count}`}>{formatDocument(totalCount)}</p>
    </div>
 
    <div className={styles.mediaBox}>
