@@ -5,7 +5,7 @@ export async function GET(request, { params }) {
  const limit = parseInt(url.searchParams.get('limit')) || 10;
 
  try {
-  const response = await fetch(`http://217.114.11.243/api/v1/content/documents/?catalog=${id}&page=${page}&page_size=${limit}`, {});
+  const response = await fetch(`http://217.114.11.243/api/v1/content/documents/?catalog=${id}`, {});
 
   if (!response.ok) {
    throw new Error(`HTTP error! Status: ${response.status}`);
@@ -35,11 +35,16 @@ export async function GET(request, { params }) {
    };
   });
 
+  const totalCount = transformedResults.length;
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const paginatedResults = transformedResults.slice(startIndex, endIndex);
+
   const paginatedData = {
-   count: data.count,
-   next: data.next ? `${request.url}?page=${page + 1}&limit=${limit}` : null,
-   previous: data.previous ? `${request.url}?page=${page - 1}&limit=${limit}` : null,
-   results: transformedResults,
+   count: totalCount,
+   next: endIndex < totalCount ? `${request.url}?page=${page + 1}&limit=${limit}` : null,
+   previous: page > 1 ? `${request.url}?page=${page - 1}&limit=${limit}` : null,
+   results: paginatedResults,
   };
 
   return new Response(JSON.stringify(paginatedData), {

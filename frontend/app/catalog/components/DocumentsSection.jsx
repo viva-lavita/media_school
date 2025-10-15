@@ -30,14 +30,22 @@ export default function DocumentsSection({ documents: initialDocuments, category
   try {
    const response = await fetch(`/api/documents/${categoryId}?page=${page}&limit=10`);
    const data = await response.json();
-   setDocuments(data.results);
-   setTotalCount(data.count);
-   setNextPage(data.next);
-   setPreviousPage(data.previous);
+   setDocuments(data.results || []);
+   setTotalCount(data.count || 0);
+   setNextPage(data.next || null);
+   setPreviousPage(data.previous || null);
    setCurrentPage(page);
-   setIsCollapsed(true); // Reset to collapsed when changing pages
+   if (page > 1) {
+    setIsCollapsed(false);
+   } else {
+    setIsCollapsed(true);
+   }
   } catch (error) {
    console.error('Error fetching documents:', error);
+   setDocuments([]);
+   setTotalCount(0);
+   setNextPage(null);
+   setPreviousPage(null);
   } finally {
    setIsLoading(false);
   }
@@ -64,7 +72,7 @@ export default function DocumentsSection({ documents: initialDocuments, category
  };
 
  const totalPages = Math.ceil(totalCount / 10);
- const visibleFilesCount = Math.min(documents?.length || 0, 5);
+ const visibleFilesCount = currentPage === 1 ? (isCollapsed ? 5 : 10) : 10;
 
  if (!Array.isArray(documents)) {
   console.error('Документы отсутствуют или имеют неверный формат.');
@@ -85,28 +93,23 @@ export default function DocumentsSection({ documents: initialDocuments, category
     {documents.slice(0, visibleFilesCount).map((file) => (
      <FileItem key={file.id} file={file} />
     ))}
-    {!isCollapsed && documents.length > 5 &&
-     documents.slice(visibleFilesCount, 10).map((file) => (
-      <FileItem key={file.id} file={file} />
-     ))
-    }
    </div>
    {totalCount > 5 && (
     <>
-     {totalCount > 10 && !isCollapsed && (
-      <Pagination
-       totalPages={totalPages}
-       currentPage={currentPage}
-       setCurrentPage={handlePageChange}
-      />
-     )}
-     {documents.length > 5 && (
+     {currentPage === 1 && documents.length > 5 && (
       <button
        className={`${montserrat.className} ${stylesDocument.toggleButton}`}
        onClick={handleToggleClick}
       >
        {isCollapsed ? 'РАСКРЫТЬ СПИСОК' : 'СВЕРНУТЬ СПИСОК'}
       </button>
+     )}
+     {!isCollapsed && totalCount > 10 && (
+      <Pagination
+       totalPages={totalPages}
+       currentPage={currentPage}
+       setCurrentPage={handlePageChange}
+      />
      )}
     </>
    )}
