@@ -52,6 +52,8 @@ export default function CommentForm({ itemId, itemType }) {
         requestBody.announcement = itemId;
       } else if (itemType === 'contests') {
         requestBody.competition = itemId;
+      } else if (itemType === 'catalog') {
+        requestBody.catalog = itemId;
       }
 
       const response = await fetch('/api/comments', {

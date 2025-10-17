@@ -30,6 +30,7 @@ export default function ListCard({ documents }, titleCardList) {
       videoUrl={file.videoUrl}
       title={file.title}
       date={file.date}
+      id={file.id}
      />
     ))}
 

@@ -20,3 +20,13 @@
     font-weight: 400;
     color: #535353;  
 }
+.popUpBackgroundCatalog {
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh; */
+    background-color: #535353CC;
+    /* position: fixed;
+    z-index: 1; */
+}

@@ -1,10 +1,19 @@
+"use client"
+
 import { montserrat } from '@/lib/fonts';
 import styles from './Card.module.css';
+import { usePopUpCatalog } from "../PopUpCatalog";
 
-export default function Card({ imageUrl, videoUrl, title, date }) {
-    
+export default function Card({ imageUrl, videoUrl, title, date, id }) {
+  const { setIsPopUpOpen, setCardData } = usePopUpCatalog();
+
+  const handleClick = () => {
+    setCardData({ imageUrl, videoUrl, title, date, id });
+    setIsPopUpOpen(true);
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleClick}>
       {videoUrl ? (
         <video className={styles.media} src={videoUrl} controls></video>
       ) : (

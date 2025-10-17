@@ -7,6 +7,8 @@ import TeachersList from '../about/components/TeachersList';
 import handleFetch from '../utils/fetchErrorHandle';
 import DocumentsSection from './components/DocumentsSection';
 import ListCard from './components/ListCard';
+import { PopUpCatalogProvider } from './PopUpCatalog';
+import PopUpCatalog from './PopUpCatalog';
 
 export default function LayoutPage() {
  const titleExpertList = 'Наставники';
@@ -92,50 +94,53 @@ useEffect(() => {
 
  console.log(expertsData);
  return (
-  <div className={styles.wrap}>
-   <h3 className={`${comfortaa.className} ${styles.title}`}>
-    Каталог материалов
-   </h3>
+  <PopUpCatalogProvider>
+   <div className={styles.wrap}>
+    <h3 className={`${comfortaa.className} ${styles.title}`}>
+     Каталог материалов
+    </h3>
 
-   <div className={styles.tabs}>
-    {categories.map((tabItem) => (
-     <button
-      key={tabItem.name}
-      onClick={() => setActiveCategory(tabItem)}
-      className={`${styles.tabButton} ${
-       activeCategory?.name === tabItem.name ? styles.active : ''
-      }`}
-     >
-      {tabItem.name}
-     </button>
-    ))}
-   </div>
-   <main className={styles.mainCatalog}>
-    {activeCategory && (
-     <>
-      <img
-       className={styles.imgPreview}
-       src={activeCategory.image}
-       alt={`Картинка ${activeCategory.name}`}
-      />
-
-      <section className={styles.description}>
-       <DescriptionSection
-        title={activeCategory.title}
-        description={activeCategory.description}
+    <div className={styles.tabs}>
+     {categories.map((tabItem) => (
+      <button
+       key={tabItem.name}
+       onClick={() => setActiveCategory(tabItem)}
+       className={`${styles.tabButton} ${
+        activeCategory?.name === tabItem.name ? styles.active : ''
+       }`}
+      >
+       {tabItem.name}
+      </button>
+     ))}
+    </div>
+    <main className={styles.mainCatalog}>
+     {activeCategory && (
+      <>
+       <img
+        className={styles.imgPreview}
+        src={activeCategory.image}
+        alt={`Картинка ${activeCategory.name}`}
        />
 
-       <div className={styles.founders}>
-        <TeachersList titleList={titleExpertList} teachers={expertsData} />
-       </div>
-      </section>
-     </>
-    )}
-    <DocumentsSection documents={files} />
-    <section className={styles.mediaSection}>
-     <ListCard titleCardList='Видео-материалы' documents={documentSection}/>
-    </section>
-   </main>
-  </div>
+       <section className={styles.description}>
+        <DescriptionSection
+         title={activeCategory.title}
+         description={activeCategory.description}
+        />
+
+        <div className={styles.founders}>
+         <TeachersList titleList={titleExpertList} teachers={expertsData} />
+        </div>
+       </section>
+      </>
+     )}
+     <DocumentsSection documents={files} />
+     <section className={styles.mediaSection}>
+      <ListCard titleCardList='Видео-материалы' documents={documentSection}/>
+     </section>
+    </main>
+   </div>
+   <PopUpCatalog />
+  </PopUpCatalogProvider>
  );
 }
