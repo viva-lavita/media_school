@@ -31,6 +31,12 @@
  width: 923px;
  gap: 24px;
 }
+
+@media screen and (max-width: 1024px) {
+ .textContent {
+  gap: 24px;
+ }
+}
 .subtitleAbout {
  font-weight: 700;
  font-size: 28px;
@@ -38,6 +44,10 @@
 .textContent p:not(:first-child) {
  font-weight: 400;
  font-size: 16px;
+ color: #535353;
+}
+
+.textContent div {
  color: #535353;
 }
 .founders {
@@ -115,10 +125,13 @@
  }
  .textContent {
   width: 462px;
-  gap: 0px;
+  gap: 24px;
  }
  .subtitleAbout {
   font-size: 22px;
+ }
+ .textContent p:not(:first-child) {
+  font-size: 16px;
  }
  .founders {
   width: 462px;

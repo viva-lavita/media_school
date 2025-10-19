@@ -16,6 +16,21 @@
  font-weight: 700;
 }
 
+.mediaTitle {
+ color: #202020;
+ font-size: 22px;
+ font-weight: 700;
+}
+
+@media screen and (max-width: 1024px) {
+ .title {
+  font-size: 22px;
+ }
+ .mediaTitle {
+  font-size: 22px;
+ }
+}
+
 .count {
  font-size: 18px;
  font-weight: 400;
@@ -80,6 +95,15 @@
  font-weight: 400;
  line-height: 130%;
  color: #535353;
+}
+
+@media screen and (max-width: 1024px) {
+ .fileName,
+ .fileDate,
+ .fileFormat,
+ .downloadLink {
+  font-size: 16px;
+ }
 }
 
 .fileName {

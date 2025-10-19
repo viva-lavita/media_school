@@ -4,6 +4,12 @@
  margin: 0 auto 40px;
 }
 
+@media screen and (max-width: 1024px) {
+ .wrap {
+  max-width: 944px;
+ }
+}
+
 .title {
  font-size: clamp(28px, 5vw + 1rem, 52px);
  font-weight: 700;
@@ -12,10 +18,11 @@
 }
 .tabs {
  display: flex;
- justify-content: space-between;
+ justify-content: flex-start;
  gap: 18px;
  overflow-x: auto;
  margin-bottom: 40px;
+ flex-wrap: wrap;
 }
 .tabButton {
  font-size: 16px;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { comfortaa } from '@/lib/fonts';
 import Card from './Card';
 import styles from './DocumentsSection.module.css';
 import formatDocument from '@/app/utils/formatDocument';
@@ -18,7 +19,7 @@ export default function SectionListCard({ title, documents }) {
  return (
   <section className={styles.mediaSection}>
    <div className={styles.info}>
-    <h2 className={`${styles.title}`}>{title}</h2>
+    <h2 className={`${comfortaa.className} ${styles.title} ${styles.mediaTitle}`}>{title}</h2>
     <p className={`${styles.count}`}>{formatDocument(totalCount)}</p>
    </div>
 
