@@ -28,8 +28,9 @@
 .textContent {
  display: flex;
  flex-direction: column;
- width: 923px;
+ width: 100%;
  gap: 24px;
+ justify-content: stretch;
 }
 
 @media screen and (max-width: 1024px) {
@@ -153,11 +154,10 @@
   align-items: center;
   gap: 40px;
  }
-
 }
 
 @media screen and (max-width: 360px) {
-  .wrap {
+ .wrap {
   width: 320px;
  }
  .titleAbout {
