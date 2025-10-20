@@ -16,6 +16,12 @@
  text-align: center;
  margin-bottom: 40px;
 }
+
+@media (min-width: 1024px) {
+ .title {
+  font-size: 40px;
+ }
+}
 .tabs {
  display: flex;
  justify-content: flex-start;
@@ -42,6 +48,20 @@
 .imgPrevue {
  max-width: 100%;
  height: auto;
+}
+
+@media (min-width: 1024px) {
+ .imgPrevue {
+  height: 359px;
+  object-fit: cover;
+ }
+}
+
+@media (min-width: 1920px) {
+ .imgPrevue {
+  height: 533px;
+  object-fit: cover;
+ }
 }
 .mainCatalog {
  display: flex;

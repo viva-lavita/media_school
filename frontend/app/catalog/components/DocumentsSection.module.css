@@ -155,3 +155,10 @@
  margin: auto;
  justify-content: flex-start;
 }
+.nameContainer {
+ flex-basis: 50%
+}
+
+.propertyContainer {
+ flex-basis: 50%
+}
