@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { comfortaa } from '@/lib/fonts';
 import Card from './Card';
 import styles from './DocumentsSection.module.css';
 import formatDocument from '@/app/utils/formatDocument';
 
 export default function SectionListCard({ title, documents }) {
- const visibleFilesCount = Math.min(documents.length, 3);
+ const [windowWidth, setWindowWidth] = useState(0);
+
+ useEffect(() => {
+  const handleResize = () => setWindowWidth(window.innerWidth);
+  handleResize();
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+ }, []);
+
+ const visibleFilesCount = windowWidth <= 768 ? 2 : Math.min(documents.length, 3);
  const [isCollapsed, setIsCollapsed] = useState(true);
 
  const handleToggleClick = () => {
@@ -39,7 +48,7 @@ export default function SectionListCard({ title, documents }) {
     ))}
 
     {!isCollapsed &&
-     documents.length > 3 &&
+     documents.length > visibleFilesCount &&
      documents
       .slice(visibleFilesCount)
       .map((file) => (
@@ -60,8 +69,8 @@ export default function SectionListCard({ title, documents }) {
    </div>
 
    {
-    /* Кнопка появляется, если документов больше трех */
-    documents.length > 3 && (
+    /* Кнопка появляется, если документов больше видимых */
+    documents.length > visibleFilesCount && (
      <button className={`${styles.toggleButton}`} onClick={handleToggleClick}>
       {isCollapsed ? 'РАСКРЫТЬ СПИСОК' : 'СВЕРНУТЬ'}
      </button>

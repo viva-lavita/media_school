@@ -30,6 +30,23 @@
  margin-bottom: 40px;
  flex-wrap: wrap;
 }
+
+@media screen and (max-width: 768px) {
+ .tabs {
+  display: none;
+ }
+}
+
+.dropdown {
+ display: none;
+}
+
+@media screen and (max-width: 768px) {
+ .dropdown {
+  display: block;
+  margin-bottom: 40px;
+ }
+}
 .tabButton {
  font-size: 16px;
  font-weight: 500;
@@ -63,6 +80,13 @@
   object-fit: cover;
  }
 }
+
+@media screen and (max-width: 768px) {
+ .imgPrevue {
+  height: 277px;
+  object-fit: cover;
+ }
+}
 .mainCatalog {
  display: flex;
  gap: 80px;
@@ -84,7 +108,7 @@ gap: 28px;
 
 @media screen and (max-width: 768px) {
  .title {
-  font-size: clamp(28px, 3vw + 1rem, 32px);
+  font-size: 32px;
  }
 }
 

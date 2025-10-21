@@ -27,6 +27,17 @@
   height: 300px;
  }
 }
+
+@media screen and (max-width: 768px) {
+ .card {
+  width: calc(50% - 15px);
+ }
+ .media {
+  object-fit: cover;
+  min-width: 354px;
+  min-height: 238px;
+ }
+}
 .mediaContainer {
  position: relative;
 }

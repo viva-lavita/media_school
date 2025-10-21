@@ -1,3 +1,4 @@
+
 .sectionDocuments {
  display: flex;
  flex-direction: column;
@@ -85,6 +86,18 @@
 .propertyContainer span {
  flex-basis: calc(33.33%);
  min-width: 0;
+}
+
+@media screen and (max-width: 768px) {
+ .fileFormat {
+  display: none;
+ }
+ .nameContainer {
+  flex-basis: 60%;
+ }
+ .propertyContainer {
+  flex-basis: 40%;
+ }
 }
 
 .fileName,

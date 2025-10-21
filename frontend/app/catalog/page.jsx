@@ -8,6 +8,7 @@ import DescriptionSection from '../about/components/DescriptionSection';
 import handleFetch from '../utils/fetchErrorHandle';
 import DocumentsSection from './components/DocumentsSection';
 import SectionListCard from './components/ListCard';
+import CategoryDropdown from './components/CategoryDropdown';
 
 export default function LayoutPage() {
  //const titleExpertList = 'Наставники';
@@ -111,6 +112,13 @@ useEffect(() => {
       {tabItem.name}
      </button>
     ))}
+   </div>
+   <div className={styles.dropdown}>
+    <CategoryDropdown
+     categories={categories}
+     activeCategory={activeCategory}
+     setActiveCategory={setActiveCategory}
+    />
    </div>
    <main className={styles.mainCatalog}>
     {activeCategory && (
