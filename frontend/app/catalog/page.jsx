@@ -145,9 +145,9 @@ useEffect(() => {
       </section>
      </>
     )}
-    <DocumentsSection documents={documentsData} categoryId={activeCategory.id} />
-    <SectionListCard title={'Видео-материалы'} documents={videosData} />
-    <SectionListCard title={'Фотогалерея'} documents={photosData} />
+    {documentsData && documentsData.length > 0 && <DocumentsSection documents={documentsData} categoryId={activeCategory.id} />}
+    {videosData && videosData.length > 0 && <SectionListCard title={'Видео-материалы'} documents={videosData} />}
+    {photosData && photosData.length > 0 && <SectionListCard title={'Фотогалерея'} documents={photosData} />}
    </main>
   </div>
  );
