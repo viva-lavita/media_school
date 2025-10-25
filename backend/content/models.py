@@ -15,6 +15,7 @@ class Catalog(models.Model):
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
+        ordering = ["pk"]
 
     def __str__(self):
         return self.name
@@ -28,6 +29,7 @@ class ContentCategory(models.Model):
     class Meta:
         verbose_name = "Категория контента"
         verbose_name_plural = "Категории контента"
+        ordering = ["pk"]
 
     def __str__(self):
         return self.name
@@ -54,6 +56,7 @@ class PhotoContent(models.Model):
     class Meta:
         verbose_name = "Фотоконтент"
         verbose_name_plural = "Фотоконтент"
+        ordering = ["-created_at"]
 
     def __str__(self):
         if self.description:
@@ -89,6 +92,7 @@ class VideoContent(models.Model):
     class Meta:
         verbose_name = "Видеоконтент"
         verbose_name_plural = "Видеоконтент"
+        ordering = ["-created_at"]
 
     def __str__(self):
         if self.description:
@@ -110,6 +114,7 @@ class DocumentContent(models.Model):
     class Meta:
         verbose_name = "Файловый контент"
         verbose_name_plural = "Файловый контент"
+        ordering = ["-created_at"]
 
 
 class Expert(models.Model):
@@ -127,3 +132,4 @@ class Expert(models.Model):
     class Meta:
         verbose_name = "Наставник"
         verbose_name_plural = "Наставники"
+        ordering = ["-created_at"]
