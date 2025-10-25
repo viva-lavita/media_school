@@ -7,16 +7,19 @@ import DescriptionSection from './DescriptionSection';
 export default function AboutProjectSection() {
  const TEACHERS_DATA = [
   {
+   id: 1,
    name: 'Мартынова Елизовета Алексеевна',
    position: 'Тренер по голосу и речи',
    photo: '/about-images/Martunova.png',
   },
   {
+   id: 2,
    name: 'Ненашев Максим Федорович',
    position: 'Оператор Первого канала',
    photo: '/about-images/Nenashev.png',
   },
   {
+   id: 3,
    name: 'Иванова Оксана Анатольевна',
    position: 'Ведущая канала К23',
    photo: '/about-images/Ivanova.png',

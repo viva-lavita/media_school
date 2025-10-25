@@ -14,7 +14,7 @@ export default function SectionListCard({ title, documents }) {
   return () => window.removeEventListener('resize', handleResize);
  }, []);
 
- const visibleFilesCount = windowWidth <= 768 ? 2 : Math.min(documents.length, 3);
+ const visibleFilesCount = windowWidth <= 360 ? 1 : (windowWidth <= 768 ? (windowWidth > 600 ? 2 : 1) : Math.min(documents.length, 3));
  const [isCollapsed, setIsCollapsed] = useState(true);
 
  const handleToggleClick = () => {

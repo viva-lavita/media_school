@@ -31,11 +31,25 @@
 @media screen and (max-width: 768px) {
  .card {
   width: calc(50% - 15px);
+  flex: 0 0 auto;
+  min-width: 300px;
  }
  .media {
   object-fit: cover;
-  min-width: 354px;
-  min-height: 238px;
+  width: 100%;
+  height: 238px;
+ }
+}
+
+@media screen and (max-width: 360px) {
+ .card {
+  width: 320px;
+  min-height: 215px;
+ }
+ .media {
+  width: 320px;
+  height: 215px;
+  object-fit: cover;
  }
 }
 .mediaContainer {

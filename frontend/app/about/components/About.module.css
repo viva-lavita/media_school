@@ -170,4 +170,10 @@
   align-items: center;
   gap: 0px;
  }
+ .subtitleAbout {
+  font-size: 18px;
+ }
+ .textContent p:not(:first-child) {
+  font-size: 16px;
+ }
 }

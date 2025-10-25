@@ -23,8 +23,10 @@ export default function LayoutPage() {
  useEffect(() => {
   handleFetch('/api/categories')
    .then((data) => {
-    setCategories(data.results);
-    setActiveCategory(data.results[0]);
+    setCategories(data.results || []);
+    if (data.results && data.results.length > 0) {
+     setActiveCategory(data.results[0]);
+    }
 
     const categoryParam = searchParams.get('category');
     if (categoryParam) {
@@ -48,7 +50,7 @@ export default function LayoutPage() {
    })
    .catch(console.error);
  }, []);
-
+console.log(categories);
 /*useEffect(() => {
   if (activeCategory.id) {
     handleFetch(`/api/experts/${activeCategory.id}`)
@@ -123,11 +125,13 @@ useEffect(() => {
    <main className={styles.mainCatalog}>
     {activeCategory && (
      <>
-      <img
-       className={styles.imgPreview}
-       src={activeCategory.image}
-       alt={`Картинка ${activeCategory.name}`}
-      />
+      <div className={styles.imgWrapper}>
+       <img
+        className={styles.imgPreview}
+        src={activeCategory.image}
+        alt={`Картинка ${activeCategory.name}`}
+       />
+      </div>
 
       <section className={styles.description}>
        <DescriptionSection

@@ -32,6 +32,34 @@
  }
 }
 
+@media screen and (max-width: 360px) {
+ .title {
+  font-size: 18px;
+ }
+ .count {
+  font-size: 16px;
+  margin-top: 12px;
+ }
+ .fileRow {
+  display: block !important;
+ }
+ .nameContainer {
+  flex-basis: 100%;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: flex-start;
+ }
+ .propertyContainer {
+  flex-basis: 100%;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+ }
+ .mediaTitle {
+  font-size: 18px;
+ }
+}
+
 .count {
  font-size: 18px;
  font-weight: 400;
@@ -163,10 +191,9 @@
  display: flex;
  flex-wrap: wrap;
  gap: 30px;
- justify-content: center;
+ justify-content: flex-start;
  max-width: 100%;
  margin: auto;
- justify-content: flex-start;
 }
 .nameContainer {
  flex-basis: 50%
