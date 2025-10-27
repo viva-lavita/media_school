@@ -148,7 +148,7 @@ useEffect(() => {
       </section>
      </>
     )}
-    {documentsData && documentsData.length > 0 && <DocumentsSection documents={documentsData} categoryId={activeCategory.id} />}
+    {documentsData && documentsData.results && documentsData.results.length > 0 && <DocumentsSection documents={documentsData} categoryId={activeCategory.id} />}
     {videosData && videosData.length > 0 && <SectionListCard title={'Видео-материалы'} documents={videosData} />}
     {photosData && photosData.length > 0 && <SectionListCard title={'Фотогалерея'} documents={photosData} />}
    </main>
