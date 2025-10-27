@@ -16,15 +16,17 @@ export default function QuestionForm({
     {question}
    </div>
    <div className={styles.icons}>
-    <span className={`${montserrat.className} ${styles.nameAuthor}`}>
+    <span className={`${montserrat.className} ${styles.nameAuthor} whitespace-nowrap`}>
      {name}
     </span>
+    <div className={`flex flex-row gap-5`}>
     <span className={`${montserrat.className} ${styles.answers}`} onClick={toggleAnswers}>
      {formatAnswer(answers.length)}
     </span>
     <span
      className={`${montserrat.className} ${styles.date}`}
     >{`${data}, ${time}`}</span>
+    </div>
    </div>
   </div>
  );

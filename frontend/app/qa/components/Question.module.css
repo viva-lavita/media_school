@@ -86,44 +86,11 @@
 .authorInfo > * + *::before {
  content: ', ';
 }
-@media screen and (max-width: 360px) {
- .icons {
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
- }
-
- .nameAuthor {
-  width: 100%;
-  text-align: left;
-  justify-content: flex-start;
- }
-
- .answers,
- .date {
-  order: 1;
-  width: auto;
-  line-height: normal;
-  vertical-align: middle;
- }
-
- .authorInfo {
-  width: calc(50% - 10px);
- }
-
- .date {
-  width: calc(50% - 10px);
- }
-
- .nameAuthor,
- .position {
-  width: 100%;
- }
-
- span.answers,
- span.date {
-  display: inline-flex;
-  align-items: center;
-  min-height: 20px;
- }
+@media screen and (max-width: 767px) {
+    .icons {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }
+

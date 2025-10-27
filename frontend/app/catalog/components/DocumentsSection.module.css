@@ -194,6 +194,7 @@
  justify-content: flex-start;
  max-width: 100%;
  margin: auto;
+ overflow-x: hidden;
 }
 .nameContainer {
  flex-basis: 50%

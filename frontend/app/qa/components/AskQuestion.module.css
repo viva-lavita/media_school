@@ -1,7 +1,7 @@
 .title {
  font-size: clamp(14px, 2vw, 18px);
  font-weight: 400;
- margin-top: 42px;
+ margin-top: 60px;
  margin-bottom: 20px;
  color: var(--color-black);
 }
@@ -20,6 +20,10 @@
 
 .titleError {
  color: #db0000;
+}
+
+.hasError {
+   border: 2px solid #DB0000;  
 }
 
 .inputCategories:checked::after {
@@ -44,10 +48,9 @@
 .labelCategory {
  display: flex;
  align-items: center;
- gap: 0.5rem;
  display: inline-flex;
  align-items: center;
- gap: 16px;
+ gap: 0px;
 }
 
 .labelCategory:not(:last-child) {
@@ -97,7 +100,8 @@
  display: flex;
  justify-content: space-between;
  align-items: center;
- margin-bottom: 16px;
+ margin-bottom: 0px;
+ margin-top: 40px;
 }
 
 .ourQuestion {
@@ -120,7 +124,7 @@
 .commentInput {
  padding: 12px;
  border: 1px solid #deedab;
- border-radius: 4px;
+ border-radius: 0px;
  font-size: 16px;
  width: 100%;
  min-height: 116px;
@@ -130,19 +134,21 @@
 }
 
 .commentButton {
- padding: 16.5px 31px;
+ padding: 14.5px 31px;
  background-color: #deedab !important;
  border: none;
  cursor: pointer;
  font-size: 16px;
  width: fit-content;
  font-weight: 500;
- line-height: 100%;
+ line-height: auto;
  letter-spacing: 0;
  vertical-align: middle;
  background-color: green;
  color: #000;
- margin-top: 24px;
+ margin: 0 auto;
+ margin-top: 48px;
+ margin-bottom: 80px;
 }
 
 .commentInput:focus {
@@ -162,7 +168,16 @@
  margin-bottom: 19px;
 }
 
+@media screen and (max-width:1024px) {
+ .wrap {
+  width: calc(100vw - 80px);
+ }
+}
+
 @media screen and (max-width: 768px) {
+.wrap {
+  width: calc(100vw - 40px);
+ }
  .commentInput {
   height: auto;
  }
@@ -185,12 +200,8 @@
  .title {
   font-size: clamp(14px, 2vw, 18px);
  }
- .commentButton {
-  padding: 12px 24px;
+ .commentButton{
+ margin-top: 36px;
  }
 }
-@media screen and (max-width: 360px) {
- .commentButton {
-  margin: 0 auto;
- }
-}
+

@@ -24,7 +24,7 @@ export default function PasswordRecoveryPage() {
               id="login"
               className="w-full border border-green bg-white py-3 px-4 focus:outline-none"
               name="login"
-              placeholder="Логин"
+              placeholder="Введите электронную почту"
             />
             <img className={`absolute top-4.5 right-4`}
                  src="/images/cross.svg"

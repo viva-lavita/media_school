@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 
 from users.models import Child, User
@@ -23,18 +24,37 @@ class ChildInline(admin.TabularInline):
 
 
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(BaseUserAdmin):
     list_display = ("id", "email", "is_staff", "is_active", "created_at", "updated_at")
-    search_fields = ("email",)
+    search_fields = ("email", "first_name", "last_name")
     list_filter = ("is_staff", "is_active")
     readonly_fields = ("created_at", "updated_at")
     show_facets = admin.ShowFacets.ALWAYS
+    ordering = ("email",)
+    filter_horizontal = ("user_permissions",)
 
     inlines = [ChildInline]
-
     fieldsets = (
-        (None, {"fields": ("email",)}),
-        ("Статус", {"fields": ("is_staff", "is_active")}),
-        ("Даты", {"fields": ("created_at", "updated_at")}),
-        ("Персональная информация", {"fields": ("first_name", "last_name", "patronymic_name", "date_of_birth")}),
+        (None, {"fields": ("email", "password", "post")}),
+        ("Персональная информация", {"fields": ("first_name", "last_name")}),
+        (
+            "Права доступа",
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                )
+            },
+        ),
+        (("Важные даты"), {"fields": ("last_login", "date_joined")}),
+    )
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("email", "usable_password", "password1", "password2"),
+            },
+        ),
     )

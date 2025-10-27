@@ -7,11 +7,34 @@
  position: relative;
  color: inherit;
 }
+.cardModal {
+ width: 100%;
+}
 .media {
  margin-bottom: 18px;
  width: 100%;
  height: clamp(200px, 20vw, 300px);
  object-fit: cover;
+}
+.navButton {
+ width: 32px;
+ height: 32px;
+ border-radius: 50%;
+ background-color: white;
+ border: none;
+ cursor: pointer;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 40px;
+ color: #3c4226;
+}
+
+.imageNavigation {
+ position: absolute;
+ align-items: center;
+ display: flex;
+ gap: 12px;
 }
 
 @media (min-width: 1024px) {
@@ -25,6 +48,21 @@
  .media {
   width: 447px;
   height: 300px;
+ }
+ .masterClass {
+  font-size: 18px;
+ }
+ .titleCardModal {
+  font-size: 22px;
+ }
+ .dateCard {
+  font-size: 18px;
+ }
+ .galleryTitle {
+  font-size: 22px;
+ }
+ .photoCount {
+  font-size: 18px;
  }
 }
 
@@ -61,6 +99,7 @@
  font-weight: 400;
  color: #3c4226;
  margin-bottom: 8px;
+ margin-top: 20px;
 }
 .titleCard {
  font-size: 18px;
@@ -69,32 +108,180 @@
  color: #040404;
  margin-bottom: 24px;
 }
+.titleCardModal {
+ font-size: 22px;
+ font-weight: 700;
+ line-height: 100%;
+ color: #040404;
+ margin-bottom: 18px;
+}
+.infoModal,
+.infoModalCount {
+ display: flex;
+ justify-content: space-between;
+}
+.infoModal {
+ margin-bottom: 60px;
+}
+.infoModalCount {
+ margin-bottom: 27px;
+}
 .dateCard {
  font-size: 14px;
  font-weight: 400;
  color: #535353;
 }
+.galleryTitle {
+ font-size: 22px;
+ font-weight: 600;
+}
+.photoCount {
+ font-size: 18px;
+ font-weight: 400;
+ color: #535353;
+}
 
-.modal {
+.popUpBackgroundCatalog {
  position: fixed;
  top: 0;
  left: 0;
  width: 100%;
  height: 100%;
- background-color: rgba(0, 0, 0, 0.8);
- display: flex;
- align-items: center;
- justify-content: center;
+ background-color: rgba(83, 83, 83, 0.8);
  z-index: 1000;
+ overflow-y: auto;
 }
 
-.modalContent {
+.popUpContentCatalog {
+ margin-top: 250px;
+ width: 1400px;
+ margin-left: auto;
+ margin-right: auto;
  position: relative;
- max-width: 90%;
- max-height: 90%;
- background-color: white;
- border-radius: 8px;
- padding: 20px;
+}
+
+@media (max-width: 1920px) {
+ .popUpContentCatalog {
+  width: 1400px;
+ }
+}
+
+@media (max-width: 1024px) {
+ .popUpContentCatalog {
+  width: 944px;
+ }
+}
+
+@media (max-width: 768px) {
+ .popUpContentCatalog {
+  width: 708px;
+ }
+}
+
+@media (max-width: 360px) {
+ .popUpContentCatalog {
+  width: 328px;
+ }
+}
+
+.popUpWrapCatalog {
+ width: 1304px;
+ margin: 0 auto;
+ position: relative;
+}
+
+@media (max-width: 1024px) {
+ .popUpWrapCatalog {
+  width: 848px;
+ }
+ .masterClass {
+  font-size: 14px;
+ }
+ .titleCardModal {
+  font-size: 22px;
+ }
+ .dateCard {
+  font-size: 18px;
+ }
+ .galleryTitle {
+  font-size: 22px;
+ }
+ .photoCount {
+  font-size: 18px;
+ }
+}
+
+@media (max-width: 768px) {
+ .popUpWrapCatalog {
+  width: 632px;
+ }
+ .masterClass {
+  font-size: 14px;
+ }
+ .titleCardModal {
+  font-size: 22px;
+ }
+ .dateCard {
+  font-size: 18px;
+ }
+ .galleryTitle {
+  font-size: 22px;
+ }
+ .photoCount {
+  font-size: 18px;
+ }
+ .infoModal {
+  flex-direction: column;
+  gap: 18px;
+ }
+}
+
+@media (max-width: 360px) {
+ .popUpWrapCatalog {
+  width: 296px;
+ }
+ .masterClass {
+  font-size: 14px;
+ }
+ .titleCardModal {
+  font-size: 18px;
+ }
+ .dateCard {
+  font-size: 16px;
+ }
+ .galleryTitle {
+  font-size: 22px;
+ }
+ .photoCount {
+  font-size: 18px;
+ }
+ .infoModal {
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 40px;
+ }
+ .imageNavigation {
+  position: relative;
+  align-items: center;
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+ }
+ .navButton {
+  margin: 0 auto;
+ }
+}
+
+.closeButtonModal {
+ position: absolute;
+ top: 20px;
+ right: 20px;
+ background: none;
+ border: none;
+ font-size: 24px;
+ cursor: pointer;
+ color: #333;
+ z-index: 10;
 }
 
 .closeButton {
@@ -113,3 +300,38 @@
  height: auto;
  max-height: 70vh;
 }
+
+.thumbnailsGrid {
+ display: grid;
+ grid-template-columns: repeat(5, 1fr);
+ gap: 2px;
+}
+
+@media (max-width: 1024px) {
+ .thumbnailsGrid {
+  grid-template-columns: repeat(4, 1fr);
+ }
+}
+
+@media (max-width: 768px) {
+ .thumbnailsGrid {
+  grid-template-columns: repeat(3, 1fr);
+ }
+}
+
+@media (max-width: 360px) {
+ .thumbnailsGrid {
+  display: none;
+ }
+}
+
+.imageNavigation {
+ position: absolute;
+ align-items: center;
+ bottom: 24px;
+ right: 24px;
+ display: flex;
+ gap: 12px;
+}
+
+

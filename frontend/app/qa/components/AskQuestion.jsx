@@ -14,26 +14,32 @@ export default function AskQuestion() {
  const [charCount, setCharCount] = useState(0);
  const [categoryError, setCategoryError] = useState(false);
  const [questionError, setQuestionError] = useState(false);
+ const [isSubmitting, setIsSubmitting] = useState(false);
+ const [submitError, setSubmitError] = useState('');
+ const [submitSuccess, setSubmitSuccess] = useState(false);
 
  const handleSubmit = async (event) => {
   event.preventDefault();
 
+  // Validation
   if (!selectedCategory) {
    setCategoryError(true);
+   setSubmitError('Пожалуйста, выберите категорию вопроса');
+   return;
   } else {
    setCategoryError(false);
   }
 
   if (!questionText.trim()) {
    setQuestionError(true);
+   setSubmitError('Пожалуйста, введите текст вопроса');
+   return;
   } else {
    setQuestionError(false);
   }
 
-  if (!selectedCategory || !questionText.trim()) {
-   alert('Заполните все необходимые поля!');
-   return;
-  }
+  setIsSubmitting(true);
+  setSubmitError('');
 
   const categoryMap = {
    'Вопрос к эксперту/преподавателю': 'expert',
@@ -60,15 +66,25 @@ export default function AskQuestion() {
     throw new Error(errorData.error || 'Ошибка отправки вопроса');
    }
 
-   alert('Вопрос отправлен успешно!');
+   // Success
+   setSubmitSuccess(true);
    setSelectedCategory('');
    setQuestionText('');
    setCharCount(0);
-  } catch (err) {
-   console.error('Ошибка отправки:', err.message);
-   alert('Ошибка отправки вопроса: ' + err.message);
+
+   // Reset success message after 3 seconds
+   setTimeout(() => {
+    setSubmitSuccess(false);
+   }, 3000);
+
+  } catch (error) {
+   console.error('Error submitting question:', error);
+   setSubmitError(error.message || 'Произошла ошибка при отправке вопроса');
+  } finally {
+   setIsSubmitting(false);
   }
  };
+
  const checkForErrors = (newValue) => {
   if (!selectedCategory && newValue.trim() !== '') {
    setCategoryError(true);
@@ -90,17 +106,15 @@ export default function AskQuestion() {
      categoryError ? styles.titleError : ''
     }`}
    >
-    Выберите категорию вопроса:
+    Категория вопроса
    </h1>
    <div
-    className={`${styles.categoriesContainer} ${
-     categoryError ? styles.hasError : ''
-    }`}
+    className={`${styles.categoriesContainer} `}
    >
     {categories.map((category, index) => (
      <label key={index} className={styles.labelCategory}>
       <input
-       className={`${montserrat.className} ${styles.inputCategories}`}
+       className={`${montserrat.className} ${styles.inputCategories} ${categoryError ? styles.hasError : ''}`}
        type="radio"
        name="category"
        value={category}
@@ -120,7 +134,7 @@ export default function AskQuestion() {
    <form className={styles.commentForm} onSubmit={handleSubmit}>
     <div className={styles.headerBlock}>
      <p className={`${montserrat.className} ${styles.ourQuestion}`}>
-      Ваш вопрос
+      Текст вопроса
      </p>
      <span className={`${montserrat.className} ${styles.count}`}>
       {charCount}/400
@@ -138,13 +152,27 @@ export default function AskQuestion() {
      }}
      maxLength="400"
      style={{ resize: 'none' }}
+     disabled={isSubmitting}
     />
+
+    {submitError && (
+     <div className="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+      {submitError}
+     </div>
+    )}
+
+    {submitSuccess && (
+     <div className="mt-3 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+      Вопрос отправлен успешно!
+     </div>
+    )}
+
     <button
-     disabled={!selectedCategory || !questionText.trim()}
+     disabled={isSubmitting}
      type="submit"
-     className={`${montserrat.className} ${styles.commentButton}`}
+     className={`${montserrat.className} ${styles.commentButton} ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
-     Отправить
+     {isSubmitting ? 'Отправляем...' : 'Спросить'}
     </button>
    </form>
   </>

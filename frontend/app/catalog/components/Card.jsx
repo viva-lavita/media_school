@@ -1,22 +1,35 @@
+"use client"
+
 import { useState } from 'react';
 import { montserrat } from '@/lib/fonts';
 import styles from './Card.module.css';
+import { usePopUpCatalog } from "../PopUpCatalog";
 
-export default function Card({
- imageUrl,
+export default function Card({imageUrl,
  videoUrl,
  title,
  date,
  categoryName,
  photoCount,
  images,
- isVideo = true,
-}) {
+ isVideo = true,}) {
+  const { setIsPopUpOpen, setCardData } = usePopUpCatalog();
+
  const [imgSrc, setImgSrc] = useState(imageUrl);
 
 
  const handleCardClick = () => {
-  // Modal removed as per request
+  setCardData({
+   imageUrl,
+   videoUrl,
+   title,
+   date,
+   categoryName,
+   photoCount,
+   images,
+   isVideo,
+  });
+  setIsPopUpOpen(true);
  };
 
  const handleImgError = () => {

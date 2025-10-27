@@ -103,7 +103,9 @@
   position: relative;
   margin-right: 16px; 
 }
-
+.hasError {
+   border: 2px solid #DB0000;  
+}
 .radioBtn::after {
   content: '';
   width: 12px;
@@ -236,12 +238,12 @@
 .bulletList {
     list-style-type: disc;
     margin: 0; 
-    padding-left: 20px; /* Отступ слева для маркеров */
+    padding-left: 20px; 
     margin-top: -7px;
 }
 
 .bulletList li {
-    margin-bottom: 0px; /* Отступ между элементами списка */
+    margin-bottom: 0px; 
 }
 
 .comment {
@@ -276,6 +278,19 @@
     text-decoration-thickness: 0%;
     text-decoration-skip-ink: auto;
     padding-bottom: 3px;
+}
+
+.textInfo {
+    font-family: Montserrat;
+    font-weight: 400;
+    font-style: Regular;
+    line-height: 140%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+    padding-left: 12px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -319,7 +334,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .newsContainer {
         max-width: 728px;
         width: calc(100vw - 40px);
@@ -351,9 +366,12 @@
     }
 }
 
-@media screen and (max-width: 360px) {
-    .newsContainer {
-        max-width: 320px;
+@media screen and (max-width: 767px) {
+    .question {
+        width: calc(100vw - 40px);
+    }
+        .newsContainer {
+        max-width: 727px;
         width: calc(100vw - 40px);
         gap: 40px;
     }
@@ -363,7 +381,8 @@
     }
 
     .newsImage {
-        max-width: 320px;
+        max-width: 727px;
+        max-height: 500px;
         width: calc(100vw - 40px);
         height: auto;
         margin-top: 40px;
@@ -374,6 +393,7 @@
     .newsPreview,
     .newsDate {
         width: calc(100vw - 40px);
+        max-width: 727px;
     }
 
     .newsInfo {
@@ -393,7 +413,11 @@
     .newsContent,
     .newsAll,
     .nameForm {
-        max-width: 320px;
+        max-width: 727px;
         width: calc(100vw - 40px);
     }
+}
+
+.loading {
+ text-align: center;
 }

@@ -8,6 +8,8 @@ import DescriptionSection from '../about/components/DescriptionSection';
 import handleFetch from '../utils/fetchErrorHandle';
 import DocumentsSection from './components/DocumentsSection';
 import SectionListCard from './components/ListCard';
+import { PopUpCatalogProvider } from './PopUpCatalog';
+import PopUpCatalog from './PopUpCatalog';
 import CategoryDropdown from './components/CategoryDropdown';
 
 export default function LayoutPage() {
@@ -49,7 +51,7 @@ export default function LayoutPage() {
     }
    })
    .catch(console.error);
- }, []);
+ }, [searchParams.toString()]);
 console.log(categories);
 /*useEffect(() => {
   if (activeCategory.id) {
@@ -97,24 +99,25 @@ useEffect(() => {
 
  console.log(videosData);
  return (
-  <div className={styles.wrap}>
-   <h3 className={`${comfortaa.className} ${styles.title}`}>
-    Каталог материалов
-   </h3>
+  <PopUpCatalogProvider>
+   <div className={styles.wrap}>
+    <h3 className={`${comfortaa.className} ${styles.title}`}>
+     Каталог материалов
+    </h3>
 
-   <div className={styles.tabs}>
-    {categories.map((tabItem) => (
-     <button
-      key={tabItem.name}
-      onClick={() => setActiveCategory(tabItem)}
-      className={`${styles.tabButton} ${
-       activeCategory?.name === tabItem.name ? styles.active : ''
-      }`}
-     >
-      {tabItem.name}
-     </button>
-    ))}
-   </div>
+    <div className={styles.tabs}>
+     {categories.map((tabItem) => (
+      <button
+       key={tabItem.name}
+       onClick={() => setActiveCategory(tabItem)}
+       className={`${styles.tabButton} ${
+        activeCategory?.name === tabItem.name ? styles.active : ''
+       }`}
+      >
+       {tabItem.name}
+      </button>
+     ))}
+    </div>
    <div className={styles.dropdown}>
     <CategoryDropdown
      categories={categories}
@@ -122,22 +125,22 @@ useEffect(() => {
      setActiveCategory={setActiveCategory}
     />
    </div>
-   <main className={styles.mainCatalog}>
-    {activeCategory && (
-     <>
+    <main className={styles.mainCatalog}>
+     {activeCategory && (
+      <>
       <div className={styles.imgWrapper}>
-       <img
-        className={styles.imgPreview}
-        src={activeCategory.image}
-        alt={`Картинка ${activeCategory.name}`}
-       />
+        <img
+         className={styles.imgPreview}
+         src={activeCategory.image}
+         alt={`Картинка ${activeCategory.name}`}
+        />
       </div>
 
-      <section className={styles.description}>
-       <DescriptionSection
-        title={activeCategory.title}
-        description={activeCategory.description}
-       />
+       <section className={styles.description}>
+        <DescriptionSection
+         title={activeCategory.title}
+         description={activeCategory.description}
+        />
 
        {/*<div className={styles.founders}>
         <TeachersList titleList={titleExpertList} teachers={expertsData} />
@@ -149,6 +152,8 @@ useEffect(() => {
     {videosData && videosData.length > 0 && <SectionListCard title={'Видео-материалы'} documents={videosData} />}
     {photosData && photosData.length > 0 && <SectionListCard title={'Фотогалерея'} documents={photosData} />}
    </main>
+   <PopUpCatalog />
   </div>
+ </PopUpCatalogProvider>
  );
 }
