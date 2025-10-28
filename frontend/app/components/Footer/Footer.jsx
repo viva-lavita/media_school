@@ -60,8 +60,8 @@ export default function Footer() {
                       <li><Link href="/catalog">Каталог материалов</Link></li>
                       {pageWidth !== null && (
                         <div className={`${pageWidth > 1400 ? 'hidden' : 'flex flex-col gap-2'}`}>
-                          <li><Link href="/news">Вопрос-ответ</Link></li>
-                          <li><Link href="/catalog">Контакты</Link></li>
+                          <li><Link href="/qa">Вопрос-ответ</Link></li>
+                          <li><Link href="/contacts">Контакты</Link></li>
                         </div>
                       )}
                     </ul>
@@ -102,8 +102,8 @@ export default function Footer() {
                     <div className="text-base font-medium flex flex-col gap-2">
                       <nav>
                         <ul className={`${montserrat.className} flex flex-col gap-2 font-medium text-base leading-[100%]`}>
-                          <li><Link href="/news">Вопрос-ответ</Link></li>
-                          <li><Link href="/catalog">Контакты</Link></li>
+                          <li><Link href="/qa">Вопрос-ответ</Link></li>
+                          <li><Link href="/contacts">Контакты</Link></li>
                         </ul>
                       </nav>
                     </div>

@@ -17,22 +17,21 @@ export default function RegistrationPage() {
     e.preventDefault();
     setError(null);
 
-    const formData = new FormData(e.target);
     const data = {
-      email: formData.get("email"),
-      password: formData.get("password"),
-      re_password: formData.get("re_password"),
-      first_name: formData.get("first_name"),
-      last_name: formData.get("last_name"),
-      patronymic_name: formData.get("patronymic_name"),
-      date_of_birth: formData.get("date_of_birth"),
+      email: userField['Email'],
+      password: userField['password'],
+      re_password: userField['re_password'],
+      first_name: userField['Имя'],
+      last_name: userField['Фамилия'],
+      patronymic_name: userField['Отчество'],
+      date_of_birth: userField['Дата рождения'],
       child: {
-        first_name: formData.get("child_first_name"),
-        last_name: formData.get("child_last_name"),
-        patronymic_name: formData.get("child_patronymic_name"),
-        date_of_birth: formData.get("child_date_of_birth"),
-        school: formData.get("child_school"),
-        classroom: formData.get("child_classroom"),
+        first_name: userField['Ребёнок_Имя'],
+        last_name: userField['Ребёнок_Фамилия'],
+        patronymic_name: userField['Ребёнок_Отчество'],
+        date_of_birth: userField['Ребёнок_Дата рождения'],
+        school: userField['Школа'],
+        classroom: userField['Класс'],
       },
     };
 
@@ -53,6 +52,120 @@ export default function RegistrationPage() {
     }
   };
 
+  const [userReqStarByDate, setUserReqStarByDate] = useState({
+    'Фамилия': false,
+    'Ребёнок_Фамилия': false,
+    'Имя': false,
+    'Ребёнок_Имя': false,
+    'Дата рождения': false,
+    'Ребёнок_Дата рождения': false,
+    'Email': false,
+    'Школа': false,
+    'Класс': false,
+  });
+
+  const [userField, setUserField] = useState({
+    'Фамилия': '',
+    'Ребёнок_Фамилия': '',
+    'Имя': '',
+    'Ребёнок_Имя': '',
+    'Отчество': '',
+    'Ребёнок_Отчество': '',
+    'Дата рождения': '',
+    'Ребёнок_Дата рождения': '',
+    'Email': '',
+    'Школа': '',
+    'Класс': '',
+    'password': '',
+    're_password': '',
+  });
+
+  function fieldStar(field, visible) {
+    setUserReqStarByDate(prev => ({
+      ...prev,
+      [field]: visible,
+    }));
+  }
+
+  function handleFocus(field) {
+    fieldStar(field, false);
+  }
+
+  function handleChange(field, e) {
+    const value = e.target.value;
+    const isEmpty = value === '';
+    setUserField(prev => ({ ...prev, [field]: value }));
+    fieldStar(field, isEmpty);
+  }
+
+  function handleBlur(field, e) {
+    const isEmpty = e.target.value === '';
+    fieldStar(field, isEmpty);
+  }
+
+  function clearField(field) {
+    setUserField(prev => ({ ...prev, [field]: '' }));
+    fieldStar(field, true);
+  }
+
+  const [isRulesChecked, setIsRulesChecked] = useState(false);
+  const [isPersonal_dataChecked, setIsPersonal_dataChecked] = useState(false);
+
+  const [isFormValid, setIsFormValid] = useState({
+    'email': false,
+    'password': false,
+    're_password': false,
+    'first_name': false,
+    'last_name': false,
+    'date_of_birth': false,
+    'child_first_name': false,
+    'child_last_name': false,
+    'child_date_of_birth': false,
+    'school': false,
+    'classroom': false,
+  });
+  function validateForm() {
+    return isFormValid['email'] && isFormValid['password'] && isFormValid['re_password'] && isFormValid['first_name']
+      && isFormValid['last_name'] && isFormValid['date_of_birth'] && isFormValid['child_first_name']
+      && isFormValid['child_last_name'] && isFormValid['child_date_of_birth'] && isFormValid['school']
+      && isFormValid['classroom'] && isRulesChecked && isPersonal_dataChecked;
+  }
+
+  const isValid = validateForm();
+
+  function handleReset() {
+    setIsRulesChecked(false);
+    setIsPersonal_dataChecked(false);
+    setUserField({
+      'Фамилия': '',
+      'Ребёнок_Фамилия': '',
+      'Имя': '',
+      'Ребёнок_Имя': '',
+      'Отчество': '',
+      'Ребёнок_Отчество': '',
+      'Дата рождения': '',
+      'Ребёнок_Дата рождения': '',
+      'Email': '',
+      'Школа': '',
+      'Класс': '',
+      'password': '',
+      're_password': '',
+    })
+    setIsFormValid({
+      'email': false,
+      'password': false,
+      're_password': false,
+      'first_name': false,
+      'last_name': false,
+      'date_of_birth': false,
+      'child_first_name': false,
+      'child_last_name': false,
+      'child_date_of_birth': false,
+      'school': false,
+      'classroom': false,
+    });
+  }
+
   return (
     <div className={styles.registration}>
       <div className={`${styles.registrationImg} flex basis-0 grow`}></div>
@@ -71,8 +184,21 @@ export default function RegistrationPage() {
               Данные родителя/законного представителя ученика
             </legend>
             <div className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2 flex flex-col gap-3`}>
-              <ParentData />
-              <CreatePassword />
+              <ParentData
+                dataRequired={true}
+                userField={userField}
+                userReqStarByDate={userReqStarByDate}
+                handleFocus={handleFocus}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                clearField={clearField}
+                setIsFormValid={setIsFormValid}
+              />
+              <CreatePassword
+                handleChange={handleChange}
+                userField={userField}
+                setIsFormValid={setIsFormValid}
+              />
             </div>
           </fieldset>
 
@@ -81,13 +207,24 @@ export default function RegistrationPage() {
               Данные ученика
             </legend>
             <div className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2 flex flex-col gap-3`}>
-              <ChildData />
+              <ChildData
+                dataRequired={true}
+                userField={userField}
+                userReqStarByDate={userReqStarByDate}
+                handleFocus={handleFocus}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                clearField={clearField}
+                setIsFormValid={setIsFormValid}
+              />
               <div className={`${montserrat.className} flex flex-col gap-3 font-normal text-sm leading-[100%] text-black`}>
                 <label className="flex items-start gap-2">
                   <input
                     type="checkbox"
                     name="rules"
                     className={styles.checkbox}
+                    checked={isRulesChecked}
+                    onChange={() => setIsRulesChecked(!isRulesChecked)}
                     required/>
                   <span>Ознакомлен с&nbsp;Правилами использования сайта.</span>
                 </label>
@@ -97,6 +234,8 @@ export default function RegistrationPage() {
                     type="checkbox"
                     name="personal_data"
                     className={styles.checkbox}
+                    checked={isPersonal_dataChecked}
+                    onChange={() => setIsPersonal_dataChecked(!isPersonal_dataChecked)}
                     required
                   />
                   <span>
@@ -110,9 +249,10 @@ export default function RegistrationPage() {
           </fieldset>
 
           <div className={`${styles.registrationAccept} flex gap-3`}>
-            <button type="submit" className={`${montserrat.className}  font-medium text-base leading-[100%] flex basis-0 grow 
-            bg-green border border-green py-3 px-6 justify-center `}>Зарегестрироваться</button>
-            <button type="reset" className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow 
+            <button type={isValid ? 'submit' : 'button'} className={`${montserrat.className} ${isValid ? 
+            'bg-green cursor-pointer':'bg-grey-3 cursor-not-allowed'} font-medium text-base leading-[100%] 
+            flex basis-0 grow border border-green py-3 px-6 justify-center`}>Зарегестрироваться</button>
+            <button type="button" onClick={handleReset} className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow 
             bg-white border border-green py-3 px-6 justify-center `}>
               Отменить
             </button>

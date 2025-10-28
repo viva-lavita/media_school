@@ -1,52 +1,89 @@
 'use client';
 import Link from "next/link";
-import styles from "./Header.module.css"
-import { montserrat } from '@/lib/fonts'
+import styles from "./Header.module.css";
+import { montserrat } from "@/lib/fonts";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function Header() {
+  const { user, loading } = useAuth();
 
   return (
-      <header className={`${montserrat.className} ${styles.header} text-base flex items-center justify-between mx-auto`}>
-        <img src="/images/logo.svg" alt="logo" className={styles.logo}/>
-        <nav className={`${styles.headerList} flex items-center`}>
-          <ul className="flex gap-7 h-5">
-            <li><Link href="/about">О проекте</Link></li>
-            <li><Link href="/news">Новости</Link></li>
-            <li><Link href="/catalog">Каталог материалов</Link></li>
-            <li><Link href="/qa">Вопрос-ответ</Link></li>
-            <li><Link href="/contacts">Контакты</Link></li>
-          </ul>
-        </nav>
-        <div className={`${styles.headerActions} flex items-center`}>
-          <div className={`${styles.headerSocialMedia} flex items-center gap-10`}>
-            <button aria-label={'Поиск'}>
-              <img src="/header-images/search.svg" alt="" className="size-9"/>
-            </button>
-            <div className="flex gap-5">
-              <a href="#" aria-label="ВКонтакте">
-                <img
-                  src="/header-images/vk-button.png"
-                  alt=""
-                  tabIndex={0}
-                  className="size-11.5" />
-              </a>
+    <header
+      className={`${montserrat.className} ${styles.header} text-base flex items-center justify-between mx-auto`}
+    >
+      <Link href="/">
+        <img
+            src="/images/logo.svg"
+            alt="logo"
+            className={`${styles.logo} cursor-pointer`} />
+      </Link>
 
-              <a href="#" aria-label="Одноклассники">
-                <img
-                  src="/header-images/ok-button.png"
-                  alt=""
-                  tabIndex={0}
-                  className="size-11.5" />
-              </a>
-            </div>
+      <nav className={`${styles.headerList} flex items-center`}>
+        <ul className="flex gap-7 h-5">
+          <li><Link href="/about">О проекте</Link></li>
+          <li><Link href="/news">Новости</Link></li>
+          <li><Link href="/catalog">Каталог материалов</Link></li>
+          <li><Link href="/qa">Вопрос-ответ</Link></li>
+          <li><Link href="/contacts">Контакты</Link></li>
+        </ul>
+      </nav>
+
+      <div className={`${styles.headerActions} flex items-center`}>
+        <div className={`${styles.headerSocialMedia} flex items-center gap-10`}>
+          <button aria-label={'Поиск'}>
+            <img src="/header-images/search.svg" alt="" className="size-9" />
+          </button>
+          <div className="flex gap-5">
+            <a
+              rel="noopener noreferrer"
+              target="_blank"
+              href="https://vk.com/perspectivatsk"
+              aria-label="ВКонтакте"
+            >
+              <img
+                src="/header-images/vk-button.png"
+                alt=""
+                tabIndex={0}
+                className="size-11.5"
+              />
+            </a>
+            <a
+              rel="noopener noreferrer"
+              target="_blank"
+              href="https://ok.ru/group/70000001092892"
+              aria-label="Одноклассники"
+            >
+              <img
+                src="/header-images/ok-button.png"
+                alt=""
+                tabIndex={0}
+                className="size-11.5"
+              />
+            </a>
           </div>
-          <button className={`${montserrat.className} ${styles.btn} font-medium text-base leading-[100%] flex items-center`}>
-            <Link href={'/account'}>Личный кабинет</Link>
-          </button>
-          <button aria-label={'Меню'} className={`${styles.headerMenu}`}>
-            <img src="/header-images/menu.svg" alt=""/>
-          </button>
         </div>
-      </header>
+
+        {loading ? null : user ? (
+          <Link href="/account" className="flex items-center gap-4">
+            <span className={`${montserrat.className} font-normal text-sm leading-[100%]`}>
+              {user.first_name} {user.last_name}
+            </span>
+            <img src="/images/avatar.png" alt="аватар" className="size-10" />
+          </Link>
+        ) : (
+          <Link href="/login">
+            <button
+              className={`${montserrat.className} ${styles.btn} cursor-pointer font-medium text-base leading-[100%] flex items-center`}
+            >
+              Личный кабинет
+            </button>
+          </Link>
+        )}
+
+        <button aria-label={"Меню"} className={`${styles.headerMenu}`}>
+          <img src="/header-images/menu.svg" alt="" />
+        </button>
+      </div>
+    </header>
   );
 }

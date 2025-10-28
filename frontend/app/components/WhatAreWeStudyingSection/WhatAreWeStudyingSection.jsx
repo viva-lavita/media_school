@@ -2,10 +2,11 @@
 import styles from "../../Home.module.css";
 import {comfortaa} from "@/lib/fonts";
 import {montserrat} from "@/lib/fonts";
+import Link from "next/link";
 
 export default function WhatAreWeStudyingSection() {
  return (
-  <div className={`flex flex-col gap-10`}>
+  <div className={`flex flex-col gap-10 w-full`}>
    <h2 className={`${comfortaa.className} ${styles.aboutLearning} font-bold leading-[100%] w-1/1`}>
     Что мы изучаем в&nbsp;Медиашколе
    </h2>
@@ -85,11 +86,11 @@ export default function WhatAreWeStudyingSection() {
      <p className={`${styles.topicsStudyText}`}>Лонгрид</p>
     </div>
    </div>
-   <p
+   <Link href={`/catalog`}
     className={`${montserrat.className} ${styles.materialCatalog} text-lg font-semibold text-dark-green`}
    >
     КАТАЛОГ МАТЕРИАЛОВ
-   </p>
+   </Link>
   </div>
  );
 }
