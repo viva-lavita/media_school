@@ -49,7 +49,7 @@ const titleListTeachers = 'Основатели проекта "Медиашко
    <section className={styles.projectInfo}>
     <h2 className={`${comfortaa.className} ${styles.titleAbout}`}>О проекте</h2>
     <div className={styles.textBlock}>
-     <DescriptionSection title={description.title} paragraph1={paragraph1} paragraph2={paragraph2}  />
+     <DescriptionSection title={description.title} paragraph1={description.paragraph1} paragraph2={description.paragraph2}  />
      <div className={styles.founders}>
       {<TeachersList titleList={titleListTeachers} teachers={TEACHERS_DATA} />}
      </div>
