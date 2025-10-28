@@ -8,7 +8,10 @@ export default function DescriptionSection({ title, description }) {
    <p className={`${comfortaa.className} ${styles.subtitleAbout}`}>
     <strong>{title}</strong>
    </p>
-   <div className={montserrat.className}>{formatText(description)}</div>
+   <div className={montserrat.className}>
+    <p>{description.paragraph1}</p>
+    <p>{description.paragraph2}</p>
+   </div>
   </div>
  );
 }
