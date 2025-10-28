@@ -109,6 +109,27 @@
  width: 100%;
 }
 
+.descriptionText {
+ flex: 1;
+}
+
+.descriptionExperts {
+ width: 447px;
+}
+
+@media screen and (max-width: 768px) {
+ .description {
+  flex-direction: column;
+  gap: 40px;
+ }
+ .descriptionText {
+  width: 100%;
+ }
+ .descriptionExperts {
+  width: 100%;
+ }
+}
+
 .mediaSection{
 display: flex;
 flex-direction: column;

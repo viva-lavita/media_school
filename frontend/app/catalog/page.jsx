@@ -4,7 +4,7 @@ import styles from './layoutCatalog.module.css';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import DescriptionSection from '../about/components/DescriptionSection';
-//import TeachersList from '../about/components/TeachersList';
+import TeachersList from '../about/components/TeachersList';
 import handleFetch from '../utils/fetchErrorHandle';
 import DocumentsSection from './components/DocumentsSection';
 import SectionListCard from './components/ListCard';
@@ -13,7 +13,7 @@ import PopUpCatalog from './PopUpCatalog';
 import CategoryDropdown from './components/CategoryDropdown';
 
 export default function LayoutPage() {
- //const titleExpertList = 'Наставники';
+ const titleExpertList = 'Наставники';
  const [categories, setCategories] = useState([]);
  const [activeCategory, setActiveCategory] = useState({});
  const [expertsData, setExpertsData] = useState([]);
@@ -53,7 +53,7 @@ export default function LayoutPage() {
    .catch(console.error);
  }, [searchParams.toString()]);
 console.log(categories);
-/*useEffect(() => {
+useEffect(() => {
   if (activeCategory.id) {
     handleFetch(`/api/experts/${activeCategory.id}`)
       .then((data) => {
@@ -65,7 +65,7 @@ console.log(categories);
       })
       .catch(console.error);
   }
-}, [activeCategory]);*/
+}, [activeCategory]);
 
 useEffect(() => {
   if (activeCategory.id) {
@@ -137,15 +137,19 @@ useEffect(() => {
       </div>
 
        <section className={styles.description}>
-        <DescriptionSection
-         title={activeCategory.title}
-         description={activeCategory.description}
-        />
+        <div className={styles.descriptionText}>
+         <DescriptionSection
+          title={activeCategory.title}
+          description={activeCategory.description}
+         />
+        </div>
 
-       {/*<div className={styles.founders}>
-        <TeachersList titleList={titleExpertList} teachers={expertsData} />
-       </div>*/}
-      </section>
+        {expertsData && expertsData.length > 0 && (
+         <div className={styles.descriptionExperts}>
+          <TeachersList titleList={titleExpertList} teachers={expertsData} />
+         </div>
+        )}
+       </section>
      </>
     )}
     {documentsData && documentsData.results && documentsData.results.length > 0 && <DocumentsSection documents={documentsData} categoryId={activeCategory.id} />}
