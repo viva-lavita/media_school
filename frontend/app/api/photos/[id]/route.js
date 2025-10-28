@@ -1,8 +1,11 @@
-export async function GET(categoryId) {
+import { formatDate } from '@/app/utils/formatDate';
+
+export async function GET(request, { params }) {
+ const { id } = await params;
  try {
   let allResults = [];
   let currentNextUrl = '';
-  let nextUrl = `http://217.114.11.243/api/v1/content/experts/${categoryId}`;
+  let nextUrl = `http://217.114.11.243/api/v1/content/photos/?catalog=${id}`;
 
   while (nextUrl && nextUrl !== currentNextUrl) {
    currentNextUrl = nextUrl;
@@ -19,9 +22,22 @@ export async function GET(categoryId) {
     );
    }
 
-   const data = await response.json(); 
+   const data = await response.json();
 
-   allResults = allResults.concat(data.results);
+   const transformedResults = data.results
+    .filter(photo => photo.images && photo.images.length > 0 && photo.title)
+    .map((photo) => ({
+     imageUrl: photo.images[0].image,
+     videoUrl: '',
+     title: photo.title,
+     date: formatDate(photo.created_at),
+     categoryName: photo.category ? photo.category.name : '',
+     photoCount: photo.images.length,
+     images: photo.images,
+     isVideo: false,
+    }));
+
+   allResults = allResults.concat(transformedResults);
    nextUrl = data.next || null;
   }
 
@@ -39,9 +55,9 @@ export async function GET(categoryId) {
    },
   });
  } catch (error) {
-  console.error('Error fetching experts:', error.message);
+  console.error('Error fetching photos:', error.message);
   return new Response(JSON.stringify({ error: error.message }), {
-   status: 500, 
+   status: 500,
    headers: {
     'Content-Type': 'application/json; charset=utf-8',
    },

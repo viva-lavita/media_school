@@ -1,55 +1,81 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { comfortaa } from '@/lib/fonts';
 import Card from './Card';
-import FileItem from './FileItem';
 import styles from './DocumentsSection.module.css';
-import { comfortaa, montserrat } from '@/lib/fonts';
+import formatDocument from '@/app/utils/formatDocument';
 
-export default function ListCard({ documents }, titleCardList) {
- const visibleFilesCount = Math.min(documents.length, 3);
+export default function SectionListCard({ title, documents }) {
+ const [windowWidth, setWindowWidth] = useState(0);
+
+ useEffect(() => {
+  const handleResize = () => setWindowWidth(window.innerWidth);
+  handleResize();
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+ }, []);
+
+ const visibleFilesCount = windowWidth <= 360 ? 1 : (windowWidth <= 768 ? (windowWidth > 600 ? 2 : 1) : Math.min(documents.length, 3));
  const [isCollapsed, setIsCollapsed] = useState(true);
 
  const handleToggleClick = () => {
-  setIsCollapsed(!isCollapsed);
+  setIsCollapsed((prevState) => !prevState); 
  };
 
+ const totalCount = title === 'Фотогалерея'
+  ? documents.reduce((sum, doc) => sum + (doc.photoCount || 0), 0)
+  : documents.length;
+
  return (
-  <>
+  <section className={styles.mediaSection}>
    <div className={styles.info}>
-    <h2 className={`${comfortaa.className} ${styles.title}`}>
-     {titleCardList}
-    </h2>
-    <p className={`${montserrat.className} ${styles.count}`}>
-     {documents.length} документов
-    </p>
+    <h2 className={`${comfortaa.className} ${styles.title} ${styles.mediaTitle}`}>{title}</h2>
+    <p className={`${styles.count}`}>{formatDocument(totalCount)}</p>
    </div>
+
    <div className={styles.mediaBox}>
     {documents.slice(0, visibleFilesCount).map((file) => (
      <Card
-      key={file.id}
+      key={`item-`+ Math.random().toString(36).substr(2, 9)}
       imageUrl={file.imageUrl}
       videoUrl={file.videoUrl}
       title={file.title}
       date={file.date}
-      id={file.id}
+      categoryName={file.categoryName}
+      photoCount={file.photoCount}
+      images={file.images}
+      isVideo={file.isVideo !== undefined ? file.isVideo : true}
      />
     ))}
 
-    {documents.length > 4 && isCollapsed && (
-     <button
-      className={`${montserrat.className} ${styles.toggleButton}`}
-      onClick={handleToggleClick}
-     >
-      РАСКРЫТЬ СПИСОК
-     </button>
-    )}
-    {!isCollapsed && documents.length > 4 && (
-     <>
-      {documents.slice(visibleFilesCount).map((file) => (
-       <FileItem key={file.id} file={file} />
+    {!isCollapsed &&
+     documents.length > visibleFilesCount &&
+     documents
+      .slice(visibleFilesCount)
+      .map((file) => (
+       <Card
+         imageUrl={file.imageUrl}
+      videoUrl={file.videoUrl}
+      title={file.title}
+      date={file.date}
+      categoryName={file.categoryName}
+      photoCount={file.photoCount}
+      images={file.images}
+      isVideo={file.isVideo !== undefined ? file.isVideo : true}
+
+        key={`item-`+ Math.random().toString(36).substr(2, 9)}
+       />
       ))}
-     </>
-    )}
+
    </div>
-  </>
+
+   {
+    /* Кнопка появляется, если документов больше видимых */
+    documents.length > visibleFilesCount && (
+     <button className={`${styles.toggleButton}`} onClick={handleToggleClick}>
+      {isCollapsed ? 'РАСКРЫТЬ СПИСОК' : 'СВЕРНУТЬ'}
+     </button>
+    )
+   }
+  </section>
  );
 }

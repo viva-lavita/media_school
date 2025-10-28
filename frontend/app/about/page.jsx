@@ -11,7 +11,6 @@ export default function About() {
      <AboutProjectSection />
      <Advantages />
      <WhatAreWeStudyingSection />
-     <Experts />
     </div>
   );
 };
