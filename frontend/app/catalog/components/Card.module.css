@@ -28,248 +28,15 @@
  justify-content: center;
  font-size: 40px;
  color: #3c4226;
+ line-height: 1em;
 }
-
 .imageNavigation {
  position: absolute;
  align-items: center;
+ bottom: 24px;
+ right: 24px;
  display: flex;
  gap: 12px;
-}
-
-@media (min-width: 1024px) {
- .media {
-  width: clamp(301px, 30vw, 447px);
-  height: clamp(202px, 20vw, 300px);
- }
-}
-
-@media (min-width: 1920px) {
- .media {
-  width: 447px;
-  height: 300px;
- }
- .masterClass {
-  font-size: 18px;
- }
- .titleCardModal {
-  font-size: 22px;
- }
- .dateCard {
-  font-size: 18px;
- }
- .galleryTitle {
-  font-size: 22px;
- }
- .photoCount {
-  font-size: 18px;
- }
-}
-
-@media screen and (max-width: 768px) {
- .card {
-  width: calc(50% - 15px);
-  flex: 0 0 auto;
-  min-width: 300px;
- }
- .media {
-  object-fit: cover;
-  width: 100%;
-  height: 238px;
- }
-}
-
-@media screen and (max-width: 360px) {
- .card {
-  width: 320px;
-  min-height: 215px;
- }
- .media {
-  width: 320px;
-  height: 215px;
-  object-fit: cover;
- }
-}
-.mediaContainer {
- position: relative;
-}
-
-.masterClass {
- font-size: 14px;
- font-weight: 400;
- color: #3c4226;
- margin-bottom: 8px;
- margin-top: 20px;
-}
-.titleCard {
- font-size: 18px;
- font-weight: 400;
- line-height: 140%;
- color: #040404;
- margin-bottom: 24px;
-}
-.titleCardModal {
- font-size: 22px;
- font-weight: 700;
- line-height: 100%;
- color: #040404;
- margin-bottom: 18px;
-}
-.infoModal,
-.infoModalCount {
- display: flex;
- justify-content: space-between;
-}
-.infoModal {
- margin-bottom: 60px;
-}
-.infoModalCount {
- margin-bottom: 27px;
-}
-.dateCard {
- font-size: 14px;
- font-weight: 400;
- color: #535353;
-}
-.galleryTitle {
- font-size: 22px;
- font-weight: 600;
-}
-.photoCount {
- font-size: 18px;
- font-weight: 400;
- color: #535353;
-}
-
-.popUpBackgroundCatalog {
- position: fixed;
- top: 0;
- left: 0;
- width: 100%;
- height: 100%;
- background-color: rgba(83, 83, 83, 0.8);
- z-index: 1000;
- overflow-y: auto;
-}
-
-.popUpContentCatalog {
- margin-top: 250px;
- width: 1400px;
- margin-left: auto;
- margin-right: auto;
- position: relative;
-}
-
-@media (max-width: 1920px) {
- .popUpContentCatalog {
-  width: 1400px;
- }
-}
-
-@media (max-width: 1024px) {
- .popUpContentCatalog {
-  width: 944px;
- }
-}
-
-@media (max-width: 768px) {
- .popUpContentCatalog {
-  width: 708px;
- }
-}
-
-@media (max-width: 360px) {
- .popUpContentCatalog {
-  width: 328px;
- }
-}
-
-.popUpWrapCatalog {
- width: 1304px;
- margin: 0 auto;
- position: relative;
-}
-
-@media (max-width: 1024px) {
- .popUpWrapCatalog {
-  width: 848px;
- }
- .masterClass {
-  font-size: 14px;
- }
- .titleCardModal {
-  font-size: 22px;
- }
- .dateCard {
-  font-size: 18px;
- }
- .galleryTitle {
-  font-size: 22px;
- }
- .photoCount {
-  font-size: 18px;
- }
-}
-
-@media (max-width: 768px) {
- .popUpWrapCatalog {
-  width: 632px;
- }
- .masterClass {
-  font-size: 14px;
- }
- .titleCardModal {
-  font-size: 22px;
- }
- .dateCard {
-  font-size: 18px;
- }
- .galleryTitle {
-  font-size: 22px;
- }
- .photoCount {
-  font-size: 18px;
- }
- .infoModal {
-  flex-direction: column;
-  gap: 18px;
- }
-}
-
-@media (max-width: 360px) {
- .popUpWrapCatalog {
-  width: 296px;
- }
- .masterClass {
-  font-size: 14px;
- }
- .titleCardModal {
-  font-size: 18px;
- }
- .dateCard {
-  font-size: 16px;
- }
- .galleryTitle {
-  font-size: 22px;
- }
- .photoCount {
-  font-size: 18px;
- }
- .infoModal {
-  flex-direction: column;
-  gap: 18px;
-  margin-bottom: 40px;
- }
- .imageNavigation {
-  position: relative;
-  align-items: center;
-  margin-top: 20px;
-  display: flex;
-  gap: 12px;
- }
- .navButton {
-  margin: 0 auto;
- }
 }
 
 .closeButtonModal {
@@ -307,31 +74,226 @@
  gap: 2px;
 }
 
+@media (min-width: 1920px) {
+ .media {
+  width: 447px;
+  height: 300px;
+ }
+ .masterClass {
+  font-size: 18px;
+ }
+ .titleCardModal {
+  font-size: 22px;
+ }
+ .dateCard {
+  font-size: 18px;
+ }
+ .galleryTitle {
+  font-size: 22px;
+ }
+ .photoCount {
+  font-size: 18px;
+ }
+
+ .popUpContentCatalog {
+  margin-top: 250px;
+  width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+ }
+}
+
 @media (max-width: 1024px) {
+ .media {
+  width: clamp(301px, 30vw, 447px);
+  height: clamp(202px, 20vw, 300px);
+ }
+ .popUpContentCatalog {
+  width: 944px;
+ }
+ .popUpWrapCatalog {
+  width: 848px;
+ }
+ .masterClass {
+  font-size: 14px;
+ }
+ .titleCardModal {
+  font-size: 22px;
+ }
+ .dateCard {
+  font-size: 18px;
+ }
+ .galleryTitle {
+  font-size: 22px;
+ }
+ .photoCount {
+  font-size: 18px;
+ }
  .thumbnailsGrid {
   grid-template-columns: repeat(4, 1fr);
  }
 }
 
 @media (max-width: 768px) {
+ .card {
+  width: calc(50% - 15px);
+  flex: 0 0 auto;
+  min-width: 300px;
+ }
+ .media {
+  object-fit: cover;
+  width: 100%;
+  height: 238px;
+ }
+ .popUpWrapCatalog {
+  width: 632px;
+ }
+ .masterClass {
+  font-size: 14px;
+ }
+ .titleCardModal {
+  font-size: 22px;
+ }
+ .dateCard {
+  font-size: 18px;
+ }
+ .galleryTitle {
+  font-size: 22px;
+ }
+ .photoCount {
+  font-size: 18px;
+ }
+ .infoModal {
+  flex-direction: column;
+  gap: 18px;
+ }
+
+ .popUpContentCatalog {
+  width: 708px;
+ }
+ .popUpWrapCatalog {
+  width: 1304px;
+  margin: 0 auto;
+  position: relative;
+ }
  .thumbnailsGrid {
   grid-template-columns: repeat(3, 1fr);
  }
 }
 
 @media (max-width: 360px) {
+ .card {
+  width: 320px;
+  min-height: 215px;
+ }
+ .media {
+  width: 320px;
+  height: 215px;
+  object-fit: cover;
+ }
+
+ .mediaContainer {
+  position: relative;
+ }
+
+ .masterClass {
+  font-size: 14px;
+  font-weight: 400;
+  color: #3c4226;
+  margin-bottom: 8px;
+  margin-top: 20px;
+ }
+ .titleCard {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%;
+  color: #040404;
+  margin-bottom: 24px;
+ }
+ .titleCardModal {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 100%;
+  color: #040404;
+  margin-bottom: 18px;
+ }
+ .infoModal,
+ .infoModalCount {
+  display: flex;
+  justify-content: space-between;
+ }
+ .infoModal {
+  margin-bottom: 60px;
+ }
+ .infoModalCount {
+  margin-bottom: 27px;
+ }
+ .dateCard {
+  font-size: 14px;
+  font-weight: 400;
+  color: #535353;
+ }
+ .galleryTitle {
+  font-size: 22px;
+  font-weight: 600;
+ }
+ .photoCount {
+  font-size: 18px;
+  font-weight: 400;
+  color: #535353;
+ }
+
+ .popUpBackgroundCatalog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(83, 83, 83, 0.8);
+  z-index: 1000;
+  overflow-y: auto;
+ }
+
  .thumbnailsGrid {
   display: none;
  }
+
+ .popUpContentCatalog {
+  width: 328px;
+ }
+
+ .popUpWrapCatalog {
+  width: 296px;
+ }
+ .masterClass {
+  font-size: 14px;
+ }
+ .titleCardModal {
+  font-size: 18px;
+ }
+ .dateCard {
+  font-size: 16px;
+ }
+ .galleryTitle {
+  font-size: 22px;
+ }
+ .photoCount {
+  font-size: 18px;
+ }
+ .infoModal {
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 40px;
+ }
+ .imageNavigation {
+  position: relative;
+  align-items: center;
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+ }
+ .navButton {
+  margin: 0 auto;
+ }
 }
-
-.imageNavigation {
- position: absolute;
- align-items: center;
- bottom: 24px;
- right: 24px;
- display: flex;
- gap: 12px;
-}
-
-
