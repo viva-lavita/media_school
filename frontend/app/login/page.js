@@ -9,8 +9,11 @@ import { useRouter } from 'next/navigation';
 import ButtonImage from "@/app/components/Button-Image/Button-Image";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+  })
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +28,7 @@ export default function LoginPage() {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify( loginData.email, loginData.password ),
       });
 
       const data = await res.json();
@@ -34,6 +37,7 @@ export default function LoginPage() {
         setError(data.error || 'Ошибка входа');
       } else {
         router.push('/');
+        window.location.reload();
       }
     } catch (err) {
       setError('Ошибка сети');
@@ -41,6 +45,40 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+
+  const [userLoginStar, setUserLoginStar] = useState({
+    'email': false,
+    'password': false,
+  });
+
+  function fieldStar(field, visible) {
+    setUserLoginStar(prev => ({
+      ...prev,
+      [field]: visible,
+    }));
+  }
+
+  function handleFocus(field) {
+    fieldStar(field, false);
+  }
+
+  function handleChange(field, e) {
+    const value = e.target.value;
+    setLoginData(prev => ({ ...prev, [field]: value }));
+    const isEmpty = value === '';
+    fieldStar(field, isEmpty);
+  }
+
+  function handleBlur(field, e) {
+    const isEmpty = e.target.value === '';
+    fieldStar(field, isEmpty);
+  }
+
+  function clearField(field) {
+    setLoginData(prev => ({ ...prev, [field]: '' }));
+    fieldStar(field, true);
+  }
+
   return (
     <div className={`${styles.loginContainer} flex justify-center m-auto`}>
       <div className={`${styles.loginImage} flex basis-0 grow`}></div>
@@ -63,33 +101,46 @@ export default function LoginPage() {
                 className="w-full border border-green bg-white py-3 px-4 focus:outline-none"
                 name="email"
                 placeholder="Логин"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={loginData.email}
+                onChange={(e) => handleChange('email', e)}
+                onFocus={() => handleFocus('email')}
+                onBlur={(e) => handleBlur('email', e)}
                 required
               />
-              <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-17.5 top-3 text-red-500`}>
-              *
-              </span>
-              <ButtonImage />
+              {userLoginStar.email &&
+                <span
+                  className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-17.5 top-3 
+                  text-red-500`}
+                >
+                  *
+                </span>
+              }
+              <ButtonImage onClick={() => clearField('email')}/>
             </div>
             <div className="relative">
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 id="password"
                 className="h-[43px] w-full border border-green bg-white py-3 px-4 focus:outline-none"
                 name="password"
                 placeholder="Пароль"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={loginData.password}
+                onChange={(e) => handleChange('password', e)}
+                onFocus={() => handleFocus('password')}
+                onBlur={(e) => handleBlur('password', e)}
                 required
               />
-              <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-20.5 top-2 text-red-500`}>
-              *
-            </span>
-              <button type="button" aria-label="скрыть или показать данные">
+              {userLoginStar.password &&
+                <span className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-20.5 top-2 text-red-500`}>
+                  *
+                </span>
+              }
+
+              <button className={`cursor-pointer`} onClick={() => {setShowPassword((prev) => !prev)}} type="button">
                 <img className={`absolute top-3.5 right-4`}
-                     src="/images/eye.svg"
-                     alt=""/>
+                     src={showPassword ? "/images/eye.svg" : "/images/eye-off.svg"}
+                     alt="глаз просмотра"
+                />
               </button>
             </div>
           </div>
@@ -102,7 +153,7 @@ export default function LoginPage() {
             </button>
             <button
               type="reset"
-              onClick={() => { setEmail(''); setPassword(''); setError(''); }}
+              onClick={() => { setLoginData({email: '', password: ''}); setError(''); }}
               className={`${montserrat.className}  font-medium text-base leading-[100%] flex basis-0 grow 
             bg-white border border-green py-3 px-6 justify-center `}>
               Отменить

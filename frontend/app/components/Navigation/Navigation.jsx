@@ -12,6 +12,7 @@ const path = {
  '/catalog': ' / Каталог материалов',
  '/qa': ' / Вопрос-ответ',
  '/contacts': ' / Контакты',
+  '/account' : ' / Личный кабинет'
 };
 
 const montserrat = Montserrat({

@@ -5,10 +5,8 @@ import { comfortaa } from '@/lib/fonts';
 import { montserrat } from '@/lib/fonts';
 import WhatAreWeStudyingSection from './components/WhatAreWeStudyingSection/WhatAreWeStudyingSection';
 import Advantages from './components/Advantages/Advantages';
-import Experts from './components/Experts/Experts';
 import PageWidthContext from './context/PageWidthProvider';
 import Link from "next/link";
-import PopUpAttribution from "@/app/components/PopUpAttribution/PopUpAttribution";
 
 const feedbacks = [
  {
@@ -62,9 +60,9 @@ export default function Home() {
  };
 
  let visibleCount = 1;
- if (pageWidth >= 768 && pageWidth < 1024) visibleCount = 2;
- else if (pageWidth >= 1024 && pageWidth < 1400) visibleCount = 3;
- else if (pageWidth >= 1400) visibleCount = 4;
+ if (pageWidth >= 590 && pageWidth < 769) visibleCount = 2;
+ else if (pageWidth >= 769 && pageWidth < 1201) visibleCount = 3;
+ else if (pageWidth >= 1201) visibleCount = 4;
 
  const visibleFeedbacks = feedbacks.slice(
    currentIndex,
@@ -110,24 +108,22 @@ export default function Home() {
        <p
         className={`${montserrat.className} font-normal text-lg leading-[140%]`}
        >
-        Проект «Медиашкола» — это возможность попробовать себя в роли
-        журналиста, блогера или видеографа уже сейчас. Мы приглашаем школьников
-        14–18 лет на мастер-классы, где вы узнаете, как создавать медиаконтент —
-        от идеи до готового материала.
+        Проект «Медиашкола»&nbsp;— это&nbsp;возможность попробовать себя в&nbsp;роли журналиста, блогера
+        или&nbsp;видеографа уже&nbsp;сейчас. Мы&nbsp;приглашаем школьников 14–18&nbsp;лет&nbsp;на&nbsp;мастер-классы,
+        где&nbsp;вы&nbsp;узнаете, как&nbsp;создавать медиаконтент&nbsp;— от&nbsp;идеи до&nbsp;готового материала.
        </p>
        <div
         className={`${montserrat.className} flex flex-col gap-3 font-normal text-base leading-[130%] 
               text-grey-2`}
        >
         <p>
-         Все занятия проходят в формате коротких практических мастер-классов.
-         Ролики мы собираем в медиабиблиотеку — чтобы каждый мог вернуться к
-         материалам в удобное время и научиться новому.
+         Все&nbsp;занятия проходят в&nbsp;формате коротких практических мастер-классов.
+         Ролики мы&nbsp;собираем в&nbsp;медиабиблиотеку&nbsp;— чтобы&nbsp;каждый мог&nbsp;вернуться
+         к&nbsp;материалам в&nbsp;удобное время и&nbsp;научиться новому.
         </p>
         <p>
-         Проект реализуется при поддержке школьных педагогов, выпускников и
-         студентов факультетов журналистики, а также профессиональных
-         журналистов.
+         Проект реализуется при&nbsp;поддержке школьных педагогов, выпускников и&nbsp;студентов факультетов журналистики,
+         а&nbsp;также&nbsp;профессиональных журналистов.
         </p>
        </div>
       </div>
@@ -138,21 +134,20 @@ export default function Home() {
         <h2
          className={`${comfortaa.className} ${styles.skillsTrainingTitle}  font-bold leading-[100%]`}
         >
-         Вместе с профессионалами из мира медиа вы:
+         Вместе с&nbsp;профессионалами из&nbsp;мира медиа вы:
         </h2>
         <ul
          className={`${montserrat.className} ${styles.skillsTrainingList} font-normal text-base leading-[130%]`}
         >
-         <li>научитесь брать интервью и&nbsp;работать с камерой;</li>
-         <li>узнаете основы фото — и&nbsp;видеосъёмки;</li>
-         <li>попробуете себя в роли блогера и&nbsp;автора новостей.</li>
+         <li>научитесь брать интервью и&nbsp;работать с&nbsp;камерой;</li>
+         <li>узнаете основы фото&nbsp;— и&nbsp;видеосъёмки;</li>
+         <li>попробуете себя в&nbsp;роли блогера и&nbsp;автора новостей.</li>
         </ul>
        </div>
        <p
         className={`${montserrat.className} font-normal text-lg leading-[140%]`}
        >
-        Стань частью команды! Учись у&nbsp;экспертов, создавай свои медиа и
-        делись ими с миром.
+        Стань частью команды! Учись у&nbsp;экспертов, создавай свои медиа и&nbsp;делись ими&nbsp;с&nbsp;миром.
        </p>
       </div>
      </div>
@@ -170,7 +165,7 @@ export default function Home() {
      <div className={`${styles.announcementsContainer}`}>
       <div className={`${styles.announcementsContainerItem} flex flex-col gap-2`}>
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/news.png" alt="новости" className={`h-[300px] object-cover object-left md:object-contain`}/>
+        <img src="/images/news.png" alt="новости" className={`h-[300px] object-cover object-left md:object-cover`}/>
         <figcaption
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
@@ -200,11 +195,11 @@ export default function Home() {
       </div>
       <div
        className={`${
-        pageWidth < 729 ? 'hidden' : ''
+        pageWidth < 501 ? 'hidden' : ''
        } ${styles.announcementsContainerItem} flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/announcements.png" alt="анонсы" className={`h-[300px] object-cover object-left md:object-contain`} />
+        <img src="/images/announcements.png" alt="анонсы" className={`h-[300px] object-cover object-center md:object-cover`} />
         <figcaption
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
@@ -213,7 +208,7 @@ export default function Home() {
        </figure>
        <div className={`flex flex-col gap-2`}>
         <p
-         className={`${montserrat.className} font-normal text-lg leading-[140%]`}
+         className={`${montserrat.className} line-clamp-3 font-normal text-lg leading-[140%]`}
         >
          Стартует курс по&nbsp;фотографии&nbsp;— запишись в&nbsp;медиагруппу!
         </p>
@@ -234,11 +229,11 @@ export default function Home() {
       </div>
       <div
        className={`${
-        pageWidth < 1401 ? 'hidden' : ''
-       } flex flex-col gap-2`}
+        pageWidth < 1025 ? 'hidden' : ''
+       } ${styles.announcementsContainerItem} flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/news-together.png" alt="новости" className={`h-[300px] object-cover object-left md:object-contain`}/>
+        <img src="/images/news-together.png" alt="новости" className={`h-[300px] object-cover object-left md:object-cover`}/>
         <figcaption
          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
@@ -268,11 +263,11 @@ export default function Home() {
        </p>
       </div>
      </div>
-     <p
+     <Link href={'/news'}
       className={`${montserrat.className} ${styles.materialCatalog} text-lg font-semibold text-dark-green`}
      >
       ВСЕ&nbsp;НОВОСТИ
-     </p>
+     </Link>
     </div>
     <div className={`${styles.feedback} relative flex flex-col gap-7`}>
      <div className={`flex flex-col gap-10`}>
@@ -286,7 +281,7 @@ export default function Home() {
        {visibleFeedbacks.map((item, idx) => (
          <div
            key={idx}
-           className={`${styles.feedbackContentItem} flex flex-col gap-2 p-4 border-green border bg-light-green`}
+           className={`flex flex-col gap-2 p-4 basis-0 grow border-green border bg-light-green`}
          >
           <div className={`flex items-center gap-2`}>
            <img
@@ -377,20 +372,20 @@ export default function Home() {
        </div>
       </address>
       <div className={`flex gap-3`}>
-        <button aria-label='Одноклассники'>
+        <a rel="noopener noreferrer" target='_blank' href="https://ok.ru/group/70000001092892" aria-label='Одноклассники'>
           <img
             src="/header-images/ok-button.png"
             alt=""
             className={`h-8 w-8`}
           />
-        </button>
-        <button aria-label='Вконтакте'>
+        </a>
+        <a rel="noopener noreferrer" target='_blank'  href="https://vk.com/perspectivatsk" aria-label='Вконтакте'>
           <img
             src="/header-images/vk-button.png"
             alt=""
             className={`h-8 w-8`}
           />
-        </button>
+        </a>
       </div>
      </div>
     </div>

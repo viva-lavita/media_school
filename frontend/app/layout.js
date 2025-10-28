@@ -8,6 +8,7 @@ import { PageTitleProvider } from './context/PageTitleContext';
 import { montserrat, comfortaa, inter } from '@/lib/fonts';
 import {PopUpProvider} from "@/app/context/PopUpContext";
 import PopUpAttribution from "@/app/components/PopUpAttribution/PopUpAttribution";
+import {AuthProvider} from "@/app/context/AuthContext";
 
 export const metadata = {
  title: 'Create Next App',
@@ -16,8 +17,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
  return (
-  <html lang="ru" className={`${montserrat.className} ${comfortaa.className} ${inter.className}`}>
+  <html lang="ru" className={`${montserrat.variable} ${comfortaa.variable} ${inter.variable}`}>
+   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   </head>
    <body>
+   <AuthProvider>
     <PopUpProvider>
      <PopUpAttribution />
      <PageTitleProvider>
@@ -35,6 +40,7 @@ export default function RootLayout({ children }) {
       </PageWidthProvider>
      </PageTitleProvider>
     </PopUpProvider>
+   </AuthProvider>
    </body>
   </html>
  );

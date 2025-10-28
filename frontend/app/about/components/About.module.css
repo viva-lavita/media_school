@@ -23,13 +23,21 @@
  display: flex;
  flex-direction: row;
  gap: 30px;
+ width: 100%;
 }
 
 .textContent {
  display: flex;
  flex-direction: column;
- width: 923px;
+ width: calc(100% - 447px - 30px);
  gap: 24px;
+ justify-content: stretch;
+}
+
+@media screen and (max-width: 1024px) {
+ .textContent {
+  gap: 24px;
+ }
 }
 .subtitleAbout {
  font-weight: 700;
@@ -38,6 +46,10 @@
 .textContent p:not(:first-child) {
  font-weight: 400;
  font-size: 16px;
+ color: #535353;
+}
+
+.textContent div {
  color: #535353;
 }
 .founders {
@@ -114,11 +126,14 @@
   gap: 20px;
  }
  .textContent {
-  width: 462px;
-  gap: 0px;
+  gap: 24px;
+  width: calc(100% - 462px - 20px);
  }
  .subtitleAbout {
   font-size: 22px;
+ }
+ .textContent p:not(:first-child) {
+  font-size: 16px;
  }
  .founders {
   width: 462px;
@@ -136,15 +151,15 @@
   gap: 40px;
  }
  .textBlock {
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
  }
-
 }
 
 @media screen and (max-width: 360px) {
-  .wrap {
+ .wrap {
   width: 320px;
  }
  .titleAbout {
@@ -157,5 +172,11 @@
   flex-direction: column;
   align-items: center;
   gap: 0px;
+ }
+ .subtitleAbout {
+  font-size: 18px;
+ }
+ .textContent p:not(:first-child) {
+  font-size: 16px;
  }
 }

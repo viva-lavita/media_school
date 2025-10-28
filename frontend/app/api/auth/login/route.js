@@ -5,7 +5,6 @@ export async function POST(req) {
   try {
     const body = await req.json();
 
-    // Отправка запроса на получение JWT
     const res = await fetch("http://217.114.11.243/api/v1/jwt/create/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -38,7 +37,6 @@ export async function POST(req) {
       path: "/",
       maxAge: 60 * 60 * 24 * 7,
     });
-
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Ошибка авторизации:", err);

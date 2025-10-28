@@ -68,12 +68,14 @@ export default function CommentsList({ questions, newsId, type, setComments }) {
                     {formatText(answer.text)}
                   </div>
                   <div className={`${styles.answerMeta} ${styles.icons} pb-2`}>
-                    <span className={`${montserrat.className} ${styles.nameAuthor} whitespace-nowrap`}>
+                    <span className={`${montserrat.className} ${styles.nameAuthor}`}>
                       {answer.author
                         ? `${answer.author.first_name} ${answer.author.last_name}`.trim() || answer.author.username
-                        : 'Аноним'}
+                        : 'Аноним'}, {answer.author
+                        ? `${answer.author.post} `.trim()
+                        : ''} 
                     </span>
-                    <span className={`${montserrat.className} ${styles.date}`}>
+                    <span className={`${montserrat.className} ${styles.date} whitespace-nowrap`}>
                       {formatDate(answer.created_at)}, {new Date(answer.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
