@@ -17,7 +17,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
  return (
-  <html lang="ru" className={`${montserrat.className} ${comfortaa.className} ${inter.className}`}>
+  <html lang="ru" className={`${montserrat.variable} ${comfortaa.variable} ${inter.variable}`}>
+   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   </head>
    <body>
    <AuthProvider>
     <PopUpProvider>

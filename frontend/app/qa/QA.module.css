@@ -12,7 +12,7 @@
  );
  font-weight: 700;
  text-align: center;
- margin-bottom: 40px;
+ margin-bottom: 60px;
 }
 
 .tabs {
@@ -36,6 +36,20 @@
 .tabButton:hover {
  color: var(--color-dark-green);
  border-bottom: 2px solid var(--color-dark-green);
+}
+
+.textInfo {
+    font-family: Montserrat;
+    font-weight: 400;
+    font-style: Regular;
+    line-height: 140%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    border-left: 1px solid var(--color-grass);
 }
 
 @media screen and (max-width: 1480px) {
@@ -64,8 +78,12 @@
   font-size: clamp(28px, 2vw + 1rem, 28px);
   margin-bottom: 28px;
  }
- .tabButton {
+ /* .tabButton {
   flex-basis: 100%;
   margin-bottom: 10px;
+} */
 }
+
+.loading {
+ text-align: center;
 }

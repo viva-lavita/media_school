@@ -1,9 +1,11 @@
+import { formatDate } from '@/app/utils/formatDate';
+
 export async function GET(request, { params }) {
  const { id } = await params;
  try {
   let allResults = [];
   let currentNextUrl = '';
- let nextUrl = `http://217.114.11.243/api/v1/content/experts/?catalog_id=${id}`;
+  let nextUrl = `http://217.114.11.243/api/v1/content/videos/?catalog=${id}`;
 
   while (nextUrl && nextUrl !== currentNextUrl) {
    currentNextUrl = nextUrl;
@@ -22,7 +24,16 @@ export async function GET(request, { params }) {
 
    const data = await response.json();
 
-   allResults = allResults.concat(data.results);
+   const transformedResults = data.results.map((video) => ({
+    imageUrl: 'https://via.placeholder.com/300x200?text=Video+Preview',
+    videoUrl: video.video_path,
+    title: video.title,
+    date: formatDate(video.created_at),
+    categoryName: video.category.name,
+    isVideo: true,
+   }));
+
+   allResults = allResults.concat(transformedResults);
    nextUrl = data.next || null;
   }
 
@@ -40,7 +51,7 @@ export async function GET(request, { params }) {
    },
   });
  } catch (error) {
-  console.error('Error fetching experts:', error.message);
+  console.error('Error fetching videos:', error.message);
   return new Response(JSON.stringify({ error: error.message }), {
    status: 500,
    headers: {

@@ -1,3 +1,4 @@
+
 .sectionDocuments {
  display: flex;
  flex-direction: column;
@@ -16,6 +17,49 @@
  font-weight: 700;
 }
 
+.mediaTitle {
+ color: #202020;
+ font-size: 22px;
+ font-weight: 700;
+}
+
+@media screen and (max-width: 1024px) {
+ .title {
+  font-size: 22px;
+ }
+ .mediaTitle {
+  font-size: 22px;
+ }
+}
+
+@media screen and (max-width: 360px) {
+ .title {
+  font-size: 18px;
+ }
+ .count {
+  font-size: 16px;
+  margin-top: 12px;
+ }
+ .fileRow {
+  display: block !important;
+ }
+ .nameContainer {
+  flex-basis: 100%;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: flex-start;
+ }
+ .propertyContainer {
+  flex-basis: 100%;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+ }
+ .mediaTitle {
+  font-size: 18px;
+ }
+}
+
 .count {
  font-size: 18px;
  font-weight: 400;
@@ -29,13 +73,59 @@
  flex-direction: column;
  gap: 16px;
 }
-.nameContainer {
- max-width: 1000px;
- flex-grow: 0;
+.fileRow {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ border-bottom: 1px solid #f8f8f8;
+ padding-bottom: 8px;
 }
+
+.nameContainer {
+ flex-basis: 65%;
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+}
+
 .propertyContainer {
  display: flex;
  justify-content: space-between;
+ flex-basis: 35%;
+}
+
+.fileDate,
+.fileFormat,
+.downloadLink {
+ flex-shrink: 0;
+ text-align: right;
+}
+
+.downloadLink::after {
+ content: '';
+ background-image: url('/catalog-images/download.svg');
+ width: 13.3px;
+ height: 13.3px;
+ display: inline-block;
+ vertical-align: middle;
+ margin-left: 5px;
+}
+
+.propertyContainer span {
+ flex-basis: calc(33.33%);
+ min-width: 0;
+}
+
+@media screen and (max-width: 768px) {
+ .fileFormat {
+  display: none;
+ }
+ .nameContainer {
+  flex-basis: 60%;
+ }
+ .propertyContainer {
+  flex-basis: 40%;
+ }
 }
 
 .fileName,
@@ -48,17 +138,17 @@
  color: #535353;
 }
 
-.fileName {
- color: #040404;
+@media screen and (max-width: 1024px) {
+ .fileName,
+ .fileDate,
+ .fileFormat,
+ .downloadLink {
+  font-size: 16px;
+ }
 }
 
-.fileRow {
- display: flex;
- flex-direction: row;
- justify-content: space-between;
- align-items: center;
- border-bottom: 1px solid #f8f8f8;
- padding-bottom: 8px;
+.fileName {
+ color: #040404;
 }
 
 .downloadLink {
@@ -66,15 +156,6 @@
  cursor: pointer;
 }
 
-.downloadLink::after {
- content: '';
- background-image: url('/catalog-images/download.svg');
- width: 13.3px;
- height: 13.3px;
- display: inline-block;
- vertical-align: middle;
- margin-left: 5px;
-}
 .toggleButton {
  text-align: left;
  align-items: center;
@@ -106,8 +187,19 @@
 .toggleButtonHover {
  background-color: #eee;
 }
-.mediaBox{
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
+.mediaBox {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 30px;
+ justify-content: flex-start;
+ max-width: 100%;
+ margin: auto;
+ overflow-x: hidden;
+}
+.nameContainer {
+ flex-basis: 50%
+}
+
+.propertyContainer {
+ flex-basis: 50%
 }

@@ -1,7 +1,7 @@
 .title {
  font-size: clamp(14px, 2vw, 18px);
  font-weight: 400;
- margin-top: 42px;
+ margin-top: 60px;
  margin-bottom: 20px;
  color: var(--color-black);
 }
@@ -20,6 +20,10 @@
 
 .titleError {
  color: #db0000;
+}
+
+.hasError {
+   border: 2px solid #DB0000;  
 }
 
 .inputCategories:checked::after {
@@ -96,7 +100,8 @@
  display: flex;
  justify-content: space-between;
  align-items: center;
- margin-bottom: 16px;
+ margin-bottom: 0px;
+ margin-top: 40px;
 }
 
 .ourQuestion {
@@ -119,7 +124,7 @@
 .commentInput {
  padding: 12px;
  border: 1px solid #deedab;
- border-radius: 4px;
+ border-radius: 0px;
  font-size: 16px;
  width: 100%;
  min-height: 116px;
