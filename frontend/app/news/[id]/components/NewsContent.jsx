@@ -47,11 +47,11 @@ export default function NewsContent({ item }) {
           >
             {formatDate(displayItem.created_at)}
           </span>
-          <div
+          <p
             className={`${montserrat.className} ${styles.newsPreview} font-normal text-base leading-[140%] lg:mt-3`}
           >
             {formatText(displayItem.description)}
-          </div>
+          </p>
         </div>
         <img src={displayItem.image} alt="Фото события" className={styles.newsImage} />
       </div>
@@ -69,11 +69,11 @@ export default function NewsContent({ item }) {
                 </h3>
               )}
               {paragraph.text && (
-                <div
+                <p
                   className={`${montserrat.className} font-normal text-base leading-[140%]`}
                 >
                   {formatText(paragraph.text)}
-                </div>
+                </p>
               )}
               {paragraph.image && (
                 <img src={paragraph.image} alt={`Фото параграфа ${index + 1}`} className={styles.subImage} />
