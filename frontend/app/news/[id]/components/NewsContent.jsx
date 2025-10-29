@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import styles from "../../Onenews.module.css";
 import { formatDate } from "@/app/utils/formatDate";
+import { formatText } from "@/app/utils/formatText";
 
 export default function NewsContent({ item }) {
   const [detailedItem, setDetailedItem] = useState(null);
@@ -46,11 +47,11 @@ export default function NewsContent({ item }) {
           >
             {formatDate(displayItem.created_at)}
           </span>
-          <p
+          <div
             className={`${montserrat.className} ${styles.newsPreview} font-normal text-base leading-[140%] lg:mt-3`}
           >
-            {displayItem.description}
-          </p>
+            {formatText(displayItem.description)}
+          </div>
         </div>
         <img src={displayItem.image} alt="Фото события" className={styles.newsImage} />
       </div>
@@ -68,11 +69,11 @@ export default function NewsContent({ item }) {
                 </h3>
               )}
               {paragraph.text && (
-                <p
+                <div
                   className={`${montserrat.className} font-normal text-base leading-[140%]`}
                 >
-                  {paragraph.text}
-                </p>
+                  {formatText(paragraph.text)}
+                </div>
               )}
               {paragraph.image && (
                 <img src={paragraph.image} alt={`Фото параграфа ${index + 1}`} className={styles.subImage} />
