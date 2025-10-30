@@ -1,11 +1,12 @@
 export async function GET(request, { params }) {
  const { id } = await params;
+ const API_URL = process.env.NEXT_PUBLIC_API_URL;
  const url = new URL(request.url);
  const page = parseInt(url.searchParams.get('page')) || 1;
  const limit = parseInt(url.searchParams.get('limit')) || 10;
 
  try {
-  const response = await fetch(`http://217.114.11.243/api/v1/content/documents/?catalog=${id}`, {});
+  const response = await fetch(`${API_URL}/api/v1/content/documents/?catalog=${id}`, {});
 
   if (!response.ok) {
    throw new Error(`HTTP error! Status: ${response.status}`);
