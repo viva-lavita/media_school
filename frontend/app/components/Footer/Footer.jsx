@@ -10,7 +10,10 @@ export default function Footer() {
   const [pageWidth, setPageWidth] = useState(0);
   const {setIsPopUpOpen} = usePopUp();
 
-  const [documents, setDocuments] = useState(null);
+  const [documents, setDocuments] = useState({
+    user_agreement: '',
+    privacy_policy: ''
+  });
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -26,7 +29,7 @@ export default function Footer() {
       }
     }
 
-    fetchDocuments();
+    void fetchDocuments();
   }, []);
 
   useEffect(() => {
