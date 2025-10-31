@@ -1,11 +1,13 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 async function tryRefreshAndSetAccess() {
   const refreshToken = cookies().get("refresh")?.value;
   if (!refreshToken) return false;
 
-  const refreshRes = await fetch("http://217.114.11.243/api/v1/jwt/refresh/", {
+  const refreshRes = await fetch(`${API_URL}/api/v1/jwt/refresh/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ refresh: refreshToken }),
@@ -31,7 +33,7 @@ export async function GET() {
     let accessToken = cookies().get("access")?.value;
 
     if (accessToken) {
-      const verifyRes = await fetch("http://217.114.11.243/api/v1/jwt/verify/", {
+      const verifyRes = await fetch(`${API_URL}/api/v1/jwt/verify/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: accessToken }),
@@ -50,7 +52,7 @@ export async function GET() {
       accessToken = cookies().get("access")?.value;
     }
 
-    const profileRes = await fetch("http://217.114.11.243/api/v1/users/me/", {
+    const profileRes = await fetch(`${API_URL}/api/v1/users/me/`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
 

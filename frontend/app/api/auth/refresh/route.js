@@ -8,9 +8,9 @@ export async function POST() {
     if (!refreshToken) {
       return NextResponse.json({ error: "Нет refresh токена" }, { status: 401 });
     }
-
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
     // Запрос на обновление access токена
-    const res = await fetch("http://217.114.11.243/api/v1/jwt/refresh/", {
+    const res = await fetch(`${API_URL}/api/v1/jwt/refresh/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ refresh: refreshToken }),

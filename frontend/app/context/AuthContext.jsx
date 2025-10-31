@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    loadProfile();
+    void loadProfile();
   }, []);
 
   useEffect(() => {

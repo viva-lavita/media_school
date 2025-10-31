@@ -3,7 +3,8 @@ export async function GET(request, { params }) {
  try {
   let allResults = [];
   let currentNextUrl = '';
- let nextUrl = `http://217.114.11.243/api/v1/content/experts/?catalog_id=${id}`;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  let nextUrl = `${API_URL}/api/v1/content/experts/?catalog_id=${id}`;
 
   while (nextUrl && nextUrl !== currentNextUrl) {
    currentNextUrl = nextUrl;
