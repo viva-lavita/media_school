@@ -2,7 +2,7 @@ export async function GET() {
   try {
     let allResults = [];
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    let nextUrl = `${API_URL}/api/v1/events/news/`;
+    let nextUrl = `${API_URL}/api/events/news/`;
 
     while (nextUrl) {
       const response = await fetch(nextUrl, {
