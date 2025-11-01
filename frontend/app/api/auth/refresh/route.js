@@ -10,7 +10,7 @@ export async function POST() {
     }
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     // Запрос на обновление access токена
-    const res = await fetch(`${API_URL}/api/v1/jwt/refresh/`, {
+    const res = await fetch(`${API_URL}/api/jwt/refresh/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ refresh: refreshToken }),

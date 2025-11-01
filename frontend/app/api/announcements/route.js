@@ -1,7 +1,7 @@
 export async function GET() {
   try {
     let allResults = [];
-    let nextUrl = 'http://217.114.11.243/api/v1/events/announcements/';
+    let nextUrl = 'http://217.114.11.243/api/events/announcements/';
 
     while (nextUrl) {
       const response = await fetch(nextUrl, {

@@ -1,7 +1,7 @@
 export async function GET(request, { params }) {
   const { id } = await params;
   try {
-    const response = await fetch(`http://217.114.11.243/api/v1/events/announcements/${id}/`, {
+    const response = await fetch(`http://217.114.11.243/api/events/announcements/${id}/`, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

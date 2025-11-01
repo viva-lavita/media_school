@@ -7,7 +7,7 @@ export async function GET(request) {
     const questionCategory = searchParams.get('question_category') || '';
     const ordering = searchParams.get('ordering') || '';
 
-    let backendUrl = `http://217.114.11.243/api/v1/events/comments/`;
+    let backendUrl = `http://217.114.11.243/api/events/comments/`;
     const params = [];
     if (newsId) params.push(`news=${newsId}`);
     if (announcementId) params.push(`announcement=${announcementId}`);
@@ -55,7 +55,7 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const backendUrl = `http://217.114.11.243/api/v1/events/comments/`;
+    const backendUrl = `http://217.114.11.243/api/events/comments/`;
 
     // Get access token from cookies
     const cookies = request.cookies;

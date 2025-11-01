@@ -1,7 +1,7 @@
 export async function GET(req) {
   try {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    const response = await fetch(`${API_URL}/api/v1/legal-documents/`);
+    const response = await fetch(`${API_URL}/api/legal-documents/`);
 
     if (!response.ok) throw new Error('Ошибка загрузки файлов');
 
