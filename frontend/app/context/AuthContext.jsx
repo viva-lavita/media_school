@@ -10,10 +10,9 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const refreshInterval = useRef(null);
   const router = useRouter();
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   async function loadProfile() {
     try {
-      const res = await fetch(`${API_URL}/api/auth/profile`, { credentials: "include" });
+      const res = await fetch(`/api/auth/profile`, { credentials: "include" });
       if (res.ok) {
         const data = await res.json();
         if (data.authenticated) setUser(data.profile);
