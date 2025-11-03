@@ -22,10 +22,11 @@ async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
 }
 
 export async function GET() {
+ const API_URL = process.env.NEXT_PUBLIC_API_URL;
  try {
   let allResults = [];
   let currentNextUrl = '';
-  let nextUrl = 'http://217.114.11.243/api/content/catalogs/';
+  let nextUrl = `${API_URL}/api/content/catalogs/`;
 
   while (nextUrl && nextUrl !== currentNextUrl) {
    currentNextUrl = nextUrl;

@@ -1,4 +1,5 @@
 export async function GET(request) {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   try {
     const { searchParams } = new URL(request.url);
     const newsId = searchParams.get('news') || '';
@@ -7,7 +8,7 @@ export async function GET(request) {
     const questionCategory = searchParams.get('question_category') || '';
     const ordering = searchParams.get('ordering') || '';
 
-    let backendUrl = `http://217.114.11.243/api/events/comments/`;
+    let backendUrl = `${API_URL}/api/events/comments/`;
     const params = [];
     if (newsId) params.push(`news=${newsId}`);
     if (announcementId) params.push(`announcement=${announcementId}`);
@@ -53,9 +54,10 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   try {
     const body = await request.json();
-    const backendUrl = `http://217.114.11.243/api/events/comments/`;
+    const backendUrl = `${API_URL}/api/events/comments/`;
 
     // Get access token from cookies
     const cookies = request.cookies;

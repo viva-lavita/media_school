@@ -1,7 +1,8 @@
 export async function GET() {
   try {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
     let allResults = [];
-    let nextUrl = 'http://217.114.11.243/api/events/competitions/';
+    let nextUrl = `${API_URL}/api/events/competitions/`;
 
     while (nextUrl) {
       const response = await fetch(nextUrl, {

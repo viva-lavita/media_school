@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   try {
     const cookieStore = cookies();
     const accessToken = cookieStore.get('access')?.value;
@@ -11,7 +12,7 @@ export async function GET(req) {
     }
 
     // Verify the token
-    const verifyRes = await fetch("http://217.114.11.243/api/jwt/verify/", {
+    const verifyRes = await fetch(`${API_URL}/api/jwt/verify/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: accessToken }),
@@ -22,7 +23,7 @@ export async function GET(req) {
     }
 
     // If valid, fetch user data
-    const res = await fetch("http://217.114.11.243/api/users/me/", {
+    const res = await fetch(`${API_URL}/api/users/me/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

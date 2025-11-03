@@ -2,10 +2,11 @@ import { formatDate } from '@/app/utils/formatDate';
 
 export async function GET(request, { params }) {
  const { id } = await params;
+ const API_URL = process.env.NEXT_PUBLIC_API_URL;
  try {
   let allResults = [];
   let currentNextUrl = '';
-  let nextUrl = `http://217.114.11.243/api/content/videos/?catalog=${id}`;
+  let nextUrl = `${API_URL}/api/v1/content/videos/?catalog=${id}`;
 
   while (nextUrl && nextUrl !== currentNextUrl) {
    currentNextUrl = nextUrl;
