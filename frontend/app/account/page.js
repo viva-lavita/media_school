@@ -1,3 +1,4 @@
+'use client'
 import ChildData from "@/app/components/Child-data/Child-data";
 import ParentData from "@/app/components/Parent-data/Parent-data";
 import CreatePassword from "@/app/components/CreatePassword/CreatePassword";
@@ -14,13 +15,34 @@ export default function AccountPage() {
           <legend className={`${montserrat.className} font-normal text-base leading-[130%] mb-4`}>
             Данные родителя/законного представителя ученика
           </legend>
-          <ParentData direction={'column'} imgUrl={'/images/pencil.svg'} />
+          <ParentData
+            direction="column"
+            imgUrl="/images/pencil.svg"
+            userField={{}}
+            userReqStarByDate={{}}
+            handleFocus={() => {}}
+            handleChange={() => {}}
+            handleBlur={() => {}}
+            clearField={() => {}}
+            setIsFormValid={() => {}}
+            dataRequired={false}
+          />
         </fieldset>
         <fieldset>
           <legend className={`${montserrat.className} ${styles.childData} font-normal text-base leading-[130%] mb-4`}>
             Данные ученика
           </legend>
-          <ChildData direction={'column'} imgUrl={'/images/pencil.svg'} />
+          <ChildData
+            direction="column"
+            imgUrl="/images/pencil.svg"
+            userField={{}}
+            userReqStarByDate={{}}
+            handleFocus={() => {}}
+            handleChange={() => {}}
+            handleBlur={() => {}}
+            clearField={() => {}}
+            setIsFormValid={() => {}}
+            dataRequired={false}/>
         </fieldset>
         <button type="button" className={`${montserrat.className} font-medium text-base leading-[100%] py-3.5 px-6 bg-green w-[197px] 
         self-center`}>
@@ -30,7 +52,10 @@ export default function AccountPage() {
       <div className={`${styles.accountPageData} ${styles.accountPagePasswordChange} flex flex-col basis-0 grow-1 bg-light-green border border-green`}>
         <div className={`flex flex-col gap-4`}>
           <h1 className={`${comfortaa.className} font-bold text-lg leading-[100%]`}>Смена пароля</h1>
-          <CreatePassword />
+          <CreatePassword
+            userField={{}}
+            handleChange={() => {}}
+            setIsFormValid={() => {}} />
         </div>
         <div className={`flex flex-col justify-between h-full`}>
           <button className={`${montserrat.className} font-medium text-base leading-[100%] py-3.5 px-6 bg-green w-[197px] 

@@ -1,8 +1,35 @@
+'use client'
+
 import styles from './Contacts.module.css'
 import {comfortaa} from "@/lib/fonts";
 import {montserrat} from "@/lib/fonts";
+import {useEffect, useState} from "react";
 
 export default function ContactsPage () {
+  const [contactsData, setContactsData] = useState({
+    "address": "",
+    "phone_number": "",
+    "contact_email": "",
+    "school_website": "",
+    "school_photo": "",
+    "social_vk": "",
+    "social_ok": "",
+    "latitude": 0,
+    "longitude": 0
+  });
+
+  useEffect(() => {
+    async function getContacts() {
+      try {
+        const res = await fetch('api/contacts');
+        const data = await res.json();
+      } catch (err) {
+        console.error('Ошибка:', err);
+      }
+    }
+
+    void getContacts();
+  }, []);
   return (
     <>
       <div className={`${styles.contactsContainer}`}>

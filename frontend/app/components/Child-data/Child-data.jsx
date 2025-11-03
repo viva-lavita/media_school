@@ -5,15 +5,27 @@ import styles from "@/app/registration/Registration.module.css";
 import ButtonImage from "@/app/components/Button-Image/Button-Image";
 import {useEffect, useState} from "react";
 
-export default function ChildData({dataRequired, userField, userReqStarByDate, handleFocus, handleChange, handleBlur,
-                                    clearField, setIsFormValid, imgUrl, direction}) {
+export default function ChildData({
+                                    dataRequired = false,
+                                    userField = {},
+                                    userReqStarByDate = {},
+                                    handleFocus = () => {},
+                                    handleChange = () => {},
+                                    handleBlur = () => {},
+                                    clearField = () => {},
+                                    setIsFormValid = () => {},
+                                    imgUrl,
+                                    direction}) {
 
-  const childLastnameValid = userField['Ребёнок_Фамилия']?.trim() !== '';
-  const childNameValid = /^[а-яА-ЯЁё-]+$/.test(userField['Ребёнок_Имя']?.trim() || '');
-  const childSchoolValid = userField['Школа']?.trim() !== '';
-  const childClassValid = userField['Класс']?.trim() !== '';
+  const safeUserField = userField || {};
+  const safeUserReqStarByDate = userReqStarByDate || {};
+
+  const childLastnameValid = safeUserField['Ребёнок_Фамилия']?.trim() !== '';
+  const childNameValid = /^[а-яА-ЯЁё-]+$/.test(safeUserField['Ребёнок_Имя']?.trim() || '');
+  const childSchoolValid = safeUserField['Школа']?.trim() !== '';
+  const childClassValid = safeUserField['Класс']?.trim() !== '';
   const childDataValid = (() => {
-    const str = userField['Ребёнок_Дата рождения']?.trim();
+    const str = safeUserField['Ребёнок_Дата рождения']?.trim();
     if (!str) return false;
 
     const regex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(\d{4})$/;
@@ -29,14 +41,16 @@ export default function ChildData({dataRequired, userField, userReqStarByDate, h
   })();
 
   useEffect(() => {
-    setIsFormValid(prev => ({
-      ...prev,
-      ['child_last_name'] : childLastnameValid,
-      ['child_first_name'] : childNameValid,
-      ['child_date_of_birth'] : childDataValid,
-      ['school'] : childSchoolValid,
-      ['classroom'] : childClassValid,
-    }))
+    if (typeof setIsFormValid === 'function') {
+      setIsFormValid(prev => ({
+        ...prev,
+        ['child_last_name'] : childLastnameValid,
+        ['child_first_name'] : childNameValid,
+        ['child_date_of_birth'] : childDataValid,
+        ['school'] : childSchoolValid,
+        ['classroom'] : childClassValid,
+      }))
+    }
   }, [childLastnameValid, childNameValid, childDataValid, childSchoolValid, childClassValid])
 
   return (
@@ -51,11 +65,11 @@ export default function ChildData({dataRequired, userField, userReqStarByDate, h
           onBlur={(e) => handleBlur('Ребёнок_Фамилия', e)}
           onChange={(e) => handleChange('Ребёнок_Фамилия', e)}
           onFocus={() => handleFocus('Ребёнок_Фамилия')}
-          value={userField["Ребёнок_Фамилия"]}
+          value={safeUserField["Ребёнок_Фамилия"]}
           required
         />
         <label className={`visually-hidden`} htmlFor="child_lastname">Фамилия</label>
-        {dataRequired && userReqStarByDate['Ребёнок_Фамилия'] && (
+        {dataRequired && safeUserReqStarByDate['Ребёнок_Фамилия'] && (
           <span
             className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-22 top-3 text-red-500`}
           >
@@ -78,11 +92,11 @@ export default function ChildData({dataRequired, userField, userReqStarByDate, h
             onBlur={(e) => handleBlur('Ребёнок_Имя', e)}
             onChange={(e) => handleChange('Ребёнок_Имя', e)}
             onFocus={() => handleFocus('Ребёнок_Имя')}
-            value={userField["Ребёнок_Имя"]}
+            value={safeUserField["Ребёнок_Имя"]}
             required
           />
           <label className={`visually-hidden`} htmlFor="child_firstname">Имя</label>
-          {dataRequired && userReqStarByDate['Ребёнок_Имя'] && (
+          {dataRequired && safeUserReqStarByDate['Ребёнок_Имя'] && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-12.5 top-3 text-red-500`}
             >
@@ -99,7 +113,7 @@ export default function ChildData({dataRequired, userField, userReqStarByDate, h
             id="child_middlename"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             onChange={(e) => handleChange('Ребёнок_Отчество', e)}
-            value={userField["Ребёнок_Отчество"]}
+            value={safeUserField["Ребёнок_Отчество"]}
           />
           <label className={`visually-hidden`} htmlFor="child_middlename">Отчество</label>
           <ButtonImage onClick={() => clearField('Ребёнок_Отчество')} imgUrl={imgUrl}/>
@@ -119,11 +133,11 @@ export default function ChildData({dataRequired, userField, userReqStarByDate, h
             onBlur={(e) => handleBlur('Ребёнок_Дата рождения', e)}
             onChange={(e) => handleChange('Ребёнок_Дата рождения', e)}
             onFocus={() => handleFocus('Ребёнок_Дата рождения')}
-            value={userField["Ребёнок_Дата рождения"]}
+            value={safeUserField["Ребёнок_Дата рождения"]}
             required
           />
           <label className={`visually-hidden`} htmlFor="child_birthday">Дата рождения</label>
-          {dataRequired && userReqStarByDate['Ребёнок_Дата рождения'] && (
+          {dataRequired && safeUserReqStarByDate['Ребёнок_Дата рождения'] && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-33 top-3 text-red-500`}
             >
@@ -142,11 +156,11 @@ export default function ChildData({dataRequired, userField, userReqStarByDate, h
             onBlur={(e) => handleBlur('Школа', e)}
             onChange={(e) => handleChange('Школа', e)}
             onFocus={() => handleFocus('Школа')}
-            value={userField["Школа"]}
+            value={safeUserField["Школа"]}
             required
           />
           <label className={`visually-hidden`} htmlFor="child_school">Школа</label>
-          {dataRequired && userReqStarByDate['Школа'] && (
+          {dataRequired && safeUserReqStarByDate['Школа'] && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-17 top-3 text-red-500`}
             >
@@ -166,11 +180,11 @@ export default function ChildData({dataRequired, userField, userReqStarByDate, h
           onBlur={(e) => handleBlur('Класс', e)}
           onChange={(e) => handleChange('Класс', e)}
           onFocus={() => handleFocus('Класс')}
-          value={userField["Класс"]}
+          value={safeUserField["Класс"]}
           required
         />
         <label className={`visually-hidden`} htmlFor="child_classroom">Класс</label>
-        {dataRequired && userReqStarByDate['Класс'] && (
+        {dataRequired && safeUserReqStarByDate['Класс'] && (
           <span
             className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-15.5 top-3 text-red-500`}
           >

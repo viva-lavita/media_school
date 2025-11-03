@@ -7,15 +7,26 @@ import {useContext, useEffect, useState} from "react";
 import PageWidthContext from "@/app/context/PageWidthProvider";
 
 export default function ParentData({
-                                     dataRequired, userField, userReqStarByDate, handleFocus, handleChange, handleBlur,
-                                     clearField, setIsFormValid, imgUrl, direction
+                                     dataRequired = false,
+                                     userField = {},
+                                     userReqStarByDate = {},
+                                     handleFocus = () => {},
+                                     handleChange = () => {},
+                                     handleBlur = () => {},
+                                     clearField = () => {},
+                                     setIsFormValid = () => {},
+                                     imgUrl,
+                                     direction
                                    }) {
+  const safeUserField = userField || {};
+  const safeUserReqStarByDate = userReqStarByDate || {};
 
-  const lastNameValid = userField['Фамилия']?.trim() !== '';
-  const firstNameValid = /^[а-яА-ЯЁё-]+$/.test(userField['Имя']?.trim() || '');
-  const emailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(userField.Email?.trim() || '');
+  const lastNameValid = safeUserField['Фамилия']?.trim() !== '';
+  const firstNameValid = /^[а-яА-ЯЁё-]+$/.test(safeUserField['Имя']?.trim() || '');
+  const emailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(safeUserField.Email?.trim() || '');
+
   const dateValid = (() => {
-    const str = userField['Дата рождения']?.trim();
+    const str = safeUserField['Дата рождения']?.trim();
     if (!str) return false;
 
     const regex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(\d{4})$/;
@@ -31,13 +42,15 @@ export default function ParentData({
   })();
 
   useEffect(() => {
-    setIsFormValid(prev => ({
-      ...prev,
-      ['last_name'] : lastNameValid,
-      ['first_name'] : firstNameValid,
-      ['email'] : emailValid,
-      ['date_of_birth'] : dateValid
-    }))
+    if (typeof setIsFormValid === 'function') {
+      setIsFormValid(prev => ({
+        ...prev,
+        ['last_name'] : lastNameValid,
+        ['first_name'] : firstNameValid,
+        ['email'] : emailValid,
+        ['date_of_birth'] : dateValid
+      }))
+    }
   }, [lastNameValid, firstNameValid, emailValid, dateValid])
 
   const { pageWidth } = useContext(PageWidthContext);
@@ -58,10 +71,10 @@ export default function ParentData({
           onBlur={(e) => handleBlur('Фамилия', e)}
           onChange={(e) => handleChange('Фамилия', e)}
           onFocus={() => handleFocus('Фамилия')}
-          value={userField['Фамилия']}
+          value={safeUserField['Фамилия']}
           required
         />
-        {dataRequired && userReqStarByDate['Фамилия'] && (
+        {dataRequired && safeUserReqStarByDate['Фамилия'] && (
           <span
             className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-22 top-3 text-red-500`}
           >
@@ -90,10 +103,10 @@ export default function ParentData({
             onBlur={(e) => handleBlur('Имя', e)}
             onChange={(e) => handleChange('Имя', e)}
             onFocus={() => handleFocus('Имя')}
-            value={userField['Имя']}
+            value={safeUserField['Имя']}
             required
           />
-          {dataRequired && userReqStarByDate['Имя'] && (
+          {dataRequired && safeUserReqStarByDate['Имя'] && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-12.5 top-3 
               text-red-500`}
@@ -111,7 +124,7 @@ export default function ParentData({
             id="parent_middlename"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             onChange={(e) => handleChange('Отчество', e)}
-            value={userField["Отчество"]}
+            value={safeUserField["Отчество"]}
           />
           <ButtonImage onClick={() => clearField('Отчество')} imgUrl={imgUrl}/>
         </div>
@@ -139,10 +152,10 @@ export default function ParentData({
             onBlur={(e) => handleBlur('Дата рождения', e)}
             onChange={(e) => handleChange('Дата рождения', e)}
             onFocus={() => handleFocus('Дата рождения')}
-            value={userField['Дата рождения']}
+            value={safeUserField['Дата рождения']}
             required
           />
-          {dataRequired && userReqStarByDate['Дата рождения'] && (
+          {dataRequired && safeUserReqStarByDate['Дата рождения'] && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-33 top-3 text-red-500`}
             >
@@ -165,10 +178,10 @@ export default function ParentData({
             onBlur={(e) => handleBlur('Email', e)}
             onChange={(e) => handleChange('Email', e)}
             onFocus={() => handleFocus('Email')}
-            value={userField.Email}
+            value={safeUserField.Email}
             required
           />
-          {dataRequired && userReqStarByDate['Email'] && (
+          {dataRequired && safeUserReqStarByDate['Email'] && (
             <span
               className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-14.5 top-3 text-red-500`}
             >

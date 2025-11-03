@@ -4,17 +4,18 @@ import {montserrat} from "@/lib/fonts";
 import {useEffect, useState} from "react";
 
 export default function CreatePassword({ userField, handleChange, setIsFormValid }) {
+  const safeUserField = userField || {};
+
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-  const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&*!])[A-Za-z\d@#$%&*!]{8,}$/.test(userField.password || '');
-  const passwordMatch = (userField.password || '') === (userField.re_password || '');
+  const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&*!])[A-Za-z\d@#$%&*!]{8,}$/.test(safeUserField.password || '');
+  const passwordMatch = (safeUserField.password || '') === (safeUserField.re_password || '');
 
   useEffect(() => {
-    setIsFormValid(prev => ({
-      ...prev,
-      password : passwordValid,
-      re_password : passwordMatch,
-    }));
+    if(typeof setIsFormValid === 'function') {
+      setIsFormValid(prev => ({ ...(prev || {}), password: passwordValid, re_password: passwordMatch }));
+
+    }
   }, [passwordValid, passwordMatch]);
 
   return (
@@ -35,7 +36,7 @@ export default function CreatePassword({ userField, handleChange, setIsFormValid
             id="parent_password"
             className="w-full h-[41px] border border-green bg-white py-3 px-4 focus:outline-none"
             onChange={(e) => handleChange('password', e)}
-            value={userField.password}
+            value={safeUserField.password}
             required
           />
           <label className={`visually-hidden`} htmlFor="parent_password">Пароль</label>
@@ -58,7 +59,7 @@ export default function CreatePassword({ userField, handleChange, setIsFormValid
           id="parent_passwordRepeat"
           className="w-full h-[41px] border border-green bg-white py-3 px-4 focus:outline-none"
           onChange={(e) => handleChange('re_password', e)}
-          value={userField.re_password}
+          value={safeUserField.re_password}
           required
         />
         <label className={`visually-hidden`} htmlFor="parent_passwordRepeat">Повторите пароль</label>
