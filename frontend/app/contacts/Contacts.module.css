@@ -1,8 +1,10 @@
 .contactsContainer {
     display: flex;
-    gap: 30px;
-    width: 1400px;
+    justify-content: center;
+    max-width: 1400px;
+    width: 100%;
     margin: 0 auto 80px;
+    padding: 0 16px;
 }
 
 .contactsTitle {
@@ -26,17 +28,20 @@
 }
 
 .contactsMap {
-    background-image: url('/images/Map.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     height: 450px;
     width: 100%;
 }
 
-@media screen and (max-width: 1024px) {
+.contactsContent {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+}
+
+@media screen and (max-width: 1400px) {
     .contactsContainer {
-        width: 944px;
+        max-width: 944px;
+        width: 100%;
     }
     .contactsTitle {
         font-size: 40px;
@@ -51,7 +56,7 @@
     .contactInfoTelEmail {
         flex-direction: column;
     }
-    .contactsContainer {
+    .contactsContent {
         gap: 20px;
     }
     .contactsImage {
@@ -62,9 +67,10 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 940px) {
     .contactsContainer {
-        width: 728px;
+        max-width: 728px;
+        width: 100%;
     }
     .contactsTitle {
         font-size: 32px;
@@ -77,10 +83,10 @@
         gap: 4px;
     }
     .contactInfoTelEmail,
-    .contactsContainer {
+    .contactsContent {
         flex-direction: column;
     }
-    .contactsContainer {
+    .contactsContent {
         gap: 40px;
     }
     .contactsImage {
@@ -89,9 +95,22 @@
     }
 }
 
+@media screen and (max-width: 730px) {
+    .contactsContent {
+        width: 90vw;
+    }
+    .contactsImage {
+        object-fit: cover;
+        width: clamp(320px, 90vw, 728px);
+        height: clamp(185px, 50vw, 420px);
+        align-self: center;
+    }
+}
+
 @media screen and (max-width: 360px) {
     .contactsContainer {
-        width: 320px;
+        max-width: 320px;
+        width: 100%;
     }
     .contactsTitle {
         font-size: 28px;
@@ -106,12 +125,10 @@
     .contactInfo {
         gap: 4px;
     }
-    .contactInfoTelEmail,
-    .contactsContainer {
+    .contactInfoTelEmail {
         flex-direction: column;
     }
     .contactsContainer {
-        gap: 40px;
         margin: 0 auto 60px;
     }
     .contactsImage {
