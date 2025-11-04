@@ -6,8 +6,7 @@ export default function YMap({ className, latitude, longitude }) {
   const mapInstance = useRef(null)
 
   useEffect(() => {
-    const MAP_ID = 'map';
-    // console.log(latitude, longitude)
+    const MAP_ID = 'map'
     function initMap() {
       if (!window.ymaps) return;
       window.ymaps.ready(() => {
@@ -15,6 +14,7 @@ export default function YMap({ className, latitude, longitude }) {
         mapInstance.current = new window.ymaps.Map(MAP_ID, {
           center: [latitude, longitude],
           zoom: 16,
+          controls: ['zoomControl', 'fullscreenControl', 'geolocationControl', 'typeSelector'],
         });
 
         const placemark = new window.ymaps.Placemark(
