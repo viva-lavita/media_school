@@ -21,6 +21,7 @@ export default function Footer() {
       try {
         const response = await fetch('/api/documents');
         const data = await response.json();
+        console.log(data);
         setDocuments(data);
       } catch (e) {
         console.log(e);
