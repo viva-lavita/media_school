@@ -4,7 +4,7 @@ export async function GET(request, { params }) {
   let allResults = [];
   let currentNextUrl = '';
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  let nextUrl = `${API_URL}/api/content/experts/?catalog_id=${id}`;
+  let nextUrl = `${API_URL}/api/v1/content/experts/?catalog_id=${id}`;
 
   while (nextUrl && nextUrl !== currentNextUrl) {
    currentNextUrl = nextUrl;

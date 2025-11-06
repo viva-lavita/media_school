@@ -3,9 +3,12 @@ import Link from "next/link";
 import styles from "./Header.module.css";
 import { montserrat } from "@/lib/fonts";
 import { useAuth } from "@/app/context/AuthContext";
+import BurgerMenu from "@/app/components/BurgerMenu/BurgerMenu";
+import {useState} from "react";
 
 export default function Header() {
   const { user, loading } = useAuth();
+  const [burgerIsOpen, setBurgerIsOpen] = useState(false);
 
   return (
     <header
@@ -73,16 +76,17 @@ export default function Header() {
         ) : (
           <Link href="/login">
             <button
-              className={`${montserrat.className} ${styles.btn} cursor-pointer font-medium text-base leading-[100%] flex items-center`}
+              className={`${montserrat.className} ${styles.btn} cursor-pointer font-medium text-base text-nowrap leading-[100%] flex items-center`}
             >
               Личный кабинет
             </button>
           </Link>
         )}
 
-        <button aria-label={"Меню"} className={`${styles.headerMenu}`}>
+        <button aria-label={"Меню"} onClick={()=>setBurgerIsOpen(true)} className={`${styles.headerMenu} cursor-pointer`}>
           <img src="/header-images/menu.svg" alt="" />
         </button>
+        <BurgerMenu isOpen={burgerIsOpen} setIsOpen={setBurgerIsOpen} />
       </div>
     </header>
   );

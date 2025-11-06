@@ -7,7 +7,7 @@ async function tryRefreshAndSetAccess() {
   const refreshToken = cookies().get("refresh")?.value;
   if (!refreshToken) return false;
 
-  const refreshRes = await fetch(`${API_URL}/api/jwt/refresh/`, {
+  const refreshRes = await fetch(`${API_URL}/api/v1/jwt/refresh/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ refresh: refreshToken }),
@@ -33,7 +33,7 @@ export async function GET() {
     let accessToken = cookies().get("access")?.value;
 
     if (accessToken) {
-      const verifyRes = await fetch(`${API_URL}/api/jwt/verify/`, {
+      const verifyRes = await fetch(`${API_URL}/api/v1/jwt/verify/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: accessToken }),
@@ -52,7 +52,7 @@ export async function GET() {
       accessToken = cookies().get("access")?.value;
     }
 
-    const profileRes = await fetch(`${API_URL}/api/users/me/`, {
+    const profileRes = await fetch(`${API_URL}/api/v1/users/me/`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
 

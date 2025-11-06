@@ -26,7 +26,7 @@ export async function GET() {
  try {
   let allResults = [];
   let currentNextUrl = '';
-  let nextUrl = `${API_URL}/api/content/catalogs/`;
+  let nextUrl = `${API_URL}/api/v1/content/catalogs/`;
 
   while (nextUrl && nextUrl !== currentNextUrl) {
    currentNextUrl = nextUrl;

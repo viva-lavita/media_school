@@ -6,7 +6,7 @@ export async function GET(request, { params }) {
  try {
   let allResults = [];
   let currentNextUrl = '';
-  let nextUrl = `${API_URL}/api/content/photos/?catalog=${id}`;
+  let nextUrl = `${API_URL}/api/v1/content/photos/?catalog=${id}`;
 
   while (nextUrl && nextUrl !== currentNextUrl) {
    currentNextUrl = nextUrl;

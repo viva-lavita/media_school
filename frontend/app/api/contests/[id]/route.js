@@ -2,7 +2,7 @@ export async function GET(request, { params }) {
   const { id } = await params;
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   try {
-    const response = await fetch(`${API_URL}/api/events/competitions/${id}/`, {
+    const response = await fetch(`${API_URL}/api/v1/events/competitions/${id}/`, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

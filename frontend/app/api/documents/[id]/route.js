@@ -6,7 +6,7 @@ export async function GET(request, { params }) {
  const limit = parseInt(url.searchParams.get('limit')) || 10;
 
  try {
-  const response = await fetch(`${API_URL}/api/content/documents/?catalog=${id}`, {});
+  const response = await fetch(`${API_URL}/api/v1/content/documents/?catalog=${id}`, {});
 
   if (!response.ok) {
    throw new Error(`HTTP error! Status: ${response.status}`);
