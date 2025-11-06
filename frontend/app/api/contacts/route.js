@@ -4,7 +4,7 @@ export async function GET() {
   try {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     console.log(API_URL);
-    const response = await fetch(`${API_URL}/api/v1/contacts/`, {
+    const response = await fetch(`${API_URL}/api/contacts/`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
