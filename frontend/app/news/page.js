@@ -16,6 +16,7 @@ export default function NewsPage() {
   const [newsData, setNewsData] = useState([]);
   const [announcementsData, setAnnouncementsData] = useState([]);
   const [contestsData, setContestsData] = useState([]);
+  const MEDIA_URL = process.env.NEXT_PUBLIC_MEDIA;
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,7 +36,7 @@ export default function NewsPage() {
 
   useEffect(() => {
     // Fetch news data from local API proxy
-    fetch("/api/news")
+    fetch(`${MEDIA_URL}/api/v1/events/news`)
       .then((response) => response.json())
       .then((data) => setNewsData(data.results))
       .catch((error) => console.error("Error fetching news:", error));
