@@ -24,7 +24,9 @@ export default function NewsDetail() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch(`${API_URL}/users/me`);
+        // тут поменять, на const response = await fetch(`${API_URL}/users/me`);
+        // если локальное апи с аутентификацией уберут
+        const response = await fetch("/local_api/auth/profile/");
         console.log('Auth check result:', response.ok, response.status);
         setIsAuthenticated(response.ok);
       } catch (error) {
