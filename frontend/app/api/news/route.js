@@ -22,6 +22,22 @@ export async function GET() {
       nextUrl = data.next;
     }
 
+    // Replace backend URLs with production domain for images
+    for (let i = 0; i < allResults.length; i++) {
+      const item = allResults[i];
+      if (item.image) {
+        item.image = item.image.replace('https://backend:8000', 'https://xn--80adiapjcmrmbljehl.xn--p1ai');
+      }
+      if (item.paragraphs) {
+        for (let j = 0; j < item.paragraphs.length; j++) {
+          const paragraph = item.paragraphs[j];
+          if (paragraph.image) {
+            paragraph.image = paragraph.image.replace('https://backend:8000', 'https://xn--80adiapjcmrmbljehl.xn--p1ai');
+          }
+        }
+      }
+    }
+
     const aggregatedData = {
       count: allResults.length,
       next: null,
