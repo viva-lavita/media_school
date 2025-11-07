@@ -35,6 +35,7 @@ export default function NewsPage() {
   }, []);
 
   useEffect(() => {
+    console.log('API_URL:', API_URL);
     // Fetch news data from local API proxy
     fetch(`${API_URL}/events/news/`)
       .then((response) => response.json())

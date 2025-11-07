@@ -52,6 +52,12 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_IMAGE_BACKEND }}:latest
 
+      - name: Create .env for frontend
+        run: |
+          echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL  }}" >> ./frontend/.env
+          echo "NEXT_PUBLIC_BACKEND=${{ secrets.NEXT_PUBLIC_BACKEND }}" >> ./frontend/.env
+          echo "NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}" >> ./frontend/.env
+
       - name: Push to Docker Hub frontend
         uses: docker/build-push-action@v6
         with:
