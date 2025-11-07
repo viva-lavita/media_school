@@ -36,7 +36,7 @@ export default function RegistrationPage() {
     };
 
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("/local_api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -169,7 +169,7 @@ export default function RegistrationPage() {
   return (
     <div className={styles.registration}>
       <div className={`${styles.registrationImg} flex basis-0 grow`}></div>
-      <div className={`${styles.registrationFormWrapper} box-border flex flex-col basis-0 grow bg-light-green 
+      <div className={`${styles.registrationFormWrapper} box-border flex flex-col basis-0 grow bg-light-green
       border-green border`}>
         <div className={`flex flex-col text-center gap-4`}>
           <h1 className={`${comfortaa.className} ${styles.registrationFormTitle} font-bold`}>Регистрация</h1>
@@ -249,10 +249,10 @@ export default function RegistrationPage() {
           </fieldset>
 
           <div className={`${styles.registrationAccept} flex gap-3`}>
-            <button type={isValid ? 'submit' : 'button'} className={`${montserrat.className} ${isValid ? 
-            'bg-green cursor-pointer':'bg-grey-3 cursor-not-allowed'} font-medium text-base leading-[100%] 
+            <button type={isValid ? 'submit' : 'button'} className={`${montserrat.className} ${isValid ?
+            'bg-green cursor-pointer':'bg-grey-3 cursor-not-allowed'} font-medium text-base leading-[100%]
             flex basis-0 grow border border-green py-3 px-6 justify-center`}>Зарегестрироваться</button>
-            <button type="button" onClick={handleReset} className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow 
+            <button type="button" onClick={handleReset} className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow
             bg-white border border-green py-3 px-6 justify-center `}>
               Отменить
             </button>

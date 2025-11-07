@@ -21,9 +21,10 @@ export default function LayoutPage() {
  const [videosData, setVideosData] = useState([]);
  const [photosData, setPhotosData] = useState([]);
  const searchParams = useSearchParams();
+ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
  useEffect(() => {
-  handleFetch('/api/categories')
+  handleFetch(`${API_URL}/content/catalogs/`)
    .then((data) => {
     setCategories(data.results || []);
     if (data.results && data.results.length > 0) {
@@ -55,7 +56,7 @@ export default function LayoutPage() {
 console.log(categories);
 useEffect(() => {
   if (activeCategory.id) {
-    handleFetch(`/api/experts/${activeCategory.id}`)
+    handleFetch(`${API_URL}/content/experts/${activeCategory.id}`)
       .then((data) => {
         setExpertsData(data.results.filter(expert => expert && expert.catalog_id == activeCategory.id).map(expert => ({
           ...expert,
@@ -69,7 +70,7 @@ useEffect(() => {
 
 useEffect(() => {
   if (activeCategory.id) {
-    handleFetch(`/api/documents/${activeCategory.id}?page=1&limit=10`)
+    handleFetch(`${API_URL}/content/documents/${activeCategory.id}?page=1&limit=10`)
       .then((data) => {
         setDocumentsData(data);
       })
@@ -79,7 +80,7 @@ useEffect(() => {
 
 useEffect(() => {
   if (activeCategory.id) {
-    handleFetch(`/api/videos/${activeCategory.id}`)
+    handleFetch(`${API_URL}/content/videos/${activeCategory.id}`)
       .then((data) => {
         setVideosData(data.results);
       })
@@ -89,7 +90,7 @@ useEffect(() => {
 
 useEffect(() => {
   if (activeCategory.id) {
-    handleFetch(`/api/photos/${activeCategory.id}`)
+    handleFetch(`${API_URL}/content/photos/${activeCategory.id}`)
       .then((data) => {
         setPhotosData(data.results);
       })

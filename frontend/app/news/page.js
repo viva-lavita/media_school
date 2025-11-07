@@ -16,6 +16,7 @@ export default function NewsPage() {
   const [newsData, setNewsData] = useState([]);
   const [announcementsData, setAnnouncementsData] = useState([]);
   const [contestsData, setContestsData] = useState([]);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,19 +36,19 @@ export default function NewsPage() {
 
   useEffect(() => {
     // Fetch news data from local API proxy
-    fetch("/api/news")
+    fetch(`${API_URL}/events/news/`)
       .then((response) => response.json())
       .then((data) => setNewsData(data.results))
       .catch((error) => console.error("Error fetching news:", error));
 
     // Fetch announcements data from local API proxy
-    fetch("/api/announcements")
+    fetch(`${API_URL}/events/announcements/`)
       .then((response) => response.json())
       .then((data) => setAnnouncementsData(data.results))
       .catch((error) => console.error("Error fetching announcements:", error));
 
     // Fetch contests data from local API proxy
-    fetch("/api/contests")
+    fetch(`${API_URL}/events/competitions/`)
       .then((response) => response.json())
       .then((data) => setContestsData(data.results))
       .catch((error) => console.error("Error fetching contests:", error));

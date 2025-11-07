@@ -12,11 +12,12 @@ export default function QAPage() {
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState(null);
  const [isAuthenticated, setIsAuthenticated] = useState(false);
+ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
  useEffect(() => {
   const fetchQuestions = async () => {
    try {
-    const response = await fetch('/api/comments?question_category=expert&ordering=-created_at');
+    const response = await fetch(`${API_URL}/events/comments?question_category=expert&ordering=-created_at`);
     if (!response.ok) {
      throw new Error('Failed to fetch questions');
     }
@@ -50,7 +51,8 @@ export default function QAPage() {
  useEffect(() => {
   const checkAuth = async () => {
    try {
-    const response = await fetch('/api/users/me');
+    const response = await fetch(`${API_URL}/users/me/`);
+    console.log('Auth check result:', response.ok, response.status);
     setIsAuthenticated(response.ok);
    } catch (error) {
     console.error('Auth check error:', error);

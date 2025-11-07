@@ -1,17 +1,19 @@
 services:
 
   db:
-    image: postgres:12
+    image: postgres:14
     restart: always
     volumes:
-      - app-db-data:/var/lib/postgresql/data/pgdata
-    env_file:
-      - .env
+      - db-data:/var/lib/postgresql/data/pgdata
+
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
       - POSTGRES_USER=${POSTGRES_USER?Variable not set}
       - POSTGRES_DB=${POSTGRES_DB?Variable not set}
+      - POSTGRES_HOST=${POSTGRES_HOST?Variable not set}
+      - POSTGRES_PORT=${POSTGRES_PORT?Variable not set}
+
   backend:
     build: ./backend
     depends_on:
@@ -27,17 +29,32 @@ services:
       - default
     command: bash /scripts/start-dev.sh
 
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    env_file:
+      - .env
+    environment:
+      - PORT=3000
+    volumes:
+      - frontend_dist:/app/dist/
+    networks:
+      - default
+    command: sh -c 'cp -r ./.next/* /app/dist/ && npm run start'
+
   nginx:
     image: nginx:alpine
     restart: always
     depends_on:
-      - backend
+      - frontend
     ports:
       - "9000:80"
     volumes:
       - static:/static/
       - media:/media/
       - ./infra/nginx.conf:/etc/nginx/conf.d/default.conf
+      - frontend_dist:/usr/src/app/dist
     networks:
       - default
 
@@ -46,6 +63,7 @@ networks:
     driver: bridge
 
 volumes:
-  app-db-data:
+  db-data:
   static:
   media:
+  frontend_dist:

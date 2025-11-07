@@ -18,11 +18,12 @@ export default function ContactsPage () {
     "latitude": null,
     "longitude": null
   });
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     async function getContacts() {
       try {
-        const res = await fetch('api/contacts');
+        const res = await fetch(`${API_URL}/contacts/`);
         const data = await res.json();
         setContactsData(data);
       } catch (err) {

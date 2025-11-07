@@ -96,7 +96,8 @@ jobs:
           echo "EMAIL_HOST=${{ secrets.EMAIL_HOST }}" >> .env
           echo "YANDEX_API_KEY=${{ secrets.YANDEX_API_KEY }}" >> .env
           echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL  }}" >> .env
-          echo "NEXT_PUBLIC_MEDIA=${{ secrets.NEXT_PUBLIC_MEDIA }}" >> .env
+          echo "NEXT_PUBLIC_BACKEND=${{ secrets.NEXT_PUBLIC_BACKEND }}" >> .env
+          echo "NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}" >> .env
 
       - name: Upload .env
         uses: actions/upload-artifact@v4

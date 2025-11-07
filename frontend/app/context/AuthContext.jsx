@@ -10,9 +10,10 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const refreshInterval = useRef(null);
   const router = useRouter();
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   async function loadProfile() {
     try {
-      const res = await fetch(`/api/auth/profile`, { credentials: "include" });
+      const res = await fetch(`/local_api/auth/profile`, { credentials: "include" });
       if (res.ok) {
         const data = await res.json();
         if (data.authenticated) setUser(data.profile);
@@ -37,7 +38,7 @@ export function AuthProvider({ children }) {
 
     async function refreshAccess() {
       try {
-        const res = await fetch("api/auth/refresh", {
+        const res = await fetch("/local_api/auth/refresh", {
           method: "POST",
           credentials: "include",
         })
@@ -59,7 +60,7 @@ export function AuthProvider({ children }) {
   }, [user, router])
 
   async function login(email, password) {
-    const res = await fetch("/api/auth/login", {
+    const res = await fetch("/local_api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -71,7 +72,7 @@ export function AuthProvider({ children }) {
       throw new Error(error?.error || "Ошибка входа");
     }
 
-    const profileRes = await fetch("/api/auth/profile", { credentials: "include" });
+    const profileRes = await fetch("/local_api/auth/profile", { credentials: "include" });
     if (profileRes.ok) {
       const profileData = await profileRes.json();
       setUser(profileData.profile);
@@ -85,7 +86,7 @@ export function AuthProvider({ children }) {
 
   async function logout() {
     try {
-      await fetch("/api/auth/logout", {
+      await fetch("/local_api/auth/logout", {
         method: "POST",
         credentials: "include",
       });

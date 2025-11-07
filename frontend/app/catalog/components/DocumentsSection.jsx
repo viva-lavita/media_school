@@ -15,6 +15,7 @@ export default function DocumentsSection({ documents: initialDocuments, category
  const [previousPage, setPreviousPage] = useState(initialDocuments?.previous || null);
  const [isLoading, setIsLoading] = useState(false);
  const [isCollapsed, setIsCollapsed] = useState(true);
+ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
  useEffect(() => {
   if (initialDocuments) {
@@ -28,7 +29,7 @@ export default function DocumentsSection({ documents: initialDocuments, category
  const fetchDocuments = async (page) => {
   setIsLoading(true);
   try {
-   const response = await fetch(`/api/documents/${categoryId}?page=${page}&limit=10`);
+   const response = await fetch(`${API_URL}/content/documents/${categoryId}?page=${page}&limit=10`);
    const data = await response.json();
    setDocuments(data.results || []);
    setTotalCount(data.count || 0);

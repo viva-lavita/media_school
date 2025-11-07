@@ -17,6 +17,7 @@ export default function AskQuestion() {
  const [isSubmitting, setIsSubmitting] = useState(false);
  const [submitError, setSubmitError] = useState('');
  const [submitSuccess, setSubmitSuccess] = useState(false);
+ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
  const handleSubmit = async (event) => {
   event.preventDefault();
@@ -50,7 +51,7 @@ export default function AskQuestion() {
   const questionCategory = categoryMap[selectedCategory] || 'other';
 
   try {
-   const response = await fetch('/api/comments', {
+   const response = await fetch(`${API_URL}/events/comments/`, {
     method: 'POST',
     headers: {
      'Content-Type': 'application/json',

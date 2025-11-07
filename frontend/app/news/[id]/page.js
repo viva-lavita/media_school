@@ -18,12 +18,13 @@ export default function NewsDetail() {
   const [error, setError] = useState(null);
   const [type, setType] = useState('news');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('/api/users/me');
+        const response = await fetch(`${API_URL}/users/me`);
         console.log('Auth check result:', response.ok, response.status);
         setIsAuthenticated(response.ok);
       } catch (error) {
@@ -47,7 +48,7 @@ export default function NewsDetail() {
 
     const fetchComments = async () => {
       try {
-        const response = await fetch(`/api/comments?${queryParam}=${id}&ordering=-created_at`);
+        const response = await fetch(`${API_URL}/events/comments?${queryParam}=${id}&ordering=-created_at`);
         if (response.ok) {
           const data = await response.json();
           console.log('Fetched comments data:', data);
@@ -68,7 +69,7 @@ export default function NewsDetail() {
     };
 
     const fetchItem = async () => {
-      const endpoint = `/api/${typeValue}/${id}`;
+      const endpoint = `${API_URL}/events/${typeValue}/${id}`;
 
       try {
         const response = await fetch(endpoint);

@@ -15,11 +15,13 @@ export default function Footer() {
     privacy_policy: ''
   });
   const [loading, setLoading] = useState(true)
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 
   useEffect(() => {
     async function fetchDocuments() {
       try {
-        const response = await fetch('/api/documents');
+        const response = await fetch(`${API_URL}/legal-documents/`);
         const data = await response.json();
         console.log(data);
         setDocuments(data);
@@ -44,7 +46,6 @@ export default function Footer() {
   if (loading) return <p>Загрузка файлов...</p>;
   if (!documents) return null;
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   return (
       <footer className={`${styles.bg} gap-10 flex flex-col w-screen`}>
@@ -72,14 +73,14 @@ export default function Footer() {
                   </nav>
                 </div>
                 {pageWidth !== null && pageWidth <= 944 && (
-                  <div className={`${montserrat.className} ${styles.terms} font-medium text-base leading-[100%] flex 
+                  <div className={`${montserrat.className} ${styles.terms} font-medium text-base leading-[100%] flex
                   flex-col justify-between`}>
                     <nav>
                       <ul className={`flex flex-col gap-2`}>
                         <li>
                           <a
                             className={`cursor-pointer`}
-                            href={`${API_URL}${documents.user_agreement}`}
+                            href={`${SITE_URL}${documents.user_agreement}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             download={true}>
@@ -89,7 +90,7 @@ export default function Footer() {
                         <li>
                           <a
                             className={`cursor-pointer`}
-                            href={`${API_URL}${documents.privacy_policy}`}
+                            href={`${SITE_URL}${documents.privacy_policy}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             download={true}>
@@ -120,7 +121,7 @@ export default function Footer() {
                   <li>
                     <a
                       className={`cursor-pointer`}
-                      href={`${API_URL}${documents.user_agreement}`}
+                      href={`${SITE_URL}${documents.user_agreement}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       download={true}>
@@ -130,7 +131,7 @@ export default function Footer() {
                   <li>
                     <a
                       className={`cursor-pointer`}
-                      href={`${API_URL}${documents.privacy_policy}`}
+                      href={`${SITE_URL}${documents.privacy_policy}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       download={true}>
@@ -142,17 +143,17 @@ export default function Footer() {
             </div>
             )}
           </div>
-          <div className={`${styles.footerBottom}  ${pageWidth <= 360 ? 'gap-2 w-80' : ''} 
+          <div className={`${styles.footerBottom}  ${pageWidth <= 360 ? 'gap-2 w-80' : ''}
           mx-auto flex ${montserrat.className}`}>
             <div className={`flex ${styles.footerAbout} ${pageWidth >= 768 && pageWidth < 1024 ? 'gap-2' : ''} gap-1`}>
               <p className={`shrink-0 font-normal text-sm`}>
                 © 2025 МАОУ Школа {pageWidth <= 360 || (pageWidth >= 1024 && pageWidth < 1401) ? <br/> : ''}
                 «Перспектива» г. Томск
               </p>
-              <button onClick={() => setIsPopUpOpen(true)} className={`cursor-pointer w-[145px] mb-[4px] flex items-end 
+              <button onClick={() => setIsPopUpOpen(true)} className={`cursor-pointer w-[145px] mb-[4px] flex items-end
               shrink-0 text-sm font-normal`}>Designed by Freepik</button>
             </div>
-            <p className={`${inter.className} ${styles.performer} ${pageWidth > 1400 ? 'ml-[15.5%]':''} text-xs font-medium 
+            <p className={`${inter.className} ${styles.performer} ${pageWidth > 1400 ? 'ml-[15.5%]':''} text-xs font-medium
             flex items-center gap-2`}>
               Сделано в
               <a

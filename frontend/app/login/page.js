@@ -25,7 +25,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch('/local_api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: loginData.email, password: loginData.password } ),
@@ -109,7 +109,7 @@ export default function LoginPage() {
               />
               {userLoginStar.email &&
                 <span
-                  className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-17.5 top-3 
+                  className={`${montserrat.className} font-normal text-lg leading-[140%] absolute left-17.5 top-3
                   text-red-500`}
                 >
                   *
@@ -148,13 +148,13 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow 
+              className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow
             bg-green border border-green py-3 px-6 justify-center `}>{loading ? 'Вход...' : 'Войти'}
             </button>
             <button
               type="reset"
               onClick={() => { setLoginData({email: '', password: ''}); setError(''); }}
-              className={`${montserrat.className}  font-medium text-base leading-[100%] flex basis-0 grow 
+              className={`${montserrat.className}  font-medium text-base leading-[100%] flex basis-0 grow
             bg-white border border-green py-3 px-6 justify-center `}>
               Отменить
             </button>
