@@ -34,25 +34,51 @@ export default function NewsPage() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const fetchAllResults = async (endpoint) => {
+    try {
+      let allResults = [];
+      let nextUrl = `${API_URL}${endpoint}`;
+
+      while (nextUrl) {
+        const response = await fetch(nextUrl, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Accept-Charset': 'utf-8',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        allResults = allResults.concat(data.results);
+        nextUrl = data.next;
+      }
+
+      return allResults;
+    } catch (error) {
+      console.error(`Error fetching ${endpoint}:`, error);
+      return [];
+    }
+  };
+
   useEffect(() => {
     console.log('API_URL:', API_URL);
-    // Fetch news data from local API proxy
-    fetch(`${API_URL}/events/news/`)
-      .then((response) => response.json())
-      .then((data) => setNewsData(data.results))
-      .catch((error) => console.error("Error fetching news:", error));
 
-    // Fetch announcements data from local API proxy
-    fetch(`${API_URL}/events/announcements/`)
-      .then((response) => response.json())
-      .then((data) => setAnnouncementsData(data.results))
-      .catch((error) => console.error("Error fetching announcements:", error));
+    const fetchData = async () => {
+      const news = await fetchAllResults('/events/news/');
+      setNewsData(news);
 
-    // Fetch contests data from local API proxy
-    fetch(`${API_URL}/events/competitions/`)
-      .then((response) => response.json())
-      .then((data) => setContestsData(data.results))
-      .catch((error) => console.error("Error fetching contests:", error));
+      const announcements = await fetchAllResults('/events/announcements/');
+      setAnnouncementsData(announcements);
+
+      const contests = await fetchAllResults('/events/competitions/');
+      setContestsData(contests);
+    };
+
+    fetchData();
   }, []);
 
   const handleTabChange = (tab) => {
