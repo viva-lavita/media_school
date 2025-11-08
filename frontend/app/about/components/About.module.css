@@ -29,7 +29,7 @@
 .textContent {
  display: flex;
  flex-direction: column;
- width: calc(100% - 447px - 30px);
+ width: 100%;
  gap: 24px;
  justify-content: stretch;
 }
@@ -127,7 +127,7 @@
  }
  .textContent {
   gap: 24px;
-  width: calc(100% - 462px - 20px);
+  width: 100%;
  }
  .subtitleAbout {
   font-size: 22px;

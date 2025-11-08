@@ -9,8 +9,14 @@ export default function DescriptionSection({ title, description }) {
     <strong>{title}</strong>
    </p>
    <div className={montserrat.className}>
-    <p>{description.paragraph1}</p>
-    <p>{description.paragraph2}</p>
+    {typeof description === 'object' && description.paragraph1 ? (
+     <>
+      <p>{description.paragraph1}</p>
+      <p>{description.paragraph2}</p>
+     </>
+    ) : (
+     <p>{description}</p>
+    )}
    </div>
   </div>
  );
