@@ -3,7 +3,6 @@ import { comfortaa } from '@/lib/fonts';
 import styles from './layoutCatalog.module.css';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import DescriptionSection from '../about/components/DescriptionSection';
 import TeachersList from '../about/components/TeachersList';
 import handleFetch from '../utils/fetchErrorHandle';
 import DocumentsSection from './components/DocumentsSection';
@@ -11,6 +10,7 @@ import SectionListCard from './components/ListCard';
 import { PopUpCatalogProvider } from './PopUpCatalog';
 import PopUpCatalog from './PopUpCatalog';
 import CategoryDropdown from './components/CategoryDropdown';
+import DescriptionSectionCatalog from './components/DescriptionSectionCatalog';
 
 export default function LayoutPage() {
  const titleExpertList = 'Наставники';
@@ -30,7 +30,6 @@ export default function LayoutPage() {
     if (data.results && data.results.length > 0) {
      setActiveCategory(data.results[0]);
     }
-
     const categoryParam = searchParams.get('category');
     if (categoryParam) {
       const reverseMap = {
@@ -53,7 +52,6 @@ export default function LayoutPage() {
    })
    .catch(console.error);
  }, [searchParams.toString()]);
-console.log(categories);
 useEffect(() => {
   if (activeCategory.id) {
     handleFetch(`${API_URL}/content/experts/${activeCategory.id}`)
@@ -139,7 +137,7 @@ useEffect(() => {
 
        <section className={styles.description}>
         <div className={styles.descriptionText}>
-         <DescriptionSection
+         <DescriptionSectionCatalog
           title={activeCategory.title}
           description={activeCategory.description}
          />
