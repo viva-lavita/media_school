@@ -62,6 +62,8 @@ class DocumentContentSerializer(serializers.ModelSerializer):
             "id",
             "catalog_id",
             "file",
+            "description",
+            "created_at",
         )
 
 
