@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from "../../Onenews.module.css";
 
 export default function CommentForm({ itemId, itemType }) {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const [charCount, setCharCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [text, setText] = useState('');
@@ -55,8 +56,8 @@ export default function CommentForm({ itemId, itemType }) {
       } else if (itemType === 'catalog') {
         requestBody.catalog = itemId;
       }
-
-      const response = await fetch('/api/comments', {
+   
+      const response = await fetch(`${API_URL}/events/comments/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
