@@ -42,19 +42,32 @@ export default function AskQuestion() {
   setIsSubmitting(true);
   setSubmitError('');
 
-  const categoryMap = {
-   'Вопрос к эксперту/преподавателю': 'expert',
-   'Технический вопрос': 'technical',
-   'Другое': 'other'
-  };
-
-  const questionCategory = categoryMap[selectedCategory] || 'other';
-
   try {
+   // Get access token from local API
+   const tokenResponse = await fetch('/local_api/auth/token');
+   if (!tokenResponse.ok) {
+    throw new Error('Необходимо войти в систему для отправки вопросов');
+   }
+   const tokenData = await tokenResponse.json();
+   const accessToken = tokenData.accessToken;
+
+   if (!accessToken) {
+    throw new Error('Необходимо войти в систему для отправки вопросов');
+   }
+
+   const categoryMap = {
+    'Вопрос к эксперту/преподавателю': 'expert',
+    'Технический вопрос': 'technical',
+    'Другое': 'other'
+   };
+
+   const questionCategory = categoryMap[selectedCategory] || 'other';
+
    const response = await fetch(`${API_URL}/events/comments/`, {
     method: 'POST',
     headers: {
      'Content-Type': 'application/json',
+     'Authorization': `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
      text: questionText,

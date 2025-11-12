@@ -33,6 +33,18 @@ export default function CommentForm({ itemId, itemType }) {
     setSubmitError('');
 
     try {
+      // Get access token from local API
+      const tokenResponse = await fetch('/local_api/auth/token');
+      if (!tokenResponse.ok) {
+        throw new Error('Необходимо войти в систему для отправки комментариев');
+      }
+      const tokenData = await tokenResponse.json();
+      const accessToken = tokenData.accessToken;
+
+      if (!accessToken) {
+        throw new Error('Необходимо войти в систему для отправки комментариев');
+      }
+
       // Map radio button values to API question_category
       const categoryMapping = {
         'category1': 'expert',
@@ -56,11 +68,12 @@ export default function CommentForm({ itemId, itemType }) {
       } else if (itemType === 'catalog') {
         requestBody.catalog = itemId;
       }
-   
+
       const response = await fetch(`${API_URL}/events/comments/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
         },
         body: JSON.stringify(requestBody),
       });
