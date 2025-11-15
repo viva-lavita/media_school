@@ -53,9 +53,9 @@
     }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 600px) {
     .newsContainer {
-        max-width: 320px;
+        max-width: 560px;
         width: calc(100vw - 40px);
         gap: 40px;
         margin: 0 auto 60px;
