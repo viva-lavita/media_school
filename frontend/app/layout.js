@@ -7,7 +7,9 @@ import { PageWidthProvider } from './context/PageWidthProvider';
 import { PageTitleProvider } from './context/PageTitleContext';
 import { montserrat, comfortaa, inter } from '@/lib/fonts';
 import {PopUpProvider} from "@/app/context/PopUpContext";
+import {PopUpAuthProvider} from "@/app/context/PopUpContextAuth";
 import PopUpAttribution from "@/app/components/PopUpAttribution/PopUpAttribution";
+import PopUpAuth from "@/app/components/PopUpAuth/PopUpAuth";
 import {AuthProvider} from "@/app/context/AuthContext";
 
 export const metadata = {
@@ -25,20 +27,23 @@ export default function RootLayout({ children }) {
    <AuthProvider>
     <PopUpProvider>
      <PopUpAttribution />
-     <PageTitleProvider>
-      <PageWidthProvider>
-       <Suspense fallback={<div>Loading...</div>}>
-        <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
-         <Header />
-         <Navigation />
-         <main style={{flex: 1}}>
-          {children}
-         </main>
-         <Footer />
-        </div>
-       </Suspense>
-      </PageWidthProvider>
-     </PageTitleProvider>
+     <PopUpAuthProvider>
+      <PopUpAuth />
+      <PageTitleProvider>
+       <PageWidthProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+         <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
+          <Header />
+          <Navigation />
+          <main style={{flex: 1}}>
+           {children}
+          </main>
+          <Footer />
+         </div>
+        </Suspense>
+       </PageWidthProvider>
+      </PageTitleProvider>
+     </PopUpAuthProvider>
     </PopUpProvider>
    </AuthProvider>
    </body>
