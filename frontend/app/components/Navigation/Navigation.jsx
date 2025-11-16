@@ -12,7 +12,8 @@ const path = {
  '/catalog': ' / Каталог материалов',
  '/qa': ' / Вопрос-ответ',
  '/contacts': ' / Контакты',
-  '/account' : ' / Личный кабинет'
+ '/login': ' / Личный кабинет',
+ '/account': ' / Личный кабинет'
 };
 
 const montserrat = Montserrat({
@@ -53,10 +54,12 @@ export default function Navigation() {
      );
     })}
    </ol>
-   <button className={styles.logoutButton}>
-    <img src="/images/log-out-outlined.svg" alt="Выход" className={styles.logoutIcon} />
-    Выход из профиля
-   </button>
+   {(pathname === '/login' || pathname === '/account') && (
+    <button className={styles.logoutButton}>
+     <img src="/images/out.svg" alt="Выход" className={styles.logoutIcon} />
+     Выход из профиля
+    </button>
+   )}
   </nav>
  );
 }
