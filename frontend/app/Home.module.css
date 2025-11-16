@@ -239,6 +239,16 @@
   }
 }
 
+@media screen and (max-width: 360px) {
+  .mediaSchoolSpecialContent {
+    align-items: center;
+  }
+  .mediaSchoolSpecial {
+    align-items: center;
+    margin: 0 auto;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .topicsStudyText {
     font-size: 22px;
@@ -412,6 +422,7 @@
   .aboutLearningContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
   }
   .mainImageContent {
@@ -451,6 +462,7 @@
   .mediaSchoolSpecialTitle,
   .mediaSchoolExperienceTeacher {
     font-size: 18px;
+    margin: 0 auto;
   }
   .skillsTrainingProspects,
   .mediaSchoolSpecial {
