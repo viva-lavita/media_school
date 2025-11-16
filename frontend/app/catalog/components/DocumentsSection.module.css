@@ -1,4 +1,3 @@
-
 .sectionDocuments {
  display: flex;
  flex-direction: column;
@@ -188,18 +187,33 @@
  background-color: #eee;
 }
 .mediaBox {
- display: flex;
+ /*display: flex;
  flex-wrap: wrap;
  gap: 30px;
  justify-content: flex-start;
  max-width: 100%;
  margin: auto;
- overflow-x: hidden;
+ overflow-x: hidden;*/
+ grid-template-columns: repeat(3, 1fr);
+ gap: 30px;
+ display: grid;
 }
 .nameContainer {
- flex-basis: 50%
+ flex-basis: 50%;
 }
 
 .propertyContainer {
- flex-basis: 50%
+ flex-basis: 50%;
+}
+@media screen and (max-width: 768px){
+.mediaBox {
+ grid-template-columns: repeat(2, 1fr);
+ gap: 20px;
+}
+}
+
+@media screen and (max-width: 360px){
+.mediaBox {
+ grid-template-columns: repeat(1, 1fr);
+}
 }

@@ -107,9 +107,16 @@
  font-weight: 400;
  color: #040404;
 }
-
+.textContentCatalog{
+  width: calc(100vw - 55px); 
+  display: flex;
+ flex-direction: column;
+ gap: 24px;
+ justify-content: stretch;
+}
 @media screen and (max-width: 1024px) {
- .textContent {
+ .textContent,
+ .textContentCatalog {
   gap: 24px;
  }
  .wrap {
@@ -129,7 +136,8 @@
  .textBlock {
   gap: 20px;
  }
- .textContent {
+ .textContent,
+ .textContentCatalog {
   gap: 24px;
   width: calc(50vw - 55px);
  }
@@ -165,7 +173,8 @@
   align-items: center;
   gap: 40px;
  }
- .textContent {
+ .textContent,
+ .textContentCatalog {
   width: calc(100vw - 55px);
  }
  .founders {
@@ -195,13 +204,15 @@
   align-items: center;
   gap: 0px;
  }
- .textContent {
+ .textContent,
+ .textContentCatalog {
   width: calc(100vw - 55px);
  }
  .subtitleAbout {
   font-size: 18px;
  }
- .textContent p:not(:first-child) {
+ .textContent p:not(:first-child), 
+ .textContentCatalog p:not(:first-child){
   font-size: 16px;
  }
 }

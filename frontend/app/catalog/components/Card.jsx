@@ -39,34 +39,37 @@ export default function Card({
 
  return (
   <>
-   <div
-    className={styles.card}
+   <div class="flex flex-col gap-2 relative"
     onClick={handleCardClick}
     style={{ cursor: photoCount !== undefined ? 'pointer' : 'default' }}
    >
-    <div className={styles.mediaContainer}>
-     {isVideo ? (
-      <iframe
-       className={styles.media}
-       src={videoUrl}
-       allowFullScreen
-       title={title}
-      />
-     ) : (
-      <img
-       className={styles.media}
-       src={images && images.length > 0 ? images[0].image : imgSrc}
-       alt={title}
-       onError={handleImgError}
-      />
-     )}
+    <figure class="flex flex-col gap-3">
+     <div class="w-full h-[300px] overflow-hidden">
+      {isVideo ? (
+       <iframe
+        class="w-full h-full object-cover object-center"
+        src={videoUrl}
+        allowFullScreen
+        title={title}
+       />
+      ) : (
+       <img
+        class="w-full h-full object-cover object-center"
+        src={images && images.length > 0 ? images[0].image : imgSrc}
+        alt={title}
+        onError={handleImgError}
+       />
+      )}
+     </div>
+     <figcaption className={`${montserrat.className} ${styles.category}`}>
+      {categoryName.toUpperCase()}
+     </figcaption>
+    </figure>
+    <div class="flex flex-col gap-2">
+     <p className={`${montserrat.className} ${styles.title}`}>{title}</p>
     </div>
-    <h2 className={`${montserrat.className} ${styles.masterClass}`}>
-     {categoryName.toUpperCase()}
-    </h2>
-    <h3 className={`${montserrat.className} ${styles.titleCard}`}>{title}</h3>
     <p
-     className={`${montserrat.className} ${styles.dateCard}`}
+     className={`${montserrat.className} ${styles.date}`}
      style={{ display: 'flex', justifyContent: 'space-between' }}
     >
      <span>{date}</span>
