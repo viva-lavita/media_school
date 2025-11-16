@@ -1,22 +1,23 @@
-"use client"
+'use client';
 
 import { useState } from 'react';
 import { montserrat } from '@/lib/fonts';
 import styles from './Card.module.css';
-import { usePopUpCatalog } from "../PopUpCatalog";
+import { usePopUpCatalog } from '../PopUpCatalog';
 
-export default function Card({imageUrl,
+export default function Card({
+ imageUrl,
  videoUrl,
  title,
  date,
  categoryName,
  photoCount,
  images,
- isVideo = true,}) {
-  const { setIsPopUpOpen, setCardData } = usePopUpCatalog();
+ isVideo = true,
+}) {
+ const { setIsPopUpOpen, setCardData } = usePopUpCatalog();
 
  const [imgSrc, setImgSrc] = useState(imageUrl);
-
 
  const handleCardClick = () => {
   setCardData({
@@ -33,7 +34,7 @@ export default function Card({imageUrl,
  };
 
  const handleImgError = () => {
-  setImgSrc('/images/avatar.png'); 
+  setImgSrc('/images/avatar.png');
  };
 
  return (
@@ -54,14 +55,14 @@ export default function Card({imageUrl,
      ) : (
       <img
        className={styles.media}
-       src={imgSrc}
+       src={images && images.length > 0 ? images[0].image : imgSrc}
        alt={title}
        onError={handleImgError}
       />
      )}
     </div>
     <h2 className={`${montserrat.className} ${styles.masterClass}`}>
-     {categoryName}
+     {categoryName.toUpperCase()}
     </h2>
     <h3 className={`${montserrat.className} ${styles.titleCard}`}>{title}</h3>
     <p
@@ -74,7 +75,6 @@ export default function Card({imageUrl,
      )}
     </p>
    </div>
-
   </>
  );
 }

@@ -73,7 +73,19 @@
  grid-template-columns: repeat(5, 1fr);
  gap: 2px;
 }
-
+.masterClass {
+ color: #3c4226;
+ font-size: 14px;
+ font-weight: 400;
+ margin-bottom: 8px;
+}
+.titleCard {
+ font-size: 18px;
+ font-weight: 400;
+ line-height: 140%;
+ color: #040404;
+ margin-bottom: 24px;
+}
 @media (min-width: 1920px) {
  .media {
   width: 447px;

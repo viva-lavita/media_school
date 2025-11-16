@@ -35,12 +35,14 @@ export default function FileItem({ file }) {
      style={{ color: iconData.color }}
     />
     <span className={`${montserrat.className} ${styles.fileName}`}>
-     {file.name}
+     {file.description}
     </span>
    </div>
    <div className={styles.propertyContainer}>
     <span className={`${montserrat.className} ${styles.fileDate}`}>
-     {new Intl.DateTimeFormat('ru-RU').format(new Date(file.createdAt))}
+     {file.created_at
+      ? new Intl.DateTimeFormat('ru-RU').format(new Date(file.created_at))
+      : ''}
     </span>
     <span className={`${montserrat.className} ${styles.fileFormat}`}>
      Формат {iconData.label}
