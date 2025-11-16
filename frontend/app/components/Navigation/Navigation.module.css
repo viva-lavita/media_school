@@ -1,15 +1,21 @@
+.nav {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin: 40px 0;
+}
+
 .breadcrumb {
  display: flex;
  align-items: center;
- margin: 40px auto;
- max-width: 1400px;
  flex-wrap: wrap;
+ flex: 1;
 }
 
 .breadcrumbItem {
  color: #535353;
  text-decoration: none;
- font-size: 14px;
+ font-size: 16px;
  min-width: 0;
  overflow-wrap: break-word;
 }
@@ -18,14 +24,31 @@
  color: #040404 !important;
 }
 
+.logoutButton {
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ background: none;
+ border: none;
+ color: #040404;
+ font-size: 16px;
+ cursor: pointer;
+ font-family: inherit;
+}
+
+.logoutIcon {
+ width: 16px;
+ height: 16px;
+}
+
 @media screen and (max-width: 1400px) {
- .breadcrumb {
+ .nav {
   max-width: calc(100vw - 80px);
   }
 }
 
 @media screen and (max-width: 768px) {
- .breadcrumb {
+ .nav {
    max-width: calc(100vw - 40px);
  }
 }

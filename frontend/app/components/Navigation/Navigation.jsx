@@ -26,7 +26,7 @@ export default function Navigation() {
   if (pathname === "/") return null;
  let crumbs = pathname.split('/').filter(Boolean);
  return (
-  <nav className={`${montserrat.className}`}>
+  <nav className={`${montserrat.className} ${styles.nav}`}>
    <ol className={styles.breadcrumb}>
     <li className={styles.breadcrumbItem}>
      <Link href="/">Главная</Link>
@@ -53,6 +53,10 @@ export default function Navigation() {
      );
     })}
    </ol>
+   <button className={styles.logoutButton}>
+    <img src="/images/log-out-outlined.svg" alt="Выход" className={styles.logoutIcon} />
+    Выход из профиля
+   </button>
   </nav>
  );
 }
