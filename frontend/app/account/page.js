@@ -23,7 +23,20 @@ export default function AccountPage() {
       try {
         const res = await fetch(`/api1/users/me`);
         const data = await res.json();
-        console.log(data);
+        setUserField({
+          'Email': data.email,
+          'Имя': data.first_name,
+          'Фамилия': data.last_name,
+          'Отчество': data.patronymic_name,
+          'Дата рождения': normalizeDate(data.date_of_birth),
+          'Ребёнок_Имя': data.child.first_name,
+          'Ребёнок_Фамилия': data.child.last_name,
+          'Ребёнок_Отчество': data.child.patronymic_name,
+          'Ребёнок_Дата рождения': normalizeDate(data.child.date_of_birth),
+          'Школа': data.child.school,
+          'Класс': data.child.classroom,
+        });
+        setDeleteId(data.pk);
       } catch (err) {
         console.error('Ошибка:', err);
       }
@@ -44,10 +57,10 @@ export default function AccountPage() {
           <ParentData
             direction="column"
             imgUrl="/images/pencil.svg"
-            userField={{}}
+            userField={userField}
             userReqStarByDate={{}}
             handleFocus={() => {}}
-            handleChange={() => {}}
+            handleChange={handleChange}
             handleBlur={() => {}}
             clearField={() => {}}
             setIsFormValid={() => {}}
@@ -61,10 +74,10 @@ export default function AccountPage() {
           <ChildData
             direction="column"
             imgUrl="/images/pencil.svg"
-            userField={{}}
+            userField={userField}
             userReqStarByDate={{}}
             handleFocus={() => {}}
-            handleChange={() => {}}
+            handleChange={handleChange}
             handleBlur={() => {}}
             clearField={() => {}}
             setIsFormValid={() => {}}

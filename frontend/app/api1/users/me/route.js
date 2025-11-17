@@ -1,8 +1,10 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export async function GET(req) {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+export async function GET() {
+
   try {
     const cookieStore = cookies();
     const accessToken = cookieStore.get('access')?.value;
@@ -38,5 +40,41 @@ export async function GET(req) {
       { error: "Ошибка сервера при проверке авторизации" },
       { status: 500 }
     );
+  }
+}
+
+export async function PATCH(req) {
+  try {
+    const body = await req.json();
+    const token = cookies().get("access")?.value;
+
+    const res = await fetch(`${API_URL}/users/me/`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "include",
+      body: JSON.stringify(body),
+    })
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      return new Response(JSON.stringify({ success: false, detail: data.detail || "Ошибка обновления" }), {
+        status: res.status,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+
+    return new Response(JSON.stringify({success: true, data}), {
+      status: 200,
+      headers: { "Content-Type": "application/json" }
+    })
+  } catch (err) {
+    return new Response(JSON.stringify({ success: false, message: "Ошибка сервера" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
   }
 }
