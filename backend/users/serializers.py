@@ -95,6 +95,7 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
             "date_of_birth",
             "child",
         )
+        extra_kwargs = {"patronymic_name": {"required": False}}
 
     def validate_first_name(self, value):
         if not is_russian(value):

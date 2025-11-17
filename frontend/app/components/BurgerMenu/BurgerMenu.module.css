@@ -1,9 +1,16 @@
 .burgerMenu {
     width: 550px;
     height: 332px;
-    top: 45px;
-    right: 40px;
+    top: -40px;
+    right:  -0px;
     padding: 40px 20px;
+    @media (max-width: 1024px) {
+       right:  -40px;
+    }
+    @media (max-width: 767px) {
+       height: 392px;
+       right:  -15px;
+    }
 }
 
 .burgerLinksMedia {
@@ -17,15 +24,16 @@
 @media screen and (max-width: 768px) {
     .burgerMenu {
         width: 450px;
-        top: 40px;
+        top: -30px;
+        right:  -30px;
     }
 }
 
 @media screen and (max-width: 700px) {
     .burgerMenu {
         width: 320px;
-        top: 35px;
-        right: 28px;
+        top: -30px;
+        right: -24px;
         padding: 28px 20px;
     }
     .burgerLinksMedia {

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from "../../Onenews.module.css";
 
 export default function CommentForm({ itemId, itemType }) {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const [charCount, setCharCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [text, setText] = useState('');
@@ -32,6 +33,18 @@ export default function CommentForm({ itemId, itemType }) {
     setSubmitError('');
 
     try {
+      // Get access token from local API
+      const tokenResponse = await fetch('/local_api/auth/token');
+      if (!tokenResponse.ok) {
+        throw new Error('Необходимо войти в систему для отправки комментариев');
+      }
+      const tokenData = await tokenResponse.json();
+      const accessToken = tokenData.accessToken;
+
+      if (!accessToken) {
+        throw new Error('Необходимо войти в систему для отправки комментариев');
+      }
+
       // Map radio button values to API question_category
       const categoryMapping = {
         'category1': 'expert',
@@ -56,10 +69,11 @@ export default function CommentForm({ itemId, itemType }) {
         requestBody.catalog = itemId;
       }
 
-      const response = await fetch('/api/comments', {
+      const response = await fetch(`${API_URL}/events/comments/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
         },
         body: JSON.stringify(requestBody),
       });

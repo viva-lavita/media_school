@@ -18,7 +18,7 @@ export default function BurgerMenu({ isOpen, setIsOpen}) {
           <nav
             onClick={()=>setIsOpen(false)}
             className={`${montserrat.className} font-medium text-base leading-[100%] flex items-center`}>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-4">
               <li><Link href="/about">О проекте</Link></li>
               <li><Link href="/news">Новости</Link></li>
               <li><Link href="/catalog">Каталог материалов</Link></li>
@@ -55,7 +55,7 @@ export default function BurgerMenu({ isOpen, setIsOpen}) {
             </a>
           </div>
         </div>
-        <button onClick={()=>setIsOpen(false)} className={`absolute top-1 right-1 cursor-pointer`} aria-label='закрыть'>
+        <button onClick={()=>setIsOpen(false)} className={`absolute top-3 right-3 cursor-pointer`} aria-label='закрыть'>
           <img src="/header-images/burger-close.svg" alt=""/>
         </button>
         <button aria-label={'Поиск'}>
