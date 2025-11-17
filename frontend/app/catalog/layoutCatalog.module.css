@@ -1,18 +1,19 @@
 .wrap {
+ width: calc(100vw - 80px);
  max-width: 1400px;
- width: 100%;
  margin: 0 auto 40px;
- overflow-x: hidden;
 }
 
 @media screen and (max-width: 1024px) {
  .wrap {
+  width: calc(100vw - 80px);
   max-width: 944px;
  }
 }
 
 @media screen and (max-width: 768px) {
  .wrap {
+  width: calc(100vw - 40px);
   max-width: 728px;
  }
 }
@@ -33,7 +34,6 @@
  display: flex;
  justify-content: flex-start;
  gap: 18px;
- overflow-x: hidden;
  margin-bottom: 40px;
  flex-wrap: wrap;
 }
@@ -130,12 +130,11 @@
  }
 }
 
-.mediaSection{
-display: flex;
-flex-direction: column;
-gap: 28px;
+.mediaSection {
+ display: flex;
+ flex-direction: column;
+ gap: 28px;
 }
-
 
 @media screen and (max-width: 768px) {
  .title {
@@ -145,7 +144,8 @@ gap: 28px;
 
 @media screen and (max-width: 360px) {
  .wrap {
-  width: 320px;
+  width: calc(100vw - 40px);
+  max-width: 320px;
   gap: 60px;
  }
  .title {

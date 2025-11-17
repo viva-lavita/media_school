@@ -18,9 +18,7 @@ export default function SectionListCard({ title, documents }) {
   windowWidth <= 360
    ? 1
    : windowWidth <= 768
-   ? windowWidth > 600
-     ? 2
-     : 1
+   ? 2
    : Math.min(documents.length, 3);
  const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -54,7 +52,7 @@ export default function SectionListCard({ title, documents }) {
       date={
        file.created_at
         ? new Intl.DateTimeFormat('ru-RU').format(new Date(file.created_at))
-        : 'Дата неизвестна'
+        : ''
       }
       categoryName={file.category?.name || ''}
       photoCount={file.photoCount}

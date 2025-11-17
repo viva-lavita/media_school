@@ -12,7 +12,8 @@ const path = {
  '/catalog': ' / Каталог материалов',
  '/qa': ' / Вопрос-ответ',
  '/contacts': ' / Контакты',
-  '/account' : ' / Личный кабинет'
+ '/login': ' / Личный кабинет',
+ '/account': ' / Личный кабинет'
 };
 
 const montserrat = Montserrat({
@@ -26,7 +27,7 @@ export default function Navigation() {
   if (pathname === "/") return null;
  let crumbs = pathname.split('/').filter(Boolean);
  return (
-  <nav className={`${montserrat.className}`}>
+  <nav className={`${montserrat.className} ${styles.nav}`}>
    <ol className={styles.breadcrumb}>
     <li className={styles.breadcrumbItem}>
      <Link href="/">Главная</Link>
@@ -53,6 +54,12 @@ export default function Navigation() {
      );
     })}
    </ol>
+   {(pathname === '/login' || pathname === '/account') && (
+    <button className={styles.logoutButton}>
+     <img src="/images/out.svg" alt="Выход" className={styles.logoutIcon} />
+     Выход из профиля
+    </button>
+   )}
   </nav>
  );
 }

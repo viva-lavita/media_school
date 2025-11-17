@@ -4,7 +4,7 @@ import { formatText } from '@/app/utils/formatText';
 
 export default function DescriptionSectionCatalog({ title, description }) {
  return (
-  <div className={styles.textContent}>
+  <div className={styles.textContentCatalog}>
    <p className={`${comfortaa.className} ${styles.subtitleAbout}`}>
     <strong>{title}</strong>
    </p>
