@@ -8,8 +8,10 @@ import {montserrat} from "@/lib/fonts";
 import ParentData from "@/app/components/Parent-data/Parent-data";
 import ChildData from "@/app/components/Child-data/Child-data";
 import CreatePassword from "@/app/components/CreatePassword/CreatePassword";
+import { usePopUpAuth } from "@/app/context/PopUpContextAuth";
 
 export default function RegistrationPage() {
+  const { openPopUp } = usePopUpAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
@@ -46,6 +48,7 @@ export default function RegistrationPage() {
 
       if (!res.ok) throw new Error(result.detail || "Ошибка регистрации");
 
+      openPopUp("Регистрация прошла успешно");
       setSuccess(true);
     } catch (err) {
       setError(err.message);
