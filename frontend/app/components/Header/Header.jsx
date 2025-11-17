@@ -9,6 +9,7 @@ import {useState} from "react";
 export default function Header() {
   const { user, loading } = useAuth();
   const [burgerIsOpen, setBurgerIsOpen] = useState(false);
+  const [searchComponentIsOpen, setSearchComponentIsOpen] = useState(false);
 
   return (
     <header
@@ -33,7 +34,7 @@ export default function Header() {
 
       <div className={`${styles.headerActions} flex items-center`}>
         <div className={`${styles.headerSocialMedia} flex items-center gap-10`}>
-          <button aria-label={'Поиск'}>
+          <button onClick={()=> setSearchComponentIsOpen(true)} className={`cursor-pointer`} aria-label={'Поиск'}>
             <img src="/header-images/search.svg" alt="" className="size-9" />
           </button>
           <div className="flex gap-5">

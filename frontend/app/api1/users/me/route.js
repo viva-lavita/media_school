@@ -12,7 +12,7 @@ export async function GET(req) {
     }
 
     // Verify the token
-    const verifyRes = await fetch(`${API_URL}/api/jwt/verify/`, {
+    const verifyRes = await fetch(`${API_URL}/jwt/verify/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: accessToken }),
@@ -23,7 +23,7 @@ export async function GET(req) {
     }
 
     // If valid, fetch user data
-    const res = await fetch(`${API_URL}/api/users/me/`, {
+    const res = await fetch(`${API_URL}/users/me/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

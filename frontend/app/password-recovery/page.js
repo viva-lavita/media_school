@@ -13,8 +13,8 @@ export default function PasswordRecoveryPage() {
             Восстановление пароля
           </h1>
           <p className={`${montserrat.className} ${styles.passwordRecoveryAbout} text-center font-normal`}>
-            На&nbsp;вашу электронную почту будет отправлено письмо с&nbsp;временным паролем. Используйте его,
-            чтобы&nbsp;войти в&nbsp;свой аккаунт.
+            На&nbsp;вашу электронную почту будет отправлена ссылка для&nbsp;восстановления пароля. Используйте её,
+            чтобы&nbsp;изменить&nbsp;пароль.
           </p>
         </div>
         <form className={`${styles.passwordRecoveryForm} flex flex-col w-full`}>

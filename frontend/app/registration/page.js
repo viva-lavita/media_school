@@ -24,12 +24,12 @@ export default function RegistrationPage() {
       first_name: userField['Имя'],
       last_name: userField['Фамилия'],
       patronymic_name: userField['Отчество'],
-      date_of_birth: userField['Дата рождения'],
+      date_of_birth: normalizeDate(userField['Дата рождения']),
       child: {
         first_name: userField['Ребёнок_Имя'],
         last_name: userField['Ребёнок_Фамилия'],
         patronymic_name: userField['Ребёнок_Отчество'],
-        date_of_birth: userField['Ребёнок_Дата рождения'],
+        date_of_birth: normalizeDate(userField['Ребёнок_Дата рождения']),
         school: userField['Школа'],
         classroom: userField['Класс'],
       },
@@ -51,6 +51,12 @@ export default function RegistrationPage() {
       setError(err.message);
     }
   };
+
+  function normalizeDate(str) {
+    if (!str) return null;
+    const [day, month, year] = str.split('.');
+    return `${year}-${month}-${day}`;
+  }
 
   const [userReqStarByDate, setUserReqStarByDate] = useState({
     'Фамилия': false,

@@ -37,3 +37,9 @@
         right: 50px;
     }
 }
+
+@media screen and (max-width: 410px) {
+    .burgerMenu {
+        width: 280px;
+    }
+}

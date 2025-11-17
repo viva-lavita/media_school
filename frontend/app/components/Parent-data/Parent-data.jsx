@@ -41,6 +41,8 @@ export default function ParentData({
     );
   })();
 
+  const [isFocused, setIsFocused] = useState(false);
+
   useEffect(() => {
     if (typeof setIsFormValid === 'function') {
       setIsFormValid(prev => ({
@@ -124,7 +126,13 @@ export default function ParentData({
             id="parent_middlename"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             onChange={(e) => handleChange('Отчество', e)}
-            value={safeUserField["Отчество"]}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            value={
+              isFocused
+                ? safeUserField["Отчество"]
+                : safeUserField["Отчество"] || "-"
+            }
           />
           <ButtonImage onClick={() => clearField('Отчество')} imgUrl={imgUrl}/>
         </div>
