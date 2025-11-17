@@ -36,7 +36,7 @@ export default function LoginPage() {
       if (!res.ok) {
         setError(data.error || 'Ошибка входа');
       } else {
-        router.push('/');
+        router.replace('/');
         window.location.reload();
       }
     } catch (err) {
