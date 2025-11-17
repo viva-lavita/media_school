@@ -8,11 +8,12 @@ import {montserrat} from "@/lib/fonts";
 import ParentData from "@/app/components/Parent-data/Parent-data";
 import ChildData from "@/app/components/Child-data/Child-data";
 import CreatePassword from "@/app/components/CreatePassword/CreatePassword";
+import {useRouter} from "next/navigation";
 
 export default function RegistrationPage() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -45,8 +46,8 @@ export default function RegistrationPage() {
       const result = await res.json();
 
       if (!res.ok) throw new Error(result.detail || "Ошибка регистрации");
-
-      setSuccess(true);
+      alert("Аккаунт зарегестрирован");
+      router.replace('/login');
     } catch (err) {
       setError(err.message);
     }
