@@ -8,9 +8,11 @@ import {montserrat} from "@/lib/fonts";
 import ParentData from "@/app/components/Parent-data/Parent-data";
 import ChildData from "@/app/components/Child-data/Child-data";
 import CreatePassword from "@/app/components/CreatePassword/CreatePassword";
+import { usePopUpAuth } from "@/app/context/PopUpContextAuth";
 import {useRouter} from "next/navigation";
 
 export default function RegistrationPage() {
+  const { openPopUp } = usePopUpAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const router = useRouter();
@@ -47,6 +49,7 @@ export default function RegistrationPage() {
 
       if (!res.ok) throw new Error(result.detail || "Ошибка регистрации");
       alert("Аккаунт зарегестрирован");
+      openPopUp("Регистрация прошла успешно");
       router.replace('/login');
     } catch (err) {
       setError(err.message);

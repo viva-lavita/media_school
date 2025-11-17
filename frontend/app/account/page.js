@@ -1,13 +1,23 @@
 'use client'
+import { useState } from "react";
 import ChildData from "@/app/components/Child-data/Child-data";
 import ParentData from "@/app/components/Parent-data/Parent-data";
 import {montserrat} from "@/lib/fonts";
 import styles from './account.module.css'
-import {useEffect, useState} from "react";
+import { usePopUpAuth } from "@/app/context/PopUpContextAuth";
+import {useEffect} from "react";
 import PasswordChange from "@/app/components/PasswordChange/PasswordChange";
 
 export default function AccountPage() {
-  const [deleteId, setDeleteId] = useState(null);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const { openPopUp } = usePopUpAuth();
+
+  const handleSave = () => {
+    // Simulate saving data
+    openPopUp("Данные сохранены");
+  };
+
+
   useEffect(() => {
     async function getUsersMe() {
       try {
@@ -35,62 +45,10 @@ export default function AccountPage() {
     void getUsersMe();
   }, []);
 
-  const [userField, setUserField] = useState({
-    'Фамилия': '',
-    'Ребёнок_Фамилия': '',
-    'Имя': '',
-    'Ребёнок_Имя': '',
-    'Отчество': '',
-    'Ребёнок_Отчество': '',
-    'Дата рождения': '',
-    'Ребёнок_Дата рождения': '',
-    'Email': '',
-    'Школа': '',
-    'Класс': '',
-  });
 
-  function handleChange(field, e) {
-    const value = e.target.value;
-    setUserField(prev => ({ ...prev, [field]: value }));
-  }
-
-  function normalizeDate(str) {
-    if (!str) return null;
-    const [year, month, day] = str.split('-');
-    return `${day}.${month}.${year}`;
-  }
-
-  function handleSave() {
-    const patchData = preparePatchData(userField);
-    fetch(`/api1/users/me`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(patchData),
-    }).then(res => res.json())
-      .then(data => console.log('Success:', data))
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }
-  function preparePatchData (fields) {
-    return {
-      first_name: fields['Имя'],
-      last_name: fields['Фамилия'],
-      patronymic_name: fields['Отчество'],
-      date_of_birth: fields['Дата рождения']?.split('.').reverse().join('-'),
-      child: {
-        first_name: fields['Ребёнок_Имя'],
-        last_name: fields['Ребёнок_Фамилия'],
-        patronymic_name: fields['Ребёнок_Отчество'],
-        date_of_birth: fields['Ребёнок_Дата рождения']?.split('.').reverse().join('-'),
-        school: fields['Школа'],
-        classroom: fields['Класс'],
-      }
-    }
-  }
   return  (
     <div className={`${styles.accountPage} flex`}>
-      <form action="/account" method="post" className={`${styles.accountPageData} flex box-border flex-col 
+      <form action="/account" method="post" className={`${styles.accountPageData} flex box-border flex-col
       shrink basis-0 grow-1 bg-light-green border border-green`}>
         <fieldset>
           <legend className={`${montserrat.className} font-normal text-base leading-[130%] mb-4`}>
@@ -125,16 +83,33 @@ export default function AccountPage() {
             setIsFormValid={() => {}}
             dataRequired={false}/>
         </fieldset>
-        <button
-          type="button"
-          className={`${montserrat.className} font-medium text-base leading-[100%] py-3.5 px-6 bg-green w-[197px] 
-        self-center`}
-          onClick={handleSave}
-        >
+        <button type="button" onClick={handleSave} className={`${montserrat.className} font-medium text-base leading-[100%] py-3.5 px-6 bg-green w-[197px]
+        self-center`}>
           Сохранить
         </button>
       </form>
-      <PasswordChange delete_id={deleteId} delete_profile={true}/>
+
+      <PasswordChange delete_profile={true}/>
+
+      {/* <div className={`${styles.accountPageData} ${styles.accountPagePasswordChange} flex flex-col basis-0 grow-1 bg-light-green border border-green`}>
+        <div className={`flex flex-col gap-4`}>
+          <h1 className={`${comfortaa.className} font-bold text-lg leading-[100%]`}>Смена пароля</h1>
+          <CreatePassword
+            userField={{}}
+            handleChange={() => {}}
+            setIsFormValid={() => {}} />
+        </div>
+        <div className={`flex flex-col justify-between h-full`}>
+          <button className={`${montserrat.className} font-medium text-base leading-[100%] py-3.5 px-6 bg-green w-[197px]
+        self-center`}>
+            Сменить пароль
+          </button>
+          <p className={`self-center ${montserrat.className} font-medium text-base leading-[100%] text-red`}>
+            Удалить профиль
+          </p>
+        </div>
+      </div> */}
+
     </div>
   )
 }

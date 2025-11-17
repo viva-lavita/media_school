@@ -6,9 +6,11 @@ import Navigation from './components/Navigation/Navigation';
 import { PageWidthProvider } from './context/PageWidthProvider';
 import { PageTitleProvider } from './context/PageTitleContext';
 import { montserrat, comfortaa, inter } from '@/lib/fonts';
-import { PopUpProvider } from '@/app/context/PopUpContext';
-import PopUpAttribution from '@/app/components/PopUpAttribution/PopUpAttribution';
-import { AuthProvider } from '@/app/context/AuthContext';
+import {PopUpProvider} from "@/app/context/PopUpContext";
+import {PopUpAuthProvider} from "@/app/context/PopUpContextAuth";
+import PopUpAttribution from "@/app/components/PopUpAttribution/PopUpAttribution";
+import PopUpAuth from "@/app/components/PopUpAuth/PopUpAuth";
+import {AuthProvider} from "@/app/context/AuthContext";
 
 export const metadata = {
  title: 'Create Next App',
@@ -25,23 +27,28 @@ export default function RootLayout({ children }) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    </head>
    <body>
-    <AuthProvider>
-     <PopUpProvider>
-      <PopUpAttribution />
+   <AuthProvider>
+    <PopUpProvider>
+     <PopUpAttribution />
+     <PopUpAuthProvider>
+      <PopUpAuth />
       <PageTitleProvider>
        <PageWidthProvider>
         <Suspense fallback={<div>Loading...</div>}>
-         <Header />
-         <main style={{ flex: 1 }}>
+         <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
+          <Header />
           <Navigation />
-          {children}
-         </main>
-         <Footer />
+          <main style={{flex: 1}}>
+           {children}
+          </main>
+          <Footer />
+         </div>
         </Suspense>
        </PageWidthProvider>
       </PageTitleProvider>
-     </PopUpProvider>
-    </AuthProvider>
+     </PopUpAuthProvider>
+    </PopUpProvider>
+   </AuthProvider>
    </body>
   </html>
  );

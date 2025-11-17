@@ -1,0 +1,24 @@
+.popUpBackground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #535353CC;
+    position: fixed;
+    z-index: 1;
+}
+
+.popUpWrapper {
+    padding: 60px 20px;
+    background-color: white;
+    max-width: 620px;
+    width: 90%;
+}
+
+.popupLine {
+    width: 180px;
+    height: 2px!important;
+    background-color: #DEEDAB;
+    margin: 0 auto;
+}
