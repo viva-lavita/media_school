@@ -218,7 +218,7 @@ DJOSER = {
     "SEND_ACTIVATION_EMAIL": False,
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": False,
     "PASSWORD_RESET_CONFIRM_RETYPE": True,
-    "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",  # pragma: allowlist secret
+    "PASSWORD_RESET_CONFIRM_URL": "password-change/{uid}/{token}",  # pragma: allowlist secret
     "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": True if DEBUG else False,
     "USERNAME_RESET_CONFIRM_URL": "email/reset/confirm/{uid}/{token}",  # конечная точка, которую должны реализовать фронты
     "USERNAME_RESET_SHOW_EMAIL_NOT_FOUND": True if DEBUG else False,  # теперь 404 если эмейла нет в бд
