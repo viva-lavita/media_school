@@ -12,7 +12,8 @@ const path = {
  '/catalog': ' / Каталог материалов',
  '/qa': ' / Вопрос-ответ',
  '/contacts': ' / Контакты',
-  '/account' : ' / Личный кабинет'
+ '/login': ' / Личный кабинет',
+ '/account': ' / Личный кабинет'
 };
 
 const montserrat = Montserrat({
@@ -25,8 +26,22 @@ export default function Navigation() {
  const { pageTitle } = usePageTitle();
   if (pathname === "/") return null;
  let crumbs = pathname.split('/').filter(Boolean);
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/local_api/auth/logout/', { method: 'POST' });
+      if (response.ok) {
+        window.location.href = '/';
+      } else {
+        console.error('Error logging out:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  }
+
  return (
-  <nav className={`${montserrat.className}`}>
+  <nav className={`${montserrat.className} ${styles.nav}`}>
    <ol className={styles.breadcrumb}>
     <li className={styles.breadcrumbItem}>
      <Link href="/">Главная</Link>
@@ -53,6 +68,12 @@ export default function Navigation() {
      );
     })}
    </ol>
+   {(pathname === '/login' || pathname === '/account') && (
+    <button onClick={handleLogout} className={styles.logoutButton}>
+     <img src="/images/out.svg" alt="Выход" className={styles.logoutIcon} />
+     Выход из профиля
+    </button>
+   )}
   </nav>
  );
 }

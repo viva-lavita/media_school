@@ -44,9 +44,6 @@
     .childData {
         margin-top: 0;
     }
-    .accountPagePasswordChange {
-        min-height: 472px;
-    }
 }
 @media screen and (max-width: 585px) {
     .accountPage {

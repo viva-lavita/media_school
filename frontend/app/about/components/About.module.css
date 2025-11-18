@@ -1,8 +1,9 @@
 .wrap {
+ width: calc(100vw - 80px);
+ max-width: 1400px;
  display: flex;
  flex-direction: column;
  gap: 120px;
- width: 1400px;
  margin: 0 auto 40px;
 }
 .titleAbout {
@@ -15,9 +16,10 @@
  gap: 40px;
 }
 
-.projectInfo img {
+.projectImg {
  max-width: 100%;
- height: auto;
+ height: 632px;
+ object-fit: cover;
 }
 .textBlock {
  display: flex;
@@ -29,16 +31,11 @@
 .textContent {
  display: flex;
  flex-direction: column;
- width: calc(100% - 447px - 30px);
+ width: calc(65vw - 55px);
  gap: 24px;
  justify-content: stretch;
 }
 
-@media screen and (max-width: 1024px) {
- .textContent {
-  gap: 24px;
- }
-}
 .subtitleAbout {
  font-weight: 700;
  font-size: 28px;
@@ -53,7 +50,7 @@
  color: #535353;
 }
 .founders {
- width: 447px;
+ width: calc(35vw - 55px);
 }
 
 .teachersList {
@@ -110,11 +107,21 @@
  font-weight: 400;
  color: #040404;
 }
-
+.textContentCatalog{
+  width: calc(100vw - 55px); 
+  display: flex;
+ flex-direction: column;
+ gap: 24px;
+ justify-content: stretch;
+}
 @media screen and (max-width: 1024px) {
+ .textContent,
+ .textContentCatalog {
+  gap: 24px;
+ }
  .wrap {
   gap: 40px;
-  width: 944px;
+  max-width: 944px;
  }
  .titleAbout {
   font-size: 40px;
@@ -122,12 +129,17 @@
  .projectInfo {
   gap: 28px;
  }
+
+ .projectImg {
+  height: 426px;
+ }
  .textBlock {
   gap: 20px;
  }
- .textContent {
+ .textContent,
+ .textContentCatalog {
   gap: 24px;
-  width: calc(100% - 462px - 20px);
+  width: calc(50vw - 55px);
  }
  .subtitleAbout {
   font-size: 22px;
@@ -136,13 +148,14 @@
   font-size: 16px;
  }
  .founders {
-  width: 462px;
+  width: calc(50vw - 55px);
  }
 }
 
 @media screen and (max-width: 768px) {
  .wrap {
-  width: 728px;
+  width: calc(100vw - 40px);
+  max-width: 728px;
  }
  .titleAbout {
   font-size: 32px;
@@ -150,33 +163,56 @@
  .projectInfo {
   gap: 40px;
  }
+
+  .projectImg {
+  height: 328px;
+ }
  .textBlock {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
  }
+ .textContent,
+ .textContentCatalog {
+  width: calc(100vw - 55px);
+ }
+ .founders {
+  width: calc(100vw - 55px);
+ }
 }
 
 @media screen and (max-width: 360px) {
  .wrap {
-  width: 320px;
+  width: calc(100vw - 40px);
+  max-width: 320px;
  }
  .titleAbout {
   font-size: 28px;
  }
+ .mediaSchoolSpecial{
+    display: none;
+ }
  .projectInfo {
   gap: 28px;
+ }
+  .projectImg {
+  height: 304px;
  }
  .textBlock {
   flex-direction: column;
   align-items: center;
   gap: 0px;
  }
+ .textContent,
+ .textContentCatalog {
+  width: calc(100vw - 55px);
+ }
  .subtitleAbout {
   font-size: 18px;
  }
- .textContent p:not(:first-child) {
+ .textContent p:not(:first-child), 
+ .textContentCatalog p:not(:first-child){
   font-size: 16px;
  }
 }

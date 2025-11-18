@@ -1,8 +1,0 @@
-- [x] Update app/catalog/layoutCatalog.module.css: Ensure .title font-size is 32px at max-width: 768px and add height: 277px for .imgPreview at max-width: 768px
-- [x] Update app/catalog/components/DocumentsSection.module.css: Add media query to hide .fileFormat at max-width: 768px
-- [x] Adjust .nameContainer flex-basis to make file name column smaller at max-width: 768px in DocumentsSection.module.css
-- [x] Remove modal window on photo gallery card click in app/catalog/components/Card.jsx
-- [x] Update app/catalog/layoutCatalog.module.css: At max-width: 360px, .wrap width 320px, gap 60px, .title 28px, .imgPreview height 500px
-- [x] Update app/about/components/About.module.css: At max-width: 360px, .subtitleAbout 18px, description 16px
-- [x] Update app/catalog/components/DocumentsSection.module.css: At max-width: 360px, .title 18px, .count under title with 12px margin, size 16px, fileItem layout: 1 line icon+name, 2nd line date+download with 8px top margin and space between
-- [x] Update app/catalog/components/ListCard.jsx: At max-width: 360px, title 18px, count under title with 12px top margin, one card 320x215px, others hidden

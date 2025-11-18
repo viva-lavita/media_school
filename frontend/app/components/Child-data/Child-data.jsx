@@ -40,6 +40,8 @@ export default function ChildData({
     );
   })();
 
+  const [isFocused, setIsFocused] = useState(false);
+
   useEffect(() => {
     if (typeof setIsFormValid === 'function') {
       setIsFormValid(prev => ({
@@ -76,7 +78,7 @@ export default function ChildData({
           *
         </span>
         )}
-        <ButtonImage onClick={() => clearField('Ребёнок_Фамилия')} imgUrl={imgUrl}/>
+        <ButtonImage color={!!safeUserField['Ребёнок_Фамилия']} onClick={() => clearField('Ребёнок_Фамилия')} imgUrl={imgUrl}/>
       </div>
       <div className={`${styles.registrationFormInputCouple}
        ${direction === "column"
@@ -103,7 +105,7 @@ export default function ChildData({
           *
         </span>
           )}
-          <ButtonImage onClick={() => clearField('Ребёнок_Имя')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Ребёнок_Имя']} onClick={() => clearField('Ребёнок_Имя')} imgUrl={imgUrl}/>
         </div>
         <div className={`flex basis-0 grow relative`}>
           <input
@@ -113,10 +115,16 @@ export default function ChildData({
             id="child_middlename"
             className="w-full h-[49px] border border-green bg-white py-3 px-4 focus:outline-none"
             onChange={(e) => handleChange('Ребёнок_Отчество', e)}
-            value={safeUserField["Ребёнок_Отчество"]}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            value={
+              isFocused
+                ? safeUserField["Ребёнок_Отчество"]
+                : safeUserField["Ребёнок_Отчество"] || "-"
+            }
           />
           <label className={`visually-hidden`} htmlFor="child_middlename">Отчество</label>
-          <ButtonImage onClick={() => clearField('Ребёнок_Отчество')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Ребёнок_Отчество']} onClick={() => clearField('Ребёнок_Отчество')} imgUrl={imgUrl}/>
         </div>
       </div>
       <div className={`${styles.registrationFormInputCouple}
@@ -144,7 +152,7 @@ export default function ChildData({
           *
         </span>
           )}
-          <ButtonImage onClick={() => clearField('Ребёнок_Дата рождения')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Ребёнок_Дата рождения']} onClick={() => clearField('Ребёнок_Дата рождения')} imgUrl={imgUrl}/>
         </div>
         <div className={`flex basis-0 grow relative`}>
           <input
@@ -167,7 +175,7 @@ export default function ChildData({
           *
         </span>
           )}
-          <ButtonImage onClick={() => clearField('Школа')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Школа']} onClick={() => clearField('Школа')} imgUrl={imgUrl}/>
         </div>
       </div>
       <div className={`relative`}>
@@ -191,7 +199,7 @@ export default function ChildData({
           *
         </span>
         )}
-        <ButtonImage onClick={() => clearField('Класс')} imgUrl={imgUrl}/>
+        <ButtonImage color={!!safeUserField['Класс']} onClick={() => clearField('Класс')} imgUrl={imgUrl}/>
       </div>
     </div>
   )

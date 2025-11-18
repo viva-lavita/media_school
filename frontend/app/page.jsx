@@ -1,5 +1,6 @@
 'use client';
-import { useContext, useState } from 'react';
+
+import { useContext, useEffect, useState } from 'react';
 import styles from './Home.module.css';
 import { comfortaa } from '@/lib/fonts';
 import { montserrat } from '@/lib/fonts';
@@ -8,71 +9,126 @@ import Advantages from './components/Advantages/Advantages';
 import PageWidthContext from './context/PageWidthProvider';
 import Link from "next/link";
 
-const feedbacks = [
- {
-  src: '/images/avatar.png',
-  alt: 'аватар Анна',
-  name: 'Анна, 15 лет',
-  text: '«Я всегда любила снимать видео на телефон, но делала это скорее интуитивно. На мастер-классе ' +
-    'по видеосъёмке нам объяснили, как строить кадр, зачем нужен сценарий и как пользоваться светом. ' +
-    'Всё было интересно и понятно — не просто лекция, а живая работа с камерой. Мы сразу пробовали ' +
-    'снимать сами. Я даже попробовала себя в роли режиссёра и поняла, что хочу продолжать этим заниматься. ' +
-    'Теперь мечтаю поступить в вуз, связанный с медиа»',
- },
- {
-  src: '/images/feedback-kirill.png',
-  alt: 'отзывы Кирилл',
-  name: 'Кирилл, 17 лет',
-  text: '«На одном из занятий у нас был гость — настоящий журналист с телевидения. Он рассказал,' +
-    ' как проводить интервью, что такое открытые и закрытые вопросы, и как не бояться камеры. А потом ' +
-    'мы сами брали интервью у учителей и учеников. Это был новый опыт, и я понял, что мне нравится' +
-    ' быть в центре событий. До этого я вообще не знал, что журналистика может быть такой живой и интересной».',
- },
- {
-  src: '/images/feedback-liza.png',
-  alt: 'аватар Лиза',
-  name: 'Лиза, 14 лет',
-  text: '«Я попала на мастер-класс по блогингу — и это было лучше, чем любой урок! Нас научили, как вести себя в кадре, о чём говорить, чтобы было интересно, и как монтировать видео. Мы сразу начали снимать свой блог, и я даже записала первое видео про школьный праздник. Поняла, что это не просто развлечение, а настоящая работа, которая требует подготовки. Теперь я веду свой видеодневник для школьного канала».',
- },
- {
-  src: '/images/avatar.png',
-  alt: 'аватар Даниил',
-  name: 'Даниил, 16 лет',
-  text: '«Я в медиагруппе почти с самого начала. За это время мы научились снимать, писать тексты, брать интервью и даже делать простые новостные сюжеты. У нас уже есть несколько видео на сайте — приятно видеть результат своей работы. Мне нравится, что всё по‑настоящему: у нас есть задачи, дедлайны, съёмки. Это развивает и ответственность, и креативность. После школы хочу поступать на журналиста, и опыт в Медиашколе точно поможет».',
- },
-];
-
 export default function Home() {
+ const [usersReview, setUsersReview] = useState([]);
+ const [pagination, setPagination] = useState({
+  next: `${process.env.NEXT_PUBLIC_BACKEND}/reviews/`,
+  previous: null,
+ });
+ const [isLoading, setIsLoading] = useState(false);
+ const [currentIndex, setCurrentIndex] = useState(0);
  const { pageWidth } = useContext(PageWidthContext);
 
- const [currentIndex, setCurrentIndex] = useState(0);
+ async function loadPage(url) {
+  if (!url || isLoading) return;
+
+  setIsLoading(true);
+  try {
+   const res = await fetch(url, { cache: "no-store" });
+   const data = await res.json();
+
+   setUsersReview((prev) => {
+    const merged = [...prev, ...data.results];
+    const uniq = new Map(merged.map((item) => [item.id, item]));
+    return Array.from(uniq.values());
+   });
+
+   const nextUrl =
+     data.next && !data.next.startsWith("http")
+       ? `${process.env.NEXT_PUBLIC_BACKEND}${data.next}`
+       : data.next;
+
+   const previousUrl =
+     data.previous && !data.previous.startsWith("http")
+       ? `${process.env.NEXT_PUBLIC_BACKEND}${data.previous}`
+       : data.previous;
+
+   setPagination({
+    next: nextUrl,
+    previous: previousUrl,
+   });
+
+  } catch (err) {
+   console.error("Ошибка загрузки отзывов:", err);
+  } finally {
+   setIsLoading(false);
+  }
+ }
+
+ useEffect(() => {
+  loadPage(pagination.next);
+ }, []);
+
+ const feedbacks = usersReview.map((item) => ({
+  src: item.image,
+  alt: `аватар ${item.full_name}`,
+  full_name: item.full_name,
+  age: formatAge(item.age),
+  text: item.review,
+ }));
+
+ let desiredVisibleCount = 1;
+
+ if (pageWidth >= 590 && pageWidth < 769) desiredVisibleCount = 2;
+ else if (pageWidth >= 769 && pageWidth < 1201) desiredVisibleCount = 3;
+ else if (pageWidth >= 1201) desiredVisibleCount = 4;
+
+ const maxVisible = Math.min(4, feedbacks.length);
+ const visibleCount = Math.min(desiredVisibleCount, maxVisible);
+
+ useEffect(() => {
+  if (isLoading) return;
+  if (!pagination.next) return;
+  if (feedbacks.length === 0) return;
+
+  const nearEnd = currentIndex + visibleCount >= feedbacks.length - 5;
+
+  if (nearEnd) {
+   loadPage(pagination.next);
+  }
+ }, [currentIndex, feedbacks.length, visibleCount]);
+
+ useEffect(() => {
+  if (currentIndex > feedbacks.length - 1) {
+   setCurrentIndex(0);
+  }
+ }, [currentIndex, feedbacks.length]);
 
  const prevSlide = () => {
-  setCurrentIndex((prev) => {
-   return prev === 0 ? feedbacks.length - 1 : prev - 1;
-  });
+  if (feedbacks.length <= visibleCount) return;
+  setCurrentIndex((prev) => (prev === 0 ? feedbacks.length - 1 : prev - 1));
  };
 
  const nextSlide = () => {
-  setCurrentIndex((prev) => {
-   return prev === feedbacks.length - 1 ? 0 : prev + 1;
-  });
+  if (feedbacks.length <= visibleCount) return;
+  setCurrentIndex((prev) => (prev === feedbacks.length - 1 ? 0 : prev + 1));
  };
 
- let visibleCount = 1;
- if (pageWidth >= 590 && pageWidth < 769) visibleCount = 2;
- else if (pageWidth >= 769 && pageWidth < 1201) visibleCount = 3;
- else if (pageWidth >= 1201) visibleCount = 4;
+ let visibleFeedbacks = [];
 
- const visibleFeedbacks = feedbacks.slice(
-   currentIndex,
-   currentIndex + visibleCount
- );
-
- if (visibleFeedbacks.length < visibleCount) {
-  visibleFeedbacks.push(
-    ...feedbacks.slice(0, visibleCount - visibleFeedbacks.length)
+ if (feedbacks.length <= visibleCount) {
+  visibleFeedbacks = feedbacks;
+ } else {
+  visibleFeedbacks = feedbacks.slice(
+    currentIndex,
+    currentIndex + visibleCount
   );
+
+  if (visibleFeedbacks.length < visibleCount) {
+   visibleFeedbacks = visibleFeedbacks.concat(
+     feedbacks.slice(0, visibleCount - visibleFeedbacks.length)
+   );
+  }
+ }
+
+ function formatAge(age) {
+  const mod10 = age % 10;
+  const mod100 = age % 100;
+
+  if (mod100 >= 11 && mod100 <= 14) return `${age} лет`;
+  if (mod10 === 1) return `${age} год`;
+  if (mod10 >= 2 && mod10 <= 4) return `${age} года`;
+  return `${age} лет`;
  }
 
  return (
@@ -286,13 +342,13 @@ export default function Home() {
           <div className={`flex items-center gap-2`}>
            <img
              src={item.src}
-             alt={item.alt}
+             alt={'Аватар пользователя'}
              className={`h-[100px] w-[100px] rounded-full`}
            />
            <p
              className={`${montserrat.className} font-medium text-base leading-[100%]`}
            >
-            {item.name}
+            {item.full_name}, {item.age}
            </p>
           </div>
           <div className={`flex flex-col gap-3`}>

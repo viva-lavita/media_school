@@ -43,7 +43,7 @@ export default function YMap({ className, latitude, longitude }) {
 
     const script = document.createElement('script');
     script.id = 'ymap-script';
-    script.src = '/api/ymap';
+    script.src = '../ymap';
     script.async = true;
     script.onload = () => {
       script.loaded = true;

@@ -36,7 +36,7 @@ export default function LoginPage() {
       if (!res.ok) {
         setError(data.error || 'Ошибка входа');
       } else {
-        router.push('/');
+        router.replace('/');
         window.location.reload();
       }
     } catch (err) {
@@ -115,7 +115,10 @@ export default function LoginPage() {
                   *
                 </span>
               }
-              <ButtonImage onClick={() => clearField('email')}/>
+              <ButtonImage
+                onClick={() => clearField('email')}
+                color={!!loginData.email}
+              />
             </div>
             <div className="relative">
               <input

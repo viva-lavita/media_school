@@ -1,4 +1,4 @@
-export default function ButtonImage({imgUrl, onClick}) {
+export default function ButtonImage({imgUrl, onClick, color}) {
   return (
     <button
       onClick={onClick}
@@ -10,7 +10,8 @@ export default function ButtonImage({imgUrl, onClick}) {
         ? "Отредактировать"
         : "убрать"}>
       <img className={`cursor-pointer absolute top-4.5 right-4`}
-           src={imgUrl ? imgUrl : "/images/cross.svg"}
+           src={imgUrl ? imgUrl
+             : color ? "/images/cross-green.svg" : "/images/cross.svg"}
            alt=""
       />
     </button>

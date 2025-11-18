@@ -32,69 +32,86 @@ export default function LayoutPage() {
     }
     const categoryParam = searchParams.get('category');
     if (categoryParam) {
-      const reverseMap = {
-        'blogging': 'Блогинг',
-        'videotaping': 'Видеосъемка',
-        'videotaping-uas': 'Видеосъемка с помощью БАС',
-        'video-editing': 'Монтаж видео',
-        'photographing': 'Фотографирование',
-        'photo-processing': 'Обработка фото',
-        'storytelling': 'Сторителлинг',
-        'interviewing': 'Интервьюирование',
-        'longread': 'Лонгрид',
-      };
-      const categoryName = reverseMap[categoryParam];
-      if (categoryName) {
-        const found = data.results.find(cat => cat.name === categoryName);
-        if (found) setActiveCategory(found);
-      }
+     const reverseMap = {
+      blogging: 'Блогинг',
+      videotaping: 'Видеосъемка',
+      'videotaping-uas': 'Видеосъемка с помощью БАС',
+      'video-editing': 'Монтаж видео',
+      photographing: 'Фотографирование',
+      'photo-processing': 'Обработка фото',
+      storytelling: 'Сторителлинг',
+      interviewing: 'Интервьюирование',
+      longread: 'Лонгрид',
+     };
+     const categoryName = reverseMap[categoryParam];
+     if (categoryName) {
+      const found = data.results.find((cat) => cat.name === categoryName);
+      if (found) setActiveCategory(found);
+     }
     }
    })
    .catch(console.error);
  }, [searchParams.toString()]);
-useEffect(() => {
+ useEffect(() => {
   if (activeCategory.id) {
-    handleFetch(`${API_URL}/content/experts/${activeCategory.id}`)
-      .then((data) => {
-        setExpertsData(data.results.filter(expert => expert && expert.catalog_id == activeCategory.id).map(expert => ({
-          ...expert,
-          photo: expert.image,
-          name: expert.full_name
-        })));
-      })
-      .catch(console.error);
+   handleFetch(`${API_URL}/content/experts/${activeCategory.id}`)
+    .then((data) => {
+     if (data && data.results) {
+      setExpertsData(
+       data.results
+        .filter((expert) => expert && expert.catalog_id == activeCategory.id)
+        .map((expert) => ({
+         ...expert,
+         photo: expert.image,
+         name: expert.full_name,
+        }))
+      );
+     } else {
+      setExpertsData([]);
+     }
+    })
+    .catch(console.error);
   }
-}, [activeCategory]);
+ }, [activeCategory]);
 
-useEffect(() => {
+ useEffect(() => {
   if (activeCategory.id) {
-    handleFetch(`${API_URL}/content/documents/${activeCategory.id}?page=1&limit=10`)
-      .then((data) => {
-        setDocumentsData(data);
-      })
-      .catch(console.error);
+   handleFetch(
+    `${API_URL}/content/documents/?catalog=${activeCategory.id}&page=1&limit=10`
+   )
+    .then((data) => {
+     setDocumentsData(data);
+    })
+    .catch(console.error);
   }
-}, [activeCategory]);
+ }, [activeCategory]);
+ console.log(documentsData);
+ useEffect(() => {
+  if (activeCategory.id) {
+   handleFetch(`${API_URL}/content/videos/?catalog=${activeCategory.id}`)
+    .then((data) => {
+     setVideosData(data.results);
+    })
+    .catch(console.error);
+  }
+ }, [activeCategory]);
 
-useEffect(() => {
+ useEffect(() => {
   if (activeCategory.id) {
-    handleFetch(`${API_URL}/content/videos/${activeCategory.id}`)
-      .then((data) => {
-        setVideosData(data.results);
-      })
-      .catch(console.error);
+   handleFetch(`${API_URL}/content/photos/?catalog=${activeCategory.id}`)
+    .then((data) => {
+     setPhotosData(
+      data.results.map((item) => ({
+       ...item,
+       imageUrl: item.images[0]?.image || '',
+       photoCount: item.images.length,
+       isVideo: false,
+      }))
+     );
+    })
+    .catch(console.error);
   }
-}, [activeCategory]);
-
-useEffect(() => {
-  if (activeCategory.id) {
-    handleFetch(`${API_URL}/content/photos/${activeCategory.id}`)
-      .then((data) => {
-        setPhotosData(data.results);
-      })
-      .catch(console.error);
-  }
-}, [activeCategory]);
+ }, [activeCategory]);
 
  console.log(videosData);
  return (
@@ -117,23 +134,23 @@ useEffect(() => {
       </button>
      ))}
     </div>
-   <div className={styles.dropdown}>
-    <CategoryDropdown
-     categories={categories}
-     activeCategory={activeCategory}
-     setActiveCategory={setActiveCategory}
-    />
-   </div>
+    <div className={styles.dropdown}>
+     <CategoryDropdown
+      categories={categories}
+      activeCategory={activeCategory}
+      setActiveCategory={setActiveCategory}
+     />
+    </div>
     <main className={styles.mainCatalog}>
      {activeCategory && (
       <>
-      <div className={styles.imgWrapper}>
+       <div className={styles.imgWrapper}>
         <img
          className={styles.imgPreview}
          src={activeCategory.image}
          alt={`Картинка ${activeCategory.name}`}
         />
-      </div>
+       </div>
 
        <section className={styles.description}>
         <div className={styles.descriptionText}>
@@ -149,14 +166,25 @@ useEffect(() => {
          </div>
         )}
        </section>
-     </>
-    )}
-    {documentsData && documentsData.results && documentsData.results.length > 0 && <DocumentsSection documents={documentsData} categoryId={activeCategory.id} />}
-    {videosData && videosData.length > 0 && <SectionListCard title={'Видео-материалы'} documents={videosData} />}
-    {photosData && photosData.length > 0 && <SectionListCard title={'Фотогалерея'} documents={photosData} />}
-   </main>
-   <PopUpCatalog />
-  </div>
- </PopUpCatalogProvider>
+      </>
+     )}
+     {documentsData &&
+      documentsData.results &&
+      documentsData.results.length > 0 && (
+       <DocumentsSection
+        documents={documentsData}
+        categoryId={activeCategory.id}
+       />
+      )}
+     {videosData && videosData.length > 0 && (
+      <SectionListCard title={'Видео-материалы'} documents={videosData} />
+     )}
+     {photosData && photosData.length > 0 && (
+      <SectionListCard title={'Фотогалерея'} documents={photosData} />
+     )}
+    </main>
+    <PopUpCatalog />
+   </div>
+  </PopUpCatalogProvider>
  );
 }

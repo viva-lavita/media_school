@@ -8,11 +8,14 @@ import {montserrat} from "@/lib/fonts";
 import ParentData from "@/app/components/Parent-data/Parent-data";
 import ChildData from "@/app/components/Child-data/Child-data";
 import CreatePassword from "@/app/components/CreatePassword/CreatePassword";
+import { usePopUpAuth } from "@/app/context/PopUpContextAuth";
+import {useRouter} from "next/navigation";
 
 export default function RegistrationPage() {
+  const { openPopUp } = usePopUpAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -24,12 +27,12 @@ export default function RegistrationPage() {
       first_name: userField['Имя'],
       last_name: userField['Фамилия'],
       patronymic_name: userField['Отчество'],
-      date_of_birth: userField['Дата рождения'],
+      date_of_birth: normalizeDate(userField['Дата рождения']),
       child: {
         first_name: userField['Ребёнок_Имя'],
         last_name: userField['Ребёнок_Фамилия'],
         patronymic_name: userField['Ребёнок_Отчество'],
-        date_of_birth: userField['Ребёнок_Дата рождения'],
+        date_of_birth: normalizeDate(userField['Ребёнок_Дата рождения']),
         school: userField['Школа'],
         classroom: userField['Класс'],
       },
@@ -45,12 +48,19 @@ export default function RegistrationPage() {
       const result = await res.json();
 
       if (!res.ok) throw new Error(result.detail || "Ошибка регистрации");
-
-      setSuccess(true);
+      alert("Аккаунт зарегестрирован");
+      openPopUp("Регистрация прошла успешно");
+      router.replace('/login');
     } catch (err) {
       setError(err.message);
     }
   };
+
+  function normalizeDate(str) {
+    if (!str) return null;
+    const [day, month, year] = str.split('.');
+    return `${year}-${month}-${day}`;
+  }
 
   const [userReqStarByDate, setUserReqStarByDate] = useState({
     'Фамилия': false,

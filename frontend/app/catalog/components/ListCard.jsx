@@ -14,33 +14,47 @@ export default function SectionListCard({ title, documents }) {
   return () => window.removeEventListener('resize', handleResize);
  }, []);
 
- const visibleFilesCount = windowWidth <= 360 ? 1 : (windowWidth <= 768 ? (windowWidth > 600 ? 2 : 1) : Math.min(documents.length, 3));
+ const visibleFilesCount =
+  windowWidth <= 360
+   ? 1
+   : windowWidth <= 768
+   ? 2
+   : Math.min(documents.length, 3);
  const [isCollapsed, setIsCollapsed] = useState(true);
 
  const handleToggleClick = () => {
-  setIsCollapsed((prevState) => !prevState); 
+  setIsCollapsed((prevState) => !prevState);
  };
 
- const totalCount = title === 'Фотогалерея'
-  ? documents.reduce((sum, doc) => sum + (doc.photoCount || 0), 0)
-  : documents.length;
+ const totalCount =
+  title === 'Фотогалерея'
+   ? documents.reduce((sum, doc) => sum + (doc.photoCount || 0), 0)
+   : documents.length;
 
  return (
   <section className={styles.mediaSection}>
    <div className={styles.info}>
-    <h2 className={`${comfortaa.className} ${styles.title} ${styles.mediaTitle}`}>{title}</h2>
+    <h2
+     className={`${comfortaa.className} ${styles.title} ${styles.mediaTitle}`}
+    >
+     {title}
+    </h2>
     <p className={`${styles.count}`}>{formatDocument(totalCount)}</p>
    </div>
 
    <div className={styles.mediaBox}>
     {documents.slice(0, visibleFilesCount).map((file) => (
      <Card
-      key={`item-`+ Math.random().toString(36).substr(2, 9)}
+      key={`item-` + Math.random().toString(36).substr(2, 9)}
       imageUrl={file.imageUrl}
-      videoUrl={file.videoUrl}
+      videoUrl={file.video_path}
       title={file.title}
-      date={file.date}
-      categoryName={file.categoryName}
+      date={
+       file.created_at
+        ? new Intl.DateTimeFormat('ru-RU').format(new Date(file.created_at))
+        : ''
+      }
+      categoryName={file.category?.name || ''}
       photoCount={file.photoCount}
       images={file.images}
       isVideo={file.isVideo !== undefined ? file.isVideo : true}
@@ -53,19 +67,21 @@ export default function SectionListCard({ title, documents }) {
       .slice(visibleFilesCount)
       .map((file) => (
        <Card
-         imageUrl={file.imageUrl}
-      videoUrl={file.videoUrl}
-      title={file.title}
-      date={file.date}
-      categoryName={file.categoryName}
-      photoCount={file.photoCount}
-      images={file.images}
-      isVideo={file.isVideo !== undefined ? file.isVideo : true}
-
-        key={`item-`+ Math.random().toString(36).substr(2, 9)}
+        imageUrl={file.imageUrl}
+        videoUrl={file.video_path}
+        title={file.title}
+        date={
+         file.created_at
+          ? new Intl.DateTimeFormat('ru-RU').format(new Date(file.created_at))
+          : 'Дата неизвестна'
+        }
+        categoryName={file.category?.name || ''}
+        photoCount={file.photoCount}
+        images={file.images}
+        isVideo={file.isVideo !== undefined ? file.isVideo : true}
+        key={`item-` + Math.random().toString(36).substr(2, 9)}
        />
       ))}
-
    </div>
 
    {

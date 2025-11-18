@@ -54,7 +54,7 @@ const titleListTeachers = 'Основатели проекта "Медиашко
       {<TeachersList titleList={titleListTeachers} teachers={TEACHERS_DATA} />}
      </div>
     </div>
-    <img src="/about-images/main.svg" alt="main" />
+    <img src="/about-images/main.svg" className={styles.projectImg} alt="main" />
    </section>
   </main>
  );

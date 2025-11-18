@@ -1,22 +1,23 @@
-"use client"
+'use client';
 
 import { useState } from 'react';
 import { montserrat } from '@/lib/fonts';
 import styles from './Card.module.css';
-import { usePopUpCatalog } from "../PopUpCatalog";
+import { usePopUpCatalog } from '../PopUpCatalog';
 
-export default function Card({imageUrl,
+export default function Card({
+ imageUrl,
  videoUrl,
  title,
  date,
  categoryName,
  photoCount,
  images,
- isVideo = true,}) {
-  const { setIsPopUpOpen, setCardData } = usePopUpCatalog();
+ isVideo = true,
+}) {
+ const { setIsPopUpOpen, setCardData } = usePopUpCatalog();
 
  const [imgSrc, setImgSrc] = useState(imageUrl);
-
 
  const handleCardClick = () => {
   setCardData({
@@ -33,39 +34,42 @@ export default function Card({imageUrl,
  };
 
  const handleImgError = () => {
-  setImgSrc('/images/avatar.png'); 
+  setImgSrc('/images/avatar.png');
  };
 
  return (
   <>
-   <div
-    className={styles.card}
+   <div class="flex flex-col gap-2 relative"
     onClick={handleCardClick}
     style={{ cursor: photoCount !== undefined ? 'pointer' : 'default' }}
    >
-    <div className={styles.mediaContainer}>
-     {isVideo ? (
-      <iframe
-       className={styles.media}
-       src={videoUrl}
-       allowFullScreen
-       title={title}
-      />
-     ) : (
-      <img
-       className={styles.media}
-       src={imgSrc}
-       alt={title}
-       onError={handleImgError}
-      />
-     )}
+    <figure class="flex flex-col gap-3">
+     <div class="w-full h-[300px] overflow-hidden">
+      {isVideo ? (
+       <iframe
+        class="w-full h-full object-cover object-center"
+        src={videoUrl}
+        allowFullScreen
+        title={title}
+       />
+      ) : (
+       <img
+        class="w-full h-full object-cover object-center"
+        src={images && images.length > 0 ? images[0].image : imgSrc}
+        alt={title}
+        onError={handleImgError}
+       />
+      )}
+     </div>
+     <figcaption className={`${montserrat.className} ${styles.category}`}>
+      {categoryName.toUpperCase()}
+     </figcaption>
+    </figure>
+    <div class="flex flex-col gap-2">
+     <p className={`${montserrat.className} ${styles.title}`}>{title}</p>
     </div>
-    <h2 className={`${montserrat.className} ${styles.masterClass}`}>
-     {categoryName}
-    </h2>
-    <h3 className={`${montserrat.className} ${styles.titleCard}`}>{title}</h3>
     <p
-     className={`${montserrat.className} ${styles.dateCard}`}
+     className={`${montserrat.className} ${styles.date}`}
      style={{ display: 'flex', justifyContent: 'space-between' }}
     >
      <span>{date}</span>
@@ -74,7 +78,6 @@ export default function Card({imageUrl,
      )}
     </p>
    </div>
-
   </>
  );
 }

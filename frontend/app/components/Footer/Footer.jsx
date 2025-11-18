@@ -23,7 +23,6 @@ export default function Footer() {
       try {
         const response = await fetch(`${API_URL}/legal-documents/`);
         const data = await response.json();
-        console.log(data);
         setDocuments(data);
       } catch (e) {
         console.log(e);
@@ -82,8 +81,7 @@ export default function Footer() {
                             className={`cursor-pointer`}
                             href={`${SITE_URL}${documents.user_agreement}`}
                             target="_blank"
-                            rel="noopener noreferrer"
-                            download={true}>
+                            rel="noopener noreferrer">
                             Пользовательское соглашение
                           </a>
                         </li>
@@ -92,8 +90,7 @@ export default function Footer() {
                             className={`cursor-pointer`}
                             href={`${SITE_URL}${documents.privacy_policy}`}
                             target="_blank"
-                            rel="noopener noreferrer"
-                            download={true}>
+                            rel="noopener noreferrer">
                             Политика конфиденциальности
                           </a>
                         </li>
