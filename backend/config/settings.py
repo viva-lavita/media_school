@@ -18,10 +18,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", default=False) == "True"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1 localhost").split()
-
 CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://127.0.0.1 http://localhost").split()
-
 CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://127.0.0.1 http://localhost").split()
+# CORS_ALLOW_CREDENTIALS = True # для cookie, позволяет отправлять куки в кросс-доменном запросе
 
 DOMAIN = os.getenv("DOMAIN", default="localhost:8000")
 SITE_NAME = os.getenv("SITE_NAME", default="Django5 Template")
