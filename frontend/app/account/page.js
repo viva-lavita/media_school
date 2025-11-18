@@ -1,12 +1,17 @@
 'use client'
+
 import ChildData from "@/app/components/Child-data/Child-data";
 import ParentData from "@/app/components/Parent-data/Parent-data";
 import {montserrat} from "@/lib/fonts";
 import styles from './account.module.css'
+import { usePopUpAuth } from "@/app/context/PopUpContextAuth";
 import {useEffect, useState} from "react";
 import PasswordChange from "@/app/components/PasswordChange/PasswordChange";
 
 export default function AccountPage() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const { openPopUp } = usePopUpAuth();
+
   const [deleteId, setDeleteId] = useState(null);
   useEffect(() => {
     async function getUsersMe() {
@@ -62,6 +67,7 @@ export default function AccountPage() {
 
   function handleSave() {
     const patchData = preparePatchData(userField);
+    openPopUp("Данные сохранены");
     fetch(`/local_api/users/me`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
