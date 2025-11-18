@@ -83,7 +83,7 @@ export default function ParentData({
           *
         </span>
         )}
-        <ButtonImage onClick={() => clearField('Фамилия')} imgUrl={imgUrl}/>
+        <ButtonImage color={!!safeUserField['Фамилия']} onClick={() => clearField('Фамилия')} imgUrl={imgUrl}/>
       </div>
       <div className={`${styles.registrationFormInputCouple} ${firstNameValid ? '' : 'pt-6'}
       ${direction === "column"
@@ -116,7 +116,7 @@ export default function ParentData({
           *
         </span>
           )}
-          <ButtonImage onClick={() => clearField('Имя')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Имя']} onClick={() => clearField('Имя')} imgUrl={imgUrl}/>
         </div>
         <div className={`flex basis-0 grow relative`}>
           <input
@@ -134,7 +134,7 @@ export default function ParentData({
                 : safeUserField["Отчество"] || "-"
             }
           />
-          <ButtonImage onClick={() => clearField('Отчество')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Отчество']} onClick={() => clearField('Отчество')} imgUrl={imgUrl}/>
         </div>
       </div>
       <div className={`${styles.registrationFormInputCouple} ${pageWidth <= 585 ? 
@@ -170,7 +170,7 @@ export default function ParentData({
           *
         </span>
           )}
-          <ButtonImage onClick={() => clearField('Дата рождения')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Дата рождения']} onClick={() => clearField('Дата рождения')} imgUrl={imgUrl}/>
         </div>
         <div className={`${!emailValid && (pageWidth <= 585) ? 'mt-4' : ''} flex basis-0 grow relative`}>
           <label htmlFor="parent_email" className={`${emailValid ? 'hidden' : '${montserrat.className} font-normal ' +
@@ -196,7 +196,7 @@ export default function ParentData({
           *
         </span>
           )}
-          <ButtonImage onClick={() => clearField('Email')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Email']} onClick={() => clearField('Email')} imgUrl={imgUrl}/>
         </div>
       </div>
     </div>

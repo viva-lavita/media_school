@@ -78,7 +78,7 @@ export default function ChildData({
           *
         </span>
         )}
-        <ButtonImage onClick={() => clearField('Ребёнок_Фамилия')} imgUrl={imgUrl}/>
+        <ButtonImage color={!!safeUserField['Ребёнок_Фамилия']} onClick={() => clearField('Ребёнок_Фамилия')} imgUrl={imgUrl}/>
       </div>
       <div className={`${styles.registrationFormInputCouple}
        ${direction === "column"
@@ -105,7 +105,7 @@ export default function ChildData({
           *
         </span>
           )}
-          <ButtonImage onClick={() => clearField('Ребёнок_Имя')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Ребёнок_Имя']} onClick={() => clearField('Ребёнок_Имя')} imgUrl={imgUrl}/>
         </div>
         <div className={`flex basis-0 grow relative`}>
           <input
@@ -124,7 +124,7 @@ export default function ChildData({
             }
           />
           <label className={`visually-hidden`} htmlFor="child_middlename">Отчество</label>
-          <ButtonImage onClick={() => clearField('Ребёнок_Отчество')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Ребёнок_Отчество']} onClick={() => clearField('Ребёнок_Отчество')} imgUrl={imgUrl}/>
         </div>
       </div>
       <div className={`${styles.registrationFormInputCouple}
@@ -152,7 +152,7 @@ export default function ChildData({
           *
         </span>
           )}
-          <ButtonImage onClick={() => clearField('Ребёнок_Дата рождения')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Ребёнок_Дата рождения']} onClick={() => clearField('Ребёнок_Дата рождения')} imgUrl={imgUrl}/>
         </div>
         <div className={`flex basis-0 grow relative`}>
           <input
@@ -175,7 +175,7 @@ export default function ChildData({
           *
         </span>
           )}
-          <ButtonImage onClick={() => clearField('Школа')} imgUrl={imgUrl}/>
+          <ButtonImage color={!!safeUserField['Школа']} onClick={() => clearField('Школа')} imgUrl={imgUrl}/>
         </div>
       </div>
       <div className={`relative`}>
@@ -199,7 +199,7 @@ export default function ChildData({
           *
         </span>
         )}
-        <ButtonImage onClick={() => clearField('Класс')} imgUrl={imgUrl}/>
+        <ButtonImage color={!!safeUserField['Класс']} onClick={() => clearField('Класс')} imgUrl={imgUrl}/>
       </div>
     </div>
   )

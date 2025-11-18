@@ -2,9 +2,10 @@ import styles from "@/app/account/account.module.css";
 import {comfortaa, montserrat} from "@/lib/fonts";
 import CreatePassword from "@/app/components/CreatePassword/CreatePassword";
 import {useState} from "react";
-import {router} from "next/client";
+import {useRouter} from "next/navigation";
 
 export default function PasswordChange({ delete_profile, delete_id }) {
+  const router = useRouter();
   const [userField, setUserField] = useState({
     'password': '',
     're_password': ''
@@ -28,7 +29,7 @@ export default function PasswordChange({ delete_profile, delete_id }) {
     if (!yes) return;
 
     try {
-      const res = await fetch(`/api1/delete-profile/${delete_id}`, {
+      const res = await fetch(`/local_api/delete-profile/${delete_id}`, {
         method: "DELETE",
         credentials: "include",
       });

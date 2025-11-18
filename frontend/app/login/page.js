@@ -115,7 +115,10 @@ export default function LoginPage() {
                   *
                 </span>
               }
-              <ButtonImage onClick={() => clearField('email')}/>
+              <ButtonImage
+                onClick={() => clearField('email')}
+                color={!!loginData.email}
+              />
             </div>
             <div className="relative">
               <input

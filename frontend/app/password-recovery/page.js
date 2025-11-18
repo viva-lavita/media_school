@@ -5,6 +5,7 @@ import styles from './password-recovery.module.css'
 import {comfortaa} from "@/lib/fonts";
 import {montserrat} from "@/lib/fonts";
 import { usePopUpAuth } from "@/app/context/PopUpContextAuth";
+import ButtonImage from "@/app/components/Button-Image/Button-Image";
 
 export default function PasswordRecoveryPage() {
   const { openPopUp } = usePopUpAuth();
@@ -15,6 +16,10 @@ export default function PasswordRecoveryPage() {
     // Simulate sending email
     openPopUp("Ссылка для восстановления отправлена", "Если указанный email зарегистрирован в системе, мы отправим на него письмо с инструкцией.");
   };
+
+  function clearField() {
+    setEmail("");
+  }
 
   return (
     <div className={`${styles.passwordRecoveryWrapper} flex`}>
@@ -42,15 +47,12 @@ export default function PasswordRecoveryPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <img className={`absolute top-4.5 right-4`}
-                 src="/images/cross.svg"
-                 alt="крестик"
-            />
+            <ButtonImage color={!!email} onClick={() => clearField()}/>
           </div>
           <div className={`${styles.passwordRecoveryFormButtons} flex gap-3`}>
             <button type="submit" className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow
             bg-green border border-green py-3 px-6 justify-center `}>Отправить</button>
-            <button type="button" className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow
+            <button onClick={()=> clearField()} type="button" className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow
             bg-white border border-green py-3 px-6 justify-center `}>
               Отменить
             </button>

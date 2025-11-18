@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 
 export async function DELETE(req, { params }) {
   const { id } = params;
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = process.env.NEXT_PUBLIC_BACKEND;
 
   const cookieHeader = cookies().toString();
   const token = cookies().get("access")?.value;
