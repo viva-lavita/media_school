@@ -8,6 +8,7 @@ import WhatAreWeStudyingSection from './components/WhatAreWeStudyingSection/What
 import Advantages from './components/Advantages/Advantages';
 import PageWidthContext from './context/PageWidthProvider';
 import Link from "next/link";
+import ReviewModal from "@/app/components/Review/Review";
 
 export default function Home() {
  const [usersReview, setUsersReview] = useState([]);
@@ -60,6 +61,7 @@ export default function Home() {
  }, []);
 
  const feedbacks = usersReview.map((item) => ({
+  id: item.id,
   src: item.image,
   alt: `аватар ${item.full_name}`,
   full_name: item.full_name,
@@ -129,6 +131,20 @@ export default function Home() {
   if (mod10 === 1) return `${age} год`;
   if (mod10 >= 2 && mod10 <= 4) return `${age} года`;
   return `${age} лет`;
+ }
+
+ const [openedReview, setOpenedReview] = useState(null);
+
+ async function openReviewById(id) {
+  try {
+   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews/${id}/`, {
+    cache: "no-store"
+   });
+   const data = await res.json();
+   setOpenedReview(data);
+  } catch (e) {
+   console.error("Ошибка загрузки отзыва:", e);
+  }
  }
 
  return (
@@ -351,14 +367,16 @@ export default function Home() {
             {item.full_name}, {item.age}
            </p>
           </div>
-          <div className={`flex flex-col gap-3`}>
+          <div className={`flex flex-col gap-3 h-full`}>
            <p
              className={`${montserrat.className} line-clamp-9 font-normal text-base leading-[130%]`}
            >
             {item.text}
            </p>
            <p
-             className={`${montserrat.className} ${styles.materialCatalog} font-medium text-base leading-[100%] text-grey-2`}
+             className={`${montserrat.className} ${styles.materialCatalog} cursor-pointer font-medium text-base leading-[100%]
+             mt-auto text-grey-2`}
+             onClick={() => openReviewById(item.id)}
            >
             ЧИТАТЬ ПОЛНОСТЬЮ
            </p>
@@ -446,6 +464,13 @@ export default function Home() {
      </div>
     </div>
    </main>
+   {openedReview && (
+     <ReviewModal
+       review={openedReview}
+       onClose={() => setOpenedReview(null)}
+       formatAge={formatAge}
+     />
+   )}
   </div>
  );
 }

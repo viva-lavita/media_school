@@ -1,0 +1,51 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: #535353CC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.modal {
+    background: #FBFFF0;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    padding: 60px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.content {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+@media screen and (max-width: 410px) {
+    .content {
+        flex-direction: column;
+    }
+    .modal {
+        padding: 32px;
+    }
+}
