@@ -12,7 +12,7 @@ import Link from "next/link";
 export default function Home() {
  const [usersReview, setUsersReview] = useState([]);
  const [pagination, setPagination] = useState({
-  next: `${process.env.NEXT_PUBLIC_BACKEND}/reviews/`,
+  next: `${process.env.NEXT_PUBLIC_API_URL}/reviews/`,
   previous: null,
  });
  const [isLoading, setIsLoading] = useState(false);
@@ -35,12 +35,12 @@ export default function Home() {
 
    const nextUrl =
      data.next && !data.next.startsWith("http")
-       ? `${process.env.NEXT_PUBLIC_BACKEND}${data.next}`
+       ? `${process.env.NEXT_PUBLIC_API_URL}${data.next}`
        : data.next;
 
    const previousUrl =
      data.previous && !data.previous.startsWith("http")
-       ? `${process.env.NEXT_PUBLIC_BACKEND}${data.previous}`
+       ? `${process.env.NEXT_PUBLIC_API_URL}${data.previous}`
        : data.previous;
 
    setPagination({
