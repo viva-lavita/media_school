@@ -40,7 +40,6 @@ export default function PasswordChange({ delete_profile, delete_id }) {
         throw new Error(data.error || "Не удалось удалить аккаунт");
       }
 
-      alert(data.message);
       router.replace("/");
 
     } catch (err) {
