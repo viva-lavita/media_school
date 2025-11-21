@@ -4,8 +4,7 @@ import CreatePassword from "@/app/components/CreatePassword/CreatePassword";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 
-export default function PasswordChange({ delete_profile, delete_id, uid, token }) {
-  const router = useRouter();
+export default function PasswordChange({ uid, token }) {
   const [userField, setUserField] = useState({
     'password': '',
     're_password': ''
@@ -18,34 +17,6 @@ export default function PasswordChange({ delete_profile, delete_id, uid, token }
     const value = e.target.value;
     setUserField(prev => ({ ...prev, [field]: value }));
     console.log(userField);
-  }
-  async function deleteProfile() {
-    if (!delete_id) {
-      alert("Ошибка: нет ID пользователя");
-      return;
-    }
-
-    const yes = confirm("вы уверены, что хотите удалить аккаунт?")
-    if (!yes) return;
-
-    try {
-      const res = await fetch(`/local_api/delete-profile/${delete_id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Не удалось удалить аккаунт");
-      }
-
-      router.replace("/");
-
-    } catch (err) {
-      console.error("Ошибка удаления:", err);
-      alert("Не удалось удалить аккаунт");
-    }
   }
   async function handleSubmit(e) {
     e.preventDefault();
@@ -83,9 +54,6 @@ export default function PasswordChange({ delete_profile, delete_id, uid, token }
         self-center`}>
           Сменить пароль
         </button>
-        {delete_profile && <p onClick={deleteProfile} className={`self-center cursor-pointer ${montserrat.className} mt-20 font-medium text-base leading-[100%] text-red`}>
-          Удалить профиль
-        </p>}
       </div>
     </div>
   )

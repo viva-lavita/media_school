@@ -7,10 +7,12 @@ import styles from './account.module.css'
 import { usePopUpAuth } from "@/app/context/PopUpContextAuth";
 import {useEffect, useState} from "react";
 import PasswordChange from "@/app/components/PasswordChange/PasswordChange";
+import {useRouter} from "next/navigation";
 
 export default function AccountPage() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const { openPopUp } = usePopUpAuth();
+  const router = useRouter();
 
   const [deleteId, setDeleteId] = useState(null);
   useEffect(() => {
@@ -94,6 +96,34 @@ export default function AccountPage() {
       }
     }
   }
+  async function deleteProfile() {
+    if (!deleteId) {
+      alert("Ошибка: нет ID пользователя");
+      return;
+    }
+
+    const yes = confirm("вы уверены, что хотите удалить аккаунт?")
+    if (!yes) return;
+
+    try {
+      const res = await fetch(`/local_api/delete-profile/${deleteId}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Не удалось удалить аккаунт");
+      }
+
+      router.replace("/");
+
+    } catch (err) {
+      console.error("Ошибка удаления:", err);
+      alert("Не удалось удалить аккаунт");
+    }
+  }
   return  (
     <div className={`${styles.accountPage} flex`}>
       <form action="/account" method="post" className={`${styles.accountPageData} flex box-border flex-col 
@@ -131,16 +161,20 @@ export default function AccountPage() {
             setIsFormValid={() => {}}
             dataRequired={false}/>
         </fieldset>
-        <button
-          type="button"
-          className={`${montserrat.className} font-medium text-base leading-[100%] py-3.5 px-6 bg-green w-[197px] 
-        self-center`}
-          onClick={handleSave}
-        >
-          Сохранить
-        </button>
+        <div className={`${styles.confirmButtons} flex justify-around`}>
+          <button
+            type="button"
+            className={`${montserrat.className} ${styles.saveButton} cursor-pointer font-medium text-base leading-[100%] 
+             bg-green self-center`}
+            onClick={handleSave}
+          >
+            Сохранить
+          </button>
+          <p onClick={deleteProfile} className={`self-center cursor-pointer ${montserrat.className} font-medium text-base leading-[100%] text-red`}>
+            Удалить профиль
+          </p>
+        </div>
       </form>
-      <PasswordChange delete_id={deleteId} delete_profile={true}/>
     </div>
   )
 }

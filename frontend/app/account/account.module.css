@@ -13,6 +13,11 @@
     gap: 32px;
 }
 
+.saveButton {
+    padding: 14px 24px;
+    width: 250px;
+}
+
 @media screen and (max-width: 1400px) {
     .accountPage {
         width: 92%;
@@ -30,6 +35,9 @@
     }
     .childData {
         margin-top: 16px;
+    }
+    .saveButton {
+        width: 197px;
     }
 }
 @media screen and (max-width: 768px) {
@@ -55,5 +63,9 @@
     }
     .childData {
         margin-top: 0;
+    }
+    .confirmButtons {
+        flex-direction: column;
+        gap: 24px;
     }
 }
