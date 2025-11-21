@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Link from "next/link";
 import styles from './Registration.module.css'
 import {comfortaa} from "@/lib/fonts";
@@ -176,6 +176,30 @@ export default function RegistrationPage() {
     });
   }
 
+  const [documents, setDocuments] = useState({
+    user_agreement: '',
+    privacy_policy: ''
+  });
+  const [loading, setLoading] = useState(true)
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
+
+  useEffect(() => {
+    async function fetchDocuments() {
+      try {
+        const response = await fetch(`${API_URL}/legal-documents/`);
+        const data = await response.json();
+        setDocuments(data);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    void fetchDocuments();
+  }, []);
+
   return (
     <div className={styles.registration}>
       <div className={`${styles.registrationImg} flex basis-0 grow`}></div>
@@ -236,9 +260,18 @@ export default function RegistrationPage() {
                     checked={isRulesChecked}
                     onChange={() => setIsRulesChecked(!isRulesChecked)}
                     required/>
-                  <span>Ознакомлен с&nbsp;Правилами использования сайта.</span>
+                  <span>Ознакомлен с&nbsp;
+                    <span className={`underline text-dark-green`}>
+                      <a className={`cursor-pointer`}
+                         href={`${SITE_URL}${documents.user_agreement}`}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                      >
+                        Правиласи использования сайта
+                      </a>
+                    </span>
+                  </span>
                 </label>
-
                 <label className="flex items-start gap-2">
                   <input
                     type="checkbox"
@@ -249,8 +282,17 @@ export default function RegistrationPage() {
                     required
                   />
                   <span>
-                    Согласен с&nbsp;Положением обработки и&nbsp;хранения персональных данных
-                    (сюда также&nbsp;включены нормы, связанные с&nbsp;обработкой и&nbsp;хранением данных
+                    Согласен с&nbsp;
+                    <span className={`underline text-dark-green`}>
+                      <a className={`cursor-pointer`}
+                         href={`${SITE_URL}${documents.privacy_policy}`}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                      >
+                        Положением обработки и&nbsp;хранения персональных данных
+                      </a>
+                    </span>
+                    &nbsp;(сюда также&nbsp;включены нормы, связанные с&nbsp;обработкой и&nbsp;хранением данных
                     несовершеннолетних).
                   </span>
                 </label>

@@ -13,7 +13,13 @@ export default function PasswordRecoveryPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate sending email
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/reset_password/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+
     openPopUp("Ссылка для восстановления отправлена", "Если указанный email зарегистрирован в системе, мы отправим на него письмо с инструкцией.");
   };
 

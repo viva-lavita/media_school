@@ -151,20 +151,20 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow
+              className={`${montserrat.className} cursor-pointer font-medium text-base leading-[100%] flex basis-0 grow
             bg-green border border-green py-3 px-6 justify-center `}>{loading ? 'Вход...' : 'Войти'}
             </button>
             <button
               type="reset"
               onClick={() => { setLoginData({email: '', password: ''}); setError(''); }}
-              className={`${montserrat.className}  font-medium text-base leading-[100%] flex basis-0 grow
+              className={`${montserrat.className} cursor-pointer font-medium text-base leading-[100%] flex basis-0 grow
             bg-white border border-green py-3 px-6 justify-center `}>
               Отменить
             </button>
           </div>
         </form>
         <div className={`${montserrat.className} flex text-wrap font-medium text-base leading-[100%] justify-center`}>
-          <p>Забыли пароль?
+          <p>Забыли пароль?&nbsp;
             <span className={`underline text-dark-green`}>
               <Link href="/password-recovery">
                 Восстановить

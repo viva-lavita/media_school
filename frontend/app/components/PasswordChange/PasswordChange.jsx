@@ -4,7 +4,7 @@ import CreatePassword from "@/app/components/CreatePassword/CreatePassword";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 
-export default function PasswordChange({ delete_profile, delete_id }) {
+export default function PasswordChange({ delete_profile, delete_id, uid, token }) {
   const router = useRouter();
   const [userField, setUserField] = useState({
     'password': '',
@@ -47,6 +47,28 @@ export default function PasswordChange({ delete_profile, delete_id }) {
       alert("Не удалось удалить аккаунт");
     }
   }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!isFormValid.password || !isFormValid.re_password) return;
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/reset_password_confirm/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          uid,
+          token,
+          new_password: userField['password'],
+          re_new_password: userField['re_password'],
+        }),
+      });
+      if (!res.ok) {
+        console.log(res);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className={`${styles.accountPageData} flex flex-col basis-0 grow-1 bg-light-green border border-green`}>
       <div className={`flex flex-col gap-4`}>
@@ -57,7 +79,7 @@ export default function PasswordChange({ delete_profile, delete_id }) {
           setIsFormValid={setIsFormValid} />
       </div>
       <div className={`flex flex-col justify-between h-full`}>
-        <button className={`${montserrat.className} font-medium text-base leading-[100%] py-3.5 px-6 bg-green w-[197px] 
+        <button type='submit' onClick={handleSubmit} className={`${montserrat.className} cursor-pointer font-medium text-base leading-[100%] py-3.5 px-6 bg-green w-[197px] 
         self-center`}>
           Сменить пароль
         </button>
