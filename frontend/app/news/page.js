@@ -65,7 +65,7 @@ export default function NewsPage() {
   };
 
   useEffect(() => {
-    console.log('API_URL:', API_URL);
+    // console.log('API_URL:', API_URL);
 
     const fetchData = async () => {
       const news = await fetchAllResults('/events/news/');
@@ -78,7 +78,7 @@ export default function NewsPage() {
       setContestsData(contests);
     };
 
-    fetchData();
+    void fetchData();
   }, []);
 
   const handleTabChange = (tab) => {

@@ -71,8 +71,10 @@ export default function NewsDetail() {
     };
 
     const fetchItem = async () => {
-      const endpoint = `${API_URL}/events/${typeValue}/${id}`;
-
+      let endpoint = `${API_URL}/events/${typeValue}/${id}`;
+      if (typeValue === 'contests') {
+        endpoint = `${API_URL}/events/competitions/${id}`;
+      }
       try {
         const response = await fetch(endpoint);
         if (!response.ok) {

@@ -10,10 +10,12 @@ import PageWidthContext from './context/PageWidthProvider';
 import Link from "next/link";
 import ReviewModal from "@/app/components/Review/Review";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function Home() {
  const [usersReview, setUsersReview] = useState([]);
  const [pagination, setPagination] = useState({
-  next: `${process.env.NEXT_PUBLIC_API_URL}/reviews/`,
+  next: `${API_URL}/reviews/`,
   previous: null,
  });
  const [isLoading, setIsLoading] = useState(false);
@@ -36,12 +38,12 @@ export default function Home() {
 
    const nextUrl =
      data.next && !data.next.startsWith("http")
-       ? `${process.env.NEXT_PUBLIC_API_URL}${data.next}`
+       ? `${API_URL}${data.next}`
        : data.next;
 
    const previousUrl =
      data.previous && !data.previous.startsWith("http")
-       ? `${process.env.NEXT_PUBLIC_API_URL}${data.previous}`
+       ? `${API_URL}${data.previous}`
        : data.previous;
 
    setPagination({
@@ -137,7 +139,7 @@ export default function Home() {
 
  async function openReviewById(id) {
   try {
-   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews/${id}/`, {
+   const res = await fetch(`${API_URL}/reviews/${id}/`, {
     cache: "no-store"
    });
    const data = await res.json();
@@ -147,6 +149,61 @@ export default function Home() {
   }
  }
 
+ const [events, setEvents ] = useState({
+  lastNews: null,
+  lastAnnouncement: null,
+  lastContest: null
+ });
+ async function fetchLastItem(url) {
+  const res = await fetch(`${API_URL}${url}`, {
+   headers: {
+    "Content-Type": "application/json",
+    'Accept': 'application/json',
+    'Accept-Charset': 'utf-8',
+   }
+  })
+
+  if (!res.ok) return null;
+
+  const data = await res.json();
+  return data.results?.[0] || null;
+ }
+ async function fetchLastContest() {
+  const res = await fetch(`${API_URL}/events/competitions/`, {
+   headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Accept-Charset': 'utf-8',
+   },
+  })
+  if (!res.ok) return null;
+  const data = await res.json();
+  console.log(data);
+  const list = data.results || null;
+
+  const currentDate = new Date();
+
+  const activeContest = list
+    .filter(x => new Date(x.end_date) >= currentDate)
+    .sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
+  if (activeContest.length > 0) return activeContest[0];
+
+  const completedContest = list
+    .filter(x => new Date(x.end_date) < currentDate)
+    .sort((a,b) => new Date(b.end_date) - new Date(a.end_date))
+
+  return completedContest[0] || null;
+ }
+ useEffect(() => {
+  async function loadData() {
+    const lastNews = await fetchLastItem('/events/news/');
+    const lastAnnouncement = await fetchLastItem('/events/announcements/');
+    const lastContest = await fetchLastContest();
+    setEvents({ lastNews, lastAnnouncement, lastContest });
+  }
+  void loadData();
+ }, [])
+ const { lastNews, lastAnnouncement, lastContest } = events;
  return (
   <div className={styles.main}>
    <div className={`${styles.mainImage} flex justify-center relative`}>
@@ -235,105 +292,116 @@ export default function Home() {
       Новости, анонсы и конкурсы
      </h2>
      <div className={`${styles.announcementsContainer}`}>
-      <div className={`${styles.announcementsContainerItem} flex flex-col gap-2`}>
+      {lastNews && <div className={`${styles.announcementsContainerItem} flex flex-col gap-2`}>
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/news.png" alt="новости" className={`h-[300px] object-cover object-left md:object-cover`}/>
+        <img
+          src={lastNews.image || '/images/news.png'}
+          alt={lastNews.title}
+          className={`h-[300px] object-cover object-left md:object-cover`}/>
         <figcaption
-         className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
+          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
          НОВОСТИ
         </figcaption>
        </figure>
        <div className={`flex flex-col gap-2`}>
         <p
-         className={`${montserrat.className} font-normal text-lg leading-[140%]`}
+          className={`${montserrat.className} font-normal text-lg leading-[140%]`}
         >
-         В&nbsp;школу приехали студенты-журналисты: как&nbsp;прошёл день МК
+         {lastNews.title}
         </p>
         <p
-         className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}
+          className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}
         >
-         В минувший четверг в&nbsp;нашей школе прошёл необычный
-         и&nbsp;насыщенный день&nbsp;— к&nbsp;нам приехали студенты факультета
-         журналистики, чтобы провести серию мастер-классов и&nbsp;творческих
-         встреч для школьников.
+         {lastNews.description}
         </p>
        </div>
        <p
-        className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
+         className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
        >
-        10&nbsp;апреля 2025
+        {new Date(lastNews.created_at).toLocaleDateString("ru-RU", {
+         year: 'numeric',
+         month: 'long',
+         day: 'numeric'
+        }).replace(" г.", "")}
        </p>
-      </div>
-      <div
-       className={`${
-        pageWidth < 501 ? 'hidden' : ''
-       } ${styles.announcementsContainerItem} flex flex-col gap-2`}
+      </div>}
+      {lastAnnouncement && <div
+        className={`${
+          pageWidth < 501 ? 'hidden' : ''
+        } ${styles.announcementsContainerItem} flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/announcements.png" alt="анонсы" className={`h-[300px] object-cover object-center md:object-cover`} />
+        <img
+          src={lastAnnouncement.image || "/images/announcements.png"}
+          alt={lastAnnouncement.title}
+          className={`h-[300px] object-cover object-center md:object-cover`}/>
         <figcaption
-         className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
+          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
          АНОНСЫ
         </figcaption>
        </figure>
        <div className={`flex flex-col gap-2`}>
         <p
-         className={`${montserrat.className} line-clamp-3 font-normal text-lg leading-[140%]`}
+          className={`${montserrat.className} line-clamp-3 font-normal text-lg leading-[140%]`}
         >
-         Стартует курс по&nbsp;фотографии&nbsp;— запишись в&nbsp;медиагруппу!
+         {lastAnnouncement.title}
         </p>
         <p
-         className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}
+          className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}
         >
-         В минувший четверг в&nbsp;нашей школе прошёл необычный
-         и&nbsp;насыщенный день&nbsp;— к&nbsp;нам приехали студенты факультета
-         журналистики, чтобы провести серию мастер-классов и&nbsp;творческих
-         встреч для школьников.
+         {lastAnnouncement.description}
         </p>
        </div>
        <p
-        className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
+         className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
        >
-        6&nbsp;апреля 2025
+        {new Date(lastAnnouncement.created_at).toLocaleDateString("ru-RU", {
+         year: 'numeric',
+         month: 'long',
+         day: 'numeric'
+        }).replace(" г.", "")}
        </p>
-      </div>
-      <div
-       className={`${
-        pageWidth < 1025 ? 'hidden' : ''
-       } ${styles.announcementsContainerItem} flex flex-col gap-2`}
+      </div>}
+      {lastContest && <div
+        className={`${
+          pageWidth < 1025 ? 'hidden' : ''
+        } ${styles.announcementsContainerItem} flex flex-col gap-2`}
       >
        <figure className={`flex flex-col gap-3`}>
-        <img src="/images/news-together.png" alt="новости" className={`h-[300px] object-cover object-left md:object-cover`}/>
+        <img
+          src={lastContest.image || "/images/news-together.png"}
+          alt={lastContest.title || "новости"}
+          className={`h-[300px] object-cover object-left md:object-cover`}/>
         <figcaption
-         className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
+          className={`${montserrat.className} text-dark-green font-normal text-sm leading-[100%]`}
         >
-         НОВОСТИ
+         КОНКУРСЫ
         </figcaption>
        </figure>
        <div className={`${styles.announcementsContainerItem} flex flex-col gap-2`}>
         <p
-         className={`${montserrat.className} font-normal text-lg leading-[140%]`}
+          className={`${montserrat.className} font-normal text-lg leading-[140%]`}
         >
-         Медиашкола приняла участников из&nbsp;соседней школы&nbsp;— вместе
-         учиться интереснее
+         {lastContest.title}
         </p>
         <p
-         className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}
+          className={`${montserrat.className} line-clamp-3 font-normal text-base leading-[130%]`}
         >
-         В минувший четверг в&nbsp;нашей школе прошёл необычный
-         и&nbsp;насыщенный день&nbsp;— к&nbsp;нам приехали студенты факультета
-         журналистики, чтобы провести серию мастер-классов и&nbsp;творческих
-         встреч для школьников.
+         {lastContest.description}
         </p>
        </div>
        <p
-        className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
+         className={`${montserrat.className} font-normal text-sm leading-[100%] text-grey-2`}
        >
-        2&nbsp;апреля 2025
+        {new Date(lastContest.created_at).toLocaleDateString("ru-RU", {
+         year: 'numeric',
+         month: 'long',
+         day: 'numeric'
+        }).replace(" г.", "")}
        </p>
-      </div>
+      </div>}
      </div>
      <Link href={'/news'}
       className={`${montserrat.className} ${styles.materialCatalog} text-lg font-semibold text-dark-green`}
