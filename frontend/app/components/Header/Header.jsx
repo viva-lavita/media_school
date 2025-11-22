@@ -5,8 +5,11 @@ import { montserrat } from "@/lib/fonts";
 import { useAuth } from "@/app/context/AuthContext";
 import BurgerMenu from "@/app/components/BurgerMenu/BurgerMenu";
 import {useState} from "react";
+import {useSearch} from "@/app/context/SearchContext";
 
 export default function Header() {
+  const { openSearch } = useSearch();
+
   const { user, loading } = useAuth();
   const [burgerIsOpen, setBurgerIsOpen] = useState(false);
   const [searchComponentIsOpen, setSearchComponentIsOpen] = useState(false);
@@ -45,7 +48,7 @@ export default function Header() {
 
       <div className={`${styles.headerActions} flex items-center`}>
         <div className={`${styles.headerSocialMedia} flex items-center gap-10`}>
-          <button onClick={()=> setSearchComponentIsOpen(true)} className={`cursor-pointer`} aria-label={'Поиск'}>
+          <button onClick={openSearch} className={`cursor-pointer`} aria-label={'Поиск'}>
             <img src="/header-images/search.svg" alt="" className="size-9" />
           </button>
           <div className="flex gap-5">

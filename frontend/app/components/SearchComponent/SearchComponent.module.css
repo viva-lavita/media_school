@@ -1,4 +1,53 @@
 .searchWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    background: white;
+    z-index: 1000;
+    display: flex;
+}
+
+.searchBlock {
+    margin: 0 auto;
+    width: 1400px;
+    padding-left: 100px;
+    padding-right: 80px;
+}
+
+.searchInputWrapper {
+    max-width: 924px;
+}
+
+.searchInput {
+    width: 100%;
+    height: 52px;
+    border: 1px solid #E2E2E2;
+    padding-left: 50px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #535353;
+    background-image: url('/images/search-page-icon.svg');
+    background-repeat: no-repeat;
+    background-position: 14px center;
+    background-size: 28px 28px;
+    outline: none;
+}
+
+.searchButton {
+    padding: 12px 24px;
+    background: #DEEDAB;
+    height: 60px;
+    width: 208px;
+}
+
+.searchBlockWrapper {
+    margin: 20px 0;
+    height: 60px;
+    gap: 40px;
+}
+
+.searchBlockBorder {
+    border-bottom: 1px solid #DEEDAB;
 }

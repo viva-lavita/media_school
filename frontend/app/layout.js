@@ -11,6 +11,8 @@ import {PopUpAuthProvider} from "@/app/context/PopUpContextAuth";
 import PopUpAttribution from "@/app/components/PopUpAttribution/PopUpAttribution";
 import PopUpAuth from "@/app/components/PopUpAuth/PopUpAuth";
 import {AuthProvider} from "@/app/context/AuthContext";
+import SearchComponent from "@/app/components/SearchComponent/SearchComponent";
+import {SearchProvider} from "@/app/context/SearchContext";
 
 export const metadata = {
  title: 'Create Next App',
@@ -29,24 +31,27 @@ export default function RootLayout({ children }) {
    <body>
    <AuthProvider>
     <PopUpProvider>
-     <PopUpAttribution />
-     <PopUpAuthProvider>
-      <PopUpAuth />
-      <PageTitleProvider>
-       <PageWidthProvider>
-        <Suspense fallback={<div>Loading...</div>}>
-         <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
-          <Header />
-          <Navigation />
-          <main style={{flex: 1}}>
-           {children}
-          </main>
-          <Footer />
-         </div>
-        </Suspense>
-       </PageWidthProvider>
-      </PageTitleProvider>
-     </PopUpAuthProvider>
+     <SearchProvider>
+      <PopUpAttribution />
+      <PopUpAuthProvider>
+       <PopUpAuth />
+       <PageTitleProvider>
+        <PageWidthProvider>
+         <Suspense fallback={<div>Loading...</div>}>
+          <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
+           <Header />
+           <Navigation />
+           <main style={{flex: 1}}>
+            {children}
+           </main>
+           <Footer />
+           <SearchComponent />
+          </div>
+         </Suspense>
+        </PageWidthProvider>
+       </PageTitleProvider>
+      </PopUpAuthProvider>
+     </SearchProvider>
     </PopUpProvider>
    </AuthProvider>
    </body>

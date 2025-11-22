@@ -2,12 +2,14 @@
 import styles from "./BurgerMenu.module.css";
 import Link from "next/link";
 import {montserrat} from "@/lib/fonts";
+import {useSearch} from "@/app/context/SearchContext";
 
 export default function BurgerMenu({ isOpen, setIsOpen}) {
+  const { openSearch } = useSearch();
 
   return (
-    <div className={`relative`}>
-      <div className={`${isOpen ? `${styles.burgerMenu} absolute z-10 bg-white flex justify-between` : 'hidden'}`}>
+    <div className={`${isOpen ? `${styles.overlay} relative` : 'hidden'}`}>
+      <div className={`${styles.burgerMenu} absolute z-10 bg-white flex justify-between` }>
         <div className={`flex flex-col justify-between`}>
           <Link onClick={()=>setIsOpen(false)} href="/">
             <img
@@ -58,7 +60,7 @@ export default function BurgerMenu({ isOpen, setIsOpen}) {
         <button onClick={()=>setIsOpen(false)} className={`absolute top-3 right-3 cursor-pointer`} aria-label='закрыть'>
           <img src="/header-images/burger-close.svg" alt=""/>
         </button>
-        <button aria-label={'Поиск'}>
+        <button onClick={openSearch} aria-label={'Поиск'}>
           <img src="/header-images/search.svg" alt="" className={`${styles.burgerMenuSearch} absolute size-9`} />
         </button>
       </div>
