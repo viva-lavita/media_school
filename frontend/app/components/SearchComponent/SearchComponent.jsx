@@ -37,7 +37,6 @@ export default function SearchComponent() {
       ];
 
       setResults(mergedResults);
-      console.log(mergedResults);
     } catch (err) {
       console.log(err);
     }
@@ -48,7 +47,7 @@ export default function SearchComponent() {
     <div className={`${styles.searchWrapper} bg-white`}>
       <div className={`${styles.searchBlock}`}>
         <div className={`${styles.searchBlockWrapper} flex w-full`}>
-          <div className={`flex flex-1 items-center gap-[30px]`}>
+          <div className={`${styles.searchBlockInput} flex flex-1 items-center`}>
             <div className={`${styles.searchInputWrapper} relative flex w-full`}>
               <input
                 className={`${styles.searchInput}`}
@@ -76,9 +75,11 @@ export default function SearchComponent() {
           <Link
             key={`${item.type}-${item.id}`}
             href={`/news/${item.id}?type=${item.type}`}
-            className={`${styles.resultItem} ${montserrat.className} font-normal text-lg leading-[140%] cursor-pointer`}
           >
-            <p onClick={()=>{closeSearch(); setResults([])}}>{item.description}</p>
+            <h2 className={`${styles.resultItem} ${montserrat.className} font-semibold text-lg leading-[140%] cursor-pointer`}>{item.title}</h2>
+            <p
+              className={`${styles.resultItem} ${montserrat.className} font-normal text-lg leading-[140%] cursor-pointer`}
+              onClick={()=>{closeSearch(); setResults([])}}>{item.description}</p>
           </Link>
         ))}
       </div>

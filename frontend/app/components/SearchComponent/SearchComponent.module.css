@@ -64,5 +64,35 @@
     padding-right: 80px;
 }
 
+.searchBlockInput {
+    display: flex;
+    gap: 30px;
+}
+
 .resultItem {
 }
+
+@media screen and (max-width: 1400px) {
+    .searchBlock {
+        width: 90%;
+        padding: 0;
+    }
+    .searchButton {
+        height: 52px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .searchBlockInput {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .searchBlockBorder {
+        margin-top: 80px;
+    }
+    .searchButton {
+        width: 100%;
+    }
+}
+
+
