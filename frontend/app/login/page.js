@@ -35,12 +35,14 @@ export default function LoginPage() {
 
       if (!res.ok) {
         setError(data.error || 'Ошибка входа');
+        alert(error.detail);
       } else {
         router.replace('/');
         window.location.reload();
       }
     } catch (err) {
       setError('Ошибка сети');
+      alert(err);
     } finally {
       setLoading(false);
     }

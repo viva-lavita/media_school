@@ -421,7 +421,7 @@ export default function Home() {
        {visibleFeedbacks.map((item, idx) => (
          <div
            key={idx}
-           className={`flex flex-col gap-2 p-4 basis-0 grow border-green border bg-light-green`}
+           className={`flex min-h-[362px] flex-col gap-2 p-4 basis-0 grow border-green border bg-light-green`}
          >
           <div className={`flex items-center gap-2`}>
            <img

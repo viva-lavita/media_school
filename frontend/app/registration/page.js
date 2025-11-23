@@ -48,7 +48,6 @@ export default function RegistrationPage() {
       const result = await res.json();
 
       if (!res.ok) throw new Error(result.detail || "Ошибка регистрации");
-      alert("Аккаунт зарегестрирован");
       openPopUp("Регистрация прошла успешно");
       router.replace('/login');
     } catch (err) {

@@ -118,7 +118,7 @@ export default function AccountPage() {
       }
 
       router.replace("/");
-
+      location.reload();
     } catch (err) {
       console.error("Ошибка удаления:", err);
       alert("Не удалось удалить аккаунт");
