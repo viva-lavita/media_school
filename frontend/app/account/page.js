@@ -117,7 +117,8 @@ export default function AccountPage() {
         throw new Error(data.error || "Не удалось удалить аккаунт");
       }
 
-      router.push("/");
+      await router.push("/");
+      location.reload();
     } catch (err) {
       console.error("Ошибка удаления:", err);
       alert("Не удалось удалить аккаунт");
