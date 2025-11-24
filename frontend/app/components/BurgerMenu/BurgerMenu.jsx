@@ -60,7 +60,10 @@ export default function BurgerMenu({ isOpen, setIsOpen}) {
         <button onClick={()=>setIsOpen(false)} className={`absolute top-3 right-3 cursor-pointer`} aria-label='закрыть'>
           <img src="/header-images/burger-close.svg" alt=""/>
         </button>
-        <button onClick={openSearch} aria-label={'Поиск'}>
+        <button onClick={() => {
+          openSearch();
+          setIsOpen(false);
+        }} aria-label={'Поиск'}>
           <img src="/header-images/search.svg" alt="" className={`${styles.burgerMenuSearch} absolute size-9`} />
         </button>
       </div>

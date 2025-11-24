@@ -68,7 +68,7 @@ export default function Navigation() {
      );
     })}
    </ol>
-   {(pathname === '/login' || pathname === '/account') && (
+   {(pathname === '/account') && (
     <button onClick={handleLogout} className={styles.logoutButton}>
      <img src="/images/out.svg" alt="Выход" className={styles.logoutIcon} />
      Выход из профиля
