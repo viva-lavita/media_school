@@ -63,14 +63,24 @@ export default function ContactsPage () {
               </div>
             </address>
             <div className="flex gap-5">
-              <a href="#" aria-label="ВКонтакте">
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://vk.com/perspectivatsk"
+                aria-label="ВКонтакте"
+              >
                 <img
                   src="/header-images/vk-button.png"
                   alt=""
                   className="size-11.5" />
               </a>
 
-              <a href="#" aria-label="Одноклассники">
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://ok.ru/group/70000001092892"
+                aria-label="Одноклассники"
+              >
                 <img
                   src="/header-images/ok-button.png"
                   alt=""

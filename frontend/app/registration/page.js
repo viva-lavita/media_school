@@ -266,7 +266,7 @@ export default function RegistrationPage() {
                          target="_blank"
                          rel="noopener noreferrer"
                       >
-                        Правиласи использования сайта
+                        Правилами использования сайта
                       </a>
                     </span>
                   </span>
@@ -302,7 +302,7 @@ export default function RegistrationPage() {
           <div className={`${styles.registrationAccept} flex gap-3`}>
             <button type={isValid ? 'submit' : 'button'} className={`${montserrat.className} ${isValid ?
             'bg-green cursor-pointer':'bg-grey-3 cursor-not-allowed'} font-medium text-base leading-[100%]
-            flex basis-0 grow border border-green py-3 px-6 justify-center`}>Зарегестрироваться</button>
+            flex basis-0 grow border border-green py-3 px-6 justify-center`}>Зарегистрироваться</button>
             <button type="button" onClick={handleReset} className={`${montserrat.className} font-medium text-base leading-[100%] flex basis-0 grow
             bg-white border border-green py-3 px-6 justify-center `}>
               Отменить
